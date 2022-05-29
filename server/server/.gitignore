@@ -1,0 +1,8 @@
+uploads/avatars
+uploads/expenses
+build/middleware
+build/models
+build/routes
+build/index.js
+build/index.d.ts
+.env
