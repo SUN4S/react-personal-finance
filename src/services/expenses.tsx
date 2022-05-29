@@ -3,7 +3,6 @@
 import {
   ExpenseDeleteId,
   ExpenseFormState,
-  ExpenseImageState,
 } from "../models/expenses";
 
 import { baseApi } from "./baseApi";
@@ -19,11 +18,10 @@ export const expensesApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Expenses"],
     }),
-    expenseImage: builder.query<ExpenseImageState, string>({
+    expenseImage: builder.query<string, string>({
       query: (name: string) => ({
         url: `/expenses/getReceipt/${name}`,
         method: "GET",
-        responseType: "blob",
         withCredentials: true,
       }),
       providesTags: ["Expenses"],

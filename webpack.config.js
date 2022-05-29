@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 let mode = process.env.NODE_ENV ? "production" : "development";
 
 module.exports = {
@@ -72,8 +73,8 @@ module.exports = {
       title: "Personal Finance",
       favicon: "./src/resources/icons/Logo.svg",
     }),
-    new webpack.ProvidePlugin({
-      process: "process/browser",
+    new Dotenv({
+      path: "./.env",
     }),
   ],
   resolve: {

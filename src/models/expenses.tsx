@@ -8,17 +8,13 @@ export interface ExpenseState {
   receipt?: string;
 }
 
-export interface ExpenseImageState {
-  file: Blob | MediaSource;
-}
-
 export interface ExpenseFormState {
   category: string;
   amount: number;
   date: Date;
   tags?: string;
   description?: string;
-  receipt?: File;
+  receipt?: File | Blob;
 }
 
 export interface ExpenseModalState {
@@ -41,4 +37,5 @@ export interface ExpenseFetchState {
 
 export interface ExpenseDeleteId {
   _id: string;
+  receipt: string;
 }

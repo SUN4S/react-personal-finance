@@ -35,15 +35,14 @@ export const ModalComponent = () => {
   const modalData = useSelector((state: RootState) => state.modal.data);
 
   const [tags, setTags] = useState<Array<ModalTagInput>>([]);
-  const [selectedFile, setSelectedFile] = useState<File>();
+  const [selectedFile, setSelectedFile] = useState<File | Blob>();
   const [preview, setPreview] = useState<string>();
   const [date, setDate] = useState(new Date());
-  const [options, setOptions] = useState<string | undefined>(undefined);
   const dispatch = useAppDispatch();
 
+  const [trigger, result] = useLazyExpenseImageQuery();
   const [postExpense, isLoading] = usePostExpenseMutation();
   const [deleteExpense] = useDeleteExpenseMutation();
-  const [trigger, result, isSuccess] = useLazyExpenseImageQuery();
 
   const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length === 0) {
@@ -103,7 +102,7 @@ export const ModalComponent = () => {
 
   const handleExpenseDelete = () => {
     if (window.confirm("Are you sure?") && modalData) {
-      deleteExpense({ _id: modalData._id! });
+      deleteExpense({ _id: modalData._id!, receipt: modalData.receipt! });
     }
     dispatch(
       notification({
@@ -126,42 +125,43 @@ export const ModalComponent = () => {
 
   useEffect(() => {
     if (modalData && modalStatus) {
-      const tags: ModalTagInput[] = [];
-      modalData.tags &&
-        modalData.tags.forEach((item, index) => {
-          tags.push({ id: index.toString(), text: item });
-        });
-
       setDate(new Date(modalData.date));
-      setTags(tags);
 
-      // if (modalData.receipt) {
-      //   trigger(modalData.receipt, true);
-      //   if (isSuccess) {
-      //     console.log(result.data?.file);
-      //     const objectUrl = URL.createObjectURL(result.data!.file);
-      //     setPreview(objectUrl);
-      //   }
-      // }
+      modalData.tags && renderTags(modalData.tags);
+      modalData.receipt && renderReceipt(modalData.receipt);
 
       reset(
         {
           category: modalData.category,
           amount: modalData.amount,
           description: modalData.description,
-          receipt: "",
         },
         { keepDefaultValues: true }
       );
     } else {
       resetForm();
     }
-  }, [resetForm, modalData, modalStatus, reset, setSelectedFile, trigger]);
+  }, [modalData, modalStatus]);
+
+  const renderReceipt = async (fileName: string) => {
+    await trigger(fileName, true).then((response) => {
+      setPreview(response.data);
+    });
+  };
+
+  const renderTags = async (tagData: Array<string>) => {
+    const tags: ModalTagInput[] = [];
+    tagData.forEach((item: string, index: number) => {
+      tags.push({ id: index.toString(), text: item });
+    });
+    setTags(tags);
+  };
 
   useEffect(() => {
     if (!selectedFile) {
       return;
     }
+
     const objectUrl = URL.createObjectURL(selectedFile);
     setPreview(objectUrl);
   }, [selectedFile]);
@@ -252,7 +252,7 @@ export const ModalComponent = () => {
                 {...register("receipt")}
                 onChange={onSelectFile}
               />
-              {selectedFile && <img src={preview} alt="Receipt preview" />}
+              {preview && <img src={preview} alt="Receipt preview" />}
             </div>
           </label>
           {!isLoading ? (
