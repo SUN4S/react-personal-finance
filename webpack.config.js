@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 let mode = process.env.NODE_ENV ? "production" : "development";
@@ -11,7 +12,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[contenthash].js",
+    filename: "[name][contenthash].js",
     clean: true,
     assetModuleFilename: "images/[hash]][ext][query]",
   },
@@ -70,6 +71,9 @@ module.exports = {
       template: "src/index.html",
       title: "Personal Finance",
       favicon: "./src/resources/icons/Logo.svg",
+    }),
+    new webpack.ProvidePlugin({
+      process: "process/browser",
     }),
   ],
   resolve: {

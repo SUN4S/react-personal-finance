@@ -1,0 +1,151 @@
+.dashboard {
+  height: calc(100% - 64px);
+  width: 100%;
+  overflow-y: auto;
+  padding: 0 16px 16px 16px;
+
+  .expenseList {
+    height: calc(100% - 134px);
+    width: 100%;
+    overflow-y: auto;
+    padding: 8px;
+    border-radius: 3px;
+    background-color: var(--sidebar-bg);
+
+    .listHeader {
+      display: flex;
+      padding: 0 0 8px 0;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      color: var(--text-primary);
+
+      .expenseListHeaderDate {
+        flex: 2;
+        border-right: 1px solid var(--primary);
+      }
+      .expenseListHeaderCategory {
+        flex: 2;
+        border-right: 1px solid var(--primary);
+      }
+      .expenseListHeaderAmount {
+        flex: 2;
+        border-right: 1px solid var(--primary);
+      }
+      .expenseListHeaderDescription {
+        flex: 4;
+        border-right: 1px solid var(--primary);
+      }
+      .expenseListHeaderTags {
+        flex: 2;
+        border-right: 1px solid var(--primary);
+      }
+      .expenseListHeaderControls {
+        flex: 1;
+      }
+
+      @media (max-width: 768px) {
+        .expenseListHeaderDescription {
+          display: none;
+        }
+        .expenseListHeaderTags {
+          display: none;
+        }
+      }
+    }
+
+    .listBody {
+      width: 100%;
+
+      .expenseListElement {
+        width: 100%;
+        min-height: 38px;
+        max-height: 66px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        border-bottom: 2px solid var(--page-bg);
+        color: var(--text-primary);
+
+        &:last-child {
+          border: none;
+        }
+
+        .expenseListElementDate {
+          flex: 2;
+        }
+        .expenseListElementCategory {
+          flex: 2;
+        }
+        .expenseListElementAmount {
+          flex: 2;
+        }
+        .expenseListElementDescription {
+          flex: 4;
+        }
+        .expenseListElementTags {
+          flex: 2;
+          max-height: 64px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-content: flex-start;
+          overflow: hidden;
+
+          .tagElement {
+            min-width: 0;
+            font-size: 12px;
+            padding: 0 8px;
+            margin: 2px 0;
+            border-radius: 90px;
+            border: 2px solid var(--primary);
+          }
+        }
+        .expenseListElementControls {
+          flex: 1;
+
+          button {
+            height: 32px;
+            width: 50%;
+            border: 2px solid var(--primary);
+            background-color: transparent;
+            color: var(--text-primary);
+          }
+        }
+
+        @media (max-width: 1200px) {
+          .expenseListElementTags {
+            .tagElement {
+              font-size: 10px;
+            }
+          }
+        }
+
+        @media (max-width: 768px) {
+          .expenseListElementDescription {
+            display: none;
+          }
+          .expenseListElementTags {
+            display: none;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 1200px) {
+      height: calc(100% - 248px);
+    }
+
+    @media (max-width: 576px) {
+      height: 100%;
+    }
+  }
+
+  @media (max-width: 576px) {
+    margin-bottom: 64px;
+  }
+}

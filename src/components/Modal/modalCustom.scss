@@ -1,0 +1,145 @@
+.selectCategory {
+  height: 40px;
+  width: 100%;
+  margin-top: 0;
+  margin-top: 3px;
+
+  .selectCategory__menu {
+    top: 32px;
+    background-color: var(--page-bg);
+    color: var(--text-primary);
+
+    .selectCategory__menu-list {
+      padding-top: 0;
+      border-radius: 3px;
+    }
+
+    .selectCategory__option {
+      transition: all 0.5 ease;
+      &:hover {
+        background-color: inherit;
+        opacity: 0.8;
+      }
+    }
+
+    .selectCategory__option--is-focused {
+      background-color: inherit;
+    }
+    .selectCategory__option--is-selected {
+      background-color: var(--primary);
+    }
+  }
+
+  .selectCategory__value-container {
+    height: 36px;
+    display: flex;
+    align-items: center !important;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    border-radius: 3px;
+    border: 2px solid transparent;
+    color: var(--text-primary);
+    padding-left: 2px;
+
+    .selectCategory__single-value {
+      padding: 0 0 16px 0;
+      color: var(--text-primary);
+    }
+
+    .selectCategory__placeholder {
+      padding: 0 0 16px 0;
+      color: var(--text-secondary);
+    }
+  }
+
+  .selectCategory__input-container {
+    height: auto;
+    color: var(--text-primary);
+
+    input {
+      padding-left: 16px;
+      padding-bottom: 6px;
+    }
+  }
+
+  .selectCategory__control {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: var(--page-bg);
+    color: var(--text-primary);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border: 2px solid var(--primary);
+    }
+  }
+
+  .selectCategory__control--is-focused {
+    box-shadow: none;
+    border: 2px solid var(--primary);
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  .selectCategory__control--menu-is-open {
+    box-shadow: none;
+    border: 2px solid var(--primary);
+    outline: none;
+    transition: all 0.3s ease;
+  }
+}
+
+.ReactTags__selected {
+  margin-top: 12px;
+  .tag-wrapper {
+    color: var(--text-primary);
+    background-color: var(--primary);
+    padding: 5px 7px;
+    border-radius: 3px;
+    margin-right: 5px;
+
+    button {
+      width: 18px;
+      background-color: transparent;
+      padding: 0 0 0 7px;
+    }
+  }
+}
+
+.ReactModal__Content {
+  transition: all 0.6s ease-in-out;
+}
+
+.ReactModal__Content--after-open {
+  transform: translate(0%, 0%);
+}
+
+.ReactModal__Content--before-close {
+  transform: translate(100%, 0%);
+
+  @media (max-width: 576px) {
+    transform: translate(0%, 100%);
+  }
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}

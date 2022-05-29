@@ -1,0 +1,76 @@
+label {
+  width: 100%;
+  color: var(--text-primary);
+  margin-top: 24px;
+
+  input,
+  textarea,
+  select {
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    padding-left: 6px;
+    margin-top: 3px;
+    margin-bottom: 1px;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    color: var(--text-primary);
+    background-color: var(--sidebar-bg);
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: var(--page-bg);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    &:focus {
+      border: 2px solid var(--primary);
+      opacity: 0.9;
+    }
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+textarea {
+  max-height: 150px;
+  min-height: 70px;
+  max-width: 100%;
+  min-width: 100%;
+  background-color: var(--page-bg);
+  padding: 8px 0 0 6px;
+}
+
+.selectDropdown {
+  position: relative;
+  width: 100%;
+  border-radius: 3px;
+
+  select {
+    option {
+      &:active {
+        background-color: var(--primary);
+      }
+    }
+  }
+}
+
+.selectDropdown:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 0;
+  height: 0;
+  border-top: 5px solid #aaa;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}

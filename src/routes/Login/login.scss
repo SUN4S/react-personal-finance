@@ -1,0 +1,66 @@
+.login,
+.register {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 12px;
+  background-color: var(--sidebar-bg);
+
+  .loginContainer,
+  .registerContainer {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    background-color: var(--page-bg);
+    border-radius: 5px;
+
+    .loginHeader,
+    .registerHeader,
+    .loginDesc {
+      text-align: center;
+      color: var(--text-primary);
+      margin-top: 0;
+      margin-bottom: 6px;
+    }
+
+    .loginDesc {
+      font-size: 14px;
+    }
+
+    img {
+      height: 60px;
+      width: 60px;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-direction: column;
+      width: 100%;
+      label {
+        input {
+          background-color: var(--sidebar-bg);
+        }
+      }
+      a {
+        width: 100%;
+      }
+      span {
+        color: var(--alert);
+      }
+
+      button.secondaryBtn {
+        margin-top: 48px;
+      }
+    }
+  }
+}

@@ -1,0 +1,97 @@
+button {
+  position: relative;
+  overflow: hidden;
+  transition: background 400ms;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 3px;
+  height: 40px;
+  width: 100%;
+  cursor: pointer;
+}
+
+span.ripple {
+  position: absolute; /* The absolute position we mentioned earlier */
+  border-radius: 0%;
+  transform: scaleX(0);
+  animation: ripple 500ms linear;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 600px;
+
+  @keyframes ripple {
+    to {
+      transform: scaleX(4);
+      opacity: 0;
+    }
+  }
+}
+
+.modalBtn {
+  font-size: 16px;
+  border-radius: 3px;
+  height: 40px;
+  width: 100%;
+  margin-top: 24px;
+  color: var(--text-primary);
+  background-color: var(--primary);
+  cursor: pointer;
+}
+
+.primaryBtn {
+  color: var(--text-primary);
+  background-color: var(--primary);
+}
+
+.secondaryBtn {
+  margin-top: 24px;
+  color: var(--text-primary);
+  background-color: var(--secondary);
+}
+
+.grayBtn {
+  margin-top: 0;
+  color: var(--text-primary);
+  background-color: var(--sidebar-bg);
+}
+
+.dangerBtn {
+  color: var(--text-primary);
+  background-color: var(--alert);
+}
+
+.loadingBtn {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border-radius: 3px;
+  margin-top: 32px;
+  color: var(--text-primary);
+  background-color: var(--sidebar-bg);
+  cursor: pointer;
+
+  &::before {
+    display: inline-block;
+    position: relative;
+    content: "";
+    height: 20px;
+    width: 20px;
+    border-radius: 100px;
+    border: 2px solid var(--text-secondary);
+    border-top: 2px solid var(--primary);
+    animation: loader 1s infinite linear;
+
+    @keyframes loader {
+      from {
+        transform: rotateZ(0deg);
+      }
+      to {
+        transform: rotateZ(360deg);
+      }
+    }
+  }
+}

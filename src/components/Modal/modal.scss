@@ -1,0 +1,92 @@
+.Modal {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  width: 100%;
+  max-width: 600px;
+  height: 100vh;
+  padding: 16px;
+  transform: translate(100%, 0%);
+  background-color: var(--sidebar-bg);
+  overflow-y: auto;
+  box-shadow: 0 0 15px var(--text-secondary);
+
+  .closeModalBtn {
+    position: absolute;
+    width: auto;
+    display: flex;
+    align-items: baseline;
+    top: 16px;
+    right: 16px;
+    background-color: transparent;
+    color: var(--text-primary);
+    font-size: 22px;
+  }
+
+  h2 {
+    color: var(--text-primary);
+    font-weight: 400;
+  }
+
+  form {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+
+    span {
+      color: var(--alert);
+    }
+
+    label {
+      input,
+      textarea {
+        background-color: var(--page-bg);
+      }
+
+      .receiptSelect {
+        margin-top: 3px;
+      }
+    }
+
+    .receiptSelect {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+
+      .avatarHeader {
+        width: 100%;
+        text-align: center;
+        color: var(--text-primary);
+      }
+      input[type="file"] {
+        height: 60px;
+        width: 100%;
+        padding-left: 0;
+        margin: 0;
+        background-color: transparent;
+      }
+      input[type="file"]::-webkit-file-upload-button {
+        border: none;
+        border-radius: 3px;
+        padding: 10px 20px 8px;
+        cursor: pointer;
+        background-color: var(--primary);
+        color: var(--text-primary);
+      }
+      img {
+        height: auto;
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 576px) {
+    transform: translate(0%, 100%);
+    form {
+      margin-bottom: 64px;
+    }
+  }
+}

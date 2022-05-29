@@ -1,0 +1,121 @@
+nav {
+  position: fixed;
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  height: 100vh;
+  width: 256px;
+  padding: 16px;
+  background-color: var(--sidebar-bg);
+  transition: all 0.5s ease-in-out;
+
+  img {
+    width: 46px;
+    height: 46px;
+    padding: 0 6px;
+    margin-bottom: 32px;
+  }
+
+  .buttonContainer {
+    height: 40px;
+    width: 224px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    text-align: center;
+    margin-bottom: 16px;
+    border: 2px solid var(--primary);
+    border-radius: 3px;
+    transition: all 0.5s ease-in-out;
+
+    button {
+      width: 46px;
+      padding: 0;
+      margin: 0;
+      font-size: 24px;
+      z-index: 1;
+      transition: all 0.5s ease-in-out;
+    }
+
+    span {
+      position: absolute;
+      width: 224px;
+      padding-left: 46px;
+      color: var(--text-primary);
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    &:hover {
+      button {
+        width: 100%;
+      }
+      span {
+        opacity: 0;
+      }
+    }
+  }
+
+  .sidebarPages {
+    height: 16px;
+    color: var(--text-secondary);
+    padding-left: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .collapseButton {
+    height: 46px;
+    width: 46px;
+    background-color: var(--sidebar-bg);
+    border: none;
+    align-self: flex-end;
+    color: var(--text-primary);
+    font-size: 18px;
+    transition: all 0.5s ease;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &.collapsed {
+    width: 78px;
+
+    .sidebarPages {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    ul {
+      height: 100%;
+      width: 60px;
+      list-style: none;
+      margin-top: 12px;
+
+      a {
+        li {
+          width: 46px;
+          span {
+            opacity: 0;
+          }
+        }
+      }
+    }
+
+    .buttonContainer {
+      width: 46px;
+
+      span {
+        opacity: 0;
+        transition: 0.3s ease-in-out;
+      }
+    }
+
+    .collapseButton {
+      transform: rotateZ(180deg);
+    }
+  }
+}
