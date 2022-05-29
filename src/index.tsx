@@ -1,5 +1,7 @@
+import "./normalize.css";
+import "./index.scss";
+
 import { createRoot } from "react-dom/client";
-import { render } from "react-dom";
 
 const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
