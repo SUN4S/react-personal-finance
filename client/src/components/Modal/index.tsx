@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useCallback, useEffect, useState } from "react";
 import {
   useDeleteExpenseMutation,
+  useEditExpenseMutation,
   useLazyExpenseImageQuery,
   usePostExpenseMutation,
 } from "../../services/expenses";
@@ -42,6 +43,7 @@ export const ModalComponent = () => {
 
   const [trigger, result] = useLazyExpenseImageQuery();
   const [postExpense, isLoading] = usePostExpenseMutation();
+  const [editExpense] = useEditExpenseMutation();
   const [deleteExpense] = useDeleteExpenseMutation();
 
   const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,24 +80,44 @@ export const ModalComponent = () => {
   });
 
   const onSubmit: SubmitHandler<ModalInputs> = (data) => {
-    const tagData = tags.map((item) => {
-      return item.text;
-    });
-    const expenseObject = {
-      ...data,
-      date: date,
-      tags: tagData.toString(),
-      receipt: selectedFile,
-    };
-    console.log(expenseObject);
-    postExpense(expenseObject);
-    dispatch(
-      notification({
-        title: "Add Expense",
-        type: "success",
-        message: "Successfully Added Expense",
-      })
-    );
+    if (editable) {
+      const tagData = tags.map((item) => {
+        return item.text;
+      });
+      const expenseObject = {
+        ...modalData!,
+        category: data.category || modalData?.category!,
+        tags: [...tagData].toString(),
+        receipt: selectedFile || modalData?.receipt,
+      };
+      console.log(expenseObject);
+      editExpense(expenseObject);
+      dispatch(
+        notification({
+          title: "Edit Expense",
+          type: "info",
+          message: "Successfully Edited Expense",
+        })
+      );
+    } else {
+      const tagData = tags.map((item) => {
+        return item.text;
+      });
+      const expenseObject = {
+        ...data,
+        date: date,
+        tags: tagData.toString(),
+        receipt: selectedFile,
+      };
+      postExpense(expenseObject);
+      dispatch(
+        notification({
+          title: "Add Expense",
+          type: "success",
+          message: "Successfully Added Expense",
+        })
+      );
+    }
     dispatch(toggleModal({ isOpen: false }));
     resetForm();
   };
@@ -243,7 +265,7 @@ export const ModalComponent = () => {
           </label>
 
           <label htmlFor="file">
-            Add receipt photo:
+            {editable ? "Change receipt photo" : "Add receipt photo:"}
             <div className="receiptSelect">
               <input
                 type="file"

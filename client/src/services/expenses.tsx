@@ -1,9 +1,6 @@
 // Need to use the React-specific entry point to allow generating React hooks
 
-import {
-  ExpenseDeleteId,
-  ExpenseFormState,
-} from "../models/expenses";
+import { ExpenseDeleteId, ExpenseFormState } from "../models/expenses";
 
 import { baseApi } from "./baseApi";
 
@@ -13,6 +10,14 @@ export const expensesApi = baseApi.injectEndpoints({
     expenses: builder.query({
       query: () => ({
         url: `/expenses`,
+        method: "GET",
+        withCredentials: true,
+      }),
+      providesTags: ["Expenses"],
+    }),
+    currentMonth: builder.query({
+      query: () => ({
+        url: `/expenses/currentMonth`,
         method: "GET",
         withCredentials: true,
       }),
@@ -38,6 +43,18 @@ export const expensesApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Expenses"],
     }),
+    editExpense: builder.mutation({
+      query: (expenseData: ExpenseFormState) => ({
+        url: "/expenses/editExpense",
+        method: "PUT",
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+        withCredentials: true,
+        data: expenseData,
+      }),
+      invalidatesTags: ["Expenses"],
+    }),
     deleteExpense: builder.mutation({
       query: (deleteId: ExpenseDeleteId) => ({
         url: "/expenses/deleteExpense",
@@ -52,7 +69,9 @@ export const expensesApi = baseApi.injectEndpoints({
 
 export const {
   useExpensesQuery,
+  useCurrentMonthQuery,
   useLazyExpenseImageQuery,
+  useEditExpenseMutation,
   usePostExpenseMutation,
   useDeleteExpenseMutation,
 } = expensesApi;

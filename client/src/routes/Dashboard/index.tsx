@@ -4,11 +4,11 @@ import { ChartContainer } from "./ChartContainer";
 import { ExpenseState } from "../../models/expenses";
 import { ListItem } from "./ListItem";
 import { RootState } from "../../app/store";
-import { useExpensesQuery } from "../../services/expenses";
+import { useCurrentMonthQuery } from "../../services/expenses";
 import { useSelector } from "react-redux";
 
 export const Dashboard = () => {
-  const expensesQuery = useExpensesQuery({});
+  const expensesQuery = useCurrentMonthQuery({});
   const expenses = useSelector((state: RootState) => state.expenses.data);
 
   return (

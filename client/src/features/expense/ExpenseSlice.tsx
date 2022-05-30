@@ -11,25 +11,10 @@ export const expenseSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addMatcher(
-      expensesApi.endpoints.expenses.matchFulfilled,
+      expensesApi.endpoints.currentMonth.matchFulfilled,
       (state, action?: PayloadAction<ExpenseState[]>) => {
         if (action?.payload) {
-          const currentMonth = new Date().getMonth() + 1;
-          const currentYear = new Date().getFullYear();
-
-          const processedArray: ExpenseState[] = action.payload
-            .sort((a, b) => {
-              if (b.date > a.date) return 1;
-              if (b.date < a.date) return -1;
-              return 0;
-            })
-            .filter((item) => {
-              const year = new Date(item.date).getFullYear();
-              const month = new Date(item.date).getMonth() + 1;
-              return currentMonth === month && currentYear === year;
-            });
-
-          state.data = processedArray;
+          state.data = action.payload;
         }
       }
     );

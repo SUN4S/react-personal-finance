@@ -14,7 +14,7 @@ export interface ExpenseFormState {
   date: Date;
   tags?: string;
   description?: string;
-  receipt?: File | Blob;
+  receipt?: File | Blob | string;
 }
 
 export interface ExpenseModalState {

@@ -15,6 +15,27 @@ router.get("/", async (req: Request, res: Response) => {
   res.status(401).json({ msg: "Unauthorized access" });
 });
 
+router.get("/currentMonth", async (req: Request, res: Response) => {
+  if (req.isAuthenticated()) {
+    const expenses = await ExpensesModel.findOne({ userid: req.user.id });
+    const currentMonth = new Date().getMonth() + 1;
+    const currentYear = new Date().getFullYear();
+    const processedArray = expenses.expensesList
+      .sort((a, b) => {
+        if (b.date > a.date) return 1;
+        if (b.date < a.date) return -1;
+        return 0;
+      })
+      .filter((item) => {
+        const year = new Date(item.date).getFullYear();
+        const month = new Date(item.date).getMonth() + 1;
+        return currentMonth === month && currentYear === year;
+      });
+    return res.status(200).send(processedArray);
+  }
+  res.status(401).json({ msg: "Unauthorized access" });
+});
+
 // Add a new expense object
 router.post("/addExpense", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
@@ -48,7 +69,7 @@ router.post("/addExpense", async (req: Request, res: Response) => {
             amount: req.body.amount,
             date: req.body.date,
             description: req.body.description,
-            tags: tags,
+            tags: tags || [],
             receipt: file ? fileName : null,
           },
         },
@@ -78,20 +99,23 @@ router.get("/getReceipt/:name", async (req: Request, res: Response) => {
 // Exit a single expense in array
 router.put("/editExpense", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
+    const tags = req.body.tags.split(",").map((item: string) => {
+      return item;
+    });
     // Defining default values for variables
     let file = undefined;
     // sets default value to already existing one as to not overwrite
     let fileName = req.body.receipt;
     if (req.files) {
-      file = req.files.expense;
+      file = req.files.receipt;
       fileName = Date.now() + "-" + Math.round(Math.random() * 1e9) + file.name;
       if (!global.whitelist.includes(file.mimetype)) {
         return res.set({ "Content-Type": file.mimetype }).json({ msg: "Bad file format" });
       } else {
+        // add new file
         file.mv(`${global.__basedir}/uploads/expenses/${fileName}`);
       }
     }
-
     // Match object in array and update values
     const expenses = await ExpensesModel.findOneAndUpdate(
       {
@@ -103,7 +127,7 @@ router.put("/editExpense", async (req: Request, res: Response) => {
           "expensesList.$.amount": req.body.amount,
           "expensesList.$.date": req.body.date,
           "expensesList.$.description": req.body.description,
-          "expensesList.$.tags": req.body.tags,
+          "expensesList.$.tags": tags,
           "expensesList.$.receipt": fileName,
         },
       }
