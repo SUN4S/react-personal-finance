@@ -1,6 +1,6 @@
+import { ExpensesModel, joiExpenseSchema } from "../models/expensesSchema";
 import express, { Request, Response } from "express";
 
-import { ExpensesModel } from "../models/expensesSchema";
 import fs from "fs";
 
 const router = express.Router();
@@ -45,9 +45,12 @@ router.get("/currentMonth", async (req: Request, res: Response) => {
 router.post("/addExpense", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     // multipart/form-data cant send arrays, need to parse string
-    const tags = req.body.tags.split(",").map((item: string) => {
-      return item;
-    });
+    const tags =
+      req.body.tags.length > 0
+        ? req.body.tags.split(",").map((item: string) => {
+            return item;
+          })
+        : [];
     // define initial values for if file does not exist
     let file = undefined;
     let fileName = null;
@@ -64,19 +67,24 @@ router.post("/addExpense", async (req: Request, res: Response) => {
         file.mv(`${global.__basedir}/uploads/expenses/${fileName}`);
       }
     }
+    // Validate data provided by the client
+    const data = joiExpenseSchema.validate({
+      category: req.body.category,
+      amount: req.body.amount,
+      date: req.body.date,
+      description: req.body.description,
+      tags: tags || [],
+      receipt: file ? fileName : null,
+    });
+    if (data.error) {
+      return res.status(400).json({ msg: data.error.message });
+    }
     // Add an expense by pushing new object into list
     const expenses = await ExpensesModel.findOneAndUpdate(
       { userid: req.user.id },
       {
         $push: {
-          expensesList: {
-            category: req.body.category,
-            amount: req.body.amount,
-            date: req.body.date,
-            description: req.body.description,
-            tags: tags || [],
-            receipt: file ? fileName : null,
-          },
+          expensesList: data.value,
         },
       }
     );
@@ -122,6 +130,18 @@ router.put("/editExpense", async (req: Request, res: Response) => {
         // TODO: should also delete old file
         file.mv(`${global.__basedir}/uploads/expenses/${fileName}`);
       }
+    }
+    // Validate data provided by the client
+    const data = joiExpenseSchema.validate({
+      category: req.body.category,
+      amount: req.body.amount,
+      date: req.body.date,
+      description: req.body.description,
+      tags: tags || [],
+      receipt: file ? fileName : null,
+    });
+    if (data.error) {
+      return res.status(400).json({ msg: data.error.message });
     }
     // Match object in array and update values
     const expenses = await ExpensesModel.findOneAndUpdate(

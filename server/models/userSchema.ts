@@ -1,4 +1,4 @@
-var uniqueValidator = require("mongoose-unique-validator");
+import Joi, { string } from "joi";
 
 import mongoose from "mongoose";
 
@@ -24,6 +24,15 @@ const UserSchema = new mongoose.Schema(
   { collection: "userData" }
 );
 
-UserSchema.plugin(uniqueValidator, { msg: "is already taken." });
+const strongPasswordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+const stringPassswordError = new Error(
+  "Password must be strong. At least one upper case alphabet. At least one lower case alphabet. At least one digit. At least one special character. Minimum eight in length"
+);
+
+export const joiUserSchema = Joi.object({
+  username: Joi.string().min(5).max(32).alphanum().required(),
+  email: Joi.string().email().required(),
+  password: Joi.string().regex(strongPasswordRegex).error(stringPassswordError).required(),
+});
 
 export const UserModel = mongoose.model("UserModel", UserSchema);

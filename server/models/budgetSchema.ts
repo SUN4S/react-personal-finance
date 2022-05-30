@@ -1,3 +1,4 @@
+import Joi from "joi";
 import mongoose from "mongoose";
 
 const BudgetSchema = new mongoose.Schema({
@@ -15,5 +16,9 @@ const UserBudget = new mongoose.Schema(
   },
   { collection: "budgetsList" }
 );
+
+export const joiBudgetSchema = Joi.object({
+  budget: Joi.number().min(1).max(10000).required(),
+});
 
 export const BudgetModel = mongoose.model("BudgetModel", UserBudget);

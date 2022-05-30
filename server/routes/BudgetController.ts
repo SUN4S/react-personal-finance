@@ -1,6 +1,7 @@
+import { BudgetModel, joiBudgetSchema } from "../models/budgetSchema";
 import express, { Request, Response } from "express";
 
-import { BudgetModel } from "../models/budgetSchema";
+import Joi from "joi";
 
 const router = express.Router();
 
@@ -17,12 +18,16 @@ router.get("/", async (req: Request, res: Response) => {
 
 // Adding a monthly budget for the user
 // It's only possible to have one budget per month
-/**
-  TODO:
-  []Add an ability to select month interval
-**/
+// TODO: Add an ability to select month interval
+
 router.post("/addBudget", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
+    // Validate if Provided data is correct
+    const data = joiBudgetSchema.validate(req.body);
+    if (data.error) {
+      return res.status(400).json({ msg: data.error.message });
+    }
+
     // Finds the object asociated with session user
     const uniqueBudget = BudgetModel.findOne({ userid: req.user.id }, async (err, list) => {
       // After finding the user, it filters by todays yyyy-mm
@@ -56,6 +61,12 @@ router.post("/addBudget", async (req: Request, res: Response) => {
 // no ability to change previous budgets
 router.put("/editBudget", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
+    //Validate if provided data is correct
+    const data = joiBudgetSchema.validate(req.body);
+    if (data.error) {
+      return res.json({ msg: data.error.message });
+    }
+
     const budget = await BudgetModel.findOneAndUpdate(
       {
         budgetList: {

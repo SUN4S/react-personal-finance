@@ -1,8 +1,8 @@
+import { UserModel, joiUserSchema } from "../models/userSchema";
 import express, { Request, Response } from "express";
 
 import { BudgetModel } from "../models/budgetSchema";
 import { ExpensesModel } from "../models/expensesSchema";
-import { UserModel } from "../models/userSchema";
 import bcrypt from "bcrypt";
 import passport from "passport";
 
@@ -78,6 +78,14 @@ router.post("/register", async (req: Request, res: Response) => {
   if (doc != null) {
     return res.status(409).json({ msg: "Username or Email already in use" });
   } else {
+    const data = joiUserSchema.validate({
+      username: body.username,
+      email: body.email,
+      password: password,
+    });
+    if (data.error) {
+      return res.status(400).json({ msg: data.error.message });
+    }
     //Bcrypt works its magic
     bcrypt.genSalt(saltRounds, function (err, salt) {
       bcrypt.hash(password, salt, function (err, hash) {

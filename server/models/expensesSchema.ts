@@ -1,3 +1,4 @@
+import Joi from "joi";
 import mongoose from "mongoose";
 
 const ExpensesSchema = new mongoose.Schema(
@@ -19,5 +20,14 @@ const UserExpenses = new mongoose.Schema(
   },
   { collection: "expensesList" }
 );
+
+export const joiExpenseSchema = Joi.object({
+  category: Joi.string().valid("Essentials", "Wants", "Culture", "Unexpected").required(),
+  amount: Joi.number().min(1).max(10000).required(),
+  date: Joi.date(),
+  description: Joi.string().min(0).max(200),
+  tags: Joi.array().items(Joi.string()),
+  receipt: Joi.string().allow(null),
+});
 
 export const ExpensesModel = mongoose.model("ExpensesModel", UserExpenses);

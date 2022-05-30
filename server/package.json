@@ -34,7 +34,6 @@
     "https": "^1.0.0",
     "joi": "^17.6.0",
     "mongoose": "^6.2.8",
-    "mongoose-unique-validator": "^3.0.0",
     "passport": "^0.5.2",
     "passport-cookie": "^1.0.9",
     "passport-local": "^1.0.0",
