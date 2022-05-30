@@ -25,6 +25,14 @@ export const userSplitApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    logoutUser: builder.mutation({
+      query: () => ({
+        url: `/logout`,
+        method: "POST",
+        withCredentials: true,
+      }),
+      invalidatesTags: ["User"],
+    }),
     isLoggedIn: builder.query({
       query: () => ({
         url: `/loggedIn`,
@@ -36,5 +44,9 @@ export const userSplitApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useRegisterUserMutation, useIsLoggedInQuery } =
-  userSplitApi;
+export const {
+  useLoginMutation,
+  useLogoutUserMutation,
+  useRegisterUserMutation,
+  useIsLoggedInQuery,
+} = userSplitApi;

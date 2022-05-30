@@ -90,7 +90,6 @@ export const ModalComponent = () => {
         tags: [...tagData].toString(),
         receipt: selectedFile || modalData?.receipt,
       };
-      console.log(expenseObject);
       editExpense(expenseObject);
       dispatch(
         notification({
