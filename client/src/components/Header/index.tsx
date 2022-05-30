@@ -1,5 +1,6 @@
 import "./header.scss";
 
+import { ThemeSwitch } from "../ThemeSwitch";
 import defaultAvatar from "../../resources/images/default-image.jpg";
 import { notification } from "../../features/notification/NotificationSlice";
 import { useAppDispatch } from "../../app/hooks";
@@ -25,6 +26,7 @@ export const Header = () => {
 
   return (
     <header>
+      <ThemeSwitch />
       <h4>John123</h4>
       <img src={defaultAvatar} alt="Avatar" />
       <div>
