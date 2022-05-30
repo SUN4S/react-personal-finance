@@ -17,6 +17,7 @@ router.post("/login", passport.authenticate("local"), async (req: Request, res: 
   res.json({ msg: "Logged in successfully" });
 });
 
+// Get request to check if user is logged in
 router.get("/loggedIn", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     res.status(200).json({ msg: "User is logged in" });
@@ -55,20 +56,12 @@ router.post("/avatar", async (req: Request, res: Response) => {
   }
 });
 
-// Return a users Username
-router.get("/getUsername", async (req: Request, res: Response) => {
+router.get("/getUser", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     const user = await UserModel.findById(req.user.id);
-    return res.status(200).json({ username: user.username });
-  }
-  res.status(401).json({ msg: "Unauthorized access" });
-});
-
-// Return a user set avatar image
-router.get("/getAvatar", async (req: Request, res: Response) => {
-  if (req.isAuthenticated()) {
-    const user = await UserModel.findById(req.user.id);
-    return res.status(200).sendFile(`${global.__basedir}/uploads/avatars/${user.image}`);
+    return res
+      .status(200)
+      .json({ username: user.username, image: `http://localhost:3030/avatars/${user.image}` });
   }
   res.status(401).json({ msg: "Unauthorized access" });
 });
@@ -109,6 +102,11 @@ router.post("/register", async (req: Request, res: Response) => {
     return res.status(201).json({ msg: "Account created succesfully" });
   }
   res.status(500).json({ msg: "Internal server error" });
+});
+
+router.post("/logout", (req: Request, res: Response) => {
+  req.logout();
+  res.json({ msg: "Logged out successfully" });
 });
 
 module.exports = router;

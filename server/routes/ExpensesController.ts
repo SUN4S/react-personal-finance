@@ -5,9 +5,10 @@ import fs from "fs";
 
 const router = express.Router();
 
-// Return an array of expense Objects
+// Return an array of ALL expenses
 router.get("/", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
+    // Gets expense object
     const expenses = await ExpensesModel.findOne({ userid: req.user.id });
     const data = await expenses;
     return res.status(200).send(data.expensesList);
@@ -15,11 +16,15 @@ router.get("/", async (req: Request, res: Response) => {
   res.status(401).json({ msg: "Unauthorized access" });
 });
 
+// Return array of expenses for current ongoing Month
 router.get("/currentMonth", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
+    // Gets expense object
     const expenses = await ExpensesModel.findOne({ userid: req.user.id });
+    // Gets current month and year
     const currentMonth = new Date().getMonth() + 1;
     const currentYear = new Date().getFullYear();
+    // Filters and sorts array here instead of in the client
     const processedArray = expenses.expensesList
       .sort((a, b) => {
         if (b.date > a.date) return 1;
@@ -99,12 +104,13 @@ router.get("/getReceipt/:name", async (req: Request, res: Response) => {
 // Exit a single expense in array
 router.put("/editExpense", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
+    // multipart/form-data cant send arrays, need to parse string
     const tags = req.body.tags.split(",").map((item: string) => {
       return item;
     });
     // Defining default values for variables
     let file = undefined;
-    // sets default value to already existing one as to not overwrite
+    // Sets default value to already existing one as to not overwrite
     let fileName = req.body.receipt;
     if (req.files) {
       file = req.files.receipt;
@@ -112,7 +118,8 @@ router.put("/editExpense", async (req: Request, res: Response) => {
       if (!global.whitelist.includes(file.mimetype)) {
         return res.set({ "Content-Type": file.mimetype }).json({ msg: "Bad file format" });
       } else {
-        // add new file
+        // Add new file
+        // TODO: should also delete old file
         file.mv(`${global.__basedir}/uploads/expenses/${fileName}`);
       }
     }
@@ -151,6 +158,7 @@ router.delete("/deleteExpense", async (req: Request, res: Response) => {
         },
       }
     ).then((response) => {
+      // If expense Object contained file name, remove that file
       if (req.body.receipt) {
         if (fs.existsSync(global.__basedir + "/uploads/expenses/" + req.body.receipt)) {
           fs.unlinkSync(global.__basedir + "/uploads/expenses/" + req.body.receipt);
