@@ -38,7 +38,7 @@ export const ListItem = (props: { expenseData: ExpenseState }) => {
           })}
       </div>
       <div className="expenseListElementControls">
-        <button onClick={handleClick}>
+        <button aria-label="Edit expense" onClick={handleClick}>
           <i className="fa-solid fa-pen-to-square"></i>
         </button>
       </div>

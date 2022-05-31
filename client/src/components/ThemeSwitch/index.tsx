@@ -26,7 +26,7 @@ export const ThemeSwitch = () => {
 
   return (
     <div className="themeContainer">
-      <button onClick={handleThemeChange}>
+      <button aria-label="Theme switch" onClick={handleThemeChange}>
         {currentTheme === "dark" ? (
           <i className="fa-solid fa-moon"></i>
         ) : (
