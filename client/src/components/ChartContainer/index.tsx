@@ -2,7 +2,7 @@ import "./chartContainer.scss";
 
 import { useEffect, useState } from "react";
 
-import { RootState } from "../../../app/store";
+import { RootState } from "../../app/store";
 import { useSelector } from "react-redux";
 
 export const ChartContainer = () => {

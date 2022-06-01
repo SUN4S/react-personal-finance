@@ -12,18 +12,13 @@
     height: 100%;
     margin: 0 auto;
     padding-left: 256px;
-  }
-}
 
-@media (max-width: 1024px) {
-  .contentContainer {
-    padding-left: 78px;
-  }
-}
-
-@media (max-width: 576px) {
-  .contentContainer {
-    padding-left: 0;
-    padding-bottom: 48px;
+    @media (max-width: 1024px) {
+      padding-left: 78px;
+    }
+    @media (max-width: 576px) {
+      padding-left: 0;
+      padding-bottom: 48px;
+    }
   }
 }

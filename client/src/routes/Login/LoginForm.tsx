@@ -10,27 +10,35 @@ import { useIsLoggedInQuery } from "../../services/user";
 import { useLoginMutation } from "../../services/user";
 
 export const LoginForm = () => {
+  // Redux Toolki api function used to check is user is logged in
   const loggedInQuery = useIsLoggedInQuery({
     skip: true,
   });
+  // Redux Toolkit api function used to send request to back-end
   const [login] = useLoginMutation();
-
+  // Redux Toolkit function used to dispatch(call) functions
   const dispatch = useAppDispatch();
 
+  // Redux-hook-form selecting functions to use
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginInputs>();
 
+  // On submit, sending request to authenticate user
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
+    // Creating a user object
     const user = {
       username: data.username,
       password: data.password,
     };
 
+    // Calling Redux Toolkit api to authenticate user
     const response: any = await login(user);
     if (response.data) {
+      // If response goes throught
+      // Dispatch Redux Toolkit function to generate notification
       dispatch(
         notification({
           title: "Login Atempt",
@@ -39,6 +47,8 @@ export const LoginForm = () => {
         })
       );
     } else if (response.error) {
+      // If response fails
+      // Dispatch Redux Toolkit function to generate notification
       dispatch(
         notification({
           title: "Login Atempt",

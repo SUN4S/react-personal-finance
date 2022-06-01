@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 
 import DefaultImage from "../resources/images/default-image.jpg";
 
+// Currently unused
+// TODO: Add user settings (where you will be able to change avatar)
 export const FileInputAvatar = () => {
   const [selectedFile, setSelectedFile] = useState<File>();
   const [preview, setPreview] = useState<string>(DefaultImage);

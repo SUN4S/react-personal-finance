@@ -14,6 +14,7 @@ export const App = () => {
   return (
     <>
       <div className="App">
+        {/* Check if screen is mobile-size, if it is, render mobileNav component */}
         {window.innerWidth > 576 ? <Sidebar /> : <MobileNav />}
         <div className="contentContainer">
           <Header />

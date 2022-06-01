@@ -3,22 +3,20 @@ const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // Experimental, only works with development environment
-const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 let mode = process.env.NODE_ENV ? "production" : "development";
 
 module.exports = {
   mode: mode,
-  devtool: "source-map",
   entry: {
     bundle: path.resolve(__dirname, "src/index.tsx"),
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "[name][contenthash].js",
+    path: path.resolve(__dirname, "../server/build/public"),
+    filename: "./[name].js",
     clean: true,
     assetModuleFilename: "images/[hash]][ext][query]",
-    publicPath: "/",
+    publicPath: "",
   },
   optimization: {
     splitChunks: {
@@ -80,7 +78,6 @@ module.exports = {
     new Dotenv({
       path: "./.env",
     }),
-    new ReactRefreshWebpackPlugin(),
   ],
   resolve: {
     extensions: [".js", ".jsx", ".tsx", ".ts", ".js"],

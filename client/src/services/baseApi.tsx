@@ -3,6 +3,7 @@
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
+// Define base Axios parameters
 const axiosBaseQuery =
   (
     { baseUrl }: { baseUrl: string } = { baseUrl: "" }
@@ -40,6 +41,7 @@ const axiosBaseQuery =
     }
   };
 
+// Creating a base api, that will house all other api requests
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: axiosBaseQuery({

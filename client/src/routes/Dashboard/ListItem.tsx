@@ -3,8 +3,12 @@ import { toggleModal } from "../../features/modal/ModalSlice";
 import { useDispatch } from "react-redux";
 
 export const ListItem = (props: { expenseData: ExpenseState }) => {
+  // Redux Toolkit function to dispatch(call) functions
   const dispatch = useDispatch();
 
+  // Handle button click and pass data to modal
+  // 'editable' sets modal element to be set to edit mode
+  // 'data' send current items data to modal
   const handleClick = () => {
     dispatch(
       toggleModal({ isOpen: true, editable: true, data: props.expenseData })

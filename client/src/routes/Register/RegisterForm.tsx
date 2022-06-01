@@ -8,26 +8,34 @@ import { useNavigate } from "react-router";
 import { useRegisterUserMutation } from "../../services/user";
 
 export const RegisterForm = () => {
+  // Redux Toolkit api function to register user
   const [registerUser] = useRegisterUserMutation();
+  // React Router functions to redirect
   const navigate = useNavigate();
+  // Redux Toolkit function to dispach(call) functions
   const dispatch = useAppDispatch();
 
+  // Getting React-hook-forms needed functions
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterInputs>();
 
+  // on submit Send request to create new user
   const onSubmit: SubmitHandler<RegisterInputs> = async (data) => {
+    // Create new user object
     const user = {
       username: data.username,
       email: data.email,
       password: data.password,
     };
 
+    // Attempt to create a new user
     const response: any = await registerUser(user);
-    console.log(response);
     if (response.data) {
+      // If request goes through
+      // Dispatch Redux Toolkit function to generate notification
       dispatch(
         notification({
           title: "Register User",
@@ -35,8 +43,11 @@ export const RegisterForm = () => {
           type: "success",
         })
       );
+      // After successful registration, redirect user to dashboard
       navigate("/");
     } else if (response.error) {
+      // If request fails
+      // Dispatch Redux Toolkit function to generate notification
       dispatch(
         notification({
           title: "Register User",

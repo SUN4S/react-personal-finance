@@ -2,9 +2,10 @@ import { LoginInputs, RegisterInputs } from "../models/user";
 
 import { baseApi } from "./baseApi";
 
-// Define a service using a base URL and expected endpoints
-export const userSplitApi = baseApi.injectEndpoints({
+// Inject a new userApi into the baseApi
+export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // First mutation(query) takes user object and tries to authenticate user
     login: builder.mutation({
       query: (userData: LoginInputs) => ({
         url: `/login`,
@@ -15,6 +16,7 @@ export const userSplitApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    // Second mutation(query) takes user object and tries to create a new user
     registerUser: builder.mutation({
       query: (userData: RegisterInputs) => ({
         url: `/register`,
@@ -25,6 +27,7 @@ export const userSplitApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    // Third mutation(query) uses token to remove user from session
     logoutUser: builder.mutation({
       query: () => ({
         url: `/logout`,
@@ -33,6 +36,7 @@ export const userSplitApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    // Fourth query send a request to see if user is logged to current session
     isLoggedIn: builder.query({
       query: () => ({
         url: `/loggedIn`,
@@ -49,4 +53,4 @@ export const {
   useLogoutUserMutation,
   useRegisterUserMutation,
   useIsLoggedInQuery,
-} = userSplitApi;
+} = userApi;

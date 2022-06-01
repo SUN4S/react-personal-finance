@@ -3,6 +3,7 @@ import "./login.scss";
 import { LoginForm } from "./LoginForm";
 import Logo from "../../resources/icons/Logo.svg";
 
+// Login display
 export const Login = () => {
   return (
     <section className="login">

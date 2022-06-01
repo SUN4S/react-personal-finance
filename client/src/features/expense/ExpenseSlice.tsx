@@ -3,6 +3,9 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { expensesApi } from "../../services/expenses";
 
+// Redux Toolkit created expense slice
+// extraReducers: request that was handled by the api sets the state here
+// reducers: these functions are used to modify (sort, filter) state data
 export const expenseSlice = createSlice({
   name: "expenses",
   initialState: { data: [] } as ExpenseFetchState,

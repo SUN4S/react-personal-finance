@@ -5,21 +5,22 @@ import { toggleModal } from "../../../features/modal/ModalSlice";
 import { useAppDispatch } from "../../../app/hooks";
 
 export const MobileNav = () => {
+  // Redux Toolkit finction to dispatch events
   const dispatch = useAppDispatch();
 
   return (
     <div className="mobileNav">
       <ul>
-        <NavLink to="/">
-          <li>
+        <li>
+          <NavLink to="/">
             <i className="fa-solid fa-table-columns"></i>
-          </li>
-        </NavLink>
-        <NavLink to="/history">
-          <li>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/history">
             <i className="fa-solid fa-table-columns"></i>
-          </li>
-        </NavLink>
+          </NavLink>
+        </li>
         <li className="buttonContainer">
           <button
             onClick={() =>
@@ -29,16 +30,16 @@ export const MobileNav = () => {
             <i className="fa-solid fa-plus"></i>
           </button>
         </li>
-        <NavLink to="/stocks">
-          <li>
+        <li>
+          <NavLink to="/stocks">
             <i className="fa-solid fa-table-columns"></i>
-          </li>
-        </NavLink>
-        <NavLink to="/monthly">
-          <li>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/monthly">
             <i className="fa-solid fa-table-columns"></i>
-          </li>
-        </NavLink>
+          </NavLink>
+        </li>
       </ul>
     </div>
   );

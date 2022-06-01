@@ -3,12 +3,16 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Notification } from "../../models/notification";
 import { Store } from "react-notifications-component";
 
+// initial state for notification component
 const initialState = {
   title: "",
   message: "",
   type: "success",
 };
 
+// Redux Toolkit create slice
+// reducers: notification is used to generate a new notification 
+// it can be called from anywhere, to display notification with provided prop data 
 export const notificationSlice = createSlice({
   name: "notification",
   initialState,

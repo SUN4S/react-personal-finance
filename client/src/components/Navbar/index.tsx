@@ -14,8 +14,14 @@ export const Sidebar = () => {
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
   const dispatch = useAppDispatch();
 
+  // This is used only on load to remove animations
+  // There was a 'bug' where on load, collapse animation would always play
+  // this had no effect on mobile or larger screens, but tablet size screens
+  // would always play collaps animation on load
+  // TODO: Might be able to resolve this with css,
   useEffect(() => {
     setTimeout(() => {
+      // Finds all elements with this class and removes it after 0.2s
       const node = document.querySelectorAll(".preload-transitions");
       node.forEach((item) => item.classList.remove("preload-transitions"));
       setFirstLoad(false);

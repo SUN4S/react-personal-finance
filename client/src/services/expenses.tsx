@@ -4,9 +4,10 @@ import { ExpenseDeleteId, ExpenseFormState } from "../models/expenses";
 
 import { baseApi } from "./baseApi";
 
-// Define a service using a base URL and expected endpoints
+// Inject a new expensesApi into the baseApi
 export const expensesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // First query returns ALL expenses ever provided
     expenses: builder.query({
       query: () => ({
         url: `/expenses`,
@@ -15,6 +16,8 @@ export const expensesApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Expenses"],
     }),
+    // Second query returns only current month expenses
+    // month verification and filtering is done server-side
     currentMonth: builder.query({
       query: () => ({
         url: `/expenses/currentMonth`,
@@ -23,6 +26,8 @@ export const expensesApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Expenses"],
     }),
+    // Third query takes image name (string) parameter used to get file
+    // Returns link to where the image is stored
     expenseImage: builder.query<string, string>({
       query: (name: string) => ({
         url: `/expenses/getReceipt/${name}`,
@@ -31,6 +36,8 @@ export const expensesApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Expenses"],
     }),
+    // Fourth mutation(query) takes an object and/or file to pass to server
+    // multipart/form-data does not send arrays, so 'tags' need to be parsed
     postExpense: builder.mutation({
       query: (expenseData: ExpenseFormState) => ({
         url: "/expenses/addExpense",
@@ -43,6 +50,8 @@ export const expensesApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Expenses"],
     }),
+    // Fifth mutation(query) takes an object and/or file to pass to server
+    // multipart/form-data does not send arrays, so 'tags' need to be parsed
     editExpense: builder.mutation({
       query: (expenseData: ExpenseFormState) => ({
         url: "/expenses/editExpense",
@@ -55,6 +64,7 @@ export const expensesApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Expenses"],
     }),
+    //Sixth mutation(query) takes an object with id of expense and/or filename
     deleteExpense: builder.mutation({
       query: (deleteId: ExpenseDeleteId) => ({
         url: "/expenses/deleteExpense",
