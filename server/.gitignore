@@ -3,6 +3,7 @@ uploads/expenses
 build/middleware
 build/models
 build/routes
+build/public
 build/index.js
 build/index.d.ts
 .env

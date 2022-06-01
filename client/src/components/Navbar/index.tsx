@@ -50,16 +50,16 @@ export const Sidebar = () => {
       <div className="sidebarLogo">
         <img src={Logo} alt="Logo" />
       </div>
-      <div className="buttonContainer">
+      <div className="buttonContainer preload-transitions">
         <Button
           type="button"
           text="+"
-          class="primaryBtn"
+          class="primaryBtn preload-transitions"
           action={() =>
             dispatch(toggleModal({ isOpen: true, editable: false }))
           }
         />
-        <span>Add Expense</span>
+        <span className="preload-transitions">Add Expense</span>
       </div>
 
       <div className="sidebarPages preload-transitions">Pages</div>

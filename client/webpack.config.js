@@ -2,7 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-// Experimental, only works with development environment
+const WebpackPwaManifest = require("webpack-pwa-manifest");
 const Dotenv = require("dotenv-webpack");
 let mode = process.env.NODE_ENV ? "production" : "development";
 
@@ -10,13 +10,14 @@ module.exports = {
   mode: mode,
   entry: {
     bundle: path.resolve(__dirname, "src/index.tsx"),
+    ServiceWorker: path.resolve(__dirname, "serviceWorker.js"),
   },
   output: {
     path: path.resolve(__dirname, "../server/build/public"),
     filename: "./[name].js",
     clean: true,
-    assetModuleFilename: "images/[hash]][ext][query]",
-    publicPath: "",
+    assetModuleFilename: "images/[name][ext][query]",
+    publicPath: "/",
   },
   optimization: {
     splitChunks: {
@@ -77,6 +78,27 @@ module.exports = {
     }),
     new Dotenv({
       path: "./.env",
+    }),
+    new WebpackPwaManifest({
+      name: "Personal Finance",
+      short_name: "PF",
+      description: "Attempt to make a Personal Finance app with React",
+      start_url: "http://localhost:3030",
+      background_color: "#ffffff",
+      theme_color: "#eeeeee",
+      display: "standalone",
+      icons: [
+        {
+          src: path.resolve("src/resources/icons/Logo.svg"),
+          sizes: [96, 128, 192, 256, 512],
+          purpose: "any maskable",
+        },
+        {
+          src: path.resolve("src/resources/icons/Logo.png"),
+          sizes: [512],
+          purpose: "any maskable",
+        },
+      ],
     }),
   ],
   resolve: {

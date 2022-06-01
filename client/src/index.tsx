@@ -2,13 +2,12 @@ import "./styles/main.scss";
 import "./styles/normalize.css";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ProtectedRoutes, PublicRoutes } from "./routes/RouteTypes";
 
 import { App } from "./components/App";
 import { Dashboard } from "./routes/Dashboard";
 import { Login } from "./routes/Login";
-import { ProtectedRoutes } from "./routes/ProtectedRoutes";
 import { Provider } from "react-redux";
-import PublicRoutes from "./routes/PublicRoutes";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ReactNotifications } from "react-notifications-component";
@@ -37,6 +36,7 @@ root.render(
           </Route>
           {/* Protected Routed are only used for users who are successfully authenticated */}
           <Route path="/" element={<ProtectedRoutes />}>
+            {/* App contains nav check(normal or mobile) and an Outlet */}
             <Route path="/" element={<App />}>
               <Route index element={<Dashboard />} />
               <Route path="history" element={<h1>history</h1>} />
@@ -59,3 +59,16 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("serviceWorker.js")
+    .then((registration) => {
+      console.log("Service Worker Registered!");
+      console.log(registration);
+    })
+    .catch((error) => {
+      console.log("Service Worker Registration Failed");
+      console.log(error);
+    });
+}

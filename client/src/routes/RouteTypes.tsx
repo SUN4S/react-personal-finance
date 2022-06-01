@@ -2,6 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 import { useIsLoggedInQuery } from "../services/user";
 
+// VERY BASIC check to verify user
 const useAuth = () => {
   const loggedInQuery = useIsLoggedInQuery({});
 
@@ -12,10 +13,16 @@ const useAuth = () => {
   }
 };
 
-const PublicRoutes = (props: any) => {
+// Public routes for non-authenticated users
+export const PublicRoutes = () => {
   const auth = useAuth();
 
   return auth ? <Navigate to="/" /> : <Outlet />;
 };
 
-export default PublicRoutes;
+// Private routes for authenticated users
+export const ProtectedRoutes = () => {
+  const auth = useAuth();
+
+  return auth ? <Outlet /> : <Navigate to="/login" />;
+};

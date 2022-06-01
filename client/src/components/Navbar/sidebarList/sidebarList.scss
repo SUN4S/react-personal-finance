@@ -16,7 +16,7 @@ ul {
       background-color: var(--sidebar-bg);
       border-radius: 2px;
       cursor: pointer;
-      transition: background-color 0.2s ease-in-out;
+      transition: width 0.2s ease-in-out;
 
       i {
         font-size: 20px;
@@ -32,6 +32,7 @@ ul {
         color: var(--text-primary);
         opacity: 1;
         transition: opacity 0.3s ease-in-out;
+        transition: color 0.2s ease-in-out;
       }
 
       &.active {
