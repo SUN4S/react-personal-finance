@@ -1,7 +1,7 @@
-import "./register.scss";
+import "./Register.scss";
 
 import Logo from "../../resources/icons/Logo.svg";
-import { RegisterForm } from "./RegisterForm";
+import { RegisterForm } from "../../components/RegisterForm/RegisterForm";
 
 export const Register = () => {
   return (

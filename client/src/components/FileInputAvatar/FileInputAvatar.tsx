@@ -1,4 +1,4 @@
-import "./fileInputAvatar.scss";
+import "./FileInputAvatar.scss";
 
 import React, { useEffect, useState } from "react";
 

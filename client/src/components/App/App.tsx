@@ -1,12 +1,12 @@
-import "./app.scss";
+import "./App.scss";
 import "react-notifications-component/dist/theme.css";
 
-import { Header } from "../Header";
-import { MobileNav } from "../Navbar/mobileNav";
+import { Header } from "../Header/Header";
+import { MobileNav } from "../MobileNav/MobileNav";
 import Modal from "react-modal";
-import { ModalComponent } from "../Modal";
+import { ModalComponent } from "../Modal/Modal";
 import { Outlet } from "react-router-dom";
-import { Sidebar } from "../Navbar";
+import { Sidebar } from "../Navbar/Navbar";
 
 Modal.setAppElement("#root");
 

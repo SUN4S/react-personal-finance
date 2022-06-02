@@ -4,14 +4,14 @@ import "./styles/normalize.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ProtectedRoutes, PublicRoutes } from "./routes/RouteTypes";
 
-import { App } from "./components/App";
-import { Dashboard } from "./routes/Dashboard";
-import { Login } from "./routes/Login";
+import { App } from "./components/App/App";
+import { Dashboard } from "./routes/Dashboard/Dashboard";
+import { Login } from "./routes/Login/Login";
 import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ReactNotifications } from "react-notifications-component";
-import { Register } from "./routes/Register";
+import { Register } from "./routes/Register/Register";
 import { store } from "./app/store";
 
 // Creating root for React to inject code into

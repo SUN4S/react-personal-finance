@@ -1,4 +1,4 @@
-import "./sidebarList.scss";
+import "./SidebarList.scss";
 
 import { NavLink } from "react-router-dom";
 

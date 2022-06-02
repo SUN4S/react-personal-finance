@@ -1,6 +1,6 @@
 import "react-datepicker/dist/react-datepicker.css";
-import "./modal.scss";
-import "./modalCustom.scss";
+import "./Modal.scss";
+import "./ModalCustom.scss";
 
 import { ModalInputs, ModalTagInput } from "../../models/modal";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -12,7 +12,7 @@ import {
   usePostExpenseMutation,
 } from "../../services/expenses";
 
-import { Button } from "../Button";
+import { Button } from "../Button/Button";
 import DatePicker from "react-datepicker";
 import Modal from "react-modal";
 import { WithContext as ReactTags } from "react-tag-input";

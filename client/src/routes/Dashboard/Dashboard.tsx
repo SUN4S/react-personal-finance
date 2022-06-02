@@ -1,17 +1,9 @@
 import "./dashboard.scss";
 
-import { ChartContainer } from "../../components/ChartContainer";
-import { ExpenseState } from "../../models/expenses";
-import { ListItem } from "./ListItem";
-import { RootState } from "../../app/store";
-import { useCurrentMonthQuery } from "../../services/expenses";
-import { useSelector } from "react-redux";
+import { ChartContainer } from "../../components/ChartContainer/ChartContainer";
+import { ExpenseList } from "../../components/ExpenseList/ExpenseList";
 
 export const Dashboard = () => {
-  // Redux Toolkit api Request to get expense array
-  const expensesQuery = useCurrentMonthQuery({});
-  const expenses = useSelector((state: RootState) => state.expenses.data);
-
   return (
     <>
       <section className="dashboard">
@@ -26,12 +18,7 @@ export const Dashboard = () => {
             <div className="expenseListHeaderControls">Edit</div>
           </div>
           {/* Rendering a list of expense items */}
-          <div className="listBody">
-            {expensesQuery.isSuccess &&
-              expenses.map((item: ExpenseState) => {
-                return <ListItem expenseData={item} key={item._id} />;
-              })}
-          </div>
+          <ExpenseList />
         </div>
       </section>
     </>

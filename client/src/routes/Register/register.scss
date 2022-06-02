@@ -31,28 +31,5 @@
       width: 60px;
       margin-bottom: 20px;
     }
-
-    form {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      flex-direction: column;
-      width: 100%;
-      label {
-        input {
-          background-color: var(--sidebar-bg);
-        }
-      }
-      a {
-        width: 100%;
-      }
-      span {
-        color: var(--alert);
-      }
-
-      button.secondaryBtn {
-        margin-top: 48px;
-      }
-    }
   }
 }

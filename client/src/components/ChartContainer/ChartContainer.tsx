@@ -1,4 +1,4 @@
-import "./chartContainer.scss";
+import "./ChartContainer.scss";
 
 import { useEffect, useState } from "react";
 

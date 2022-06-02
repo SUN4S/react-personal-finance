@@ -1,6 +1,8 @@
+import "./RegisterForm.scss";
+
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { Button } from "../../components/Button";
+import { Button } from "../Button/Button";
 import { RegisterInputs } from "../../models/user";
 import { notification } from "../../features/notification/NotificationSlice";
 import { useAppDispatch } from "../../app/hooks";

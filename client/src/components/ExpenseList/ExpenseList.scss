@@ -1,0 +1,20 @@
+.listBody {
+  width: 100%;
+
+  @media (max-width: 1200px) {
+    .expenseListElementTags {
+      .tagElement {
+        font-size: 10px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .expenseListElementDescription {
+      display: none;
+    }
+    .expenseListElementTags {
+      display: none;
+    }
+  }
+}

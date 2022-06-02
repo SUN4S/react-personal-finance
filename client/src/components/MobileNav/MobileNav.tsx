@@ -1,8 +1,8 @@
-import "./mobileNav.scss";
+import "./MobileNav.scss";
 
 import { NavLink } from "react-router-dom";
-import { toggleModal } from "../../../features/modal/ModalSlice";
-import { useAppDispatch } from "../../../app/hooks";
+import { toggleModal } from "../../features/modal/ModalSlice";
+import { useAppDispatch } from "../../app/hooks";
 
 export const MobileNav = () => {
   // Redux Toolkit finction to dispatch events

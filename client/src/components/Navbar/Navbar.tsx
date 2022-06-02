@@ -1,10 +1,10 @@
-import "./navbar.scss";
+import "./Navbar.scss";
 
 import { useEffect, useState } from "react";
 
-import { Button } from "../Button";
+import { Button } from "../Button/Button";
 import Logo from "../../resources/icons/Logo.svg";
-import { SidebarList } from "./sidebarList";
+import { SidebarList } from "../SidebarList/SidebarList";
 import { toggleModal } from "../../features/modal/ModalSlice";
 import { useAppDispatch } from "../../app/hooks";
 

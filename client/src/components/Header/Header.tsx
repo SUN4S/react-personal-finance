@@ -1,6 +1,6 @@
-import "./header.scss";
+import "./Header.scss";
 
-import { ThemeSwitch } from "../ThemeSwitch";
+import { ThemeSwitch } from "../ThemeSwitch/ThemeSwitch";
 import defaultAvatar from "../../resources/images/default-image.jpg";
 import { notification } from "../../features/notification/NotificationSlice";
 import { useAppDispatch } from "../../app/hooks";

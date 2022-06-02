@@ -1,8 +1,10 @@
+import "./ExpenseListItem.scss";
+
 import { ExpenseState } from "../../models/expenses";
 import { toggleModal } from "../../features/modal/ModalSlice";
 import { useDispatch } from "react-redux";
 
-export const ListItem = (props: { expenseData: ExpenseState }) => {
+export const ExpenseListItem = (props: { expenseData: ExpenseState }) => {
   // Redux Toolkit function to dispatch(call) functions
   const dispatch = useDispatch();
 

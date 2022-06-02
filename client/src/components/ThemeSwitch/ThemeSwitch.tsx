@@ -1,4 +1,4 @@
-import "./themeSwitch.scss";
+import "./ThemeSwitch.scss";
 
 import React, { ChangeEvent, useEffect, useState } from "react";
 

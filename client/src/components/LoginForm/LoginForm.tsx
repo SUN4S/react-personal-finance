@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { Button } from "../../components/Button";
-import { Divider } from "../../components/Divider";
+import { Button } from "../Button/Button";
+import { Divider } from "../Divider/Divider";
 import { Link } from "react-router-dom";
 import { LoginInputs } from "../../models/user";
 import { notification } from "../../features/notification/NotificationSlice";

@@ -1,6 +1,6 @@
-import "./login.scss";
+import "./Login.scss";
 
-import { LoginForm } from "./LoginForm";
+import { LoginForm } from "../../components/LoginForm/LoginForm";
 import Logo from "../../resources/icons/Logo.svg";
 
 // Login display

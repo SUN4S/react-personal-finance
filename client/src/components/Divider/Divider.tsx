@@ -1,4 +1,4 @@
-import "./divider.scss";
+import "./Divider.scss";
 
 // Simple divider, so far only used in login
 export const Divider = () => {
