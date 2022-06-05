@@ -1,4 +1,4 @@
-import "./dashboard.scss";
+import "./Dashboard.scss";
 
 import { ChartContainer } from "../../components/ChartContainer/ChartContainer";
 import { ExpenseList } from "../../components/ExpenseList/ExpenseList";
