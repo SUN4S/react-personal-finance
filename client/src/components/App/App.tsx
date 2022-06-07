@@ -6,7 +6,7 @@ import { MobileNav } from "../MobileNav/MobileNav";
 import Modal from "react-modal";
 import { ModalComponent } from "../Modal/Modal";
 import { Outlet } from "react-router-dom";
-import { Sidebar } from "../Navbar/Navbar";
+import { Sidebar } from "../Navbar/Sidebar";
 
 Modal.setAppElement("#root");
 
@@ -16,11 +16,11 @@ export const App = () => {
       <div className="App">
         {/* Check if screen is mobile-size, if it is, render mobileNav component */}
         {window.innerWidth > 576 ? <Sidebar /> : <MobileNav />}
-        <div className="contentContainer">
+        <main className="contentContainer">
           <Header />
           <ModalComponent />
           <Outlet />
-        </div>
+        </main>
       </div>
     </>
   );

@@ -58,7 +58,7 @@ export const Button = (props: ButtonProps) => {
       onClick={handleClick}
       disabled={props.disabled}
     >
-      {props.text}
+      {props.loading ? <span className="loader"></span> : props.text}
     </button>
   );
 };

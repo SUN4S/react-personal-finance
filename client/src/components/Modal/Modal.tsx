@@ -81,6 +81,17 @@ export const ModalComponent = () => {
     setTags([...tags, tag]);
   };
 
+  // Function for ability to drag and drop tags
+  const handleDrag = (tag: ModalTagInput, currPos: number, newPos: number) => {
+    const currTags = [...tags];
+    const newTags = currTags.slice();
+
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+
+    setTags(newTags);
+  };
+
   // React-hook-forms functions to be used and default values
   const {
     register,
@@ -320,6 +331,7 @@ export const ModalComponent = () => {
               delimiters={delimiters}
               handleDelete={handleDelete}
               handleAddition={handleAddition}
+              handleDrag={handleDrag}
               inputFieldPosition="top"
               autocomplete
               inline={true}

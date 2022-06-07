@@ -22,7 +22,5 @@
     "outDir": "./dist/",
     "noImplicitAny": true,
   },
-  "include": [
-    "src"
-, "types", "serviceWorker.js"  ],
+  "include": [ "src", "types", "serviceWorker.js" ],
 }

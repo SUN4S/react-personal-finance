@@ -86,7 +86,7 @@ export const LoginForm = () => {
       ) : (
         <Button type="submit" class="secondaryBtn" text="Login" />
       )}
-      <Divider />
+      <Divider text="OR" />
       <Link to="/register">
         <Button type="button" class="grayBtn" text="Register" />
       </Link>
