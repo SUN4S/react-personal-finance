@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { RootState } from "../../app/store";
 import { useSelector } from "react-redux";
 
+// Chart container currently does not have functionality
 export const ChartContainer = () => {
   const [spentMoney, setSpentMoney] = useState<number>(0);
   const expenses = useSelector((state: RootState) => state.expenses);

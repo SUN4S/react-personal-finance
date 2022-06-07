@@ -35,7 +35,7 @@ export const ExpenseListItem = (props: { expenseData: ExpenseState }) => {
       </div>
       <div className="expenseListElementTags">
         {props.expenseData.tags &&
-          props.expenseData.tags.map((tag: any, index: number) => {
+          props.expenseData.tags.map((tag: string, index: number) => {
             return (
               <div className="tagElement" key={index}>
                 {tag}
