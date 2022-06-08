@@ -1,14 +1,19 @@
-import "chart.js/auto";
 import "./DoughnutContainer.scss";
 
-import { ArcElement, Chart as ChartJS, Filler } from "chart.js";
+import {
+  Cell,
+  Label,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Sector,
+  Tooltip,
+} from "recharts";
 import { useEffect, useState } from "react";
 
-import { Doughnut } from "react-chartjs-2";
 import { ExpenseState } from "../../models/expenses";
 import { LoadingBox } from "../LoadingBox/LoadingBox";
-
-ChartJS.register(ArcElement, Filler);
 
 //TODO: Fix resize isue
 // Currently chart container only increases in scale
@@ -37,37 +42,92 @@ export const DoughnutContainer = (props: {
     console.log(expenseAmount, remainingBudget);
   }, [props.budgetData, props.expenseData]);
 
-  const data = {
-    labels: ["Spent", "Remaining"],
-    datasets: [
-      {
-        label: "# Amount",
-        data: [expenseAmount, remainingBudget < 0 ? 0 : remainingBudget],
-        backgroundColor: ["#dc2626", "#22c55e"],
-        borderColor: ["transparent", "transparent"],
-      },
-    ],
-  };
+  const data = [
+    { name: "Spent", value: expenseAmount },
+    { name: "Remaining", value: remainingBudget < 0 ? 0 : remainingBudget },
+  ];
+  const COLORS = ["#dc2626", "#22c55e"];
+
+  // const data = {
+  //   labels: ["Spent", "Remaining"],
+  //   datasets: [
+  //     {
+  //       label: "# Amount",
+  //       data: [expenseAmount, remainingBudget < 0 ? 0 : remainingBudget],
+  //       backgroundColor: ["#dc2626", "#22c55e"],
+  //       borderColor: ["transparent", "transparent"],
+  //     },
+  //   ],
+  // };
   return (
     <div className="doughnutContainer">
       {loading ? (
         <LoadingBox size="xl" />
       ) : (
-        <>
-          <h3 className="doughnutCenter">{remainingBudget}</h3>
-          <Doughnut
-            data={data}
-            options={{
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  position: "left",
-                },
-              },
-            }}
-          />
-        </>
+        <ResponsiveContainer width="100%" minWidth="275px" height="100%">
+          <PieChart>
+            <Pie
+              data={data}
+              cx="70%"
+              cy="50%"
+              innerRadius={45}
+              outerRadius={70}
+              fill="transparent"
+              paddingAngle={0}
+              dataKey="value"
+              style={{ stroke: "none", paddingRight: "16px" }}
+            >
+              {data.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+              <Label
+                position="center"
+                style={{
+                  fontSize: "12px",
+                  fontWeight: "400",
+                  fill: "var(--text-secondary)",
+                  transform: "translateY(20px)",
+                }}
+              >
+                Remaining
+              </Label>
+              <Label
+                position="center"
+                style={{
+                  fontSize: "32px",
+                  fontWeight: "600",
+                  fill: "var(--text-primary)",
+                }}
+              >
+                {remainingBudget}
+              </Label>
+            </Pie>
+            <Legend
+              layout="vertical"
+              align="left"
+              verticalAlign="middle"
+              wrapperStyle={{
+                display: "inline",
+                width: "32px",
+                paddingLeft: "16px",
+              }}
+            />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "var(--sidebar-bg)",
+                padding: "0",
+                border: "1px solid var(--text-secondary)",
+                borderRadius: "5px",
+              }}
+              itemStyle={{
+                color: "var(--text-primary)",
+              }}
+            />
+          </PieChart>
+        </ResponsiveContainer>
       )}
     </div>
   );
