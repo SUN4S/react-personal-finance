@@ -9,9 +9,25 @@ const router = express.Router();
 // Budgets are categorized by month ex. 2022-06
 router.get("/", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
+    const currentDate = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
     const budget = await BudgetModel.findOne({ userid: req.user.id });
     const data = await budget;
     return res.status(200).send(data.budgetList);
+  }
+  res.status(401).json({ msg: "Unauthorized access" });
+});
+
+// Return Current month budget
+// Budgets are categorized by month ex. 2022-06
+router.get("/currentBudget", async (req: Request, res: Response) => {
+  if (req.isAuthenticated()) {
+    const currentDate = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
+    const budget = await BudgetModel.findOne({ userid: req.user.id });
+
+    const data = await budget;
+    const currentBudget = data.budgetList.filter((item) => item.budgetDate == currentDate);
+    console.log(currentBudget);
+    return res.status(200).send(currentBudget);
   }
   res.status(401).json({ msg: "Unauthorized access" });
 });

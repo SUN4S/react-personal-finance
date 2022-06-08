@@ -1,26 +1,20 @@
 import "./ChartContainer.scss";
 
-import { useEffect, useState } from "react";
-
-import { RootState } from "../../app/store";
-import { useSelector } from "react-redux";
+import { BudgetChart } from "../BudgetChart/BudgetChart";
+import { useCurrentBudgetQuery } from "../../services/budget";
 
 // Chart container currently does not have functionality
 export const ChartContainer = () => {
-  const [spentMoney, setSpentMoney] = useState<number>(0);
-  const expenses = useSelector((state: RootState) => state.expenses);
-  useEffect(() => {
-    let spentAmount = 0;
-    expenses.data.forEach((item: any) => {
-      spentAmount += Number(item.amount);
-    });
-    setSpentMoney(spentAmount);
-  }, [expenses]);
+  const budgetQuery = useCurrentBudgetQuery({});
 
   return (
     <div className="chartContainer">
-      <div className="chart">12</div>
-      <div className="chart">Monthly Expenditure: {spentMoney}</div>
+      <BudgetChart
+        data={budgetQuery.data}
+        isFetching={true}
+        isSuccess={budgetQuery.isSuccess}
+      />
+      <div className="chart">Monthly Expenditure: 0</div>
       <div className="chart">third</div>
       <div className="chart">four</div>
     </div>

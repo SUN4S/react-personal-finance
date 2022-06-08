@@ -1,0 +1,45 @@
+.loadingContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+
+  .loadingSpinner {
+    border: 2px solid var(--primary);
+    border-bottom: 2px solid var(--page-bg);
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+
+    &.sm {
+      height: 12px;
+      width: 12px;
+    }
+
+    &.md {
+      height: 24px;
+      width: 24px;
+    }
+
+    &.lg {
+      height: 48px;
+      width: 48px;
+    }
+
+    &.xl {
+      height: 96px;
+      width: 96px;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}
