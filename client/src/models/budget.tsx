@@ -1,3 +1,5 @@
+import { ExpenseState } from "./expenses";
+
 export interface BudgetState {
   _id?: string;
   budget: number;
@@ -5,7 +7,10 @@ export interface BudgetState {
 }
 
 export interface BudgetProps {
-  data: Array<BudgetState>;
-  isFetching: boolean;
-  isSuccess: boolean;
+  budgetData: Array<BudgetState>;
+  expenseData: Array<ExpenseState>;
+  budgetIsFetching: boolean;
+  budgetIsSuccess: boolean;
+  expenseIsFetching: boolean;
+  expenseIsSuccess: boolean;
 }

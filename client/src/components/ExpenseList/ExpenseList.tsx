@@ -1,5 +1,3 @@
-import "./ExpenseList.scss";
-
 import { ExpenseListItem } from "../ExpenseListItem/ExpenseListItem";
 import { ExpenseState } from "../../models/expenses";
 

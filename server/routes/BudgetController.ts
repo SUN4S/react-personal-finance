@@ -25,8 +25,9 @@ router.get("/currentBudget", async (req: Request, res: Response) => {
     const budget = await BudgetModel.findOne({ userid: req.user.id });
 
     const data = await budget;
+    // Filter out unnecessary data
     const currentBudget = data.budgetList.filter((item) => item.budgetDate == currentDate);
-    console.log(currentBudget);
+
     return res.status(200).send(currentBudget);
   }
   res.status(401).json({ msg: "Unauthorized access" });

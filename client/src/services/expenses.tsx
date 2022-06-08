@@ -18,7 +18,7 @@ export const expensesApi = baseApi.injectEndpoints({
     }),
     // Second query returns only current month expenses
     // month verification and filtering is done server-side
-    currentMonth: builder.query({
+    currentExpenseMonth: builder.query({
       query: () => ({
         url: `/expenses/currentMonth`,
         method: "GET",
@@ -79,7 +79,7 @@ export const expensesApi = baseApi.injectEndpoints({
 
 export const {
   useExpensesQuery,
-  useCurrentMonthQuery,
+  useCurrentExpenseMonthQuery,
   useLazyExpenseImageQuery,
   useEditExpenseMutation,
   usePostExpenseMutation,

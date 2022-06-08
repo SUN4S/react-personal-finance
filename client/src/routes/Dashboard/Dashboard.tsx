@@ -3,12 +3,12 @@ import "./Dashboard.scss";
 import { ChartContainer } from "../../components/ChartContainer/ChartContainer";
 import { ExpenseList } from "../../components/ExpenseList/ExpenseList";
 import { RootState } from "../../app/store";
-import { useCurrentMonthQuery } from "../../services/expenses";
+import { useCurrentExpenseMonthQuery } from "../../services/expenses";
 import { useSelector } from "react-redux";
 
 export const Dashboard = () => {
   // Redux Toolkit api Request to get expense array
-  const expensesQuery = useCurrentMonthQuery({});
+  const expensesQuery = useCurrentExpenseMonthQuery({});
   const expenses = useSelector((state: RootState) => state.expenses.data);
 
   return (
