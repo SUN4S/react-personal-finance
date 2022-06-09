@@ -27,7 +27,13 @@ const initExpenseData = [
 
 export const Default_Light = () => (
   <html data-theme="light">
-    <div style={{ width: "400px" }}>
+    <div
+      style={{
+        width: "400px",
+        backgroundColor: "var(--sidebar-bg)",
+        padding: "8px",
+      }}
+    >
       <BudgetChart
         budgetData={initBudgetData}
         expenseData={initExpenseData}
@@ -40,9 +46,57 @@ export const Default_Light = () => (
   </html>
 );
 
+export const Default_Light_Loading = () => (
+  <html data-theme="light">
+    <div
+      style={{
+        width: "400px",
+        backgroundColor: "var(--sidebar-bg)",
+        padding: "8px",
+      }}
+    >
+      <BudgetChart
+        budgetData={initBudgetData}
+        expenseData={initExpenseData}
+        budgetIsFetching={true}
+        budgetIsSuccess={true}
+        expenseIsFetching={true}
+        expenseIsSuccess={true}
+      />
+    </div>
+  </html>
+);
+
+export const Default_Light_NoData = () => (
+  <html data-theme="light">
+    <div
+      style={{
+        width: "400px",
+        backgroundColor: "var(--sidebar-bg)",
+        padding: "8px",
+      }}
+    >
+      <BudgetChart
+        budgetData={initBudgetData}
+        expenseData={initExpenseData}
+        budgetIsFetching={false}
+        budgetIsSuccess={false}
+        expenseIsFetching={false}
+        expenseIsSuccess={false}
+      />
+    </div>
+  </html>
+);
+
 export const Default_Dark = () => (
   <html data-theme="dark">
-    <div style={{ width: "400px", backgroundColor: "#0f172a" }}>
+    <div
+      style={{
+        width: "400px",
+        backgroundColor: "var(--sidebar-bg)",
+        padding: "8px",
+      }}
+    >
       <BudgetChart
         budgetData={initBudgetData}
         expenseData={initExpenseData}
@@ -50,6 +104,48 @@ export const Default_Dark = () => (
         budgetIsSuccess={true}
         expenseIsFetching={false}
         expenseIsSuccess={true}
+      />
+    </div>
+  </html>
+);
+
+export const Default_Dark_Loading = () => (
+  <html data-theme="dark">
+    <div
+      style={{
+        width: "400px",
+        backgroundColor: "var(--sidebar-bg)",
+        padding: "8px",
+      }}
+    >
+      <BudgetChart
+        budgetData={initBudgetData}
+        expenseData={initExpenseData}
+        budgetIsFetching={true}
+        budgetIsSuccess={true}
+        expenseIsFetching={true}
+        expenseIsSuccess={true}
+      />
+    </div>
+  </html>
+);
+
+export const Default_Dark_NoData = () => (
+  <html data-theme="dark">
+    <div
+      style={{
+        width: "400px",
+        backgroundColor: "var(--sidebar-bg)",
+        padding: "8px",
+      }}
+    >
+      <BudgetChart
+        budgetData={initBudgetData}
+        expenseData={initExpenseData}
+        budgetIsFetching={false}
+        budgetIsSuccess={false}
+        expenseIsFetching={false}
+        expenseIsSuccess={false}
       />
     </div>
   </html>

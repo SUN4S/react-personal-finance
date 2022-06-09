@@ -1,3 +1,4 @@
+import { BudgetFormState } from "../models/budget";
 import { baseApi } from "./baseApi";
 
 // Inject a new budgetApi into the baseApi
@@ -20,7 +21,20 @@ export const budgetApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Budget"],
     }),
+    postBudget: builder.mutation({
+      query: (budgetData: BudgetFormState) => ({
+        url: "/budget/addBudget",
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        withCredentials: true,
+        data: budgetData,
+      }),
+      invalidatesTags: ["Budget"],
+    }),
   }),
 });
 
-export const { useBudgetQuery, useCurrentBudgetQuery } = budgetApi;
+export const { useBudgetQuery, useCurrentBudgetQuery, usePostBudgetMutation } =
+  budgetApi;

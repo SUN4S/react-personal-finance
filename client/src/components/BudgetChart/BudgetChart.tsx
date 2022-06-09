@@ -2,6 +2,7 @@ import "./BudgetChart.scss";
 
 import { useEffect, useState } from "react";
 
+import { BudgetForm } from "../BudgetForm/BudgetForm";
 import { BudgetProps } from "../../models/budget";
 import { DoughnutContainer } from "../DoughnutContainer/DoughnutContainer";
 import { LoadingBox } from "../LoadingBox/LoadingBox";
@@ -31,7 +32,7 @@ export const BudgetChart = ({
             expenseData={expenseData}
           />
         ) : (
-          <h3>No Data</h3>
+          <BudgetForm />
         )}
       </div>
     </div>

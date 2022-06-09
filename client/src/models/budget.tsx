@@ -14,3 +14,7 @@ export interface BudgetProps {
   expenseIsFetching: boolean;
   expenseIsSuccess: boolean;
 }
+
+export interface BudgetFormState {
+  budget: number;
+}
