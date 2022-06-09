@@ -1,33 +1,32 @@
-import { LoginForm } from "./LoginForm";
+import { ChartContainer } from "./ChartContainer";
 
 export default {
-  title: "Login Form",
-  component: LoginForm,
+  title: "Chart Container",
+  component: ChartContainer,
 };
 
 export const Default_Light = () => (
   <html data-theme="light">
     <div
       style={{
-        width: "400px",
+        backgroundColor: "var(--sidebar-bg)",
         padding: "8px",
-        backgroundColor: "var(--page-bg)",
       }}
     >
-      <LoginForm />
+      <ChartContainer />
     </div>
   </html>
 );
+
 export const Default_Dark = () => (
   <html data-theme="dark">
     <div
       style={{
-        width: "400px",
+        backgroundColor: "var(--sidebar-bg)",
         padding: "8px",
-        backgroundColor: "var(--page-bg)",
       }}
     >
-      <LoginForm />
+      <ChartContainer />
     </div>
   </html>
 );

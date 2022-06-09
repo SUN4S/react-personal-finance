@@ -1,8 +1,8 @@
-import { LoginForm } from "./LoginForm";
+import { BudgetForm } from "./BudgetForm";
 
 export default {
-  title: "Login Form",
-  component: LoginForm,
+  title: "Budget Chart Form",
+  component: BudgetForm,
 };
 
 export const Default_Light = () => (
@@ -10,24 +10,25 @@ export const Default_Light = () => (
     <div
       style={{
         width: "400px",
+        backgroundColor: "var(--sidebar-bg)",
         padding: "8px",
-        backgroundColor: "var(--page-bg)",
       }}
     >
-      <LoginForm />
+      <BudgetForm />
     </div>
   </html>
 );
+
 export const Default_Dark = () => (
   <html data-theme="dark">
     <div
       style={{
         width: "400px",
+        backgroundColor: "var(--sidebar-bg)",
         padding: "8px",
-        backgroundColor: "var(--page-bg)",
       }}
     >
-      <LoginForm />
+      <BudgetForm />
     </div>
   </html>
 );

@@ -1,9 +1,9 @@
-import { ExpenseList } from "./ExpenseList";
+import { DoughnutContainer } from "./DoughnutContainer";
 
 const mockData = [
   {
     category: "Unexpected",
-    amount: 1223,
+    amount: 10,
     date: new Date(),
     description: "This is a random description",
     tags: ["Dog", "Cat", "Cake"],
@@ -11,35 +11,29 @@ const mockData = [
   },
   {
     category: "Wants",
-    amount: 15,
+    amount: 16,
     date: new Date(),
-    description: "Baught a T-shirt",
-    tags: ["T-Shirt"],
-    receipt: "",
-  },
-  {
-    category: "Culture",
-    amount: 12,
-    date: new Date(),
-    description: "This is a Cake",
-    tags: ["Dog", "Expensive"],
+    description: "This is a random description",
+    tags: ["Dog", "Cat", "Cake"],
     receipt: "",
   },
 ];
 
 export default {
-  title: "Expense List",
-  component: ExpenseList,
+  title: "Doughnut Container",
+  component: DoughnutContainer,
 };
 
 export const Default_Light = () => (
   <html data-theme="light">
     <div
       style={{
+        width: "400px",
         backgroundColor: "var(--sidebar-bg)",
+        padding: "8px",
       }}
     >
-      <ExpenseList data={mockData} />
+      <DoughnutContainer budgetData={420} expenseData={mockData} />
     </div>
   </html>
 );
@@ -48,10 +42,12 @@ export const Default_Dark = () => (
   <html data-theme="dark">
     <div
       style={{
+        width: "400px",
         backgroundColor: "var(--sidebar-bg)",
+        padding: "8px",
       }}
     >
-      <ExpenseList data={mockData} />
+      <DoughnutContainer budgetData={420} expenseData={mockData} />
     </div>
   </html>
 );

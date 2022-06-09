@@ -16,12 +16,24 @@ export default {
 
 export const Default_Light = () => (
   <html data-theme="light">
-    <ExpenseListItem expenseData={mockData} />
+    <div
+      style={{
+        backgroundColor: "var(--sidebar-bg)",
+      }}
+    >
+      <ExpenseListItem expenseData={mockData} />
+    </div>
   </html>
 );
 
 export const Default_Dark = () => (
   <html data-theme="dark">
-    <ExpenseListItem expenseData={mockData} />
+    <div
+      style={{
+        backgroundColor: "var(--sidebar-bg)",
+      }}
+    >
+      <ExpenseListItem expenseData={mockData} />
+    </div>
   </html>
 );

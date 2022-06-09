@@ -1,8 +1,8 @@
-import { Divider } from "./Divider";
+import { LoadingBox } from "./LoadingBox";
 
 export default {
-  title: "Divider",
-  component: Divider,
+  title: "Loading Box",
+  component: LoadingBox,
 };
 
 export const Default_Light = () => (
@@ -10,10 +10,12 @@ export const Default_Light = () => (
     <div
       style={{
         backgroundColor: "var(--sidebar-bg)",
-        padding: "8px",
       }}
     >
-      <Divider text="OR" />
+      <LoadingBox size="sm" />
+      <LoadingBox size="md" />
+      <LoadingBox size="lg" />
+      <LoadingBox size="xl" />
     </div>
   </html>
 );
@@ -23,10 +25,12 @@ export const Default_Dark = () => (
     <div
       style={{
         backgroundColor: "var(--sidebar-bg)",
-        padding: "8px",
       }}
     >
-      <Divider text="OR" />
+      <LoadingBox size="sm" />
+      <LoadingBox size="md" />
+      <LoadingBox size="lg" />
+      <LoadingBox size="xl" />
     </div>
   </html>
 );

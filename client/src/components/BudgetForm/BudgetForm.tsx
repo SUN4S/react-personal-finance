@@ -61,12 +61,7 @@ export const BudgetForm = () => {
         />
         {errors.budget && <span>This field is required</span>}
       </label>
-      <Button
-        type="submit"
-        class="primaryBtn"
-        text="Login"
-        loading={isLoading}
-      />
+      <Button type="submit" class="primaryBtn" text="Add" loading={isLoading} />
     </form>
   );
 };

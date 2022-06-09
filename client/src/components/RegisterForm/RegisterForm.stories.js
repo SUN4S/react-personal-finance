@@ -7,12 +7,28 @@ export default {
 
 export const Default_Light = () => (
   <html data-theme="light">
-    <RegisterForm />
+    <div
+      style={{
+        width: "400px",
+        padding: "8px",
+        backgroundColor: "var(--page-bg)",
+      }}
+    >
+      <RegisterForm />
+    </div>
   </html>
 );
 
 export const Default_Dark = () => (
   <html data-theme="dark">
-    <RegisterForm />
+    <div
+      style={{
+        width: "400px",
+        padding: "8px",
+        backgroundColor: "var(--page-bg)",
+      }}
+    >
+      <RegisterForm />
+    </div>
   </html>
 );
