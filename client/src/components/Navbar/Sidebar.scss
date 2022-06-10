@@ -28,6 +28,7 @@ nav {
     margin-bottom: 16px;
     border: 2px solid var(--primary);
     border-radius: 3px;
+    transition: width 0.5s ease-in-out;
 
     button {
       width: 46px;
@@ -43,7 +44,7 @@ nav {
       width: 224px;
       padding-left: 46px;
       color: var(--text-primary);
-      transition: opacity 0.3s ease-in-out, color 0.3s ease-in-out;
+      transition: opacity 0.3s ease-in-out, color 0.2s ease-in-out;
     }
 
     &:hover {
@@ -110,7 +111,6 @@ nav {
 
       span {
         opacity: 0;
-        transition: 0.3s ease-in-out;
       }
     }
 

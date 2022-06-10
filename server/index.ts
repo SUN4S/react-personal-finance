@@ -2,6 +2,7 @@ const budget = require("./routes/BudgetController");
 const expenses = require("./routes/ExpensesController");
 const user = require("./routes/UserController");
 
+import compression from "compression";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
@@ -29,6 +30,7 @@ global.whitelist = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 
 // Middleware
 app.use(express.json());
+app.use(compression());
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(require("serve-static")(__dirname + "/uploads"));
 app.use(express.static("/uploads"));

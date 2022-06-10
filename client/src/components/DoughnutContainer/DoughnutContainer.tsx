@@ -33,13 +33,10 @@ export const DoughnutContainer = (props: {
     props.expenseData.map((item) => {
       newAmount += item.amount;
     });
-    console.log(props.budgetData - expenseAmount);
 
     setExpenseAmount(newAmount);
     setRemainingBudget(props.budgetData - newAmount);
     setLoading(false);
-
-    console.log(expenseAmount, remainingBudget);
   }, [props.budgetData, props.expenseData]);
 
   const data = [
@@ -48,23 +45,12 @@ export const DoughnutContainer = (props: {
   ];
   const COLORS = ["#dc2626", "#22c55e"];
 
-  // const data = {
-  //   labels: ["Spent", "Remaining"],
-  //   datasets: [
-  //     {
-  //       label: "# Amount",
-  //       data: [expenseAmount, remainingBudget < 0 ? 0 : remainingBudget],
-  //       backgroundColor: ["#dc2626", "#22c55e"],
-  //       borderColor: ["transparent", "transparent"],
-  //     },
-  //   ],
-  // };
   return (
     <div className="doughnutContainer">
       {loading ? (
         <LoadingBox size="xl" />
       ) : (
-        <ResponsiveContainer width="100%" minWidth="275px" height="100%">
+        <ResponsiveContainer width="100%" minWidth="225px" height="100%">
           <PieChart>
             <Pie
               data={data}
@@ -97,12 +83,12 @@ export const DoughnutContainer = (props: {
               <Label
                 position="center"
                 style={{
-                  fontSize: "32px",
+                  fontSize: "28px",
                   fontWeight: "600",
                   fill: "var(--text-primary)",
                 }}
               >
-                {remainingBudget}
+                {remainingBudget.toFixed(2)}
               </Label>
             </Pie>
             <Legend

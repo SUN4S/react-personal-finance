@@ -26,12 +26,12 @@ export const Sidebar = () => {
       node.forEach((item) => item.classList.remove("preload-transitions"));
       setFirstLoad(false);
     }, 200);
-    if (window.innerWidth < 1024) {
+    if (window.innerWidth <= 1024) {
       setCollapsed(true);
       setCollapseButton(true);
     }
     window.addEventListener("resize", () => {
-      if (window.innerWidth < 1024) {
+      if (window.innerWidth <= 1024) {
         setCollapsed(true);
         setCollapseButton(true);
       } else {

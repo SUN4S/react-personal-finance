@@ -5,4 +5,11 @@
   display: flex;
   align-items: baseline;
   justify-content: center;
+
+  .recharts-default-legend {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
 }

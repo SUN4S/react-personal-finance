@@ -1,26 +1,36 @@
 import "./ChartContainer.scss";
 
 import { BudgetChart } from "../BudgetChart/BudgetChart";
+import { BudgetChartProps } from "../../models/chart";
+import { ExpenseChart } from "../ExpenseChart/ExpenseChart";
 import { useCurrentBudgetQuery } from "../../services/budget";
 import { useCurrentExpenseMonthQuery } from "../../services/expenses";
 
 // Chart container currently does not have functionality
-export const ChartContainer = () => {
-  const budgetQuery = useCurrentBudgetQuery({});
-  const currentExpenseQuery = useCurrentExpenseMonthQuery({});
-
+export const ChartContainer = ({
+  budgetData,
+  expenseData,
+  budgetIsFetching,
+  budgetIsSuccess,
+  expenseIsFetching,
+  expenseIsSuccess,
+}: BudgetChartProps) => {
   return (
     <div className="chartContainer">
       <BudgetChart
-        budgetData={budgetQuery.data}
-        expenseData={currentExpenseQuery.data}
-        budgetIsFetching={budgetQuery.isFetching}
-        budgetIsSuccess={budgetQuery.isSuccess}
-        expenseIsFetching={currentExpenseQuery.isFetching}
-        expenseIsSuccess={currentExpenseQuery.isSuccess}
+        budgetData={budgetData}
+        expenseData={expenseData}
+        budgetIsFetching={budgetIsFetching}
+        budgetIsSuccess={budgetIsSuccess}
+        expenseIsFetching={expenseIsFetching}
+        expenseIsSuccess={expenseIsSuccess}
       />
-      <div className="chart">Monthly Expenditure: 0</div>
-      <div className="chart">third</div>
+      <ExpenseChart
+        expenseData={expenseData}
+        expenseIsFetching={expenseIsFetching}
+        expenseIsSuccess={expenseIsSuccess}
+      />
+      <div className="chart weeklyChangeChart">third</div>
     </div>
   );
 };

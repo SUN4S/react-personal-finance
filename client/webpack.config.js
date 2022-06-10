@@ -1,5 +1,4 @@
 const path = require("path");
-const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
@@ -83,7 +82,7 @@ module.exports = {
       name: "Personal Finance",
       short_name: "PF",
       description: "Attempt to make a Personal Finance app with React",
-      start_url: "http://localhost:3030",
+      start_url: "https://marglipersonalfinance.me",
       background_color: "#ffffff",
       theme_color: "#eeeeee",
       display: "standalone",

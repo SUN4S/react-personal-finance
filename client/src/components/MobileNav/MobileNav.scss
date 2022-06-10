@@ -52,8 +52,9 @@
         }
 
         &.active {
-          background-color: var(--page-bg);
+          background-color: transparent;
           i {
+            color: var(--primary);
             animation: linkSelect 0.3s ease-out;
           }
         }

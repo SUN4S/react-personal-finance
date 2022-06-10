@@ -1,26 +1,41 @@
-import { BudgetChart } from "./BudgetChart";
+import { ExpenseChart } from "./ExpenseChart";
 
 export default {
-  title: "Budget Chart",
-  component: BudgetChart,
+  title: "Expense Chart",
+  component: ExpenseChart,
 };
 
-const initBudgetData = [
+const mockData = [
   {
-    _id: "1234",
-    budget: 645,
-    budgetDate: "2022-06",
-  },
-];
-
-const initExpenseData = [
-  {
-    _id: "9876",
     category: "Unexpected",
-    amount: 36,
+    amount: 10,
     date: new Date(),
-    tags: ["Dog", "Cat"],
-    description: "This is a description",
+    description: "This is a random description",
+    tags: ["Dog", "Cat", "Cake"],
+    receipt: "",
+  },
+  {
+    category: "Wants",
+    amount: 16,
+    date: new Date(),
+    description: "This is a random description",
+    tags: ["Dog", "Cat", "Cake"],
+    receipt: "",
+  },
+  {
+    category: "Essentials",
+    amount: 160,
+    date: new Date(),
+    description: "This is a random description",
+    tags: ["Dog", "Cat", "Cake"],
+    receipt: "",
+  },
+  {
+    category: "Culture",
+    amount: 50,
+    date: new Date(),
+    description: "This is a random description",
+    tags: ["Dog", "Cat", "Cake"],
     receipt: "",
   },
 ];
@@ -28,11 +43,8 @@ const initExpenseData = [
 export const Default_Light = () => (
   <html data-theme="light">
     <div className="chartContainer">
-      <BudgetChart
-        budgetData={initBudgetData}
-        expenseData={initExpenseData}
-        budgetIsFetching={false}
-        budgetIsSuccess={true}
+      <ExpenseChart
+        expenseData={mockData}
         expenseIsFetching={false}
         expenseIsSuccess={true}
       />
@@ -43,11 +55,8 @@ export const Default_Light = () => (
 export const Default_Light_Loading = () => (
   <html data-theme="light">
     <div className="chartContainer">
-      <BudgetChart
-        budgetData={initBudgetData}
-        expenseData={initExpenseData}
-        budgetIsFetching={true}
-        budgetIsSuccess={true}
+      <ExpenseChart
+        expenseData={mockData}
         expenseIsFetching={true}
         expenseIsSuccess={true}
       />
@@ -58,11 +67,8 @@ export const Default_Light_Loading = () => (
 export const Default_Light_NoData = () => (
   <html data-theme="light">
     <div className="chartContainer">
-      <BudgetChart
-        budgetData={initBudgetData}
-        expenseData={initExpenseData}
-        budgetIsFetching={false}
-        budgetIsSuccess={false}
+      <ExpenseChart
+        expenseData={mockData}
         expenseIsFetching={false}
         expenseIsSuccess={false}
       />
@@ -73,11 +79,8 @@ export const Default_Light_NoData = () => (
 export const Default_Dark = () => (
   <html data-theme="dark">
     <div className="chartContainer">
-      <BudgetChart
-        budgetData={initBudgetData}
-        expenseData={initExpenseData}
-        budgetIsFetching={false}
-        budgetIsSuccess={true}
+      <ExpenseChart
+        expenseData={mockData}
         expenseIsFetching={false}
         expenseIsSuccess={true}
       />
@@ -88,11 +91,8 @@ export const Default_Dark = () => (
 export const Default_Dark_Loading = () => (
   <html data-theme="dark">
     <div className="chartContainer">
-      <BudgetChart
-        budgetData={initBudgetData}
-        expenseData={initExpenseData}
-        budgetIsFetching={true}
-        budgetIsSuccess={true}
+      <ExpenseChart
+        expenseData={mockData}
         expenseIsFetching={true}
         expenseIsSuccess={true}
       />
@@ -103,11 +103,8 @@ export const Default_Dark_Loading = () => (
 export const Default_Dark_NoData = () => (
   <html data-theme="dark">
     <div className="chartContainer">
-      <BudgetChart
-        budgetData={initBudgetData}
-        expenseData={initExpenseData}
-        budgetIsFetching={false}
-        budgetIsSuccess={false}
+      <ExpenseChart
+        expenseData={mockData}
         expenseIsFetching={false}
         expenseIsSuccess={false}
       />
