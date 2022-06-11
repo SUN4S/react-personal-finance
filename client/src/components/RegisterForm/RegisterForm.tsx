@@ -11,7 +11,7 @@ import { useRegisterUserMutation } from "../../services/user";
 
 export const RegisterForm = () => {
   // Redux Toolkit api function to register user
-  const [registerUser] = useRegisterUserMutation();
+  const [registerUser, { isLoading }] = useRegisterUserMutation();
   // React Router functions to redirect
   const navigate = useNavigate();
   // Redux Toolkit function to dispach(call) functions
@@ -92,7 +92,13 @@ export const RegisterForm = () => {
         {errors.password && <span>This field is required</span>}
       </label>
 
-      <Button type="submit" class="secondaryBtn" text="Register" />
+      <Button
+        type="submit"
+        class="secondaryBtn"
+        text="Register"
+        loading={isLoading}
+        disabled={isLoading}
+      />
     </form>
   );
 };

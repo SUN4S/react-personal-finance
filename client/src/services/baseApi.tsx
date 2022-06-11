@@ -3,6 +3,8 @@
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
+import { useNavigate } from "react-router";
+
 // Define base Axios parameters
 const axiosBaseQuery =
   (
@@ -32,6 +34,12 @@ const axiosBaseQuery =
       return { data: result.data };
     } catch (axiosError) {
       let err = axiosError as AxiosError;
+      if (
+        err.response?.status === 401 &&
+        window.location.pathname !== "/login"
+      ) {
+        window.location.href = "/login";
+      }
       return {
         error: {
           status: err.response?.status,

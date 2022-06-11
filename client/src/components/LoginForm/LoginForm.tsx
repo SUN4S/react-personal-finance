@@ -6,16 +6,11 @@ import { Link } from "react-router-dom";
 import { LoginInputs } from "../../models/user";
 import { notification } from "../../features/notification/NotificationSlice";
 import { useAppDispatch } from "../../app/hooks";
-import { useIsLoggedInQuery } from "../../services/user";
 import { useLoginMutation } from "../../services/user";
 
 export const LoginForm = () => {
-  // Redux Toolki api function used to check is user is logged in
-  const loggedInQuery = useIsLoggedInQuery({
-    skip: true,
-  });
   // Redux Toolkit api function used to send request to back-end
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   // Redux Toolkit function used to dispatch(call) functions
   const dispatch = useAppDispatch();
 
@@ -81,12 +76,16 @@ export const LoginForm = () => {
         {errors.password && <span>This field is required</span>}
       </label>
 
-      {loggedInQuery.isFetching ? (
-        <Button type="submit" class="loadingBtn" text="" disabled />
-      ) : (
-        <Button type="submit" class="secondaryBtn" text="Login" />
-      )}
+      <Button
+        type="submit"
+        class="secondaryBtn"
+        text="Login"
+        loading={isLoading}
+        disabled={isLoading}
+      />
+
       <Divider text="OR" />
+
       <Link to="/register">
         <Button type="button" class="grayBtn" text="Register" />
       </Link>
