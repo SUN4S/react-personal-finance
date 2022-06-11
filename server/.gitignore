@@ -1,5 +1,7 @@
 uploads/avatars/*
 uploads/expenses/*
+!uploads/expenses/README.md
+!uploads/avatars/README.md
 build/middleware
 build/models
 build/routes
