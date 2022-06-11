@@ -2,6 +2,7 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "outDir": "build", // Types should go into this directory. 
+    "rootDir": "./",
     "declaration": true // Generate d.ts files
   },
 }

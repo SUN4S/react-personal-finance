@@ -59,6 +59,10 @@ router.post("/addExpense", async (req: Request, res: Response) => {
       file = req.files.receipt;
       // Generate random prefix for file name
       fileName = Date.now() + "-" + Math.round(Math.random() * 1e9) + file.name;
+      // Check if folder exists, if note create
+      if (!fs.existsSync("./uploads/expenses")) {
+        fs.mkdirSync("./uploads/expenses");
+      }
       // Check item mimetype to filter out non-image files
       if (!global.whitelist.includes(file.mimetype)) {
         return res.json({ msg: "Bad file format" });
