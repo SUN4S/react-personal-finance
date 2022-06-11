@@ -82,7 +82,7 @@ module.exports = {
       name: "Personal Finance",
       short_name: "PF",
       description: "Attempt to make a Personal Finance app with React",
-      start_url: "https://marglipersonalfinance.me",
+      start_url: "https://www.marglipersonalfinance.me",
       background_color: "#ffffff",
       theme_color: "#eeeeee",
       display: "standalone",

@@ -41,7 +41,7 @@
   "short_name": "PF",
   "orientation": "portrait",
   "display": "standalone",
-  "start_url": "https://marglipersonalfinance.me",
+  "start_url": "https://www.marglipersonalfinance.me",
   "description": "Attempt to make a Personal Finance app with React",
   "background_color": "#ffffff",
   "theme_color": "#eeeeee"
