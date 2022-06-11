@@ -1,5 +1,5 @@
-uploads/avatars
-uploads/expenses
+uploads/avatars/*
+uploads/expenses/*
 build/middleware
 build/models
 build/routes

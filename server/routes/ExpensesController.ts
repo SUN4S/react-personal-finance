@@ -74,11 +74,12 @@ router.post("/addExpense", async (req: Request, res: Response) => {
       date: req.body.date,
       description: req.body.description,
       tags: tags || [],
-      receipt: file ? fileName : null,
+      receipt: fileName ? fileName : null,
     });
     if (data.error) {
       return res.status(400).json({ msg: data.error.message });
     }
+
     // Add an expense by pushing new object into list
     const expenses = await ExpensesModel.findOneAndUpdate(
       { userid: req.user.id },
