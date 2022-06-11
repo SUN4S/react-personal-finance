@@ -54,7 +54,7 @@ const axiosBaseQuery =
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: axiosBaseQuery({
-    baseUrl: `${process.env.SERVER_URL}/api`,
+    baseUrl: `${process.env.SERVER_URL}api`,
   }),
   tagTypes: ["Expenses", "User", "Budget"],
   endpoints: () => ({}),
