@@ -5,6 +5,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import expenseReducer from "../features/expense/ExpenseSlice";
 import modalReducer from "../features/modal/ModalSlice";
 import notificationReducer from "../features/notification/NotificationSlice";
+import userReducer from "../features/user/UserSlice";
 
 // Redux store, that hold whole application state tree
 // middleware refers to api created with Redux Toolkit
@@ -12,6 +13,7 @@ import notificationReducer from "../features/notification/NotificationSlice";
 // exported api functions alse have extra functionality, such as load-state, success-state, etc.
 export const store = configureStore({
   reducer: {
+    user: userReducer,
     expenses: expenseReducer,
     notification: notificationReducer,
     modal: modalReducer,

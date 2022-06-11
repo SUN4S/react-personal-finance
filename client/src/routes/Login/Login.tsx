@@ -2,9 +2,12 @@ import "./Login.scss";
 
 import { LoginForm } from "../../components/LoginForm/LoginForm";
 import Logo from "../../resources/icons/Logo.svg";
+import { useTheme } from "../../hooks/useTheme";
 
 // Login display
 export const Login = () => {
+  const { currentTheme } = useTheme();
+
   return (
     <section className="login">
       <div className="loginContainer">

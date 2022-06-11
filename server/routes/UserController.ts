@@ -14,13 +14,15 @@ const saltRounds = 10;
 // Login uses passport.js to authenticate user
 // "Local" strategy only uses Username and Passwowrd for authentication
 router.post("/login", passport.authenticate("local"), async (req: Request, res: Response) => {
-  res.json({ msg: "Logged in successfully" });
+  res.json({ msg: "Logged in successfully", username: req.user.username, image: req.user.image });
 });
 
 // Get request to check if user is logged in
 router.get("/loggedIn", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
-    res.status(200).json({ msg: "User is logged in" });
+    res
+      .status(200)
+      .json({ msg: "User is logged in", username: req.user.username, image: req.user.image });
   } else {
     res.status(401).json({ msg: "Unauthorizes access" });
   }

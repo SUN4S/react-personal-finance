@@ -8,3 +8,16 @@ export interface RegisterInputs {
   email: string;
   password: string;
 }
+
+export interface UserResponse {
+  msg: string;
+  username: string;
+  image: string;
+}
+
+export interface UserState {
+  userData: {
+    username: string;
+    image: string;
+  };
+}

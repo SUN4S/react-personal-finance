@@ -15,7 +15,7 @@ passport.use(
       if (!bcrypt.compare(password, user.hash)) {
         return done(null, false);
       }
-      return done(null, { id: user._id.toString() });
+      return done(null, { id: user._id.toString(), username: user.username, image: user.image });
     });
   })
 );
@@ -26,5 +26,5 @@ passport.serializeUser(function (user, done) {
 
 passport.deserializeUser(async (id, done) => {
   const user = await UserModel.findById(id);
-  done(null, { id: user._id.toString() });
+  done(null, { id: user._id.toString(), username: user.username, image: user.image });
 });

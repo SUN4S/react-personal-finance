@@ -1,13 +1,18 @@
 import "./Header.scss";
 
+import { RootState } from "../../app/store";
 import { ThemeSwitch } from "../ThemeSwitch/ThemeSwitch";
 import defaultAvatar from "../../resources/images/default-image.jpg";
 import { notification } from "../../features/notification/NotificationSlice";
 import { useAppDispatch } from "../../app/hooks";
 import { useLogoutUserMutation } from "../../services/user";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
 export const Header = () => {
+  const username = useSelector(
+    (state: RootState) => state.user.userData.username
+  );
   // Redux toolkit api request to logout user
   const [logout] = useLogoutUserMutation();
   const dispatch = useAppDispatch();
@@ -34,7 +39,7 @@ export const Header = () => {
   return (
     <header>
       <ThemeSwitch />
-      <h4>John123</h4>
+      <h4>{username}</h4>
       <img src={defaultAvatar} alt="Avatar" />
       <div>
         <i className="fa-solid fa-power-off" onClick={handleClick}></i>
