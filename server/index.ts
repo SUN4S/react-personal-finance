@@ -3,6 +3,7 @@ const expenses = require("./routes/ExpensesController");
 const user = require("./routes/UserController");
 
 import express, { Express } from "express";
+import { morganRequestMiddleware, morganResponseMiddleware } from "./middleware/morgan";
 
 import compression from "compression";
 import cookieParser from "cookie-parser";
@@ -10,7 +11,6 @@ import cors from "cors";
 import fileUpload from "express-fileupload";
 import fs from "fs";
 import https from "https";
-import { morganMiddleware } from "./middleware/morgan";
 import passport from "passport";
 import path from "path";
 import process from "process";
@@ -35,6 +35,8 @@ global.whitelist = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 // };
 
 // Middleware
+app.use(morganRequestMiddleware);
+app.use(morganResponseMiddleware);
 app.use(express.json());
 app.use(compression());
 app.use(
@@ -47,6 +49,7 @@ app.use(
     ],
   })
 );
+
 // Serving static images, which can be accessed through url
 app.use("/resources/expense_image", express.static(process.cwd() + "/uploads/expenses"));
 app.use("/resources/avatar_image", express.static(process.cwd() + "/uploads/avatars"));
@@ -61,8 +64,6 @@ app.use(
     cookie: { maxAge: 24 * 60 * 60 * 1000 },
   })
 );
-app.use(morganMiddleware);
-app.use(morganMiddleware);
 
 // Limit file upload to 4MB
 app.use(fileUpload({ limits: { fileSize: 4 * 1024 * 1024 } }));

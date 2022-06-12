@@ -4,6 +4,7 @@ import express, { Request, Response } from "express";
 import { BudgetModel } from "../models/budgetSchema";
 import { ExpensesModel } from "../models/expensesSchema";
 import bcrypt from "bcrypt";
+import logger from "../config/winston";
 import passport from "passport";
 
 const router = express.Router();
@@ -58,63 +59,64 @@ router.post("/avatar", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/getUser", async (req: Request, res: Response) => {
-  if (req.isAuthenticated()) {
-    const user = await UserModel.findById(req.user.id);
-    return res
-      .status(200)
-      .json({ username: user.username, image: `http://localhost:3030/avatars/${user.image}` });
-  }
-  res.status(401).json({ msg: "Unauthorized access" });
-});
-
 // Register a new user
 router.post("/register", async (req: Request, res: Response) => {
-  const body = req.body;
-  const password = body.password;
+  try {
+    const { username, email, password } = req.body;
 
-  const doc = await UserModel.findOne({
-    $or: [{ username: body.username }, { email: body.email }],
-  });
-
-  if (doc != null) {
-    return res.status(409).json({ msg: "Username or Email already in use" });
-  } else {
-    const data = joiUserSchema.validate({
-      username: body.username,
-      email: body.email,
-      password: password,
+    const user = await UserModel.findOne({
+      $or: [{ username: username }, { email: email }],
     });
-    if (data.error) {
-      return res.status(400).json({ msg: data.error.message });
-    }
-    //Bcrypt works its magic
-    bcrypt.genSalt(saltRounds, function (err, salt) {
-      bcrypt.hash(password, salt, function (err, hash) {
-        // Create a user, as well as extra collections linking them together
-        // by user _id which is named userid in other collections
-        UserModel.create({
-          username: body.username,
-          email: body.email,
-          hash: hash,
-        }).then((response) => {
-          ExpensesModel.create({
-            userid: response._id,
-            expenses: [],
-          });
-          BudgetModel.create({
-            userid: response._id,
-            budget: [],
+    if (user != null) {
+      if (user.username === username) {
+        logger.warn(`Duplicate User Attempted Registration (Username: ${username})`);
+      }
+      if (user.email === email) {
+        logger.warn(`Duplicate User Attempted Registration (Email: ${email})`);
+      }
+      return res.status(409).json({ msg: "Username or Email already in use" });
+    } else {
+      const data = joiUserSchema.validate({
+        username: username,
+        email: email,
+        password: password,
+      });
+
+      if (data.error) {
+        return res.status(400).json({ msg: data.error.message });
+      }
+
+      //Bcrypt works its magic
+      bcrypt.genSalt(saltRounds, function (err, salt) {
+        bcrypt.hash(password, salt, function (err, hash) {
+          // Create a user, as well as extra collections linking them together
+          // by user _id which is named userid in other collections
+          UserModel.create({
+            username: username,
+            email: email,
+            hash: hash,
+          }).then((response) => {
+            ExpensesModel.create({
+              userid: response._id,
+              expenses: [],
+            });
+            BudgetModel.create({
+              userid: response._id,
+              budget: [],
+            });
           });
         });
       });
-    });
-    return res.status(201).json({ msg: "Account created succesfully" });
+      logger.info(`Created new Account`);
+      return res.status(201).json({ msg: "Account created succesfully" });
+    }
+  } catch (error) {
+    logger.error(error);
   }
-  res.status(500).json({ msg: "Internal server error" });
 });
 
 router.post("/logout", (req: Request, res: Response) => {
+  logger.info(`${req.user.username} Logged Out`);
   req.logout();
   res.json({ msg: "Logged out successfully" });
 });

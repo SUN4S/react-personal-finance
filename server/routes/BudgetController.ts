@@ -1,7 +1,7 @@
 import { BudgetModel, joiBudgetSchema } from "../models/budgetSchema";
 import express, { Request, Response } from "express";
 
-import Joi from "joi";
+import logger from "../config/winston";
 
 const router = express.Router();
 
@@ -9,28 +9,39 @@ const router = express.Router();
 // Budgets are categorized by month ex. 2022-06
 router.get("/", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
-    const currentDate = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
-    const budget = await BudgetModel.findOne({ userid: req.user.id });
-    const data = await budget;
-    return res.status(200).send(data.budgetList);
+    try {
+      const currentDate = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
+      const budget = await BudgetModel.findOne({ userid: req.user.id });
+      const data = await budget;
+      logger.info(`${req.user.username} Requested Budged Data`);
+      return res.status(200).send(data.budgetList);
+    } catch (error) {
+      logger.error(error);
+    }
+  } else {
+    res.status(401).json({ msg: "Unauthorized access" });
   }
-  res.status(401).json({ msg: "Unauthorized access" });
 });
 
 // Return Current month budget
 // Budgets are categorized by month ex. 2022-06
 router.get("/currentBudget", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
-    const currentDate = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
-    const budget = await BudgetModel.findOne({ userid: req.user.id });
+    try {
+      const currentDate = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
+      const budget = await BudgetModel.findOne({ userid: req.user.id });
 
-    const data = await budget;
-    // Filter out unnecessary data
-    const currentBudget = data.budgetList.filter((item) => item.budgetDate == currentDate);
-
-    return res.status(200).send(currentBudget);
+      const data = await budget;
+      // Filter out unnecessary data
+      const currentBudget = data.budgetList.filter((item) => item.budgetDate == currentDate);
+      logger.info(`${req.user.username} Requested Budged Data`);
+      return res.status(200).send(currentBudget);
+    } catch (error) {
+      logger.error(error);
+    }
+  } else {
+    res.status(401).json({ msg: "Unauthorized access" });
   }
-  res.status(401).json({ msg: "Unauthorized access" });
 });
 
 // Adding a monthly budget for the user
@@ -45,31 +56,35 @@ router.post("/addBudget", async (req: Request, res: Response) => {
       return res.status(400).json({ msg: data.error.message });
     }
 
-    // Finds the object asociated with session user
-    const uniqueBudget = BudgetModel.findOne({ userid: req.user.id }, async (err, list) => {
-      // After finding the user, it filters by todays yyyy-mm
-      const filteredByDate = list.budgetList.filter(
-        (item) => item.budgetDate == new Date().getFullYear() + "-" + (new Date().getMonth() + 1)
-      );
-      // If budget exists, return msg
-      if (filteredByDate.length > 0) {
-        return res.status(202).json({ msg: "Budget already set" });
-      }
-      // If budget doesn't exist, add a new budget with todays yyyy-mm
-      const budget = await BudgetModel.findOneAndUpdate(
-        { userid: req.user.id },
-        {
-          $push: {
-            budgetList: {
-              budget: req.body.budget,
-            },
-          },
+    try {
+      // Finds the object asociated with session user
+      const uniqueBudget = BudgetModel.findOne({ userid: req.user.id }, async (err, list) => {
+        // After finding the user, it filters by todays yyyy-mm
+        const filteredByDate = list.budgetList.filter(
+          (item) => item.budgetDate == new Date().getFullYear() + "-" + (new Date().getMonth() + 1)
+        );
+        // If budget exists, return msg
+        if (filteredByDate.length > 0) {
+          return res.status(202).json({ msg: "Budget already set" });
         }
-      );
-      return res.status(201).json({ msg: "Added new budget" });
-    });
+        // If budget doesn't exist, add a new budget with todays yyyy-mm
+        const budget = await BudgetModel.findOneAndUpdate(
+          { userid: req.user.id },
+          {
+            $push: {
+              budgetList: {
+                budget: req.body.budget,
+              },
+            },
+          }
+        );
+        logger.info(`${req.user.username} Added New Budget`);
+        return res.status(201).json({ msg: "Added new budget" });
+      });
+    } catch (error) {
+      logger.error(error);
+    }
   } else {
-    // Return Authentication error
     res.status(401).json({ msg: "Unauthorized access" });
   }
 });
@@ -84,21 +99,29 @@ router.put("/editBudget", async (req: Request, res: Response) => {
       return res.json({ msg: data.error.message });
     }
 
-    const budget = await BudgetModel.findOneAndUpdate(
-      {
-        budgetList: {
-          $elemMatch: { budgetDate: new Date().getFullYear() + "-" + (new Date().getMonth() + 1) },
+    try {
+      const budget = await BudgetModel.findOneAndUpdate(
+        {
+          budgetList: {
+            $elemMatch: {
+              budgetDate: new Date().getFullYear() + "-" + (new Date().getMonth() + 1),
+            },
+          },
         },
-      },
-      {
-        $set: {
-          "budgetList.$.budget": req.body.budget,
-        },
-      }
-    );
-    return res.status(201).json({ msg: "Edited budget successfully" });
+        {
+          $set: {
+            "budgetList.$.budget": req.body.budget,
+          },
+        }
+      );
+      logger.info(`${req.user.username} Edited Budget`);
+      return res.status(201).json({ msg: "Edited budget successfully" });
+    } catch (error) {
+      logger.error(error);
+    }
+  } else {
+    res.status(401).json({ msg: "Unauthorized access" });
   }
-  res.status(401).json({ msg: "Unauthorized access" });
 });
 
 module.exports = router;
