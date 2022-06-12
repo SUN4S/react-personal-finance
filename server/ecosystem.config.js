@@ -3,7 +3,7 @@ module.exports = {
     {
       name: "Personal Finance",
       script: "./build/index.js",
-      watch: ".",
+      watch: false,
       cwd: "./",
     },
   ],
