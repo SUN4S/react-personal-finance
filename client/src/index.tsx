@@ -62,7 +62,7 @@ root.render(
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
-    .register("serviceWorker.js")
+    .register("./serviceWorker.js")
     .then((registration) => {
       console.log("Service Worker Registered!");
       console.log(registration);
