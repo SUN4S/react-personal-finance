@@ -59,16 +59,12 @@ router.post("/addExpense", async (req: Request, res: Response) => {
       file = req.files.receipt;
       // Generate random prefix for file name
       fileName = Date.now() + "-" + Math.round(Math.random() * 1e9) + file.name;
-      // Check if folder exists, if note create
-      if (!fs.existsSync("./uploads/expenses")) {
-        fs.mkdirSync("./uploads/expenses");
-      }
       // Check item mimetype to filter out non-image files
       if (!global.whitelist.includes(file.mimetype)) {
         return res.json({ msg: "Bad file format" });
       } else {
         // use 'express-fileupload' to save file
-        file.mv(`${global.__basedir}/uploads/expenses/${fileName}`);
+        file.mv(`./uploads/expenses/${fileName}`);
       }
     }
     // Validate data provided by the client
@@ -96,22 +92,6 @@ router.post("/addExpense", async (req: Request, res: Response) => {
     return res.status(201).json({ msg: "Added new Expense" });
   }
   res.status(401).json({ msg: "Unauthorized access" });
-});
-
-// Get receipt image by providing file name
-router.get("/getReceipt/:name", async (req: Request, res: Response) => {
-  if (req.isAuthenticated()) {
-    const { name } = req.params;
-    // Check if file requested exist
-    if (fs.existsSync(global.__basedir + "/uploads/expenses/" + name)) {
-      //return res.sendFile(global.__basedir + "/uploads/expenses/" + name);
-      res.send("http://localhost:3030/expenses/" + name);
-    } else {
-      return res.json({ msg: "File does not exist" });
-    }
-  } else {
-    res.status(401).json({ msg: "Unauthorized access" });
-  }
 });
 
 // Exit a single expense in array

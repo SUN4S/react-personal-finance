@@ -8,7 +8,6 @@ import { useCallback, useEffect, useState } from "react";
 import {
   useDeleteExpenseMutation,
   useEditExpenseMutation,
-  useLazyExpenseImageQuery,
   usePostExpenseMutation,
 } from "../../services/expenses";
 
@@ -52,7 +51,6 @@ export const ModalComponent = () => {
   const dispatch = useAppDispatch();
 
   //Redux toolkit Query,Mutation declarations
-  const [trigger] = useLazyExpenseImageQuery();
   const [postExpense, isLoading] = usePostExpenseMutation();
   const [editExpense] = useEditExpenseMutation();
   const [deleteExpense] = useDeleteExpenseMutation();
@@ -229,12 +227,8 @@ export const ModalComponent = () => {
 
   // Function that gets called if modaldata.receipt passes the check
   const renderReceipt = async (fileName: string) => {
-    // trigger is a Redux toolkit api defined function,
-    // that executes a request to the server to fetch data
-    await trigger(fileName, true).then((response) => {
-      // Set preview state as a link to new image
-      setPreview(response.data);
-    });
+    const imageLink = `${process.env.SERVER_URL}/resources/expense_image/${fileName}`;
+    setPreview(imageLink);
   };
 
   // Function that gets called if modaldata.tags passes the check

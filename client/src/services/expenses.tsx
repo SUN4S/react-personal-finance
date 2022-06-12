@@ -26,16 +26,6 @@ export const expensesApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Expenses"],
     }),
-    // Third query takes image name (string) parameter used to get file
-    // Returns link to where the image is stored
-    expenseImage: builder.query<string, string>({
-      query: (name: string) => ({
-        url: `/expenses/getReceipt/${name}`,
-        method: "GET",
-        withCredentials: true,
-      }),
-      providesTags: ["Expenses"],
-    }),
     // Fourth mutation(query) takes an object and/or file to pass to server
     // multipart/form-data does not send arrays, so 'tags' need to be parsed
     postExpense: builder.mutation({
@@ -80,7 +70,6 @@ export const expensesApi = baseApi.injectEndpoints({
 export const {
   useExpensesQuery,
   useCurrentExpenseMonthQuery,
-  useLazyExpenseImageQuery,
   useEditExpenseMutation,
   usePostExpenseMutation,
   useDeleteExpenseMutation,

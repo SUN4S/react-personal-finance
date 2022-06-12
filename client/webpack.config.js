@@ -31,6 +31,7 @@ module.exports = {
     port: 3000,
     open: true,
     hot: true,
+    contentBase: "./",
     historyApiFallback: true,
   },
   performance: {
@@ -79,6 +80,7 @@ module.exports = {
       path: "./.env",
     }),
     new WebpackPwaManifest({
+      filename: "manifest.json",
       name: "Personal Finance",
       short_name: "PF",
       description: "Attempt to make a Personal Finance app with React",

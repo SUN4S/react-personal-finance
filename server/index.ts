@@ -10,6 +10,7 @@ import fileUpload from "express-fileupload";
 import fs from "fs";
 import https from "https";
 import passport from "passport";
+import process from "process";
 
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
@@ -32,8 +33,9 @@ global.whitelist = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 app.use(express.json());
 app.use(compression());
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
-app.use(require("serve-static")(__dirname + "/uploads"));
-app.use(express.static("/uploads"));
+// Serving static images, which can be accessed through url
+app.use("/resources/expense_image", express.static(process.cwd() + "/uploads/expenses"));
+app.use("/resources/avatar_image", express.static(process.cwd() + "/uploads/avatars"));
 app.use(require("serve-static")(__dirname + "/public"));
 app.use(express.static("/public"));
 app.use(require("body-parser").urlencoded({ extended: true }));
@@ -48,6 +50,13 @@ app.use(
 
 // Limit file upload to 4MB
 app.use(fileUpload({ limits: { fileSize: 4 * 1024 * 1024 } }));
+if (!fs.existsSync(`./uploads/expenses`)) {
+  fs.mkdirSync(`./uploads/expenses`, { recursive: true });
+}
+
+if (!fs.existsSync(`./uploads/avatar`)) {
+  fs.mkdirSync(`./uploads/avatar`, { recursive: true });
+}
 
 // Using Passportjs for authentification
 require("./middleware/authorize");
