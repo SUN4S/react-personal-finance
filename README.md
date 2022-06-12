@@ -1,6 +1,9 @@
 # react-personal-finance
 A personal finance management program, that processes daily expenditures and ( at some point) generates weekly/monthly expense reports.
 
+## Live version
+https://www.marglipersonalfinance.me/
+
 ## Usage
 
 In ```./client``` create a ```.env``` file containing:
