@@ -3,6 +3,7 @@ uploads/expenses/*
 build/middleware
 build/models
 build/routes
+build/config
 build/index.js
 build/index.d.ts
 logs

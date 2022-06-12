@@ -12,6 +12,7 @@ import fs from "fs";
 import https from "https";
 import morgan from "morgan";
 import passport from "passport";
+import path from "path";
 import process from "process";
 import winston from "./config/winston";
 
@@ -93,6 +94,14 @@ try {
 app.use("/api", user);
 app.use("/api/expenses", expenses);
 app.use("/api/budget", budget);
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(process.cwd(), "/build/public/index.html"), function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 app.all("*", (req, res) => res.status(404).json({ msg: "Page not Found" }));
 
