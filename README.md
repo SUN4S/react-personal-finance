@@ -28,6 +28,9 @@ and run ```npm start```
 ## Usage production
 
 To run in production:
-```npm run build``` in ```./client``` diractory
+In ```./client``` diractory:
+```npm run build```
 
-```npm run serve``` in ```./server``` directory to build and run pm2 instance
+In ```./server``` directory:
+Remove comments from https cert(httpsOptions) options and createServer
+```npm run serve```  to build and run pm2 instance
