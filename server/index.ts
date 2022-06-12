@@ -98,6 +98,10 @@ app.use("/api", user);
 app.use("/api/expenses", expenses);
 app.use("/api/budget", budget);
 
+app.get("/service-worker.js", (req, res) => {
+  res.sendFile(path.resolve(process.cwd(), "/build/public/serviceWorker.js"));
+});
+
 app.get("/*", (req, res) => {
   res.sendFile(path.join(process.cwd(), "/build/public/index.html"), function (err) {
     if (err) {
