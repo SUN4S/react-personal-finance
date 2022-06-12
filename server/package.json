@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=development ts-node-dev index.ts",
     "serve": "NODE_ENV=production tsc & pm2 start",
-    "tsc": "tsc",
-    "start:prod": "node build/index.js"
+    "tsc": "tsc"
   },
   "compilerOptions": {
     "module": "ESNext"
@@ -22,6 +21,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@logtail/node": "^0.1.12",
+    "@logtail/winston": "^0.1.12",
     "bcrypt": "^5.0.1",
     "compression": "^1.7.4",
     "connect-ensure-login": "^0.1.1",

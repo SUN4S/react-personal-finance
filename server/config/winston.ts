@@ -1,13 +1,16 @@
 import "winston-daily-rotate-file";
 
+import { Logtail } from "@logtail/node";
+import { LogtailTransport } from "@logtail/winston";
 import path from "path";
 import winston from "winston";
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 const { combine, timestamp, colorize, align, printf, json } = winston.format;
 
-const errorFilter = winston.format((info, opts) => {
-  return info.level === "error" ? info : false;
-});
+const logtail = new Logtail(process.env.LOGTAIL_SOURCE_TOKEN);
 
 const infoFilter = winston.format((info, opts) => {
   return info.level === "info" ? info : false;
@@ -17,11 +20,19 @@ const warnFilter = winston.format((info, opts) => {
   return info.level === "warn" ? info : false;
 });
 
+const errorFilter = winston.format((info, opts) => {
+  return info.level === "error" ? info : false;
+});
+
+const httpFilter = winston.format((info, opts) => {
+  return info.level === "http" ? info : false;
+});
+
 const fileRotateTransportCombined = new winston.transports.DailyRotateFile({
   filename: path.resolve(process.cwd() + "/logs/combined-%DATE%.log"),
   datePattern: "YYYY-MM-DD",
   maxFiles: "14d",
-  format: winston.format.combine(timestamp(), json()),
+  format: winston.format.combine(timestamp({ format: "YYYY-MM-DD hh:mm:ss" }), json()),
 });
 fileRotateTransportCombined.on("rotate", (oldFilename, newFilename) => {
   console.log("You should probably save this somewhere");
@@ -32,7 +43,11 @@ const fileRotateTransportWarn = new winston.transports.DailyRotateFile({
   datePattern: "YYYY-MM-DD",
   maxFiles: "14d",
   level: "warn",
-  format: winston.format.combine(warnFilter(), timestamp(), json()),
+  format: winston.format.combine(
+    warnFilter(),
+    timestamp({ format: "YYYY-MM-DD hh:mm:ss" }),
+    json()
+  ),
 });
 fileRotateTransportWarn.on("rotate", (oldFilename, newFilename) => {
   console.log("You should probably save this somewhere");
@@ -43,7 +58,11 @@ const fileRotateTransportError = new winston.transports.DailyRotateFile({
   datePattern: "YYYY-MM-DD",
   maxFiles: "14d",
   level: "error",
-  format: winston.format.combine(errorFilter(), timestamp(), json()),
+  format: winston.format.combine(
+    errorFilter(),
+    timestamp({ format: "YYYY-MM-DD hh:mm:ss" }),
+    json()
+  ),
 });
 fileRotateTransportError.on("rotate", (oldFilename, newFilename) => {
   console.log("You should probably save this somewhere");
@@ -54,7 +73,26 @@ const fileRotateTransportInfo = new winston.transports.DailyRotateFile({
   datePattern: "YYYY-MM-DD",
   maxFiles: "14d",
   level: "info",
-  format: winston.format.combine(infoFilter(), timestamp(), json()),
+  format: winston.format.combine(
+    infoFilter(),
+    timestamp({ format: "YYYY-MM-DD hh:mm:ss" }),
+    json()
+  ),
+});
+fileRotateTransportInfo.on("rotate", (oldFilename, newFilename) => {
+  console.log("You should probably save this somewhere");
+});
+
+const fileRotateTransportHttp = new winston.transports.DailyRotateFile({
+  filename: path.resolve(process.cwd() + "/logs/http-%DATE%.log"),
+  datePattern: "YYYY-MM-DD",
+  maxFiles: "14d",
+  level: "http",
+  format: winston.format.combine(
+    httpFilter(),
+    timestamp({ format: "YYYY-MM-DD hh:mm:ss" }),
+    json()
+  ),
 });
 fileRotateTransportInfo.on("rotate", (oldFilename, newFilename) => {
   console.log("You should probably save this somewhere");
@@ -62,6 +100,7 @@ fileRotateTransportInfo.on("rotate", (oldFilename, newFilename) => {
 
 const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || "info",
+  exitOnError: false,
   transports: [
     new winston.transports.Console({
       format: combine(
@@ -75,11 +114,9 @@ const logger = winston.createLogger({
     fileRotateTransportInfo,
     fileRotateTransportWarn,
     fileRotateTransportError,
+    fileRotateTransportHttp,
+    new LogtailTransport(logtail),
   ],
 });
-
-logger.info("Info message");
-logger.error("Error message");
-logger.warn("Warning message");
 
 export default logger;

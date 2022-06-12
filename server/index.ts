@@ -10,7 +10,7 @@ import cors from "cors";
 import fileUpload from "express-fileupload";
 import fs from "fs";
 import https from "https";
-import morgan from "morgan";
+import { morganMiddleware } from "./middleware/morgan";
 import passport from "passport";
 import path from "path";
 import process from "process";
@@ -61,6 +61,8 @@ app.use(
     cookie: { maxAge: 24 * 60 * 60 * 1000 },
   })
 );
+app.use(morganMiddleware);
+app.use(morganMiddleware);
 
 // Limit file upload to 4MB
 app.use(fileUpload({ limits: { fileSize: 4 * 1024 * 1024 } }));
