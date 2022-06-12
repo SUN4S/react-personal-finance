@@ -11,18 +11,24 @@ import { Button } from "../Button/Button";
 import { notification } from "../../features/notification/NotificationSlice";
 import { useAppDispatch } from "../../app/hooks";
 
+// Component to render a small form inside budget container
 export const BudgetForm = () => {
+  // Using RTK mutation to handle server requests
   const [postBudget, { isLoading }] = usePostBudgetMutation();
-  const budgetQuery = useCurrentBudgetQuery({});
+  // RTK query to get data from server
+  const budgetQuery = useCurrentBudgetQuery({ skip: true });
 
+  // RTK function to dispatch actions to reducers
   const dispatch = useAppDispatch();
 
+  // Getting react-hook-forms functions that are needed 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<BudgetFormState>();
 
+  // Function fired button click
   const onSubmit: SubmitHandler<BudgetFormState> = async (data) => {
     // Posting new budget
     const response: any = await postBudget(data);

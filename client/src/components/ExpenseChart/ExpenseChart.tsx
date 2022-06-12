@@ -3,6 +3,7 @@ import { ChartError } from "../ChartError/ChartError";
 import { ExpenseChartProps } from "../../models/chart";
 import { LoadingBox } from "../LoadingBox/LoadingBox";
 
+// Component that houses subcomponents
 export const ExpenseChart = ({
   expenseData,
   expenseIsFetching,

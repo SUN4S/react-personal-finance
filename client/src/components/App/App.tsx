@@ -6,11 +6,15 @@ import { MobileNav } from "../MobileNav/MobileNav";
 import Modal from "react-modal";
 import { ModalComponent } from "../Modal/Modal";
 import { Outlet } from "react-router-dom";
+import { RootState } from "../../app/store";
 import { Sidebar } from "../Navbar/Sidebar";
+import { useSelector } from "react-redux";
 
 Modal.setAppElement("#root");
 
 export const App = () => {
+  const modalStatus = useSelector((state: RootState) => state.modal.isOpen);
+
   return (
     <>
       <div className="App">
@@ -18,7 +22,7 @@ export const App = () => {
         {window.innerWidth > 576 ? <Sidebar /> : <MobileNav />}
         <main className="contentContainer">
           <Header />
-          <ModalComponent />
+          <ModalComponent openStatus={modalStatus} />
           <Outlet />
         </main>
       </div>

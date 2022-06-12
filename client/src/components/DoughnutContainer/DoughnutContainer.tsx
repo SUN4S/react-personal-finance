@@ -20,29 +20,41 @@ import { LoadingBox } from "../LoadingBox/LoadingBox";
 // fix this bug, so it would also scale back down
 // Reloading website on scaled up container fixes scaling issue
 
+// Component that holds boughnut chart
 export const DoughnutContainer = (props: {
   budgetData: number;
   expenseData: Array<ExpenseState>;
 }) => {
+  // State to save cumulative expsne value
   const [expenseAmount, setExpenseAmount] = useState<number>(0);
+  // State to save change between budget and expenses
   const [remainingBudget, setRemainingBudget] = useState<number>(0);
+  // State to manage load state
   const [loading, setLoading] = useState<boolean>(true);
 
+  // On load and prop change fire function
   useEffect(() => {
+    // Variable to store expense cumulative value
     let newAmount = 0;
+    // Mapping though provided expense data and adding values to variable
     props.expenseData.map((item) => {
       newAmount += item.amount;
     });
-
+    // Setting variable to expense state
     setExpenseAmount(newAmount);
+    // Setting budget difference so state
     setRemainingBudget(props.budgetData - newAmount);
+    // Setting loading state to false
     setLoading(false);
   }, [props.budgetData, props.expenseData]);
 
+  // data that will be represented in the chart
+  // If remaining value is less than 0, then set it to 0
   const data = [
     { name: "Spent", value: expenseAmount },
     { name: "Remaining", value: remainingBudget < 0 ? 0 : remainingBudget },
   ];
+  // Colors that doughtnut chart will have
   const COLORS = ["#dc2626", "#22c55e"];
 
   return (

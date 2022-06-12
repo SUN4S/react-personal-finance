@@ -26,14 +26,18 @@ interface DataObject {
 export const BarChartContainer = (props: {
   expenseData: Array<ExpenseState>;
 }) => {
+  // State for data array
+  // Data used to draw barchart
   const [data, setData] = useState<Array<DataObject>>([
     { name: "Essentials", value: 0 },
     { name: "Wants", value: 0 },
     { name: "Culture", value: 0 },
     { name: "Unexpected", value: 0 },
   ]);
+  // Loading state for when data is being processed
   const [loading, setLoading] = useState<boolean>(true);
 
+  // Colors for barchart bars
   const barColors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#a2b321"];
 
   useEffect(() => {
@@ -62,6 +66,7 @@ export const BarChartContainer = (props: {
     });
     // Set state of processed expense data
     setData(processedData);
+    // Set state of loading to false
     setLoading(false);
   }, [props.expenseData]);
 

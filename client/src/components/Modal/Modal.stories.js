@@ -7,12 +7,12 @@ export default {
 
 export const Default_Light = () => (
   <html data-theme="light">
-    <ModalComponent style={{ transform: "translateX(100%)" }} />
+    <ModalComponent openStatus={true} />
   </html>
 );
 
 export const Default_Dark = () => (
   <html data-theme="dark">
-    <ModalComponent />
+    <ModalComponent openStatus={true} />
   </html>
 );

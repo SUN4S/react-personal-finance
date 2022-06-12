@@ -5,6 +5,7 @@ import { BudgetForm } from "../BudgetForm/BudgetForm";
 import { DoughnutContainer } from "../DoughnutContainer/DoughnutContainer";
 import { LoadingBox } from "../LoadingBox/LoadingBox";
 
+// Component to render budgetChart
 export const BudgetChart = ({
   budgetData,
   expenseData,

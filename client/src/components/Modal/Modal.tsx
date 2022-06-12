@@ -31,13 +31,11 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter, KeyCodes.space];
 
-export const ModalComponent = () => {
+export const ModalComponent = (props: { openStatus: boolean }) => {
   // Redux toolkit Modal data
   // Modal has the ability to receive from 1 to 3 props
-  // isOpen prop is REQUIRED, just handles if modal is open or closed
   // editable and data are optional props,
   // that are only used to handle expense edit
-  const modalStatus = useSelector((state: RootState) => state.modal.isOpen);
   const editable = useSelector((state: RootState) => state.modal.editable);
   const modalData = useSelector((state: RootState) => state.modal.data);
 
@@ -198,7 +196,7 @@ export const ModalComponent = () => {
     // When modals status changes,
     // function checks wether there has beed data passed to modal
     // depending if data is passed to modal, it autofills input fields
-    if (modalData && modalStatus) {
+    if (modalData && props.openStatus) {
       // Date is set by using a State
       setDate(new Date(modalData.date));
       // modal Tags and Receipt need extra check to check if render is needed
@@ -223,7 +221,7 @@ export const ModalComponent = () => {
       // If modal data is not provided, reset modal data to default values
       resetForm();
     }
-  }, [modalData, modalStatus]);
+  }, [modalData, props.openStatus]);
 
   // Function that gets called if modaldata.receipt passes the check
   const renderReceipt = async (fileName: string) => {
@@ -259,7 +257,7 @@ export const ModalComponent = () => {
     <>
       <Modal
         closeTimeoutMS={200}
-        isOpen={modalStatus}
+        isOpen={props.openStatus}
         onRequestClose={() => dispatch(toggleModal({ isOpen: false }))}
         shouldCloseOnOverlayClick={true}
         contentLabel="Expense Modal"
@@ -278,12 +276,12 @@ export const ModalComponent = () => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>
-            Select Time:{" "}
+            Select Time:
             <DatePicker
-              selected={date}
+              selected={new Date(date)}
               onChange={(date: Date) => setDate(date)}
               showTimeSelect
-              dateFormat="yyyy MM dd HH:mm"
+              dateFormat="yyyy-MM-dd HH:mm"
               timeIntervals={5}
             />
           </label>

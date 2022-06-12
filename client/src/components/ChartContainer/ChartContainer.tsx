@@ -3,10 +3,8 @@ import "./ChartContainer.scss";
 import { BudgetChart } from "../BudgetChart/BudgetChart";
 import { BudgetChartProps } from "../../models/chart";
 import { ExpenseChart } from "../ExpenseChart/ExpenseChart";
-import { useCurrentBudgetQuery } from "../../services/budget";
-import { useCurrentExpenseMonthQuery } from "../../services/expenses";
 
-// Chart container currently does not have functionality
+// Chart container used to house data visualization charts
 export const ChartContainer = ({
   budgetData,
   expenseData,
