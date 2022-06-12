@@ -98,8 +98,9 @@ app.use("/api", user);
 app.use("/api/expenses", expenses);
 app.use("/api/budget", budget);
 
-app.get("/service-worker.js", (req, res) => {
-  res.sendFile(path.resolve(process.cwd(), "/build/public/serviceWorker.js"));
+app.get("/ServiceWorker.js", (req, res) => {
+  res.header("Content-type: application/javascript");
+  res.sendFile(path.resolve(process.cwd(), "/build/public/ServiceWorker.js"));
 });
 
 app.get("/*", (req, res) => {
