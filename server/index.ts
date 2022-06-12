@@ -2,20 +2,24 @@ const budget = require("./routes/BudgetController");
 const expenses = require("./routes/ExpensesController");
 const user = require("./routes/UserController");
 
+import express, { Express } from "express";
+
 import compression from "compression";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import express from "express";
 import fileUpload from "express-fileupload";
 import fs from "fs";
 import https from "https";
+import morgan from "morgan";
 import passport from "passport";
 import process from "process";
+import winston from "./config/winston";
 
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const logger = winston;
 
-const app = express();
+const app: Express = express();
 
 dotenv.config();
 
@@ -32,7 +36,16 @@ global.whitelist = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 // Middleware
 app.use(express.json());
 app.use(compression());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(
+  cors({
+    credentials: true,
+    origin: [
+      "http://localhost:3000",
+      "https://www.marglipersonalfinance.me",
+      "https://marglipersonalfinance.me",
+    ],
+  })
+);
 // Serving static images, which can be accessed through url
 app.use("/resources/expense_image", express.static(process.cwd() + "/uploads/expenses"));
 app.use("/resources/avatar_image", express.static(process.cwd() + "/uploads/avatars"));

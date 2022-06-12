@@ -1,10 +1,9 @@
 uploads/avatars/*
 uploads/expenses/*
-!uploads/expenses/README.md
-!uploads/avatars/README.md
 build/middleware
 build/models
 build/routes
 build/index.js
 build/index.d.ts
+logs
 .env
