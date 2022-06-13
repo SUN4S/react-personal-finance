@@ -1,5 +1,7 @@
 import "./ExpenseListItem.scss";
 
+import { useEffect, useRef } from "react";
+
 import { ExpenseState } from "../../models/expenses";
 import { toggleModal } from "../../features/modal/ModalSlice";
 import { useDispatch } from "react-redux";
@@ -8,6 +10,7 @@ export const ExpenseListItem = (props: { expenseData: ExpenseState }) => {
   // Redux Toolkit function to dispatch(call) functions
   const dispatch = useDispatch();
 
+  const itemRef = useRef<HTMLDivElement>(null);
   // Handle button click and pass data to modal
   // 'editable' sets modal element to be set to edit mode
   // 'data' send current items data to modal
@@ -17,8 +20,15 @@ export const ExpenseListItem = (props: { expenseData: ExpenseState }) => {
     );
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      itemRef.current!.className = itemRef.current!.className + " show";
+      console.log(itemRef.current?.className);
+    }, 10);
+  }, []);
+
   return (
-    <div className="expenseListElement">
+    <div className="expenseListElement" ref={itemRef}>
       <div className="expenseListElementDate">
         {`${new Date(props.expenseData.date).getFullYear()}-${
           new Date(props.expenseData.date).getMonth() + 1
