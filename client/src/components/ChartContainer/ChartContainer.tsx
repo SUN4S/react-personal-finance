@@ -1,12 +1,9 @@
 import "./ChartContainer.scss";
 
 import { BudgetChart } from "../BudgetChart/BudgetChart";
-import { BudgetChartProps } from "../../models/chart";
 import { ExpenseChart } from "../ExpenseChart/ExpenseChart";
-import { RootState } from "../../app/store";
 import { useCurrentBudgetQuery } from "../../services/budget";
 import { useCurrentExpenseMonthQuery } from "../../services/expenses";
-import { useSelector } from "react-redux";
 
 // Chart container used to house data visualization charts
 export const ChartContainer = () => {
