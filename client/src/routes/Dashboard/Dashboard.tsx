@@ -10,22 +10,12 @@ import { useSelector } from "react-redux";
 export const Dashboard = () => {
   // Redux Toolkit api Request to get expense array
   const currentExpensesQuery = useCurrentExpenseMonthQuery({});
-  const budgetQuery = useCurrentBudgetQuery({});
-
-  const expenses = useSelector((state: RootState) => state.expenses.data);
 
   return (
     <>
       <section className="dashboard">
         {/* Currentl Chart container is a placeholder */}
-        <ChartContainer
-          budgetData={budgetQuery.data}
-          expenseData={currentExpensesQuery.data}
-          budgetIsFetching={budgetQuery.isFetching}
-          budgetIsSuccess={budgetQuery.isSuccess}
-          expenseIsFetching={currentExpensesQuery.isFetching}
-          expenseIsSuccess={currentExpensesQuery.isSuccess}
-        />
+        <ChartContainer />
         <div className="expenseList">
           <div className="listHeader">
             <div className="expenseListHeaderDate">Date</div>
@@ -38,7 +28,7 @@ export const Dashboard = () => {
           {/* Rendering a list of expense items */}
           <div className="listBody">
             {currentExpensesQuery.isSuccess ? (
-              <ExpenseList data={expenses} />
+              <ExpenseList />
             ) : (
               <h2>No Data Available</h2>
             )}

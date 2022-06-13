@@ -39,7 +39,7 @@ export const Header = () => {
   return (
     <header>
       <ThemeSwitch />
-      <h4>{username}</h4>
+      <h4>{username || "placeholder"}</h4>
       <img src={defaultAvatar} alt="Avatar" />
       <div>
         <i className="fa-solid fa-power-off" onClick={handleClick}></i>
