@@ -283,7 +283,7 @@ export const ModalComponent = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormInput labelFor="date" label="Select time: ">
             <DatePicker
-              selected={new Date(date)}
+              selected={date}
               onChange={(date: Date) => setDate(date)}
               showTimeSelect
               dateFormat="yyyy-MM-dd HH:mm"

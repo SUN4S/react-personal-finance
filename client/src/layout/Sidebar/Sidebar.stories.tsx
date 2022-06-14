@@ -1,22 +1,26 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 
-import { CollapseButton } from "./CollapseButton";
+import { Sidebar } from "./Sidebar";
 
 interface TemplateProps {
   theme: string;
-  onClick: Function;
 }
-
 export default {
-  title: "Components/Collapse Button",
-  component: CollapseButton,
-} as Meta;
+  title: "Layout/Sidebar",
+  component: Sidebar,
+};
 
 const Template: Story<TemplateProps> = (args) => {
   return (
     <html data-theme={args.theme}>
-      <body>
-        <CollapseButton onClick={args.onClick} />
+      <body
+        style={{
+          boxSizing: "border-box",
+          margin: 0,
+          padding: 0,
+        }}
+      >
+        <Sidebar />
       </body>
     </html>
   );
@@ -25,11 +29,9 @@ const Template: Story<TemplateProps> = (args) => {
 export const Default_Light = Template.bind({});
 Default_Light.args = {
   theme: "light",
-  onClick: () => alert("clicked"),
 };
 
 export const Default_Dark = Template.bind({});
 Default_Dark.args = {
   theme: "dark",
-  onClick: () => alert("clicked"),
 };

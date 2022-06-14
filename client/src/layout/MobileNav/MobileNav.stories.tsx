@@ -1,22 +1,21 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 
-import { CollapseButton } from "./CollapseButton";
+import { MobileNav } from "./MobileNav";
 
 interface TemplateProps {
   theme: string;
-  onClick: Function;
 }
 
 export default {
-  title: "Components/Collapse Button",
-  component: CollapseButton,
+  title: "Layout/MobileNav",
+  component: MobileNav,
 } as Meta;
 
 const Template: Story<TemplateProps> = (args) => {
   return (
     <html data-theme={args.theme}>
       <body>
-        <CollapseButton onClick={args.onClick} />
+        <MobileNav />
       </body>
     </html>
   );
@@ -25,11 +24,9 @@ const Template: Story<TemplateProps> = (args) => {
 export const Default_Light = Template.bind({});
 Default_Light.args = {
   theme: "light",
-  onClick: () => alert("clicked"),
 };
 
 export const Default_Dark = Template.bind({});
 Default_Dark.args = {
   theme: "dark",
-  onClick: () => alert("clicked"),
 };

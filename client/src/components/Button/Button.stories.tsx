@@ -30,7 +30,9 @@ export default {
 const Template: Story<TemplateProps> = (args) => {
   return (
     <html data-theme={args.theme}>
-      <Button {...args} />
+      <body>
+        <Button {...args} />
+      </body>
     </html>
   );
 };
