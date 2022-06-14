@@ -65,6 +65,7 @@
     "react-router-dom": "^6.3.0",
     "react-tag-input": "^6.8.0",
     "recharts": "^2.1.10",
+    "storybook-addon-react-router-v6": "^0.1.8",
     "webpack-pwa-manifest": "^4.3.0"
   }
 }

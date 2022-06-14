@@ -11,8 +11,11 @@ import {
   usePostExpenseMutation,
 } from "../../services/expenses";
 
-import { Button } from "../Button/Button";
+import { Button } from "../../components/Button/Button";
 import DatePicker from "react-datepicker";
+import { FormInput } from "../../components/FormInput/FormInput";
+import { FormSelect } from "../../components/FormSelect/FormSelect";
+import { FormTextarea } from "../../components/FormTextarea/FormTextarea";
 import Modal from "react-modal";
 import { WithContext as ReactTags } from "react-tag-input";
 import { RootState } from "../../app/store";
@@ -50,7 +53,7 @@ export const ModalComponent = () => {
   const dispatch = useAppDispatch();
 
   //Redux toolkit Query,Mutation declarations
-  const [postExpense, isLoading] = usePostExpenseMutation();
+  const [postExpense, { isLoading }] = usePostExpenseMutation();
   const [editExpense] = useEditExpenseMutation();
   const [deleteExpense] = useDeleteExpenseMutation();
 
@@ -111,6 +114,7 @@ export const ModalComponent = () => {
   // regular, for when modal is being used to add new expense
   const onSubmit: SubmitHandler<ModalInputs> = (data) => {
     // checks if modal is used to edit expense
+    console.log(data);
     if (editable) {
       // tags need to be parsed from object to array
       const tagData = tags.map((item) => {
@@ -120,6 +124,7 @@ export const ModalComponent = () => {
       const expenseObject = {
         ...modalData!,
         category: data.category || modalData?.category!,
+        amount: data.amount,
         tags: [...tagData].toString(),
         receipt: selectedFile || modalData?.receipt,
       };
@@ -276,8 +281,7 @@ export const ModalComponent = () => {
         </button>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label>
-            Select Time:
+          <FormInput labelFor="date" label="Select time: ">
             <DatePicker
               selected={new Date(date)}
               onChange={(date: Date) => setDate(date)}
@@ -285,40 +289,37 @@ export const ModalComponent = () => {
               dateFormat="yyyy-MM-dd HH:mm"
               timeIntervals={5}
             />
-          </label>
+          </FormInput>
 
-          <label htmlFor="category">
-            Expense Category:
-            <div className="selectDropdown">
-              <select {...register("category", { required: true })}>
-                <option value="Essentials">Essentials</option>
-                <option value="Wants">Wants</option>
-                <option value="Culture">Culture</option>
-                <option value="Unexpected">Unexpected</option>
-              </select>
-            </div>
-          </label>
-          <label htmlFor="number">
-            Amount Spent:
-            <input
-              type="number"
-              step="0.01"
-              {...register("amount", { required: true })}
-              placeholder="Amount"
-            />
-            {errors.amount && <span>This field is required</span>}
-          </label>
+          <FormSelect
+            labelFor="category"
+            label="Expense Category"
+            name="category"
+            options={["Essentials", "Wants", "Culture", "Unexpected"]}
+            required
+            register={register}
+          />
 
-          <label htmlFor="description">
-            Description:{" "}
-            <textarea
-              {...register("description", { required: true })}
-              placeholder="Description"
-            />
-          </label>
+          <FormInput
+            labelFor="number"
+            label="Amount Spent:"
+            name="amount"
+            required
+            type="number"
+            placeholder="Amount"
+            register={register}
+          />
 
-          <label htmlFor="tags">
-            Select Tags to add: (press Enter to confirm tag){" "}
+          <FormTextarea
+            labelFor="description"
+            label="Description:"
+            name="description"
+            required={false}
+            placeholder="Something to describe your expense"
+            register={register}
+          />
+
+          <FormInput labelFor="tags" label="Select Tags to add: ">
             <ReactTags
               tags={tags}
               delimiters={delimiters}
@@ -329,10 +330,12 @@ export const ModalComponent = () => {
               autocomplete
               inline={true}
             />
-          </label>
+          </FormInput>
 
-          <label htmlFor="file">
-            {editable ? "Change receipt photo" : "Add receipt photo:"}
+          <FormInput
+            labelFor="file"
+            label={editable ? "Change receipt photo" : "Add receipt photo:"}
+          >
             <div className="receiptSelect">
               <input
                 type="file"
@@ -343,16 +346,15 @@ export const ModalComponent = () => {
               />
               {preview && <img src={preview} alt="Receipt preview" />}
             </div>
-          </label>
-          {!isLoading ? (
-            <Button type="button" class="loadingBtn" text="" disabled />
-          ) : (
-            <Button
-              type="submit"
-              class={editable ? "modalBtn secondaryBtn" : "modalBtn primaryBtn"}
-              text={editable ? "Edit Expense" : "Add Expense"}
-            />
-          )}
+          </FormInput>
+
+          <Button
+            type="submit"
+            class={editable ? "modalBtn secondaryBtn" : "modalBtn primaryBtn"}
+            text={editable ? "Edit Expense" : "Add Expense"}
+            loading={isLoading}
+            disabled={isLoading}
+          />
 
           {editable ? (
             <Button

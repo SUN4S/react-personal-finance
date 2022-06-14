@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Button } from "../Button/Button";
 import { Divider } from "../Divider/Divider";
+import { FormInput } from "../FormInput/FormInput";
 import { Link } from "react-router-dom";
 import { LoginInputs } from "../../models/user";
 import { notification } from "../../features/notification/NotificationSlice";
@@ -28,6 +29,7 @@ export const LoginForm = () => {
       username: data.username,
       password: data.password,
     };
+    console.log(data);
 
     // Calling Redux Toolkit api to authenticate user
     const response: any = await login(user);
@@ -56,25 +58,27 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="username">
-        Username:
-        <input
-          type="text"
-          {...register("username", { required: true })}
-          placeholder="ex: john123, etc."
-        />
-        {errors.username && <span>This field is required</span>}
-      </label>
+      <FormInput
+        labelFor="username"
+        label="Username:"
+        required
+        type="text"
+        placeholder="Ex.: John123, user68"
+        register={register}
+        name="username"
+      />
+      {errors.username && <span>This field is required</span>}
 
-      <label htmlFor="password">
-        Password:
-        <input
-          type="password"
-          {...register("password", { required: true })}
-          placeholder="ex: password123, etc."
-        />
-        {errors.password && <span>This field is required</span>}
-      </label>
+      <FormInput
+        labelFor="password"
+        label="Password:"
+        required
+        type="password"
+        placeholder="Ex.: password123, idontknow"
+        register={register}
+        name="password"
+      />
+      {errors.password && <span>This field is required</span>}
 
       <Button
         type="submit"

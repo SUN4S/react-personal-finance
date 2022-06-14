@@ -1,5 +1,5 @@
-import { BarChartContainer } from "../BarChartContainer/BarChartContainer";
 import { ChartError } from "../ChartError/ChartError";
+import { ExpenseChartContainer } from "../ExpenseChartContainer/ExpenseChartContainer";
 import { ExpenseChartProps } from "../../models/chart";
 import { LoadingBox } from "../LoadingBox/LoadingBox";
 
@@ -10,7 +10,7 @@ export const ExpenseChart = ({
   expenseIsSuccess,
 }: ExpenseChartProps) => {
   return (
-    <div className="chart expenseChart">
+    <div className="chart">
       <div className="chartHeader">
         <h3>Expense Breakdown</h3>
       </div>
@@ -18,7 +18,7 @@ export const ExpenseChart = ({
         {expenseIsFetching ? (
           <LoadingBox size="xl" />
         ) : expenseIsSuccess && expenseData.length > 0 ? (
-          <BarChartContainer expenseData={expenseData} />
+          <ExpenseChartContainer expenseData={expenseData} />
         ) : (
           <ChartError title="No Data" />
         )}

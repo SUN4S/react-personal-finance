@@ -2,15 +2,9 @@ import "./Dashboard.scss";
 
 import { ChartContainer } from "../../layout/ChartContainer/ChartContainer";
 import { ExpenseList } from "../../layout/ExpenseList/ExpenseList";
-import { RootState } from "../../app/store";
-import { useCurrentBudgetQuery } from "../../services/budget";
-import { useCurrentExpenseMonthQuery } from "../../services/expenses";
-import { useSelector } from "react-redux";
 
 export const Dashboard = () => {
   // Redux Toolkit api Request to get expense array
-  const currentExpensesQuery = useCurrentExpenseMonthQuery({});
-
   return (
     <>
       <section className="dashboard">
@@ -26,13 +20,7 @@ export const Dashboard = () => {
             <div className="expenseListHeaderControls">Edit</div>
           </div>
           {/* Rendering a list of expense items */}
-          <div className="listBody">
-            {currentExpensesQuery.isSuccess ? (
-              <ExpenseList />
-            ) : (
-              <h2>No Data Available</h2>
-            )}
-          </div>
+          <ExpenseList />
         </div>
       </section>
     </>

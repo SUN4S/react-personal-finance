@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Header } from "../../layout/Header/Header";
 import { MobileNav } from "../../layout/MobileNav/MobileNav";
 import Modal from "react-modal";
-import { ModalComponent } from "../Modal/Modal";
+import { ModalComponent } from "../../layout/Modal/Modal";
 import { Outlet } from "react-router-dom";
 import { RootState } from "../../app/store";
 import { Sidebar } from "../../layout/Sidebar/Sidebar";

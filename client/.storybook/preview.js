@@ -1,5 +1,5 @@
 import "../src/styles/main.scss";
-import "../src/components/ChartContainer/ChartContainer.scss";
+import "../src/layout/ChartContainer/ChartContainer.scss";
 
 import { MemoryRouter } from "react-router";
 import { Provider } from "react-redux";

@@ -19,11 +19,16 @@
     background-color: var(--page-bg);
     border-radius: 5px;
 
-    .registerHeader {
+    .registerHeader,
+    .registerDesc {
       text-align: center;
       color: var(--text-primary);
       margin-top: 0;
       margin-bottom: 6px;
+    }
+
+    .loginDesc {
+      font-size: 14px;
     }
 
     img {

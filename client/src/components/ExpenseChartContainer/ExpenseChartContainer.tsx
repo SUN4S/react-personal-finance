@@ -23,7 +23,7 @@ interface DataObject {
 // TODO: Fix Reference chart bug, where one line is thinner
 // Also fix isFront bug, where reference lines will not go behind bars
 
-export const BarChartContainer = (props: {
+export const ExpenseChartContainer = (props: {
   expenseData: Array<ExpenseState>;
 }) => {
   // State for data array
@@ -101,6 +101,7 @@ export const BarChartContainer = (props: {
               (entry, index) =>
                 entry.value > 0 && (
                   <ReferenceLine
+                    key={index}
                     segment={[
                       { x: entry.value, y: entry.name },
                       { x: entry.value, y: data[3].name },

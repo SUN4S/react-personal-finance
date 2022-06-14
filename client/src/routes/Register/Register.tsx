@@ -9,7 +9,7 @@ export const Register = () => {
       <div className="registerContainer">
         <img src={Logo} alt="Logo" />
         <h1 className="registerHeader">Register</h1>
-        <div className="loginDesc">Fill out form to Register</div>
+        <div className="registerDesc">Fill out form to Register</div>
         <RegisterForm />
       </div>
     </section>

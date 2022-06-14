@@ -1,8 +1,6 @@
-import "./BudgetChart.scss";
-
 import { BudgetChartProps } from "../../models/chart";
 import { BudgetForm } from "../BudgetForm/BudgetForm";
-import { DoughnutContainer } from "../DoughnutContainer/DoughnutContainer";
+import { DoughnutContainer } from "../BudgetChartDoughnut/BudgetChartDoughnut";
 import { LoadingBox } from "../LoadingBox/LoadingBox";
 
 // Component to render budgetChart
@@ -15,12 +13,12 @@ export const BudgetChart = ({
   expenseIsSuccess,
 }: BudgetChartProps) => {
   return (
-    <div className="chart budgetChart">
+    <div className="chart">
       <div className="chartHeader">
         <h3>Budget</h3>
       </div>
       <div className="chartBody">
-        {budgetIsFetching && expenseIsFetching ? (
+        {budgetIsFetching || expenseIsFetching ? (
           <LoadingBox size="xl" />
         ) : budgetData &&
           budgetData.length > 0 &&

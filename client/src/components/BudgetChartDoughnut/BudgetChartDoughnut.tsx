@@ -1,4 +1,4 @@
-import "./DoughnutContainer.scss";
+import "./BudgetChartDoughnut.scss";
 
 import {
   Cell,
