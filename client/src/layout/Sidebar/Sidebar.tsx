@@ -2,11 +2,12 @@ import "./Sidebar.scss";
 
 import { useEffect, useState } from "react";
 
-import { Button } from "../Button/Button";
+import { Button } from "../../components/Button/Button";
 import Logo from "../../resources/icons/Logo.svg";
-import { SidebarList } from "../SidebarList/SidebarList";
+import { SidebarList } from "../../components/SidebarList/SidebarList";
 import { toggleModal } from "../../features/modal/ModalSlice";
 import { useAppDispatch } from "../../app/hooks";
+import { CollapseButton } from "../../components/CollapseButton/CollapseButton";
 
 export const Sidebar = () => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -65,12 +66,7 @@ export const Sidebar = () => {
       <div className="sidebarPages preload-transitions">Pages</div>
       <SidebarList />
       {collapseButton && (
-        <button
-          className="collapseButton"
-          onClick={() => setCollapsed(!collapsed)}
-        >
-          <i className="fa-solid fa-arrow-left-long"></i>
-        </button>
+        <CollapseButton onClick={() => setCollapsed(!collapsed)} />
       )}
     </nav>
   );

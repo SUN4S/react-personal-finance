@@ -1,6 +1,6 @@
 import "./ExpenseList.scss";
 
-import { ExpenseListItem } from "../ExpenseListItem/ExpenseListItem";
+import { ExpenseListItem } from "../../components/ExpenseListItem/ExpenseListItem";
 import { ExpenseState } from "../../models/expenses";
 import { RootState } from "../../app/store";
 import { useSelector } from "react-redux";

@@ -1,0 +1,9 @@
+.mobileNav {
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+  border-top: 2px solid var(--page-bg);
+  background-color: var(--sidebar-bg);
+  z-index: 10;
+}

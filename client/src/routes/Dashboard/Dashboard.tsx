@@ -1,7 +1,7 @@
 import "./Dashboard.scss";
 
-import { ChartContainer } from "../../components/ChartContainer/ChartContainer";
-import { ExpenseList } from "../../components/ExpenseList/ExpenseList";
+import { ChartContainer } from "../../layout/ChartContainer/ChartContainer";
+import { ExpenseList } from "../../layout/ExpenseList/ExpenseList";
 import { RootState } from "../../app/store";
 import { useCurrentBudgetQuery } from "../../services/budget";
 import { useCurrentExpenseMonthQuery } from "../../services/expenses";

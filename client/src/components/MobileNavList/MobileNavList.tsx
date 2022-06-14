@@ -1,12 +1,12 @@
-import "./MobileNav.scss";
-
 import { NavLink } from "react-router-dom";
-import { toggleModal } from "../../features/modal/ModalSlice";
-import { useAppDispatch } from "../../app/hooks";
+import "./MobileNavList.scss";
 
-export const MobileNav = () => {
-  // Redux Toolkit finction to dispatch events
-  const dispatch = useAppDispatch();
+export const MobileNavList = (props: { onClick: Function }) => {
+  const handleClick = () => {
+    if (props.onClick) {
+      props.onClick();
+    }
+  };
 
   return (
     <div className="mobileNav">
@@ -22,11 +22,7 @@ export const MobileNav = () => {
           </NavLink>
         </li>
         <li className="buttonContainer">
-          <button
-            onClick={() =>
-              dispatch(toggleModal({ isOpen: true, editable: false }))
-            }
-          >
+          <button onClick={handleClick}>
             <i className="fa-solid fa-plus"></i>
           </button>
         </li>

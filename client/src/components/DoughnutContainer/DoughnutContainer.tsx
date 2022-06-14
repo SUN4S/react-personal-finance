@@ -89,19 +89,21 @@ export const DoughnutContainer = (props: {
                   fill: "var(--text-secondary)",
                   transform: "translateY(20px)",
                 }}
-              >
-                Remaining
-              </Label>
+                value="Remaining"
+              />
+
               <Label
                 position="center"
                 style={{
                   fontSize: "28px",
-                  fontWeight: "600",
+                  fontWeight: "400",
                   fill: "var(--text-primary)",
                 }}
-              >
-                {remainingBudget.toFixed(2)}
-              </Label>
+                textLength="80px"
+                lengthAdjust="spacingAndGlyphs"
+                viewBox={{ width: 80, height: 20 }}
+                value={remainingBudget.toFixed(2)}
+              />
             </Pie>
             <Legend
               layout="vertical"

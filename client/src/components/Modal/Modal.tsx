@@ -31,11 +31,12 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter, KeyCodes.space];
 
-export const ModalComponent = (props: { openStatus: boolean }) => {
+export const ModalComponent = () => {
   // Redux toolkit Modal data
   // Modal has the ability to receive from 1 to 3 props
   // editable and data are optional props,
   // that are only used to handle expense edit
+  const modalStatus = useSelector((state: RootState) => state.modal.isOpen);
   const editable = useSelector((state: RootState) => state.modal.editable);
   const modalData = useSelector((state: RootState) => state.modal.data);
 
@@ -196,7 +197,7 @@ export const ModalComponent = (props: { openStatus: boolean }) => {
     // When modals status changes,
     // function checks wether there has beed data passed to modal
     // depending if data is passed to modal, it autofills input fields
-    if (modalData && props.openStatus) {
+    if (modalData && modalStatus) {
       // Date is set by using a State
       setDate(new Date(modalData.date));
       // modal Tags and Receipt need extra check to check if render is needed
@@ -221,7 +222,7 @@ export const ModalComponent = (props: { openStatus: boolean }) => {
       // If modal data is not provided, reset modal data to default values
       resetForm();
     }
-  }, [modalData, props.openStatus]);
+  }, [modalData, modalStatus]);
 
   // Function that gets called if modaldata.receipt passes the check
   const renderReceipt = async (fileName: string) => {
@@ -257,7 +258,7 @@ export const ModalComponent = (props: { openStatus: boolean }) => {
     <>
       <Modal
         closeTimeoutMS={200}
-        isOpen={props.openStatus}
+        isOpen={modalStatus}
         onRequestClose={() => dispatch(toggleModal({ isOpen: false }))}
         shouldCloseOnOverlayClick={true}
         contentLabel="Expense Modal"

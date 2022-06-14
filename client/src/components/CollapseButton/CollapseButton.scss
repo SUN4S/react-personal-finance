@@ -1,0 +1,21 @@
+nav {
+  .collapseButton {
+    height: 46px;
+    width: 46px;
+    background-color: var(--sidebar-bg);
+    border: none;
+    align-self: flex-end;
+    color: var(--text-primary);
+    font-size: 18px;
+    transition: all 0.5s ease;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &.collapsed {
+    .collapseButton {
+      transform: rotateZ(180deg);
+    }
+  }
+}

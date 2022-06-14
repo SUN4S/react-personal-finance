@@ -67,21 +67,6 @@ nav {
     transition: all 0.5s ease-in-out;
   }
 
-  .collapseButton {
-    height: 46px;
-    width: 46px;
-    background-color: var(--sidebar-bg);
-    border: none;
-    align-self: flex-end;
-    color: var(--text-primary);
-    font-size: 18px;
-    transition: all 0.5s ease;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
   &.collapsed {
     width: 78px;
 
@@ -112,10 +97,6 @@ nav {
       span {
         opacity: 0;
       }
-    }
-
-    .collapseButton {
-      transform: rotateZ(180deg);
     }
   }
 }

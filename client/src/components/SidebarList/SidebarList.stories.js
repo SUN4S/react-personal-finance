@@ -1,4 +1,4 @@
-import { Sidebar } from "../Navbar/Sidebar";
+import { Sidebar } from "../../layout/Sidebar/Sidebar";
 import { SidebarList } from "./SidebarList";
 
 export default {
