@@ -1,15 +1,8 @@
 import "./FormTextarea.scss";
 
-interface InputProps {
-  labelFor: string;
-  label: string;
-  name: string;
-  required: boolean;
-  placeholder?: string;
-  register: any;
-}
+import { FormTextareaProps } from "../../models/inputs";
 
-export const FormTextarea: React.FC<InputProps> = ({
+export const FormTextarea: React.FC<FormTextareaProps> = ({
   labelFor,
   label,
   name,

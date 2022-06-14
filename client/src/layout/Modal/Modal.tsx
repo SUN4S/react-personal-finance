@@ -124,7 +124,7 @@ export const ModalComponent = () => {
       const expenseObject = {
         ...modalData!,
         category: data.category || modalData?.category!,
-        amount: data.amount,
+        amount: Number(data.amount),
         tags: [...tagData].toString(),
         receipt: selectedFile || modalData?.receipt,
       };
@@ -134,7 +134,7 @@ export const ModalComponent = () => {
       dispatch(
         notification({
           title: "Edit Expense",
-          type: "info",
+          type: "success",
           message: "Successfully Edited Expense",
         })
       );

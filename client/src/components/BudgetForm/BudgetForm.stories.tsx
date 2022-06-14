@@ -14,7 +14,7 @@ export default {
 const Template: Story<TemplateProps> = (args) => {
   return (
     <html data-theme={args.theme}>
-      <div
+      <body
         style={{
           width: "400px",
           backgroundColor: "var(--sidebar-bg)",
@@ -22,7 +22,7 @@ const Template: Story<TemplateProps> = (args) => {
         }}
       >
         <BudgetForm />
-      </div>
+      </body>
     </html>
   );
 };

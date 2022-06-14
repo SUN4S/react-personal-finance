@@ -21,13 +21,13 @@ export default {
 const Template: Story<TemplateProps> = (args) => {
   return (
     <html data-theme={args.theme}>
-      <div
+      <body
         style={{
           backgroundColor: "var(--sidebar-bg)",
         }}
       >
         <LoadingBox size={args.size} />
-      </div>
+      </body>
     </html>
   );
 };

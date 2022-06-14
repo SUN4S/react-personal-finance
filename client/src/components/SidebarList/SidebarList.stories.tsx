@@ -1,29 +1,29 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 
-import { ChartError } from "./ChartError";
+import { SidebarList } from "./SidebarList";
 
 interface TemplateProps {
   theme: string;
-  title: string;
 }
 
 export default {
-  title: "Components/Chart Error",
-  component: ChartError,
+  title: "Components/Sidebar List",
+  component: SidebarList,
 } as Meta;
 
 const Template: Story<TemplateProps> = (args) => {
   return (
     <html data-theme={args.theme}>
-      <div
+      <body
         style={{
           width: "400px",
-          backgroundColor: "var(--sidebar-bg)",
+          height: "100vh",
           padding: "8px",
+          backgroundColor: "var(--page-bg)",
         }}
       >
-        <ChartError title={args.title} />
-      </div>
+        <SidebarList />
+      </body>
     </html>
   );
 };
@@ -31,11 +31,9 @@ const Template: Story<TemplateProps> = (args) => {
 export const Default_Light = Template.bind({});
 Default_Light.args = {
   theme: "light",
-  title: "No Data",
 };
 
 export const Default_Dark = Template.bind({});
 Default_Dark.args = {
   theme: "dark",
-  title: "No Data",
 };

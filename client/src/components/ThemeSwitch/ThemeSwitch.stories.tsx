@@ -1,15 +1,14 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 
-import { Divider } from "./Divider";
+import { ThemeSwitch } from "./ThemeSwitch";
 
 interface TemplateProps {
   theme: string;
-  text: string;
 }
 
 export default {
-  title: "Components/Divider",
-  component: Divider,
+  title: "Components/Theme Switch",
+  component: ThemeSwitch,
 } as Meta;
 
 const Template: Story<TemplateProps> = (args) => {
@@ -17,11 +16,13 @@ const Template: Story<TemplateProps> = (args) => {
     <html data-theme={args.theme}>
       <body
         style={{
-          backgroundColor: "var(--sidebar-bg)",
+          width: "400px",
+          height: "100vh",
           padding: "8px",
+          backgroundColor: "var(--page-bg)",
         }}
       >
-        <Divider text={args.text} />
+        <ThemeSwitch />
       </body>
     </html>
   );
@@ -30,11 +31,9 @@ const Template: Story<TemplateProps> = (args) => {
 export const Default_Light = Template.bind({});
 Default_Light.args = {
   theme: "light",
-  text: "OR",
 };
 
-export const Dark_Light = Template.bind({});
-Dark_Light.args = {
+export const Default_Dark = Template.bind({});
+Default_Dark.args = {
   theme: "dark",
-  text: "OR",
 };

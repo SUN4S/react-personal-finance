@@ -1,24 +1,8 @@
 import "./FormInput.scss";
 
-import { FieldErrors, FieldValues } from "react-hook-form";
+import { FormInputProps } from "../../models/inputs";
 
-import { Children } from "react";
-
-type InputType = "text" | "password" | "email" | "number";
-
-interface InputProps {
-  labelFor: string;
-  label: string;
-  name?: string;
-  required?: boolean;
-  type?: InputType;
-  step?: number;
-  placeholder?: string;
-  register?: any;
-  children?: JSX.Element;
-}
-
-export const FormInput: React.FC<InputProps> = ({
+export const FormInput: React.FC<FormInputProps> = ({
   labelFor,
   label,
   name,

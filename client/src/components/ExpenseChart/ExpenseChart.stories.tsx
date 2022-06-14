@@ -53,13 +53,13 @@ export default {
 const Template: Story<TemplateProps> = (args) => {
   return (
     <html data-theme={args.theme}>
-      <div className="chartContainer">
+      <body className="chartContainer">
         <ExpenseChart
           expenseData={args.expenseData}
           expenseIsFetching={args.expenseIsFetching}
           expenseIsSuccess={args.expenseIsSuccess}
         />
-      </div>
+      </body>
     </html>
   );
 };

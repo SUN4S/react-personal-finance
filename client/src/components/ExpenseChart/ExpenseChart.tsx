@@ -1,4 +1,4 @@
-import { ChartError } from "../ChartError/ChartError";
+import { ErrorText } from "../ErrorText/ErrorText";
 import { ExpenseChartContainer } from "../ExpenseChartContainer/ExpenseChartContainer";
 import { ExpenseChartProps } from "../../models/chart";
 import { LoadingBox } from "../LoadingBox/LoadingBox";
@@ -20,7 +20,7 @@ export const ExpenseChart = ({
         ) : expenseIsSuccess && expenseData.length > 0 ? (
           <ExpenseChartContainer expenseData={expenseData} />
         ) : (
-          <ChartError title="No Data" />
+          <ErrorText title="No Data" />
         )}
       </div>
     </div>

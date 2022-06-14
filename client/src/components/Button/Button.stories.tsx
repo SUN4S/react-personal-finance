@@ -15,6 +15,16 @@ interface TemplateProps {
 export default {
   title: "Components/Button",
   component: Button,
+  argTypes: {
+    loading: {
+      options: [true, false],
+      control: { type: "boolean" },
+    },
+    disabled: {
+      options: [true, false],
+      control: { type: "boolean" },
+    },
+  },
 } as Meta;
 
 const Template: Story<TemplateProps> = (args) => {

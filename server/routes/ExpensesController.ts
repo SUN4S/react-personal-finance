@@ -120,9 +120,13 @@ router.post("/addExpense", async (req: Request, res: Response) => {
 router.put("/editExpense", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     // multipart/form-data cant send arrays, need to parse string
-    const tags = req.body.tags.split(",").map((item: string) => {
-      return item;
-    });
+    // multipart/form-data cant send arrays, need to parse string
+    const tags =
+      req.body.tags.length > 0
+        ? req.body.tags.split(",").map((item: string) => {
+            return item;
+          })
+        : [];
     // Defining default values for variables
     let file = undefined;
     // Sets default value to already existing one as to not overwrite

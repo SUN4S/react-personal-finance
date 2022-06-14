@@ -42,7 +42,7 @@ export default {
 const Template: Story<TemplateProps> = (args) => {
   return (
     <html data-theme={args.theme}>
-      <div className="chartContainer">
+      <body className="chartContainer">
         <BudgetChart
           budgetData={args.budgetData}
           expenseData={args.expenseData}
@@ -51,7 +51,7 @@ const Template: Story<TemplateProps> = (args) => {
           expenseIsFetching={args.expenseIsFetching}
           expenseIsSuccess={args.expenseIsSuccess}
         />
-      </div>
+      </body>
     </html>
   );
 };

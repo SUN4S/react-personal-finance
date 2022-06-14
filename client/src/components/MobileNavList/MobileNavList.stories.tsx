@@ -1,25 +1,15 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 
-import { ExpenseListItem } from "./ExpenseListItem";
-import { ExpenseState } from "../../models/expenses";
+import { MobileNavList } from "./MobileNavList";
 
 interface TemplateProps {
   theme: string;
-  expenseData: ExpenseState;
+  onClick: Function;
 }
 
-const mockData = {
-  category: "Unexpected",
-  amount: 1223,
-  date: new Date(),
-  description: "This is a random description",
-  tags: ["Dog", "Cat", "Cake"],
-  receipt: "",
-};
-
 export default {
-  title: "Components/Expense List Item",
-  component: ExpenseListItem,
+  title: "Components/Mobile Nav List",
+  component: MobileNavList,
 } as Meta;
 
 const Template: Story<TemplateProps> = (args) => {
@@ -30,7 +20,7 @@ const Template: Story<TemplateProps> = (args) => {
           backgroundColor: "var(--sidebar-bg)",
         }}
       >
-        <ExpenseListItem expenseData={args.expenseData} />
+        <MobileNavList onClick={args.onClick} />
       </body>
     </html>
   );
@@ -39,11 +29,11 @@ const Template: Story<TemplateProps> = (args) => {
 export const Default_Light = Template.bind({});
 Default_Light.args = {
   theme: "light",
-  expenseData: mockData,
+  onClick: () => alert("Clicked"),
 };
 
 export const Default_Dark = Template.bind({});
 Default_Dark.args = {
   theme: "dark",
-  expenseData: mockData,
+  onClick: () => alert("Clicked"),
 };

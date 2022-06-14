@@ -1,14 +1,6 @@
-interface InputProps {
-  labelFor: string;
-  label: string;
-  name: string;
-  options: Array<string>;
-  required: boolean;
-  placeholder?: string;
-  register: any;
-}
+import { FormSelectProps } from "../../models/inputs";
 
-export const FormSelect: React.FC<InputProps> = ({
+export const FormSelect: React.FC<FormSelectProps> = ({
   labelFor,
   label,
   name,
