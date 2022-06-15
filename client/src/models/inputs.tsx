@@ -1,6 +1,6 @@
 export interface FormInputProps {
   labelFor: string;
-  label: string;
+  label?: string;
   name?: string;
   required?: boolean;
   type?: "text" | "password" | "email" | "number";

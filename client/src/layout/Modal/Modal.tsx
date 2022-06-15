@@ -114,7 +114,6 @@ export const ModalComponent = () => {
   // regular, for when modal is being used to add new expense
   const onSubmit: SubmitHandler<ModalInputs> = (data) => {
     // checks if modal is used to edit expense
-    console.log(data);
     if (editable) {
       // tags need to be parsed from object to array
       const tagData = tags.map((item) => {

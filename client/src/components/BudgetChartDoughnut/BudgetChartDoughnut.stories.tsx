@@ -69,7 +69,7 @@ Default_Light.args = {
 
 export const Default_Dark = Template.bind({});
 Default_Dark.args = {
-  theme: "light",
+  theme: "dark",
   budgetData: 600,
   expenseData: mockData,
 };

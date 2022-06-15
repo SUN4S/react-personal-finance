@@ -4,6 +4,7 @@ import { LogoutButton } from "./LogoutButton";
 
 interface TemplateProps {
   theme: string;
+  onClick: Function;
 }
 
 export default {
@@ -19,7 +20,7 @@ const Template: Story<TemplateProps> = (args) => {
           backgroundColor: "var(--sidebar-bg)",
         }}
       >
-        <LogoutButton />
+        <LogoutButton onClick={args.onClick} />
       </body>
     </html>
   );
@@ -28,9 +29,11 @@ const Template: Story<TemplateProps> = (args) => {
 export const Default_Light = Template.bind({});
 Default_Light.args = {
   theme: "light",
+  onClick: () => alert("Clicked"),
 };
 
 export const Default_Dark = Template.bind({});
 Default_Dark.args = {
   theme: "dark",
+  onClick: () => alert("Clicked"),
 };

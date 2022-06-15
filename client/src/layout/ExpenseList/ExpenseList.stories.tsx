@@ -1,7 +1,7 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
-import { mockBudget, mockExpense } from "../../resources/mockData";
 
 import { ExpenseList } from "./ExpenseList";
+import { mockExpense } from "../../resources/mockData";
 import withMock from "storybook-addon-mock";
 
 interface TemplateProps {
@@ -19,6 +19,7 @@ const Template: Story<TemplateProps> = (args) => {
     <html data-theme={args.theme}>
       <body
         style={{
+          height: "100vh",
           backgroundColor: "var(--sidebar-bg)",
           padding: "8px",
         }}
@@ -30,10 +31,6 @@ const Template: Story<TemplateProps> = (args) => {
 };
 
 export const Default_Light = Template.bind({});
-Default_Light.args = {
-  theme: "light",
-};
-
 Default_Light.parameters = {
   mockData: [
     {
@@ -44,12 +41,11 @@ Default_Light.parameters = {
     },
   ],
 };
-
-export const Default_Dark = Template.bind({});
-Default_Dark.args = {
-  theme: "dark",
+Default_Light.args = {
+  theme: "light",
 };
 
+export const Default_Dark = Template.bind({});
 Default_Dark.parameters = {
   mockData: [
     {
@@ -59,4 +55,7 @@ Default_Dark.parameters = {
       response: mockExpense,
     },
   ],
+};
+Default_Dark.args = {
+  theme: "dark",
 };

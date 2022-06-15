@@ -2,20 +2,13 @@ import { Meta, Story } from "@storybook/react/types-6-0";
 
 import { ExpenseListItem } from "./ExpenseListItem";
 import { ExpenseState } from "../../models/expenses";
+import { mockExpense } from "../../resources/mockData";
 
 interface TemplateProps {
   theme: string;
   expenseData: ExpenseState;
+  onClick: Function;
 }
-
-const mockData = {
-  category: "Unexpected",
-  amount: 1223,
-  date: new Date(),
-  description: "This is a random description",
-  tags: ["Dog", "Cat", "Cake"],
-  receipt: "",
-};
 
 export default {
   title: "Components/Expense List Item",
@@ -30,7 +23,10 @@ const Template: Story<TemplateProps> = (args) => {
           backgroundColor: "var(--sidebar-bg)",
         }}
       >
-        <ExpenseListItem expenseData={args.expenseData} />
+        <ExpenseListItem
+          expenseData={args.expenseData}
+          onClick={args.onClick}
+        />
       </body>
     </html>
   );
@@ -39,11 +35,13 @@ const Template: Story<TemplateProps> = (args) => {
 export const Default_Light = Template.bind({});
 Default_Light.args = {
   theme: "light",
-  expenseData: mockData,
+  expenseData: mockExpense[0],
+  onClick: () => alert("Clicked"),
 };
 
 export const Default_Dark = Template.bind({});
 Default_Dark.args = {
   theme: "dark",
-  expenseData: mockData,
+  expenseData: mockExpense[0],
+  onClick: () => alert("Clicked"),
 };

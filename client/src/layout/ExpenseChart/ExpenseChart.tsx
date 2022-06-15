@@ -1,9 +1,9 @@
 import "./ExpenseChart.scss";
 
-import { ErrorText } from "../ErrorText/ErrorText";
-import { ExpenseChartContainer } from "../ExpenseChartContainer/ExpenseChartContainer";
+import { ErrorText } from "../../components/ErrorText/ErrorText";
+import { ExpenseChartContainer } from "../../components/ExpenseChartContainer/ExpenseChartContainer";
 import { ExpenseChartProps } from "../../models/chart";
-import { LoadingBox } from "../LoadingBox/LoadingBox";
+import { LoadingBox } from "../../components/LoadingBox/LoadingBox";
 
 // Component that houses subcomponents
 export const ExpenseChart = ({

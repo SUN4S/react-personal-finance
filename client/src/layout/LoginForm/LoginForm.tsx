@@ -29,7 +29,7 @@ export const LoginForm = (props: {
         label="Username:"
         required
         type="text"
-        placeholder="Ex.: John123, user68"
+        placeholder="Ex.: John123, user69"
         register={register}
         name="username"
       />

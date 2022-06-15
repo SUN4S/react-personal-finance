@@ -1,7 +1,7 @@
 import "./ChartContainer.scss";
 
-import { BudgetChart } from "../../components/BudgetChart/BudgetChart";
-import { ExpenseChart } from "../../components/ExpenseChart/ExpenseChart";
+import { BudgetChart } from "../BudgetChart/BudgetChart";
+import { ExpenseChart } from "../ExpenseChart/ExpenseChart";
 import { useCurrentBudgetQuery } from "../../services/budget";
 import { useCurrentExpenseMonthQuery } from "../../services/expenses";
 

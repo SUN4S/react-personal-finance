@@ -1,27 +1,17 @@
 import "./BudgetForm.scss";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import {
-  useCurrentBudgetQuery,
-  usePostBudgetMutation,
-} from "../../services/budget";
 
 import { BudgetFormState } from "../../models/budget";
 import { Button } from "../Button/Button";
-import { notification } from "../../features/notification/NotificationSlice";
-import { useAppDispatch } from "../../app/hooks";
+import { FormInput } from "../FormInput/FormInput";
 
 // Component to render a small form inside budget container
-export const BudgetForm = () => {
-  // Using RTK mutation to handle server requests
-  const [postBudget, { isLoading }] = usePostBudgetMutation();
-  // RTK query to get data from server
-  const budgetQuery = useCurrentBudgetQuery({ skip: true });
-
-  // RTK function to dispatch actions to reducers
-  const dispatch = useAppDispatch();
-
-  // Getting react-hook-forms functions that are needed 
+export const BudgetForm = (props: {
+  submitFunction: Function;
+  isLoading: boolean;
+}) => {
+  // Getting react-hook-forms functions that are needed
   const {
     register,
     handleSubmit,
@@ -30,44 +20,29 @@ export const BudgetForm = () => {
 
   // Function fired button click
   const onSubmit: SubmitHandler<BudgetFormState> = async (data) => {
-    // Posting new budget
-    const response: any = await postBudget(data);
-    if (response.data) {
-      // If request goes through
-      // Dispatch Redux Toolkit function to generate notification
-      dispatch(
-        notification({
-          title: "Add Budget",
-          message: response.data.msg,
-          type: "success",
-        })
-      );
-      budgetQuery.refetch();
-      // After successful registration, redirect user to dashboard
-    } else if (response.error) {
-      // If request fails
-      // Dispatch Redux Toolkit function to generate notification
-      dispatch(
-        notification({
-          title: "Add Budget",
-          message: response.error.data.msg,
-          type: "danger",
-        })
-      );
-    }
+    await props.submitFunction(data);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="budgetForm">
-      <label htmlFor="budget">
-        <input
+      <div className="budgetInput">
+        <FormInput
+          labelFor="budget"
+          name="budget"
+          required
           type="number"
-          {...register("budget", { required: true })}
-          placeholder="ex: 160, 98.22"
+          placeholder="Ex.: 160, 96.43"
+          register={register}
         />
         {errors.budget && <span>This field is required</span>}
-      </label>
-      <Button type="submit" class="primaryBtn" text="Add" loading={isLoading} />
+      </div>
+
+      <Button
+        type="submit"
+        class="primaryBtn"
+        text="Add"
+        loading={props.isLoading}
+      />
     </form>
   );
 };
