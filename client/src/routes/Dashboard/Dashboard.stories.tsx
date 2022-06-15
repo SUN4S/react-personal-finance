@@ -1,51 +1,9 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
+import { mockBudget, mockExpense } from "../../resources/mockData";
 
 import { Dashboard } from "./Dashboard";
 import withMock from "storybook-addon-mock";
 import { withRouter } from "storybook-addon-react-router-v6";
-
-const mockExpense = [
-  {
-    category: "Unexpected",
-    amount: 10,
-    date: new Date(),
-    description: "This is a random description",
-    tags: ["Dog", "Cat", "Cake"],
-    receipt: "",
-  },
-  {
-    category: "Wants",
-    amount: 16,
-    date: new Date(),
-    description: "This is a random description",
-    tags: ["Dog", "Cat", "Cake"],
-    receipt: "",
-  },
-  {
-    category: "Essentials",
-    amount: 160,
-    date: new Date(),
-    description: "This is a random description",
-    tags: ["Dog", "Cat", "Cake"],
-    receipt: "",
-  },
-  {
-    category: "Culture",
-    amount: 50,
-    date: new Date(),
-    description: "This is a random description",
-    tags: ["Dog", "Cat", "Cake"],
-    receipt: "",
-  },
-];
-
-const mockBudget = [
-  {
-    _id: "1234",
-    budget: 645,
-    budgetDate: "2022-06",
-  },
-];
 
 interface TemplateProps {
   theme: string;

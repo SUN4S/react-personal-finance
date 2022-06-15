@@ -1,28 +1,9 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
+import { mockBudget, mockExpense } from "../../resources/mockData";
 
 import { BudgetChart } from "./BudgetChart";
 import { BudgetState } from "../../models/budget";
 import { ExpenseState } from "../../models/expenses";
-
-const initBudgetData = [
-  {
-    _id: "1234",
-    budget: 645,
-    budgetDate: "2022-06",
-  },
-];
-
-const initExpenseData = [
-  {
-    _id: "9876",
-    category: "Unexpected",
-    amount: 36,
-    date: new Date(),
-    tags: ["Dog", "Cat"],
-    description: "This is a description",
-    receipt: "",
-  },
-];
 
 interface TemplateProps {
   theme: string;
@@ -59,8 +40,8 @@ const Template: Story<TemplateProps> = (args) => {
 export const Default_Light = Template.bind({});
 Default_Light.args = {
   theme: "light",
-  budgetData: initBudgetData,
-  expenseData: initExpenseData,
+  budgetData: mockBudget,
+  expenseData: mockExpense,
   budgetIsFetching: false,
   budgetIsSuccess: true,
   expenseIsFetching: false,
@@ -70,8 +51,8 @@ Default_Light.args = {
 export const Default_Dark = Template.bind({});
 Default_Dark.args = {
   theme: "dark",
-  budgetData: initBudgetData,
-  expenseData: initExpenseData,
+  budgetData: mockBudget,
+  expenseData: mockExpense,
   budgetIsFetching: false,
   budgetIsSuccess: true,
   expenseIsFetching: false,

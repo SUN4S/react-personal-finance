@@ -4,7 +4,8 @@ import "./styles/normalize.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ProtectedRoutes, PublicRoutes } from "./routes/RouteTypes";
 
-import { App } from "./components/App/App";
+import { App } from "./layout/App/App";
+import { Cypress } from "cypress/react";
 import { Dashboard } from "./routes/Dashboard/Dashboard";
 import { Login } from "./routes/Login/Login";
 import { Provider } from "react-redux";

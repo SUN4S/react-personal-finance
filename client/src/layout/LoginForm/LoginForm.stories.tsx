@@ -4,10 +4,12 @@ import { LoginForm } from "./LoginForm";
 
 interface TemplateProps {
   theme: string;
+  submitFunction: Function;
+  isLoading: boolean;
 }
 
 export default {
-  title: "Components/Login Form",
+  title: "Layout/Login Form",
   component: LoginForm,
 } as Meta;
 
@@ -21,7 +23,10 @@ const Template: Story<TemplateProps> = (args) => {
           backgroundColor: "var(--page-bg)",
         }}
       >
-        <LoginForm />
+        <LoginForm
+          submitFunction={args.submitFunction}
+          isLoading={args.isLoading}
+        />
       </body>
     </html>
   );
@@ -30,9 +35,13 @@ const Template: Story<TemplateProps> = (args) => {
 export const Default_Light = Template.bind({});
 Default_Light.args = {
   theme: "light",
+  submitFunction: () => alert("Submit"),
+  isLoading: false,
 };
 
 export const Default_Dark = Template.bind({});
 Default_Dark.args = {
   theme: "dark",
+  submitFunction: () => alert("Submit"),
+  isLoading: false,
 };

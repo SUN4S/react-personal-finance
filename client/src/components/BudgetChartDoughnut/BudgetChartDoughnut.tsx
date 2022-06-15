@@ -66,7 +66,7 @@ export const DoughnutContainer = (props: {
           <PieChart>
             <Pie
               data={data}
-              cx="70%"
+              cx="60%"
               cy="50%"
               innerRadius={45}
               outerRadius={70}
@@ -111,7 +111,7 @@ export const DoughnutContainer = (props: {
               verticalAlign="middle"
               wrapperStyle={{
                 display: "inline",
-                width: "32px",
+                width: "130px",
                 paddingLeft: "16px",
               }}
             />

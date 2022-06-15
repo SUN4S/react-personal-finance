@@ -1,3 +1,5 @@
+import "./BudgetChart.scss";
+
 import { BudgetChartProps } from "../../models/chart";
 import { BudgetForm } from "../BudgetForm/BudgetForm";
 import { DoughnutContainer } from "../BudgetChartDoughnut/BudgetChartDoughnut";

@@ -1,17 +1,12 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 
 import { Register } from "./Register";
-import { withRouter } from "storybook-addon-react-router-v6";
+import withMock from "storybook-addon-mock";
 
 export default {
   title: "Pages/Register",
   component: Register,
-  decorators: [withRouter],
-  parameters: {
-    reactRouter: {
-      routePath: "/login",
-    },
-  },
+  decorators: [withMock],
 } as Meta;
 
 interface TemplateProps {
@@ -28,11 +23,31 @@ const Template: Story<TemplateProps> = (args) => {
   );
 };
 export const Default_Light = Template.bind({});
+Default_Light.parameters = {
+  mockData: [
+    {
+      url: "http://localhost:3030/api/register",
+      method: "POST",
+      status: 200,
+      response: { msg: "Successfully Registered" },
+    },
+  ],
+};
 Default_Light.args = {
   theme: "light",
 };
 
 export const Default_Dark = Template.bind({});
+Default_Dark.parameters = {
+  mockData: [
+    {
+      url: "http://localhost:3030/api/register",
+      method: "POST",
+      status: 200,
+      response: { msg: "Successfully Registered" },
+    },
+  ],
+};
 Default_Dark.args = {
   theme: "dark",
 };

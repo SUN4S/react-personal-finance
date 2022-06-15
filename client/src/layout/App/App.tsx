@@ -3,13 +3,13 @@ import "react-notifications-component/dist/theme.css";
 
 import { useEffect, useState } from "react";
 
-import { Header } from "../../layout/Header/Header";
-import { MobileNav } from "../../layout/MobileNav/MobileNav";
+import { Header } from "../Header/Header";
+import { MobileNav } from "../MobileNav/MobileNav";
 import Modal from "react-modal";
-import { ModalComponent } from "../../layout/Modal/Modal";
+import { ModalComponent } from "../Modal/Modal";
 import { Outlet } from "react-router-dom";
 import { RootState } from "../../app/store";
-import { Sidebar } from "../../layout/Sidebar/Sidebar";
+import { Sidebar } from "../Sidebar/Sidebar";
 import { useSelector } from "react-redux";
 
 Modal.setAppElement("#root");

@@ -1,3 +1,5 @@
+import "./ExpenseChart.scss";
+
 import { ErrorText } from "../ErrorText/ErrorText";
 import { ExpenseChartContainer } from "../ExpenseChartContainer/ExpenseChartContainer";
 import { ExpenseChartProps } from "../../models/chart";
