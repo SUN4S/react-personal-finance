@@ -2,6 +2,7 @@ import { Meta, Story } from "@storybook/react/types-6-0";
 
 import { Dashboard } from "./Dashboard";
 import withMock from "storybook-addon-mock";
+import { withRouter } from "storybook-addon-react-router-v6";
 
 const mockExpense = [
   {
@@ -53,7 +54,12 @@ interface TemplateProps {
 export default {
   title: "Pages/Dashboard",
   component: Dashboard,
-  decorators: [withMock],
+  decorators: [withMock, withRouter],
+  parameters: {
+    reactRouter: {
+      routePath: "/",
+    },
+  },
 } as Meta;
 
 const Template: Story<TemplateProps> = (args) => {

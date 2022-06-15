@@ -3,6 +3,7 @@ import "./RegisterForm.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Button } from "../Button/Button";
+import { FormInput } from "../FormInput/FormInput";
 import { RegisterInputs } from "../../models/user";
 import { notification } from "../../features/notification/NotificationSlice";
 import { useAppDispatch } from "../../app/hooks";
@@ -62,35 +63,45 @@ export const RegisterForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="uername">
-        Username:
-        <input
-          type="text"
-          {...register("username", { required: true })}
-          placeholder="Username"
-        />
-        {errors.username && <span>This field is required</span>}
-      </label>
+      <FormInput
+        labelFor="username"
+        label="Username:"
+        required
+        type="text"
+        placeholder="Ex.: John123, user68"
+        register={register}
+        name="username"
+      />
+      {errors.username && <span>This field is required</span>}
 
-      <label htmlFor="email">
-        Email:
-        <input
-          type="email"
-          {...register("email", { required: true })}
-          placeholder="Email"
-        />
-        {errors.email && <span>This field is required</span>}
-      </label>
+      <FormInput
+        labelFor="email"
+        label="Email:"
+        required
+        type="email"
+        placeholder="Ex.: randomemail@mail.com"
+        register={register}
+        name="email"
+      />
+      {errors.email && <span>This field is required</span>}
 
-      <label htmlFor="password">
-        Password:
-        <input
-          type="password"
-          {...register("password", { required: true })}
-          placeholder="Password"
-        />
-        {errors.password && <span>This field is required</span>}
-      </label>
+      <FormInput
+        labelFor="password"
+        label="Password:"
+        required
+        type="password"
+        placeholder="Ex.: password123, idontknow"
+        register={register}
+        name="password"
+      />
+      {errors.password && <span>This field is required</span>}
+      <div className="reqContainer">
+        <ul>
+          <li>At least one Uppercase Letter</li>
+          <li>At least one Number</li>
+          <li>At least one Special Symbol</li>
+        </ul>
+      </div>
 
       <Button
         type="submit"

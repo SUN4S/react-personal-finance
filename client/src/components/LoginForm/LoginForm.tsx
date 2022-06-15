@@ -29,7 +29,6 @@ export const LoginForm = () => {
       username: data.username,
       password: data.password,
     };
-    console.log(data);
 
     // Calling Redux Toolkit api to authenticate user
     const response: any = await login(user);

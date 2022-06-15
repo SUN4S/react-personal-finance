@@ -1,10 +1,17 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 
 import { Register } from "./Register";
+import { withRouter } from "storybook-addon-react-router-v6";
 
 export default {
   title: "Pages/Register",
   component: Register,
+  decorators: [withRouter],
+  parameters: {
+    reactRouter: {
+      routePath: "/login",
+    },
+  },
 } as Meta;
 
 interface TemplateProps {

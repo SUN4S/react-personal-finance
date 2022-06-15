@@ -8,9 +8,7 @@ import { store } from "../src/app/store";
 export const decorators = [
   (Story) => (
     <Provider store={store}>
-      <MemoryRouter initialEntries={["/"]}>
-        <Story />
-      </MemoryRouter>
+      <Story />
     </Provider>
   ),
 ];
