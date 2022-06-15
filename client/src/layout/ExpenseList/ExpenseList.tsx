@@ -1,5 +1,6 @@
 import "./ExpenseList.scss";
 
+import { ErrorText } from "../../components/ErrorText/ErrorText";
 import { ExpenseListItem } from "../../components/ExpenseListItem/ExpenseListItem";
 import { ExpenseState } from "../../models/expenses";
 import { RootState } from "../../app/store";
@@ -17,7 +18,7 @@ export const ExpenseList = () => {
           return <ExpenseListItem expenseData={item} key={item._id} />;
         })
       ) : (
-        <h2>No Data Available</h2>
+        <ErrorText title="No Data" />
       )}
     </div>
   );
