@@ -10,12 +10,6 @@ interface TemplateProps {
 export default {
   title: "Pages/App",
   component: App,
-  decorators: [withRouter],
-  parameters: {
-    reactRouter: {
-      routePath: "/",
-    },
-  },
 } as Meta;
 
 const Template: Story<TemplateProps> = (args) => {

@@ -8,9 +8,9 @@ html[data-theme="light"] {
   --text-secondary: rgb(51, 51, 51);
   --sidebar-bg: rgb(238, 238, 238);
   --page-bg: rgb(255, 255, 255);
-  --success: #22c55e;
-  --danger: #eab308;
-  --alert: #dc2626;
+  --success: rgb(34, 197, 94);
+  --danger: rgb(234, 179, 8);
+  --alert: rgb(220, 38, 38);
 }
 
 html[data-theme="dark"] {
@@ -20,9 +20,9 @@ html[data-theme="dark"] {
   --text-secondary: rgb(100, 116, 139);
   --page-bg: rgb(30, 41, 59);
   --sidebar-bg: rgb(15, 23, 42);
-  --success: #22c55e;
-  --danger: #eab308;
-  --alert: #dc2626;
+  --success: rgb(34, 197, 94);
+  --danger: rgb(234, 179, 8);
+  --alert: rgb(220, 38, 38);
 }
 
 * {

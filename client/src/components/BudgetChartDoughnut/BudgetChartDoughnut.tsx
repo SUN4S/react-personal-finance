@@ -7,7 +7,6 @@ import {
   Pie,
   PieChart,
   ResponsiveContainer,
-  Sector,
   Tooltip,
 } from "recharts";
 import { useEffect, useState } from "react";
