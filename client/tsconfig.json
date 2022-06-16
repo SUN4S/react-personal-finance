@@ -21,7 +21,6 @@
     "jsx": "react-jsx",
     "outDir": "./dist/",
     "noImplicitAny": true,
-    "types": ["cypress"]
   },
-  "include": [ "src", "types", "serviceWorker.js", "cypress/**/*.ts" ],
+  "include": [ "src", "types", "serviceWorker.js" ],
 }

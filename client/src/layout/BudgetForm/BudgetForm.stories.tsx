@@ -9,7 +9,7 @@ interface TemplateProps {
 }
 
 export default {
-  title: "Components/Budget Chart Form",
+  title: "Layout/Budget Chart Form",
   component: BudgetForm,
 };
 
@@ -23,7 +23,7 @@ const Template: Story<TemplateProps> = (args) => {
           padding: "8px",
         }}
       >
-        <BudgetForm submitFunction={args.onSubmit} isLoading={args.isLoading} />
+        <BudgetForm />
       </body>
     </html>
   );
@@ -32,13 +32,9 @@ const Template: Story<TemplateProps> = (args) => {
 export const Default_Light = Template.bind({});
 Default_Light.args = {
   theme: "light",
-  onSubmit: () => alert("Submit"),
-  isLoading: false,
 };
 
 export const Default_Dark = Template.bind({});
 Default_Dark.args = {
   theme: "dark",
-  onSubmit: () => alert("Submit"),
-  isLoading: false,
 };

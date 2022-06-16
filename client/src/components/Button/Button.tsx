@@ -19,6 +19,7 @@ export const Button = (props: ButtonProps) => {
     // If action props exists, execute it
     // this is here because some components need to dispatch actions
     props.action && props.action();
+    
     const button = e.currentTarget;
     // Modal breaks animation, so check is required
     // explanation: buttons are rendered on modal, which is pushed to the RIGHt off-screen

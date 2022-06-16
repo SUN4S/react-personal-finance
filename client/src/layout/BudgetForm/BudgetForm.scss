@@ -1,0 +1,32 @@
+.budgetForm {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+
+  .budgetFormContainer {
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+
+    label {
+      width: 70%;
+      margin-top: 0;
+
+      input {
+        margin: 0;
+      }
+    }
+
+    button {
+      width: 30%;
+      font-size: 22px;
+    }
+  }
+}

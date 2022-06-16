@@ -1,7 +1,6 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 
 import { App } from "./App";
-import { withRouter } from "storybook-addon-react-router-v6";
 
 interface TemplateProps {
   theme: string;
