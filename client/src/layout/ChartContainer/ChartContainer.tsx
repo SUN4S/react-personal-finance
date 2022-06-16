@@ -21,11 +21,11 @@ export const ChartContainer = () => {
         expenseIsFetching={currentExpensesQuery.isFetching}
         expenseIsSuccess={currentExpensesQuery.isSuccess}
       />
-      <ExpenseChart
+      {/* <ExpenseChart
         expenseData={currentExpensesQuery.data}
         expenseIsFetching={currentExpensesQuery.isFetching}
         expenseIsSuccess={currentExpensesQuery.isSuccess}
-      />
+      /> */}
       <div className="chart weeklyChangeChart">third</div>
     </div>
   );

@@ -35,7 +35,7 @@ router.get("/currentBudget", async (req: Request, res: Response) => {
       // Filter out unnecessary data
       const currentBudget = data.budgetList.filter((item) => item.budgetDate == currentDate);
       logger.info(`${req.user.username} Requested Budged Data`);
-      return res.status(200).send(currentBudget);
+      return res.status(200).send(currentBudget[0]);
     } catch (error) {
       logger.error(error);
     }

@@ -2,7 +2,7 @@ import { BudgetState } from "./budget";
 import { ExpenseState } from "./expenses";
 
 export interface BudgetChartProps {
-  budgetData: Array<BudgetState>;
+  budgetData: BudgetState;
   expenseData: Array<ExpenseState>;
   budgetIsFetching: boolean;
   budgetIsSuccess: boolean;

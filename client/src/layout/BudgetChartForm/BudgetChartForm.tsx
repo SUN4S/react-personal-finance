@@ -1,4 +1,4 @@
-import "./BudgetForm.scss";
+import "./BudgetChartForm.scss";
 
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
@@ -13,7 +13,7 @@ import { notification } from "../../features/notification/NotificationSlice";
 import { useAppDispatch } from "../../app/hooks";
 
 // Component to render a small form inside budget container
-export const BudgetForm = () => {
+export const BudgetChartForm = () => {
   // Using RTK mutation to handle server requests
   const [postBudget, { isLoading }] = usePostBudgetMutation();
   // RTK query to get data from server

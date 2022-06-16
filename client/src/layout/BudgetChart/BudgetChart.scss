@@ -29,5 +29,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    .doughnutContainer {
+      position: relative;
+      height: 144px;
+      width: 100%;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      background-color: var(--sidebar-bg);
+
+      .recharts-default-legend {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+      }
+    }
   }
 }

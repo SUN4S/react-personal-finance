@@ -7,7 +7,7 @@ import { ExpenseState } from "../../models/expenses";
 
 interface TemplateProps {
   theme: string;
-  budgetData: BudgetState[];
+  budgetData: BudgetState;
   expenseData: ExpenseState[];
   budgetIsFetching: boolean;
   budgetIsSuccess: boolean;

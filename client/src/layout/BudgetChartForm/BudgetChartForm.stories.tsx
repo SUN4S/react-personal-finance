@@ -1,6 +1,6 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 
-import { BudgetForm } from "./BudgetForm";
+import { BudgetChartForm } from "./BudgetChartForm";
 
 interface TemplateProps {
   theme: string;
@@ -10,7 +10,7 @@ interface TemplateProps {
 
 export default {
   title: "Layout/Budget Chart Form",
-  component: BudgetForm,
+  component: BudgetChartForm,
 };
 
 const Template: Story<TemplateProps> = (args) => {
@@ -23,7 +23,7 @@ const Template: Story<TemplateProps> = (args) => {
           padding: "8px",
         }}
       >
-        <BudgetForm />
+        <BudgetChartForm />
       </body>
     </html>
   );

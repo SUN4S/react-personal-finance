@@ -33,10 +33,8 @@ export const mockExpense = [
   },
 ];
 
-export const mockBudget = [
-  {
-    _id: "1234",
-    budget: 645,
-    budgetDate: "2022-06",
-  },
-];
+export const mockBudget = {
+  _id: "1234",
+  budget: 645,
+  budgetDate: "2022-06",
+};

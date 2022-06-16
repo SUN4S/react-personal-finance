@@ -7,7 +7,7 @@ export interface BudgetState {
 }
 
 export interface BudgetProps {
-  budgetData: Array<BudgetState>;
+  budgetData: BudgetState;
   expenseData: Array<ExpenseState>;
   budgetIsFetching: boolean;
   budgetIsSuccess: boolean;
