@@ -179,7 +179,7 @@ export const ModalComponent = () => {
     dispatch(
       notification({
         title: "Delete Expense",
-        type: "info",
+        type: "success",
         message: "Successfully Deleted Expense",
       })
     );

@@ -25,18 +25,16 @@ export const BudgetChart = ({
 
   // On load and prop change fire function
   useEffect(() => {
-    if (budgetData && expenseData) {
-      // Variable to store expense cumulative value
-      let newAmount = 0;
-      // Mapping though provided expense data and adding values to variable
-      expenseData.map((item) => {
-        newAmount += item.amount;
-      });
-      // Setting variable to expense state
-      setExpenseAmount(newAmount);
-      // Setting budget difference so state
-      setRemainingBudget(budgetData.budget - newAmount);
-    }
+    // Variable to store expense cumulative value
+    let newAmount = 0;
+    // Mapping though provided expense data and adding values to variable
+    expenseData?.map((item) => {
+      newAmount += item.amount;
+    });
+    // Setting variable to expense state
+    setExpenseAmount(newAmount);
+    // Setting budget difference so state
+    setRemainingBudget(budgetData?.budget - newAmount);
   }, [budgetData, expenseData]);
 
   return (
@@ -49,13 +47,10 @@ export const BudgetChart = ({
           <LoadingBox size="xl" />
         ) : (
           <div className="doughnutContainer">
-            {budgetIsSuccess &&
-            expenseIsSuccess &&
-            expenseAmount &&
-            remainingBudget ? (
+            {budgetIsSuccess && expenseIsSuccess ? (
               <BudgetDoughnutChart
-                expenseAmount={expenseAmount}
-                remainingBudget={remainingBudget}
+                expenseAmount={expenseAmount!}
+                remainingBudget={remainingBudget!}
               />
             ) : (
               <BudgetChartForm />

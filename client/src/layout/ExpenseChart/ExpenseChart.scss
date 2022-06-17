@@ -29,5 +29,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    .barchartContainer {
+      position: relative;
+      height: 144px;
+      width: 100%;
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-start;
+    }
   }
 }

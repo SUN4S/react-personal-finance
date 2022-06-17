@@ -62,7 +62,7 @@ export const BudgetDoughnutChart = (props: {
             textLength="80px"
             lengthAdjust="spacingAndGlyphs"
             viewBox={{ width: 80, height: 20 }}
-            value={props.remainingBudget.toFixed(2)}
+            value={props.remainingBudget?.toFixed(2)}
           />
         </Pie>
         <Legend

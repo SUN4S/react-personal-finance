@@ -38,3 +38,10 @@ export const mockBudget = {
   budget: 645,
   budgetDate: "2022-06",
 };
+
+export const barChartData = [
+  { name: "Essentials", value: 60 },
+  { name: "Wants", value: 15.24 },
+  { name: "Culture", value: 20 },
+  { name: "Unexpected", value: 8 },
+];
