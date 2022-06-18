@@ -6,5 +6,9 @@ interface Props {
 
 // Simple divider, so far only used in login
 export const Divider = ({ text }: Props) => {
-  return <div className="divider">{text}</div>;
+  return (
+    <div className="divider" data-testid="divider">
+      {text}
+    </div>
+  );
 };

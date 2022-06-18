@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Divider Component Matches Snapshot 1`] = `
+<div
+  className="divider"
+  data-testid="divider"
+>
+  OR
+</div>
+`;
