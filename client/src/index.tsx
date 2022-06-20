@@ -39,6 +39,7 @@ root.render(
             {/* App contains nav check(normal or mobile) and an Outlet */}
             <Route path="/" element={<App />}>
               <Route index element={<Dashboard />} />
+              <Route path="settings" element={<h1>settings</h1>} />
               <Route path="history" element={<h1>history</h1>} />
               <Route path="stocks" element={<h1>stocks</h1>} />
               <Route path="weekly" element={<h1>weekly</h1>} />
