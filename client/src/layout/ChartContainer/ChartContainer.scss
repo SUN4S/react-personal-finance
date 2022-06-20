@@ -5,6 +5,40 @@
   gap: 16px;
   padding: 16px 0;
 
+  .chart {
+    width: 100%;
+    min-width: 235px;
+    text-align: center;
+    height: 200px;
+    padding: 8px;
+    border-radius: 3px;
+    background-color: var(--sidebar-bg);
+    box-shadow: 0 0 12px var(--primary-diffused);
+
+    .chartHeader {
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--primary);
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+
+      h3 {
+        font-weight: 400;
+        color: var(--text-primary);
+      }
+    }
+
+    .chartBody {
+      height: 144px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
   @media (max-width: 1200px) {
     grid-template-columns: repeat(2, 1fr);
 

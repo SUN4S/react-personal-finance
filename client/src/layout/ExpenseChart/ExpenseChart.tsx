@@ -30,7 +30,12 @@ export const ExpenseChart = ({
   useEffect(() => {
     // Needlesly complex way to update array of objects
     // Create a variable that will be passed to state later
-    let processedData: Array<DataObject> = data;
+    let processedData: Array<DataObject> = [
+      { name: "Essentials", value: 0 },
+      { name: "Wants", value: 0 },
+      { name: "Culture", value: 0 },
+      { name: "Unexpected", value: 0 },
+    ];
     // Map through all expenses
     expenseData?.forEach((item) => {
       // Create a temporary Array
