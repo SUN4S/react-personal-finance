@@ -67,9 +67,17 @@
       height: 32px;
       min-width: 32px;
       width: 50%;
-      border: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
       background-color: transparent;
       color: var(--text-primary);
+
+      svg {
+        height: 18px;
+        width: 18px;
+      }
     }
   }
 }

@@ -16,6 +16,7 @@ import DatePicker from "react-datepicker";
 import { FormInput } from "../../components/FormInput/FormInput";
 import { FormSelect } from "../../components/FormSelect/FormSelect";
 import { FormTextarea } from "../../components/FormTextarea/FormTextarea";
+import { IconClose } from "../../components/Icons/IconClose/IconClose";
 import Modal from "react-modal";
 import { WithContext as ReactTags } from "react-tag-input";
 import { RootState } from "../../app/store";
@@ -276,7 +277,7 @@ export const ModalComponent = () => {
           onClick={() => dispatch(toggleModal({ isOpen: false }))}
           className="closeModalBtn"
         >
-          <i className="fa-solid fa-xmark"></i>
+          <IconClose />
         </button>
 
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -308,6 +309,7 @@ export const ModalComponent = () => {
             placeholder="Amount"
             register={register}
           />
+          {errors.amount && <span>This field is required</span>}
 
           <FormTextarea
             labelFor="description"

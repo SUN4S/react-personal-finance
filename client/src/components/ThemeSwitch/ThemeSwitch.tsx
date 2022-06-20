@@ -1,5 +1,7 @@
 import "./ThemeSwitch.scss";
 
+import { IconMoon } from "../Icons/IconMoon/IconMoon";
+import { IconSun } from "../Icons/IconSun/IconSun";
 import { useTheme } from "../../hooks/useTheme";
 
 export const ThemeSwitch = () => {
@@ -18,11 +20,7 @@ export const ThemeSwitch = () => {
   return (
     <div className="themeContainer">
       <button aria-label="Theme switch" onClick={handleThemeChange}>
-        {currentTheme === "dark" ? (
-          <i className="fa-solid fa-moon"></i>
-        ) : (
-          <i className="fa-solid fa-sun"></i>
-        )}
+        {currentTheme === "dark" ? <IconMoon /> : <IconSun />}
       </button>
     </div>
   );

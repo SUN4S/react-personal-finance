@@ -1,0 +1,19 @@
+#historyIcon {
+  fill: none;
+  stroke: var(--primary);
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+
+  .cls-1 {
+    fill: none;
+    stroke-width: 2px;
+  }
+  .cls-2 {
+    fill: none;
+    stroke-width: 3px;
+  }
+  .cls-3 {
+    fill: none;
+    stroke-width: 4px;
+  }
+}

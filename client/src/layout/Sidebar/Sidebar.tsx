@@ -3,11 +3,12 @@ import "./Sidebar.scss";
 import { useEffect, useState } from "react";
 
 import { Button } from "../../components/Button/Button";
+import { CollapseButton } from "../../components/CollapseButton/CollapseButton";
+import { IconLogo } from "../../components/Icons/IconLogo/IconLogo";
 import Logo from "../../resources/icons/Logo.svg";
 import { SidebarList } from "../../components/SidebarList/SidebarList";
 import { toggleModal } from "../../features/modal/ModalSlice";
 import { useAppDispatch } from "../../app/hooks";
-import { CollapseButton } from "../../components/CollapseButton/CollapseButton";
 
 export const Sidebar = () => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -49,7 +50,7 @@ export const Sidebar = () => {
       }`}
     >
       <div className="sidebarLogo">
-        <img src={Logo} alt="Logo" />
+        <IconLogo />
       </div>
       <div className="buttonContainer preload-transitions">
         <Button

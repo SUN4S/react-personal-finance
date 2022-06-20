@@ -1,5 +1,7 @@
 import "./CollapseButton.scss";
 
+import { IconArrow } from "../Icons/IconArrow/IconArrow";
+
 export const CollapseButton = (props: { onClick: Function }) => {
   const handleClick = () => {
     if (props.onClick) {
@@ -9,7 +11,7 @@ export const CollapseButton = (props: { onClick: Function }) => {
 
   return (
     <button className="collapseButton" onClick={handleClick}>
-      <i className="fa-solid fa-arrow-left-long"></i>
+      <IconArrow />
     </button>
   );
 };

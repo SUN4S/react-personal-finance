@@ -1,3 +1,5 @@
+import "./LoginForm.scss";
+
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Button } from "../../components/Button/Button";
@@ -23,7 +25,7 @@ export const LoginForm = (props: {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} id="loginForm">
       <FormInput
         labelFor="username"
         label="Username:"
@@ -48,7 +50,7 @@ export const LoginForm = (props: {
 
       <Button
         type="submit"
-        class="secondaryBtn"
+        class="primaryBtn"
         text="Login"
         loading={props.isLoading}
         disabled={props.isLoading}

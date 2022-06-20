@@ -1,0 +1,10 @@
+#arrowIcon {
+  .cls-1 {
+    fill: none;
+    stroke: var(--text-secondary);
+    stroke-linecap: round;
+    stroke-miterlimit: 10;
+    stroke-width: 3px;
+  }
+  transform: rotateZ(180deg);
+}

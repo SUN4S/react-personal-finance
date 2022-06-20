@@ -1,6 +1,7 @@
 import "./ExpenseListItem.scss";
 
 import { ExpenseState } from "../../models/expenses";
+import { IconEdit } from "../Icons/IconEdit/IconEdit";
 
 export const ExpenseListItem = (props: {
   expenseData: ExpenseState;
@@ -39,7 +40,7 @@ export const ExpenseListItem = (props: {
       </div>
       <div className="expenseListElementControls">
         <button aria-label="Edit expense" onClick={handleClick}>
-          <i className="fa-solid fa-pen-to-square"></i>
+          <IconEdit />
         </button>
       </div>
     </div>

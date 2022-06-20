@@ -1,4 +1,4 @@
-form {
+#loginForm {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -10,14 +10,16 @@ form {
       background-color: var(--sidebar-bg);
     }
   }
+
   a {
     width: 100%;
   }
+
   span {
     color: var(--alert);
   }
 
-  button.secondaryBtn {
+  .primaryBtn {
     margin-top: 48px;
   }
 }

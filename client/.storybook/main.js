@@ -28,6 +28,16 @@ module.exports = {
     builder: "@storybook/builder-webpack5",
   },
   webpackFinal: async (config, { configType }) => {
+    const fileLoaderRule = config.module.rules.find(
+      (rule) => rule.test && rule.test.test(".svg")
+    );
+    fileLoaderRule.exclude = /\.svg$/;
+
+    config.module.rules.push({
+      test: /\.svg$/,
+      enforce: "pre",
+      loader: require.resolve("@svgr/webpack"),
+    });
     config.module.rules.push({
       test: /\.scss$/,
       use: [
@@ -37,6 +47,7 @@ module.exports = {
         "sass-loader",
       ],
     });
+
     config.plugins.push(new MiniCssExtractPlugin({ filename: "[name].css" }));
     return config;
   },

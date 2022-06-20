@@ -36,7 +36,7 @@ export const BudgetDoughnutChart = (props: {
           fill="transparent"
           paddingAngle={0}
           dataKey="value"
-          style={{ stroke: "none", paddingRight: "16px" }}
+          style={{ stroke: "none", paddingRight: "16px", minWidth: "140px" }}
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -71,7 +71,8 @@ export const BudgetDoughnutChart = (props: {
           verticalAlign="middle"
           wrapperStyle={{
             display: "inline",
-            width: "130px",
+            width: "100%",
+            maxWidth: "80px",
             paddingLeft: "16px",
           }}
         />

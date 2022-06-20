@@ -2,17 +2,25 @@ nav {
   .collapseButton {
     height: 46px;
     width: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+    align-self: flex-end;
     background-color: var(--sidebar-bg);
     border: none;
-    align-self: flex-end;
-    color: var(--text-primary);
-    font-size: 18px;
     transition: all 0.5s ease;
 
     &:hover {
       cursor: pointer;
     }
+
+    svg {
+      width: 46px;
+      height: 36px;
+      padding: 10px;
+    }
   }
+
   &.collapsed {
     .collapseButton {
       transform: rotateZ(180deg);

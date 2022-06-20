@@ -23,7 +23,7 @@ export const RegisterForm = (props: {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} id="registrationForm">
       <FormInput
         labelFor="username"
         label="Username:"
@@ -56,7 +56,7 @@ export const RegisterForm = (props: {
         name="password"
       />
       {errors.password && <span>This field is required</span>}
-      
+
       <div className="reqContainer">
         <ul>
           <li>At least one Uppercase Letter</li>
@@ -67,7 +67,7 @@ export const RegisterForm = (props: {
 
       <Button
         type="submit"
-        class="secondaryBtn"
+        class="primaryBtn"
         text="Register"
         loading={props.isLoading}
         disabled={props.isLoading}

@@ -1,5 +1,6 @@
 import "./Login.scss";
 
+import { IconLogo } from "../../components/Icons/IconLogo/IconLogo";
 import { LoginForm } from "../../layout/LoginForm/LoginForm";
 import { LoginInputs } from "../../models/user";
 import Logo from "../../resources/icons/Logo.svg";
@@ -52,7 +53,9 @@ export const Login = () => {
   return (
     <section className="login">
       <div className="loginContainer">
-        <img src={Logo} alt="Logo" />
+        <div className="logoContainer">
+          <IconLogo />
+        </div>
         <h1 className="loginHeader">Login</h1>
         <div className="loginDesc">Please enter your Username and Password</div>
         <LoginForm submitFunction={onSubmit} isLoading={isLoading} />

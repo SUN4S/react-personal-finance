@@ -1,0 +1,15 @@
+#logoIcon {
+  .cls-1 {
+    fill: none;
+    stroke-width: 3px;
+  }
+  .cls-1,
+  .cls-2 {
+    stroke: var(--primary);
+    stroke-miterlimit: 10;
+  }
+  .cls-2 {
+    fill: none;
+    stroke-width: 2px;
+  }
+}

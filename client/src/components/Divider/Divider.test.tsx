@@ -20,7 +20,6 @@ describe("Divider Component", () => {
     const { getByTestId } = render(<Divider text="OR" />);
     const dividerElement = getByTestId("divider");
     expect(dividerElement).toHaveTextContent("OR");
-    expect(dividerElement).toHaveCss
   });
 
   it("Matches Snapshot", () => {

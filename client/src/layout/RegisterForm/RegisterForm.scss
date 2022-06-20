@@ -1,4 +1,4 @@
-form {
+#registrationForm {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -16,7 +16,7 @@ form {
     color: var(--alert);
   }
 
-  button.secondaryBtn {
+  .primaryBtn {
     margin-top: 48px;
   }
 

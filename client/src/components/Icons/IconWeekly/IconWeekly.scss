@@ -1,0 +1,17 @@
+#weeklyIcon {
+  fill: none;
+  stroke-linecap: round;
+  stroke: var(--primary);
+
+  .cls-1,
+  .cls-2 {
+    fill: none;
+    stroke-miterlimit: 10;
+    stroke-width: 2px;
+  }
+  .cls-2 {
+    font-size: 40px;
+    font-family: RobotoSlab-Light, Roboto Slab;
+    font-weight: 300;
+  }
+}

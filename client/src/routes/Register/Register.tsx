@@ -1,5 +1,6 @@
 import "./Register.scss";
 
+import { IconLogo } from "../../components/Icons/IconLogo/IconLogo";
 import Logo from "../../resources/icons/Logo.svg";
 import { RegisterForm } from "../../layout/RegisterForm/RegisterForm";
 import { RegisterInputs } from "../../models/user";
@@ -53,7 +54,9 @@ export const Register = () => {
   return (
     <section className="register">
       <div className="registerContainer">
-        <img src={Logo} alt="Logo" />
+        <div className="logoContainer">
+          <IconLogo />
+        </div>
         <h1 className="registerHeader">Register</h1>
         <div className="registerDesc">Fill out form to Register</div>
         <RegisterForm submitFunction={onSubmit} isLoading={isLoading} />
