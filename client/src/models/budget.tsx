@@ -18,3 +18,7 @@ export interface BudgetProps {
 export interface BudgetFormState {
   budget: number;
 }
+
+export interface BudgetFetchState {
+  data: BudgetState;
+}

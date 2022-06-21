@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { UserResponse, UserState } from "../../models/user";
+import { UserResponse, UserState } from "../models/user";
 
-import { userApi } from "../../services/user";
+import { userApi } from "../services/user";
 
 // Redux Toolkit created user slice
 // extraReducers: request that was handled by the api sets the state here

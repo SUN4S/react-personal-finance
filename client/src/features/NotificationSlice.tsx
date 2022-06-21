@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { Notification } from "../../models/notification";
+import { Notification } from "../models/notification";
 import { Store } from "react-notifications-component";
 
 // initial state for notification component

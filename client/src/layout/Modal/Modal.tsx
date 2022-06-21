@@ -20,8 +20,8 @@ import { IconClose } from "../../components/Icons/IconClose/IconClose";
 import Modal from "react-modal";
 import { WithContext as ReactTags } from "react-tag-input";
 import { RootState } from "../../app/store";
-import { notification } from "../../features/notification/NotificationSlice";
-import { toggleModal } from "../../features/modal/ModalSlice";
+import { notification } from "../../features/NotificationSlice";
+import { toggleModal } from "../../features/ModalSlice";
 import { useAppDispatch } from "../../app/hooks";
 import { useSelector } from "react-redux";
 

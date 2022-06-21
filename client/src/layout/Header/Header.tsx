@@ -5,7 +5,7 @@ import { RootState } from "../../app/store";
 import { ThemeSwitch } from "../../components/ThemeSwitch/ThemeSwitch";
 import { UserDropdown } from "../../components/UserDropdown/UserDropdown";
 import defaultAvatar from "../../resources/images/default-image.jpg";
-import { notification } from "../../features/notification/NotificationSlice";
+import { notification } from "../../features/NotificationSlice";
 import { useAppDispatch } from "../../app/hooks";
 import { useLogoutUserMutation } from "../../services/user";
 import { useNavigate } from "react-router";

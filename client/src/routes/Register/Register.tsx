@@ -4,7 +4,7 @@ import { IconLogo } from "../../components/Icons/IconLogo/IconLogo";
 import Logo from "../../resources/icons/Logo.svg";
 import { RegisterForm } from "../../layout/RegisterForm/RegisterForm";
 import { RegisterInputs } from "../../models/user";
-import { notification } from "../../features/notification/NotificationSlice";
+import { notification } from "../../features/NotificationSlice";
 import { useAppDispatch } from "../../app/hooks";
 import { useNavigate } from "react-router";
 import { useRegisterUserMutation } from "../../services/user";

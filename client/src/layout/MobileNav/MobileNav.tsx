@@ -1,6 +1,6 @@
 import "./MobileNav.scss";
 
-import { toggleModal } from "../../features/modal/ModalSlice";
+import { toggleModal } from "../../features/ModalSlice";
 import { useAppDispatch } from "../../app/hooks";
 import { MobileNavList } from "../../components/MobileNavList/MobileNavList";
 

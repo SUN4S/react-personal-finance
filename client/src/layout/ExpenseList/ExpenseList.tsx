@@ -4,7 +4,7 @@ import { ErrorText } from "../../components/ErrorText/ErrorText";
 import { ExpenseListItem } from "../../components/ExpenseListItem/ExpenseListItem";
 import { ExpenseState } from "../../models/expenses";
 import { RootState } from "../../app/store";
-import { toggleModal } from "../../features/modal/ModalSlice";
+import { toggleModal } from "../../features/ModalSlice";
 import { useCurrentExpenseMonthQuery } from "../../services/expenses";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";

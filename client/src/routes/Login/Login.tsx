@@ -4,7 +4,7 @@ import { IconLogo } from "../../components/Icons/IconLogo/IconLogo";
 import { LoginForm } from "../../layout/LoginForm/LoginForm";
 import { LoginInputs } from "../../models/user";
 import Logo from "../../resources/icons/Logo.svg";
-import { notification } from "../../features/notification/NotificationSlice";
+import { notification } from "../../features/NotificationSlice";
 import { useAppDispatch } from "../../app/hooks";
 import { useLoginMutation } from "../../services/user";
 import { useTheme } from "../../hooks/useTheme";

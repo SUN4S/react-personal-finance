@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { ExpenseModalState } from "../../models/expenses";
+import { ExpenseModalState } from "../models/expenses";
 
 // defining initial state for the modal
 const initialState = {

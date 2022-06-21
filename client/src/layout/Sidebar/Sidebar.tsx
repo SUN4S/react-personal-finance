@@ -5,9 +5,8 @@ import { useEffect, useState } from "react";
 import { Button } from "../../components/Button/Button";
 import { CollapseButton } from "../../components/CollapseButton/CollapseButton";
 import { IconLogo } from "../../components/Icons/IconLogo/IconLogo";
-import Logo from "../../resources/icons/Logo.svg";
 import { SidebarList } from "../../components/SidebarList/SidebarList";
-import { toggleModal } from "../../features/modal/ModalSlice";
+import { toggleModal } from "../../features/ModalSlice";
 import { useAppDispatch } from "../../app/hooks";
 
 export const Sidebar = () => {

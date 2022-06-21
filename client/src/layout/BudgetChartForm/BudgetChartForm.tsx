@@ -9,7 +9,7 @@ import {
 import { BudgetFormState } from "../../models/budget";
 import { Button } from "../../components/Button/Button";
 import { FormInput } from "../../components/FormInput/FormInput";
-import { notification } from "../../features/notification/NotificationSlice";
+import { notification } from "../../features/NotificationSlice";
 import { useAppDispatch } from "../../app/hooks";
 
 // Component to render a small form inside budget container

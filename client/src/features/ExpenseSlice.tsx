@@ -1,7 +1,7 @@
-import { ExpenseFetchState, ExpenseState } from "../../models/expenses";
+import { ExpenseFetchState, ExpenseState } from "../models/expenses";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { expensesApi } from "../../services/expenses";
+import { expensesApi } from "../services/expenses";
 
 // Redux Toolkit created expense slice
 // extraReducers: request that was handled by the api sets the state here
