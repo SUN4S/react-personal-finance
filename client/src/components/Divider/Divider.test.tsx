@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 import { cleanup, render } from "@testing-library/react";
 
 import { Divider } from "./Divider";

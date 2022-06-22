@@ -47,7 +47,7 @@ export const BudgetChart = ({
           <LoadingBox size="xl" />
         ) : (
           <div className="doughnutContainer">
-            {budgetIsSuccess && expenseIsSuccess ? (
+            {budgetIsSuccess && expenseIsSuccess && budgetData.budget ? (
               <BudgetDoughnutChart
                 expenseAmount={expenseAmount!}
                 remainingBudget={remainingBudget!}

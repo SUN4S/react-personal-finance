@@ -1,3 +1,5 @@
+import "./BudgetDoughnutChart.scss";
+
 import {
   Cell,
   Label,
@@ -25,69 +27,73 @@ export const BudgetDoughnutChart = (props: {
   const COLORS = ["#dc2626", "#22c55e"];
 
   return (
-    <ResponsiveContainer width="100%" minWidth="225px" height="100%">
-      <PieChart>
-        <Pie
-          data={data}
-          cx="60%"
-          cy="50%"
-          innerRadius={45}
-          outerRadius={70}
-          fill="transparent"
-          paddingAngle={0}
-          dataKey="value"
-          style={{ stroke: "none", paddingRight: "16px", minWidth: "140px" }}
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-          <Label
-            position="center"
-            style={{
-              fontSize: "12px",
-              fontWeight: "400",
-              fill: "var(--text-secondary)",
-              transform: "translateY(20px)",
+    <div className="doughnutChartContainer" data-testid="doughnutChart">
+      <ResponsiveContainer width="100%" minWidth="225px" height="100%">
+        <PieChart>
+          <Pie
+            data={data}
+            cx="60%"
+            cy="50%"
+            innerRadius={45}
+            outerRadius={70}
+            fill="transparent"
+            paddingAngle={0}
+            dataKey="value"
+            style={{ stroke: "none", paddingRight: "16px", minWidth: "140px" }}
+          >
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+            <Label
+              position="center"
+              style={{
+                fontSize: "28px",
+                fontWeight: "400",
+                fill: "var(--text-primary)",
+              }}
+              textLength="80px"
+              lengthAdjust="spacingAndGlyphs"
+              viewBox={{ width: 80, height: 20 }}
+              value={props.remainingBudget?.toFixed(2)}
+            />
+            <Label
+              position="center"
+              style={{
+                fontSize: "12px",
+                fontWeight: "400",
+                fill: "var(--text-secondary)",
+                transform: "translateY(20px)",
+              }}
+              value="Remaining"
+            />
+          </Pie>
+          <Legend
+            layout="vertical"
+            align="left"
+            verticalAlign="middle"
+            wrapperStyle={{
+              display: "inline",
+              width: "100%",
+              maxWidth: "80px",
+              paddingLeft: "16px",
             }}
-            value="Remaining"
           />
-
-          <Label
-            position="center"
-            style={{
-              fontSize: "28px",
-              fontWeight: "400",
-              fill: "var(--text-primary)",
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "var(--sidebar-bg)",
+              padding: "4px 8px",
+              border: "1px solid var(--text-secondary)",
+              borderRadius: "5px",
             }}
-            textLength="80px"
-            lengthAdjust="spacingAndGlyphs"
-            viewBox={{ width: 80, height: 20 }}
-            value={props.remainingBudget?.toFixed(2)}
+            itemStyle={{
+              color: "var(--text-primary)",
+            }}
           />
-        </Pie>
-        <Legend
-          layout="vertical"
-          align="left"
-          verticalAlign="middle"
-          wrapperStyle={{
-            display: "inline",
-            width: "100%",
-            maxWidth: "80px",
-            paddingLeft: "16px",
-          }}
-        />
-        <Tooltip
-          contentStyle={{
-            backgroundColor: "var(--sidebar-bg)",
-            padding: "4px 8px",
-            border: "1px solid var(--text-secondary)",
-            borderRadius: "5px",
-          }}
-          itemStyle={{
-            color: "var(--text-primary)",
-          }}
-        />
-      </PieChart>
-    </ResponsiveContainer>
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
   );
 };

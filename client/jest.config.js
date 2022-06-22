@@ -1,8 +1,13 @@
 module.exports = {
+  verbose: true,
+  preset: "ts-jest",
+  testEnvironment: "jsdom",
   setupFilesAfterEnv: ["<rootDir>/jest/setUpTests.js"],
   transform: {
-    ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js",
+    "^.+\\.(ts|tsx)?$": "ts-jest",
+    "^.+\\.(js|jsx)$": "babel-jest",
   },
+  transformIgnorePatterns: ["node_modules/(?!variables/.*)"],
   testRegex: "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
   moduleFileExtensions: ["ts", "tsx", "js"],
   moduleNameMapper: {
