@@ -5,13 +5,8 @@ import { IconEdit } from "../Icons/IconEdit/IconEdit";
 
 export const ExpenseListItem = (props: {
   expenseData: ExpenseState;
-  onClick: Function;
+  clickFunction: Function;
 }) => {
-  // Handle button click and pass data to modal
-  const handleClick = async () => {
-    await props.onClick(props.expenseData);
-  };
-
   return (
     <div className="expenseListElement">
       <div className="expenseListElementDate">
@@ -39,7 +34,10 @@ export const ExpenseListItem = (props: {
           })}
       </div>
       <div className="expenseListElementControls">
-        <button aria-label="Edit expense" onClick={handleClick}>
+        <button
+          aria-label="Edit expense"
+          onClick={props.clickFunction(props.expenseData)}
+        >
           <IconEdit />
         </button>
       </div>

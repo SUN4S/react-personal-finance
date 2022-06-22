@@ -66,7 +66,7 @@ export const Sidebar = () => {
       <div className="sidebarPages preload-transitions">Pages</div>
       <SidebarList />
       {collapseButton && (
-        <CollapseButton onClick={() => setCollapsed(!collapsed)} />
+        <CollapseButton clickFunction={() => setCollapsed(!collapsed)} />
       )}
     </nav>
   );

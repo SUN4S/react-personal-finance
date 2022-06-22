@@ -27,7 +27,13 @@ export const ExpenseList = () => {
     <div className="listBody">
       {currentExpensesQuery.isSuccess ? (
         expenses.map((item: ExpenseState) => {
-          return <ExpenseListItem expenseData={item} onClick={handleClick} key={item._id} />;
+          return (
+            <ExpenseListItem
+              expenseData={item}
+              clickFunction={handleClick}
+              key={item._id}
+            />
+          );
         })
       ) : (
         <ErrorText title="No Data" />

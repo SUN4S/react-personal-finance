@@ -6,13 +6,7 @@ import { IconStock } from "../Icons/IconStock/IconStock";
 import { IconWeekly } from "../Icons/IconWeekly/IconWeekly";
 import { NavLink } from "react-router-dom";
 
-export const MobileNavList = (props: { onClick: Function }) => {
-  const handleClick = () => {
-    if (props.onClick) {
-      props.onClick();
-    }
-  };
-
+export const MobileNavList = (props: { clickFunction: Function }) => {
   return (
     <div className="mobileNav">
       <ul>
@@ -31,7 +25,7 @@ export const MobileNavList = (props: { onClick: Function }) => {
           </NavLink>
         </li>
         <li className="buttonContainer">
-          <button onClick={handleClick}>+</button>
+          <button onClick={props.clickFunction()}>+</button>
         </li>
         <li>
           <NavLink to="/stocks">
