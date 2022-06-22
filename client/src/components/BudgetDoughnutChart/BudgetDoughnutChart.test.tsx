@@ -14,21 +14,21 @@ describe("Budget Doughnut Chart", () => {
 
   afterAll(cleanup);
 
-  it("Renders Chart", () => {
+  it("Renders", () => {
     const { getByTestId } = render(
       <BudgetDoughnutChart expenseAmount={600} remainingBudget={200} />
     );
     expect(getByTestId("doughnutChart")).toBeTruthy();
   });
 
-  it("Displays Label", () => {
+  it("Renders Label", () => {
     const { container } = render(
       <BudgetDoughnutChart expenseAmount={600} remainingBudget={200} />
     );
     expect(container.querySelector(".recharts-label")).toBeTruthy();
   });
 
-  it("Displays Label Correct Text", () => {
+  it("Renders Label Correct Text", () => {
     const { container } = render(
       <BudgetDoughnutChart expenseAmount={600} remainingBudget={200} />
     );
@@ -37,7 +37,7 @@ describe("Budget Doughnut Chart", () => {
     );
   });
 
-  it("Displays Legend", () => {
+  it("Renders Legend", () => {
     const { container } = render(
       <BudgetDoughnutChart expenseAmount={600} remainingBudget={200} />
     );

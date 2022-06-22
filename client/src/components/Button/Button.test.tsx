@@ -6,14 +6,14 @@ import renderer from "react-test-renderer";
 describe("Button", () => {
   afterEach(cleanup);
 
-  it("Renders Button", () => {
+  it("Button", () => {
     const { getByTestId } = render(
       <Button type="button" text="Press Me!" class="primaryBtn" />
     );
     expect(getByTestId("button")).toBeTruthy();
   });
 
-  it("Button Fires handleclick", () => {
+  it("Fires handleclick", () => {
     const mockFunction = jest.fn();
     const { getByTestId } = render(
       <Button
@@ -27,21 +27,21 @@ describe("Button", () => {
     expect(mockFunction).toHaveBeenCalledTimes(1);
   });
 
-  it("Button Loading", () => {
+  it("Loading", () => {
     const { getByTestId } = render(
       <Button type="button" text="Press Me!" class="primaryBtn" loading />
     );
     expect(getByTestId("buttonLoader")).toBeTruthy();
   });
 
-  it("Button Matches Snapshot", () => {
+  it("Matches Snapshot", () => {
     const tree = renderer.create(
       <Button type="button" text="Press Me!" class="primaryBtn" />
     );
     expect(tree).toMatchSnapshot();
   });
 
-  it("Button Matches Loading Snapshot", () => {
+  it("Matches Loading Snapshot", () => {
     const tree = renderer.create(
       <Button type="button" text="Press Me!" class="primaryBtn" loading />
     );

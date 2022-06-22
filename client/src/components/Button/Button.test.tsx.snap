@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button Button Matches Loading Snapshot 1`] = `
+exports[`Button Matches Loading Snapshot 1`] = `
 <button
   className="primaryBtn"
   data-testid="button"
@@ -14,7 +14,7 @@ exports[`Button Button Matches Loading Snapshot 1`] = `
 </button>
 `;
 
-exports[`Button Button Matches Snapshot 1`] = `
+exports[`Button Matches Snapshot 1`] = `
 <button
   className="primaryBtn"
   data-testid="button"

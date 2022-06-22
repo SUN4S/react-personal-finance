@@ -6,13 +6,13 @@ import renderer from "react-test-renderer";
 describe("Divider Component", () => {
   afterAll(cleanup);
 
-  it("Renders Divider", () => {
+  it("Renders", () => {
     const { getByTestId } = render(<Divider text="OR" />);
     const dividerElement = getByTestId("divider");
     expect(dividerElement).toBeTruthy();
   });
 
-  it("Renders Divider Text", () => {
+  it("Renders Text", () => {
     const { getByTestId } = render(<Divider text="OR" />);
     const dividerElement = getByTestId("divider");
     expect(dividerElement).toHaveTextContent("OR");
