@@ -12,7 +12,7 @@ export const UserDropdown = (props: {
         <li>
           <Link to="/settings">Settings</Link>
         </li>
-        <li onClick={props.logoutFunction()}>Logout</li>
+        <li onClick={() => props.logoutFunction()}>Logout</li>
       </ul>
     </div>
   );

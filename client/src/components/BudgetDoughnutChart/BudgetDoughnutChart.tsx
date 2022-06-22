@@ -79,7 +79,7 @@ export const BudgetDoughnutChart = (props: {
         <Tooltip
           contentStyle={{
             backgroundColor: "var(--sidebar-bg)",
-            padding: "0",
+            padding: "4px 8px",
             border: "1px solid var(--text-secondary)",
             borderRadius: "5px",
           }}

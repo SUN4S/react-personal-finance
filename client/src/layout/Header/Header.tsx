@@ -42,9 +42,7 @@ export const Header = () => {
   };
 
   // Inverts dropdown status value
-  const handleDropdownClick = () => {
-    setOpen(!open);
-  };
+  const handleDropdownClick = () => {};
 
   return (
     <header>
@@ -57,7 +55,7 @@ export const Header = () => {
         <h4>{user.username || "placeholder"}</h4>
         <div
           className={`dropdownArror ${open && "invertedArrow"}`}
-          onClick={handleDropdownClick}
+          onClick={() => setOpen(!open)}
         >
           <IconDropdown />
         </div>

@@ -25,7 +25,7 @@ export const MobileNavList = (props: { clickFunction: Function }) => {
           </NavLink>
         </li>
         <li className="buttonContainer">
-          <button onClick={props.clickFunction()}>+</button>
+          <button onClick={() => props.clickFunction()}>+</button>
         </li>
         <li>
           <NavLink to="/stocks">

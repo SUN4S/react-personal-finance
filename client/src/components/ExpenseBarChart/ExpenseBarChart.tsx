@@ -35,7 +35,7 @@ export const ExpenseBarChart = (props: { chartData: Array<DataObject> }) => {
           cursor={false}
           contentStyle={{
             backgroundColor: "var(--sidebar-bg)",
-            padding: "0",
+            padding: "4px 8px 0 8px",
             border: "1px solid var(--text-secondary)",
             color: "var(--text-primary)",
             borderRadius: "5px",

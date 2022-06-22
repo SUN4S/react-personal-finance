@@ -36,7 +36,7 @@ export const ExpenseListItem = (props: {
       <div className="expenseListElementControls">
         <button
           aria-label="Edit expense"
-          onClick={props.clickFunction(props.expenseData)}
+          onClick={() => props.clickFunction(props.expenseData)}
         >
           <IconEdit />
         </button>
