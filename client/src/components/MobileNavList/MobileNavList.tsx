@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 
 export const MobileNavList = (props: { clickFunction: Function }) => {
   return (
-    <div className="mobileNav">
+    <div className="mobileNav" data-testid="mobileNavList">
       <ul>
         <li>
           <NavLink to="/">
@@ -25,7 +25,12 @@ export const MobileNavList = (props: { clickFunction: Function }) => {
           </NavLink>
         </li>
         <li className="buttonContainer">
-          <button onClick={() => props.clickFunction()}>+</button>
+          <button
+            data-testid="mobileNavListButton"
+            onClick={() => props.clickFunction()}
+          >
+            +
+          </button>
         </li>
         <li>
           <NavLink to="/stocks">

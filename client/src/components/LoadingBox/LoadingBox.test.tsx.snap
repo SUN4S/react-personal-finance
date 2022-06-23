@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading Box Matches Snapshot 1`] = `
+<div
+  className="loadingContainer"
+  data-testid="loadingBox"
+>
+  <div
+    className="loadingSpinner lg"
+    data-testid="loadingSpinner"
+  />
+</div>
+`;
