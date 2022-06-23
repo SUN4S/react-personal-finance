@@ -8,11 +8,9 @@ export const ExpenseListItem = (props: {
   clickFunction: Function;
 }) => {
   return (
-    <div className="expenseListElement">
+    <div className="expenseListElement" data-testid="expenseItem">
       <div className="expenseListElementDate">
-        {`${new Date(props.expenseData.date).getFullYear()}-${
-          new Date(props.expenseData.date).getMonth() + 1
-        }-${new Date(props.expenseData.date).getDate()}`}
+        {`${new Date(props.expenseData.date).toISOString().slice(0, 10)}`}
       </div>
       <div className="expenseListElementCategory">
         {props.expenseData.category}
@@ -36,6 +34,7 @@ export const ExpenseListItem = (props: {
       <div className="expenseListElementControls">
         <button
           aria-label="Edit expense"
+          data-testid="editExpenseButton"
           onClick={() => props.clickFunction(props.expenseData)}
         >
           <IconEdit />

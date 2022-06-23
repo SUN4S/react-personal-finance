@@ -43,4 +43,27 @@ describe("Budget Doughnut Chart", () => {
     );
     expect(container.querySelector(".recharts-default-legend")).toBeTruthy();
   });
+
+  it("Renders Legend Correct Text", () => {
+    const { container } = render(
+      <BudgetDoughnutChart expenseAmount={600} remainingBudget={200} />
+    );
+    expect(
+      container.querySelectorAll(
+        ".recharts-default-legend .recharts-legend-item span"
+      )[0]
+    ).toHaveTextContent("Spent");
+    expect(
+      container.querySelectorAll(
+        ".recharts-default-legend .recharts-legend-item span"
+      )[1]
+    ).toHaveTextContent("Remaining");
+  });
+
+  it("Renders Legend", () => {
+    const { container } = render(
+      <BudgetDoughnutChart expenseAmount={600} remainingBudget={200} />
+    );
+    expect(container.querySelector(".recharts-default-legend")).toBeTruthy();
+  });
 });

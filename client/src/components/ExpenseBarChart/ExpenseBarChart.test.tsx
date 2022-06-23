@@ -29,7 +29,7 @@ describe("Expense Bar Chart", () => {
   it("Renders yAxis", () => {
     const { getByTestId } = render(<ExpenseBarChart chartData={mockData} />);
     const axisText = getByTestId("expenseChart").querySelectorAll(
-      `.recharts-yAxis .recharts-cartesian-axis-ticks  text tspan`
+      `.recharts-yAxis .recharts-cartesian-axis-ticks text tspan`
     );
     expect(axisText[0]).toHaveTextContent("Essentials");
     expect(axisText[1]).toHaveTextContent("Wants");

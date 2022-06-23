@@ -27,6 +27,21 @@ describe("Button", () => {
     expect(mockFunction).toHaveBeenCalledTimes(1);
   });
 
+  it("Ignores handleclick", () => {
+    const mockFunction = jest.fn();
+    const { getByTestId } = render(
+      <Button
+        type="button"
+        text="Press Me!"
+        class="primaryBtn"
+        action={mockFunction}
+        disabled
+      />
+    );
+    fireEvent.click(getByTestId("button"));
+    expect(mockFunction).toHaveBeenCalledTimes(0);
+  });
+
   it("Loading", () => {
     const { getByTestId } = render(
       <Button type="button" text="Press Me!" class="primaryBtn" loading />
