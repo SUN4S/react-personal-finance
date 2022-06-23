@@ -1,7 +1,6 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render } from "@testing-library/react";
 
 import { FormInput } from "./FormInput";
-import { FormProvider } from "react-hook-form";
 import renderer from "react-test-renderer";
 
 describe("Form Input", () => {
@@ -10,10 +9,11 @@ describe("Form Input", () => {
   it("Renders", () => {
     const { getByTestId } = render(
       <FormInput
-        labelFor="name"
-        label="name"
+        labelFor="username"
+        label="username"
         required
         type="text"
+        name="username"
         placeholder="Enter Name"
         register={mockRegister}
       />
@@ -21,27 +21,44 @@ describe("Form Input", () => {
     expect(getByTestId("formLabel")).toBeTruthy();
   });
 
-  it("Render Label", () => {
+  it("Renders Label", () => {
     const { getByTestId } = render(
       <FormInput
-        labelFor="name"
-        label="name"
+        labelFor="username"
+        label="username"
         required
         type="text"
+        name="username"
         placeholder="Enter Name"
         register={mockRegister}
       />
     );
-    expect(getByTestId("formLabel")).toHaveTextContent("name");
+    expect(getByTestId("formLabel")).toHaveTextContent("username");
   });
 
-  it("Render Input", () => {
+  it("Renders Label For", () => {
     const { getByTestId } = render(
       <FormInput
-        labelFor="name"
-        label="name"
+        labelFor="username"
+        label="username"
         required
         type="text"
+        name="username"
+        placeholder="Enter Name"
+        register={mockRegister}
+      />
+    );
+    expect(getByTestId("formLabel")).toHaveAttribute("for", "username");
+  });
+
+  it("Renders Input", () => {
+    const { getByTestId } = render(
+      <FormInput
+        labelFor="username"
+        label="username"
+        required
+        type="text"
+        name="username"
         placeholder="Enter Name"
         register={mockRegister}
       />
@@ -52,32 +69,50 @@ describe("Form Input", () => {
   it("Renders Placeholder", () => {
     const { getByTestId } = render(
       <FormInput
-        labelFor="name"
-        label="name"
+        labelFor="username"
+        label="username"
         required
         type="text"
+        name="username"
         placeholder="Enter Name"
         register={mockRegister}
       />
     );
-    const inputPlaceholder = screen.getByPlaceholderText("Enter Name");
-    expect(inputPlaceholder).toBeTruthy();
+    expect(getByTestId("formInput")).toHaveAttribute(
+      "placeholder",
+      "Enter Name"
+    );
+  });
+
+  it("Has Input Type", () => {
+    const { getByTestId } = render(
+      <FormInput
+        labelFor="username"
+        label="username"
+        required
+        type="text"
+        name="username"
+        placeholder="Enter Name"
+        register={mockRegister}
+      />
+    );
+    expect(getByTestId("formInput")).toHaveAttribute("type", "text");
   });
 
   it("Is Typeable", () => {
     const { getByTestId } = render(
       <FormInput
-        labelFor="name"
-        label="name"
+        labelFor="username"
+        label="username"
         required
         type="text"
+        name="username"
         placeholder="Enter Name"
         register={mockRegister}
       />
     );
-    const input = screen.getByTestId("formInput");
-    fireEvent.change(input, { target: { value: "John" } });
-    expect(input).toHaveValue("John");
+    fireEvent.change(getByTestId("formInput"), { target: { value: "John" } });
+    expect(getByTestId("formInput")).toHaveValue("John");
   });
 
   it("Renders Children", () => {
@@ -92,10 +127,11 @@ describe("Form Input", () => {
   it("Matches Snapshot", () => {
     const tree = renderer.create(
       <FormInput
-        labelFor="name"
-        label="name"
+        labelFor="username"
+        label="username"
         required
         type="text"
+        name="username"
         placeholder="Enter Name"
         register={mockRegister}
       />

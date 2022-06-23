@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render } from "@testing-library/react";
 
 import { FormProvider } from "react-hook-form";
 import { FormSelect } from "./FormSelect";
@@ -35,6 +35,20 @@ describe("Form Select", () => {
       />
     );
     expect(getByTestId("formLabel")).toHaveTextContent("Expense Category");
+  });
+
+  it("Renders Label For", () => {
+    const { getByTestId } = render(
+      <FormSelect
+        labelFor="category"
+        label="Expense Category"
+        name="category"
+        options={["Essentials", "Wants", "Culture", "Unexpected"]}
+        required
+        register={mockRegister}
+      />
+    );
+    expect(getByTestId("formLabel")).toHaveAttribute("for", "category");
   });
 
   it("Renders Select", () => {
@@ -80,9 +94,10 @@ describe("Form Select", () => {
         register={mockRegister}
       />
     );
-    const select = screen.getByTestId("formSelect");
-    fireEvent.change(select, { target: { value: "Culture", name: "Culture" } });
-    expect(select).toHaveValue("Culture");
+    fireEvent.change(getByTestId("formSelect"), {
+      target: { value: "Culture", name: "Culture" },
+    });
+    expect(getByTestId("formSelect")).toHaveValue("Culture");
   });
 
   it("Matches Snapshot", () => {

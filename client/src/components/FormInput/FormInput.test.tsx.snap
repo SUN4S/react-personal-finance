@@ -14,9 +14,9 @@ exports[`Form Input Matches Snapshot (Children) 1`] = `
 exports[`Form Input Matches Snapshot 1`] = `
 <label
   data-testid="formLabel"
-  htmlFor="name"
+  htmlFor="username"
 >
-  name
+  username
   <input
     data-testid="formInput"
     placeholder="Enter Name"

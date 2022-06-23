@@ -11,9 +11,10 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
   register,
 }) => {
   return (
-    <label htmlFor={labelFor}>
+    <label htmlFor={labelFor} data-testid="formLabel">
       {label}
       <textarea
+        data-testid="formTextarea"
         {...register(name, { required: required })}
         placeholder={placeholder}
       />
