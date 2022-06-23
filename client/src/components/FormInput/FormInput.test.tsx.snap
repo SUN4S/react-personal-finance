@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form Input Matches Snapshot (Children) 1`] = `
+<label
+  data-testid="formLabel"
+  htmlFor="image"
+>
+  <h1>
+    Hello World
+  </h1>
+</label>
+`;
+
+exports[`Form Input Matches Snapshot 1`] = `
+<label
+  data-testid="formLabel"
+  htmlFor="name"
+>
+  name
+  <input
+    data-testid="formInput"
+    placeholder="Enter Name"
+    type="text"
+  />
+</label>
+`;

@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 
 import { Button } from "./Button";
 import renderer from "react-test-renderer";
@@ -11,6 +11,14 @@ describe("Button", () => {
       <Button type="button" text="Press Me!" class="primaryBtn" />
     );
     expect(getByTestId("button")).toBeTruthy();
+  });
+
+  it("Renders Text", () => {
+    const { getByTestId } = render(
+      <Button type="button" text="Press Me!" class="primaryBtn" />
+    );
+    const buttonText = screen.getByText("Press Me!");
+    expect(buttonText).toBeTruthy();
   });
 
   it("Fires handleclick", () => {
@@ -29,6 +37,7 @@ describe("Button", () => {
 
   it("Ignores handleclick", () => {
     const mockFunction = jest.fn();
+
     const { getByTestId } = render(
       <Button
         type="button"

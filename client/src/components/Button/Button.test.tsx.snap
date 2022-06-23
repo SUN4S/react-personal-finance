@@ -24,3 +24,28 @@ exports[`Button Matches Snapshot 1`] = `
   Press Me!
 </button>
 `;
+
+exports[`Matches Loading Snapshot 1`] = `
+<button
+  className="primaryBtn"
+  data-testid="button"
+  onClick={[Function]}
+  type="button"
+>
+  <span
+    className="loader"
+    data-testid="buttonLoader"
+  />
+</button>
+`;
+
+exports[`Matches Snapshot 1`] = `
+<button
+  className="primaryBtn"
+  data-testid="button"
+  onClick={[Function]}
+  type="button"
+>
+  Press Me!
+</button>
+`;
