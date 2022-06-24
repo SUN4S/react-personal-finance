@@ -16,7 +16,7 @@ import DatePicker from "react-datepicker";
 import { FormInput } from "../../components/FormInput/FormInput";
 import { FormSelect } from "../../components/FormSelect/FormSelect";
 import { FormTextarea } from "../../components/FormTextarea/FormTextarea";
-import { IconClose } from "../../components/Icons/IconClose/IconClose";
+import { IconClose } from "../../resources/icons/IconClose/IconClose";
 import Modal from "react-modal";
 import { WithContext as ReactTags } from "react-tag-input";
 import { RootState } from "../../app/store";

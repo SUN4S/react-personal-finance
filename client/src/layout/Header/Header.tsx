@@ -1,6 +1,6 @@
 import "./Header.scss";
 
-import { IconDropdown } from "../../components/Icons/IconDropdown/IconDropdown";
+import { IconDropdown } from "../../resources/icons/IconDropdown/IconDropdown";
 import { RootState } from "../../app/store";
 import { ThemeSwitch } from "../../components/ThemeSwitch/ThemeSwitch";
 import { UserDropdown } from "../../components/UserDropdown/UserDropdown";

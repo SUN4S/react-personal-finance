@@ -1,7 +1,7 @@
 import "./ExpenseListItem.scss";
 
 import { ExpenseState } from "../../models/expenses";
-import { IconEdit } from "../Icons/IconEdit/IconEdit";
+import { IconEdit } from "../../resources/icons/IconEdit/IconEdit";
 
 export const ExpenseListItem = (props: {
   expenseData: ExpenseState;
