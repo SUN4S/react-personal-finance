@@ -20,7 +20,7 @@ const Template: Story<TemplateProps> = (args) => {
           backgroundColor: "var(--sidebar-bg)",
         }}
       >
-        <MobileNavList onClick={args.onClick} />
+        <MobileNavList clickFunction={args.onClick} />
       </body>
     </html>
   );

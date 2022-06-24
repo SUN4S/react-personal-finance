@@ -11,10 +11,14 @@ import { useLogoutUserMutation } from "../../services/user";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { useTheme } from "../../hooks/useTheme";
 
 export const Header = () => {
   // Getting user data from redux store
   const user = useSelector((state: RootState) => state.user.userData);
+
+  // Custom Hook Call to handle Theme change
+  const { currentTheme, setTheme } = useTheme();
 
   const [open, setOpen] = useState(false);
 
@@ -41,14 +45,19 @@ export const Header = () => {
     navigate("/login");
   };
 
-  // Inverts dropdown status value
-  const handleDropdownClick = () => {
-    setOpen(!open);
+  // Function that handles theme change
+  // Inverts selected option,
+  const handleThemeChange = () => {
+    console.log("Clicked");
+    if (currentTheme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
   };
-
   return (
     <header>
-      <ThemeSwitch />
+      <ThemeSwitch theme={currentTheme} clickFunction={handleThemeChange} />
       <div className="userContainer">
         <img
           src={defaultAvatar || `/resources/avatar_image/${user.image}`}
@@ -57,7 +66,7 @@ export const Header = () => {
         <h4>{user.username || "placeholder"}</h4>
         <div
           className={`dropdownArror ${open && "invertedArrow"}`}
-          onClick={handleDropdownClick}
+          onClick={() => setOpen(!open)}
         >
           <IconDropdown />
         </div>

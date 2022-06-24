@@ -1,15 +1,11 @@
-.themeContainer {
-  margin-right: auto;
+#themeButton {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
 
-  button {
-    display: flex;
-    align-items: center;
-    background-color: transparent;
-    transition: all 0.3s ease-in-out;
-
-    svg {
-      height: 26px;
-      width: 26px;
-    }
+  svg {
+    height: 26px;
+    width: 26px;
   }
 }

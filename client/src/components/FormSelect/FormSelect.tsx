@@ -9,13 +9,17 @@ export const FormSelect: React.FC<FormSelectProps> = ({
   register,
 }) => {
   return (
-    <label htmlFor={labelFor}>
+    <label htmlFor={labelFor} data-testid="formLabel">
       {label}
       <div className="selectDropdown">
-        <select {...register(name, { required: required })}>
+        <select
+          {...register(name, { required: required })}
+          defaultValue={"Essentials"}
+          data-testid="formSelect"
+        >
           {options.map((item, index) => {
             return (
-              <option value={item} selected={index == 0 && true}>
+              <option value={item} key={index}>
                 {item}
               </option>
             );

@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 
 export const SidebarList = () => {
   return (
-    <ul className="preload-transitions" id="sidebar">
+    <ul className="preload-transitions" data-testid="sidebarList">
       <li className="preload-transitions">
         <NavLink to="/">
           <div className="iconContainer">

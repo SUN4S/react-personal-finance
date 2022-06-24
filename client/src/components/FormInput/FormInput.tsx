@@ -14,12 +14,13 @@ export const FormInput: React.FC<FormInputProps> = ({
   children,
 }) => {
   return (
-    <label htmlFor={labelFor}>
+    <label htmlFor={labelFor} data-testid="formLabel">
       {label}
       {children ? (
         children
       ) : (
         <input
+          data-testid="formInput"
           type={type}
           step={step}
           {...register(name, { required: required })}

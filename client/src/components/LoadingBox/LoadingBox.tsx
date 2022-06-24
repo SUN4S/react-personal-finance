@@ -5,8 +5,8 @@ export interface LoadingProps {
 }
 export const LoadingBox = (props: { size: string }) => {
   return (
-    <div className="loadingContainer">
-      <div className={`loadingSpinner ${props.size}`}></div>
+    <div className="loadingContainer" data-testid="loadingBox">
+      <div className={`loadingSpinner ${props.size}`} data-testid="loadingSpinner"></div>
     </div>
   );
 };

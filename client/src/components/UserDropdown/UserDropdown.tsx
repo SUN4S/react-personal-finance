@@ -6,17 +6,24 @@ export const UserDropdown = (props: {
   openStatus: boolean;
   logoutFunction: Function;
 }) => {
-  const handleClick = () => {
-    props.logoutFunction();
-  };
-
   return (
-    <div className={`dropdown ${!props.openStatus && "collapsedDropdown"}`}>
+    <div
+      id="dropdown"
+      data-testid="dropdown"
+      className={`${!props.openStatus && "collapsedDropdown"}`}
+    >
       <ul>
         <li>
           <Link to="/settings">Settings</Link>
         </li>
-        <li onClick={handleClick}>Logout</li>
+        <li>
+          <button
+            data-testid="logoutButton"
+            onClick={() => props.logoutFunction()}
+          >
+            Logout
+          </button>
+        </li>
       </ul>
     </div>
   );

@@ -100,7 +100,7 @@ app.use("/api/budget", budget);
 
 app.get("/ServiceWorker.js", (req, res) => {
   res.header("Content-type: application/javascript");
-  res.sendFile(path.resolve(process.cwd(), "/build/public/ServiceWorker.js"));
+  res.sendFile(path.join(process.cwd(), "/build/public/ServiceWorker.js"));
 });
 
 app.get("/*", (req, res) => {

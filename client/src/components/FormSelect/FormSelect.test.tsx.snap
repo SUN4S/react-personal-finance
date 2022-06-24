@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form Select Matches Snapshot 1`] = `
+<label
+  data-testid="formLabel"
+  htmlFor="category"
+>
+  Expense Category
+  <div
+    className="selectDropdown"
+  >
+    <select
+      data-testid="formSelect"
+      defaultValue="Essentials"
+    >
+      <option
+        value="Essentials"
+      >
+        Essentials
+      </option>
+      <option
+        value="Wants"
+      >
+        Wants
+      </option>
+      <option
+        value="Culture"
+      >
+        Culture
+      </option>
+      <option
+        value="Unexpected"
+      >
+        Unexpected
+      </option>
+    </select>
+  </div>
+</label>
+`;

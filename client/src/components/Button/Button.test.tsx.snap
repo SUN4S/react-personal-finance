@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Matches Loading Snapshot 1`] = `
+<button
+  className="primaryBtn"
+  data-testid="button"
+  onClick={[Function]}
+  type="button"
+>
+  <span
+    className="loader"
+    data-testid="buttonLoader"
+  />
+</button>
+`;
+
+exports[`Button Matches Snapshot 1`] = `
+<button
+  className="primaryBtn"
+  data-testid="button"
+  onClick={[Function]}
+  type="button"
+>
+  Press Me!
+</button>
+`;

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error Text Matches Snapshot 1`] = `
+<div
+  className="errorText"
+  data-testid="errorText"
+>
+  <span>
+    Error
+  </span>
+</div>
+`;

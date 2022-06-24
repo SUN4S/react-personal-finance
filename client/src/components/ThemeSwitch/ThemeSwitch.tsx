@@ -4,24 +4,18 @@ import { IconMoon } from "../Icons/IconMoon/IconMoon";
 import { IconSun } from "../Icons/IconSun/IconSun";
 import { useTheme } from "../../hooks/useTheme";
 
-export const ThemeSwitch = () => {
-  const { currentTheme, setTheme } = useTheme();
-
-  // Function that handles theme change
-  // Inverts selected option,
-  const handleThemeChange = () => {
-    if (currentTheme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  };
-
+export const ThemeSwitch = (props: {
+  theme: string | null;
+  clickFunction: Function;
+}) => {
   return (
-    <div className="themeContainer">
-      <button aria-label="Theme switch" onClick={handleThemeChange}>
-        {currentTheme === "dark" ? <IconMoon /> : <IconSun />}
-      </button>
-    </div>
+    <button
+      id="themeButton"
+      data-testid="themeButton"
+      aria-label="Theme switch"
+      onClick={() => props.clickFunction()}
+    >
+      {props.theme === "dark" ? <IconMoon /> : <IconSun />}
+    </button>
   );
 };

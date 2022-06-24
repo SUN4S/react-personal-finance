@@ -16,7 +16,7 @@ const Template: Story<TemplateProps> = (args) => {
   return (
     <html data-theme={args.theme}>
       <body style={{ height: "50px", width: "50px" }}>
-        <CollapseButton onClick={args.onClick} />
+        <CollapseButton clickFunction={args.onClick} />
       </body>
     </html>
   );

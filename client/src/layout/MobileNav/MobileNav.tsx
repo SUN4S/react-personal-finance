@@ -1,8 +1,8 @@
 import "./MobileNav.scss";
 
+import { MobileNavList } from "../../components/MobileNavList/MobileNavList";
 import { toggleModal } from "../../features/ModalSlice";
 import { useAppDispatch } from "../../app/hooks";
-import { MobileNavList } from "../../components/MobileNavList/MobileNavList";
 
 export const MobileNav = () => {
   // Redux Toolkit finction to dispatch events
@@ -10,7 +10,7 @@ export const MobileNav = () => {
 
   return (
     <MobileNavList
-      onClick={() => dispatch(toggleModal({ isOpen: true, editable: false }))}
+      clickFunction={() => dispatch(toggleModal({ isOpen: true, editable: false }))}
     />
   );
 };

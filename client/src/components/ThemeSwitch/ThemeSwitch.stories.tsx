@@ -4,6 +4,8 @@ import { ThemeSwitch } from "./ThemeSwitch";
 
 interface TemplateProps {
   theme: string;
+  currentTheme: string;
+  function: Function;
 }
 
 export default {
@@ -22,7 +24,7 @@ const Template: Story<TemplateProps> = (args) => {
           backgroundColor: "var(--page-bg)",
         }}
       >
-        <ThemeSwitch />
+        <ThemeSwitch theme={args.currentTheme} clickFunction={args.function} />
       </body>
     </html>
   );
@@ -31,9 +33,13 @@ const Template: Story<TemplateProps> = (args) => {
 export const Default_Light = Template.bind({});
 Default_Light.args = {
   theme: "light",
+  currentTheme: "light",
+  function: () => alert("clicked"),
 };
 
 export const Default_Dark = Template.bind({});
 Default_Dark.args = {
   theme: "dark",
+  currentTheme: "light",
+  function: () => alert("clicked"),
 };

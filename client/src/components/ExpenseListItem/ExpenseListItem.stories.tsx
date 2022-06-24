@@ -25,7 +25,7 @@ const Template: Story<TemplateProps> = (args) => {
       >
         <ExpenseListItem
           expenseData={args.expenseData}
-          onClick={args.onClick}
+          clickFunction={args.onClick}
         />
       </body>
     </html>
