@@ -1,9 +1,9 @@
 import "./MobileNavList.scss";
 
-import { IconDashboard } from "../Icons/IconDashboard/IconDashboard";
-import { IconHistory } from "../Icons/IconHistory/IconHistory";
-import { IconStock } from "../Icons/IconStock/IconStock";
-import { IconWeekly } from "../Icons/IconWeekly/IconWeekly";
+import { IconDashboard } from "../../resources/icons/IconDashboard/IconDashboard";
+import { IconHistory } from "../../resources/icons/IconHistory/IconHistory";
+import { IconStock } from "../../resources/icons/IconStock/IconStock";
+import { IconWeekly } from "../../resources/icons/IconWeekly/IconWeekly";
 import { NavLink } from "react-router-dom";
 
 export const MobileNavList = (props: { clickFunction: Function }) => {

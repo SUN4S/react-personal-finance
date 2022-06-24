@@ -1,7 +1,6 @@
 import "./Register.scss";
 
-import { IconLogo } from "../../components/Icons/IconLogo/IconLogo";
-import Logo from "../../resources/icons/Logo.svg";
+import { IconLogo } from "../../resources/icons/IconLogo/IconLogo";
 import { RegisterForm } from "../../layout/RegisterForm/RegisterForm";
 import { RegisterInputs } from "../../models/user";
 import { notification } from "../../features/NotificationSlice";

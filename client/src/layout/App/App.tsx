@@ -8,9 +8,7 @@ import { MobileNav } from "../MobileNav/MobileNav";
 import Modal from "react-modal";
 import { ModalComponent } from "../Modal/Modal";
 import { Outlet } from "react-router-dom";
-import { RootState } from "../../app/store";
 import { Sidebar } from "../Sidebar/Sidebar";
-import { useSelector } from "react-redux";
 
 Modal.setAppElement("#root");
 
