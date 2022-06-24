@@ -26,6 +26,7 @@ export const MobileNavList = (props: { clickFunction: Function }) => {
         </li>
         <li className="buttonContainer">
           <button
+            aria-label="Mobile Navigation Button"
             data-testid="mobileNavListButton"
             onClick={() => props.clickFunction()}
           >

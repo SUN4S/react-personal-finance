@@ -28,6 +28,19 @@ describe("Mobile Navigation List", () => {
     );
   });
 
+  it("Has Aria-label", () => {
+    const { getByTestId } = render(
+      <MemoryRouter initialEntries={[{ pathname: "/" }]}>
+        <MobileNavList clickFunction={mockFunction} />
+      </MemoryRouter>
+    );
+
+    expect(getByTestId("mobileNavListButton")).toHaveAttribute(
+      "aria-label",
+      "Mobile Navigation Button"
+    );
+  });
+
   it("Calls Function", () => {
     const { getByTestId } = render(
       <MemoryRouter initialEntries={[{ pathname: "/" }]}>

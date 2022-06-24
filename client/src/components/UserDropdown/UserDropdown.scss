@@ -1,4 +1,4 @@
-.dropdown {
+#dropdown {
   width: 140px;
   height: 72px;
   position: absolute;
@@ -13,6 +13,7 @@
     background-color: var(--sidebar-bg);
     border: 1px solid var(--primary-diffused);
     border-radius: 5px;
+    margin: 0;
 
     li {
       padding: 8px 10px;
@@ -31,15 +32,20 @@
         text-decoration: none;
         color: var(--text-primary);
       }
+
+      button {
+        height: 100%;
+        width: 100%;
+        display: inline-block;
+        text-align: right;
+        color: var(--text-primary);
+        background-color: transparent;
+      }
     }
   }
-  
+
   &.collapsedDropdown {
     height: 0;
     opacity: 0;
-
-    ul {
-      display: none;
-    }
   }
 }

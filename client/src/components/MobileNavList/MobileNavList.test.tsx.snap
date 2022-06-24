@@ -146,6 +146,7 @@ exports[`Mobile Navigation List Matches Snapshot 1`] = `
       className="buttonContainer"
     >
       <button
+        aria-label="Mobile Navigation Button"
         data-testid="mobileNavListButton"
         onClick={[Function]}
       >

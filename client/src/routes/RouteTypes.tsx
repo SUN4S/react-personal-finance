@@ -1,29 +1,19 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useMemo, useState } from "react";
 
-import { useIsLoggedInQuery } from "../services/user";
-
-// VERY BASIC check to verify user
-const useAuth = () => {
-  const loggedInQuery = useIsLoggedInQuery({});
-
-  if (loggedInQuery.isSuccess) {
-    return true;
-  } else {
-    return false;
-  }
-};
+import { useAuth } from "../hooks/useAuth";
 
 // Public routes for non-authenticated users
 export const PublicRoutes = () => {
-  const auth = useAuth();
+  const { getStatus } = useAuth();
+  const auth = getStatus();
 
   return auth ? <Navigate to="/" /> : <Outlet />;
 };
 
 // Private routes for authenticated users
 export const ProtectedRoutes = () => {
-  const auth = useAuth();
+  const { getStatus } = useAuth();
+  const auth = getStatus();
 
   return auth ? <Outlet /> : <Navigate to="/login" />;
 };

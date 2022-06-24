@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Theme Switch Matches Dark Snapshot 1`] = `
+<button
+  aria-label="Theme switch"
+  data-testid="themeButton"
+  id="themeButton"
+  onClick={[Function]}
+>
+  <svg
+    id="moonLogo"
+    viewBox="0 0 38.25 39.91"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g
+      data-name="Layer 2"
+      id="Layer_2"
+    >
+      <g
+        data-name="Layer 1"
+        id="Layer_1-2"
+      >
+        <path
+          className="cls-1"
+          d="M13.88,1A19.54,19.54,0,1,0,37.25,29.5"
+        />
+        <path
+          className="cls-1"
+          d="M13.88,1A19.54,19.54,0,0,0,30.59,30.67a19.35,19.35,0,0,0,6.66-1.17"
+        />
+      </g>
+    </g>
+  </svg>
+</button>
+`;
+
+exports[`Theme Switch Matches Light Snapshot 1`] = `
+<button
+  aria-label="Theme switch"
+  data-testid="themeButton"
+  id="themeButton"
+  onClick={[Function]}
+>
+  <svg
+    id="sunLogo"
+    viewBox="0 0 43.08 43.08"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g
+      data-name="Layer 2"
+      id="Layer_2"
+    >
+      <g
+        data-name="Layer 1"
+        id="Layer_1-2"
+      >
+        <circle
+          className="cls-1"
+          cx="21.54"
+          cy="21.54"
+          r="9.24"
+        />
+        <line
+          className="cls-1"
+          x1="21.54"
+          x2="21.54"
+          y1="8.48"
+          y2="1"
+        />
+        <line
+          className="cls-1"
+          x1="21.54"
+          x2="21.54"
+          y1="42.08"
+          y2="34.61"
+        />
+        <line
+          className="cls-1"
+          x1="34.61"
+          x2="42.08"
+          y1="21.98"
+          y2="21.98"
+        />
+        <line
+          className="cls-1"
+          x1="1"
+          x2="8.48"
+          y1="21.98"
+          y2="21.98"
+        />
+        <line
+          className="cls-1"
+          x1="30.78"
+          x2="36.06"
+          y1="12.75"
+          y2="7.46"
+        />
+        <line
+          className="cls-1"
+          x1="7.02"
+          x2="12.3"
+          y1="36.51"
+          y2="31.22"
+        />
+        <line
+          className="cls-1"
+          x1="30.78"
+          x2="36.06"
+          y1="31.22"
+          y2="36.51"
+        />
+        <line
+          className="cls-1"
+          x1="7.02"
+          x2="12.3"
+          y1="7.46"
+          y2="12.75"
+        />
+      </g>
+    </g>
+  </svg>
+</button>
+`;
