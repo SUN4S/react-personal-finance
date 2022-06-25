@@ -56,6 +56,7 @@ export const Sidebar = () => {
           type="button"
           text="+"
           class="primaryBtn preload-transitions"
+          testId="openModal"
           action={() =>
             dispatch(toggleModal({ isOpen: true, editable: false }))
           }

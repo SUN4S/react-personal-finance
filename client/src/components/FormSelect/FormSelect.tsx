@@ -3,6 +3,7 @@ import { FormSelectProps } from "../../models/inputs";
 export const FormSelect: React.FC<FormSelectProps> = ({
   labelFor,
   label,
+  inputTestId,
   name,
   options,
   required,
@@ -15,7 +16,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
         <select
           {...register(name, { required: required })}
           defaultValue={"Essentials"}
-          data-testid="formSelect"
+          data-testid={inputTestId}
         >
           {options.map((item, index) => {
             return (

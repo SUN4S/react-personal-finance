@@ -5,6 +5,7 @@ import { FormInputProps } from "../../models/inputs";
 export const FormInput: React.FC<FormInputProps> = ({
   labelFor,
   label,
+  inputTestId,
   name,
   required,
   type,
@@ -20,7 +21,7 @@ export const FormInput: React.FC<FormInputProps> = ({
         children
       ) : (
         <input
-          data-testid="formInput"
+          data-testid={inputTestId}
           type={type}
           step={step}
           {...register(name, { required: required })}

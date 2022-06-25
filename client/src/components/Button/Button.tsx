@@ -8,6 +8,7 @@ export type ButtonProps = {
   type: "button" | "submit" | "reset" | undefined;
   text: string;
   class: string;
+  testId: string;
   action?: Function;
   disabled?: boolean;
   loading?: boolean;
@@ -58,7 +59,7 @@ export const Button = (props: ButtonProps) => {
       className={props.class}
       onClick={handleClick}
       disabled={props.disabled}
-      data-testid="button"
+      data-testid={props.testId}
     >
       {props.loading ? (
         <span className="loader" data-testid="buttonLoader"></span>

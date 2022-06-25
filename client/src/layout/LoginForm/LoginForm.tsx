@@ -29,29 +29,36 @@ export const LoginForm = (props: {
       <FormInput
         labelFor="username"
         label="Username:"
+        inputTestId="username"
         required
         type="text"
         placeholder="Ex.: John123, user69"
         register={register}
         name="username"
       />
-      {errors.username && <span>This field is required</span>}
+      {errors.username && (
+        <span data-testid="usernameMissing">This field is required</span>
+      )}
 
       <FormInput
         labelFor="password"
         label="Password:"
+        inputTestId="password"
         required
         type="password"
         placeholder="Ex.: password123, idontknow"
         register={register}
         name="password"
       />
-      {errors.password && <span>This field is required</span>}
+      {errors.password && (
+        <span data-testid="passwordMissing">This field is required</span>
+      )}
 
       <Button
         type="submit"
         class="primaryBtn"
         text="Login"
+        testId="login"
         loading={props.isLoading}
         disabled={props.isLoading}
       />
@@ -59,7 +66,12 @@ export const LoginForm = (props: {
       <Divider text="OR" />
 
       <Link to="/register">
-        <Button type="button" class="grayBtn" text="Register" />
+        <Button
+          type="button"
+          class="grayBtn"
+          text="Register"
+          testId="register"
+        />
       </Link>
     </form>
   );

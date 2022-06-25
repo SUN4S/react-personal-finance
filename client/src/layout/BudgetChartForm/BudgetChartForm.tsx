@@ -64,6 +64,7 @@ export const BudgetChartForm = () => {
         <FormInput
           labelFor="budget"
           name="budget"
+          inputTestId="budget"
           required
           type="number"
           placeholder="Ex.: 160, 96.43"
@@ -73,6 +74,7 @@ export const BudgetChartForm = () => {
           type="submit"
           class="primaryBtn"
           text="Add"
+          testId="addBudget"
           loading={isLoading}
         />
       </div>

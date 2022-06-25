@@ -28,6 +28,7 @@ const Template: Story<TemplateProps> = (args) => {
           labelFor={args.labelFor}
           label={args.label}
           name={args.name}
+          inputTestId={args.inputTestId}
           options={args.options}
           required={args.required}
           register={register}
@@ -44,6 +45,7 @@ Default_Light.args = {
   label: "Enter your name: ",
   options: ["Dog", "Cat", "Boat"],
   name: "name",
+  inputTestId: "select",
   required: true,
 };
 
@@ -54,5 +56,6 @@ Default_Dark.args = {
   label: "Enter your name: ",
   name: "name",
   options: ["Dog", "Cat", "Boat"],
+  inputTestId: "select",
   required: true,
 };

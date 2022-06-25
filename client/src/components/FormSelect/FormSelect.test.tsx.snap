@@ -10,7 +10,7 @@ exports[`Form Select Matches Snapshot 1`] = `
     className="selectDropdown"
   >
     <select
-      data-testid="formSelect"
+      data-testid="category"
       defaultValue="Essentials"
     >
       <option

@@ -13,6 +13,7 @@ describe("Form Textarea", () => {
         labelFor="description"
         label="Description:"
         name="description"
+        inputTestId="description"
         required={false}
         placeholder="Something to describe your expense"
         register={mockRegister}
@@ -27,6 +28,7 @@ describe("Form Textarea", () => {
         labelFor="description"
         label="Description:"
         name="description"
+        inputTestId="description"
         required={false}
         placeholder="Something to describe your expense"
         register={mockRegister}
@@ -41,6 +43,7 @@ describe("Form Textarea", () => {
         labelFor="description"
         label="Description:"
         name="description"
+        inputTestId="description"
         required={false}
         placeholder="Something to describe your expense"
         register={mockRegister}
@@ -55,12 +58,13 @@ describe("Form Textarea", () => {
         labelFor="description"
         label="Description:"
         name="description"
+        inputTestId="description"
         required={false}
         placeholder="Something to describe your expense"
         register={mockRegister}
       />
     );
-    expect(getByTestId("formTextarea")).toHaveAttribute(
+    expect(getByTestId("description")).toHaveAttribute(
       "placeholder",
       "Something to describe your expense"
     );
@@ -72,15 +76,16 @@ describe("Form Textarea", () => {
         labelFor="description"
         label="Description:"
         name="description"
+        inputTestId="description"
         required={false}
         placeholder="Something to describe your expense"
         register={mockRegister}
       />
     );
-    fireEvent.change(getByTestId("formTextarea"), {
+    fireEvent.change(getByTestId("description"), {
       target: { value: "John" },
     });
-    expect(getByTestId("formTextarea")).toHaveValue("John");
+    expect(getByTestId("description")).toHaveValue("John");
   });
 
   it("Matches Snapshot", () => {
@@ -89,6 +94,7 @@ describe("Form Textarea", () => {
         labelFor="description"
         label="Description:"
         name="description"
+        inputTestId="description"
         required={false}
         placeholder="Something to describe your expense"
         register={mockRegister}

@@ -27,35 +27,38 @@ export const RegisterForm = (props: {
       <FormInput
         labelFor="username"
         label="Username:"
+        inputTestId="username"
         required
         type="text"
         placeholder="Ex.: John123, user68"
         register={register}
         name="username"
       />
-      {errors.username && <span>This field is required</span>}
+      {errors.username && <span data-testid="usernameMissing">This field is required</span>}
 
       <FormInput
         labelFor="email"
         label="Email:"
+        inputTestId="email"
         required
         type="email"
         placeholder="Ex.: randomemail@mail.com"
         register={register}
         name="email"
       />
-      {errors.email && <span>This field is required</span>}
+      {errors.email && <span data-testid="emailMissing">This field is required</span>}
 
       <FormInput
         labelFor="password"
         label="Password:"
+        inputTestId="password"
         required
         type="password"
         placeholder="Ex.: password123, idontknow"
         register={register}
         name="password"
       />
-      {errors.password && <span>This field is required</span>}
+      {errors.password && <span data-testid="passwordMissing">This field is required</span>}
 
       <div className="reqContainer">
         <ul>
@@ -69,6 +72,7 @@ export const RegisterForm = (props: {
         type="submit"
         class="primaryBtn"
         text="Register"
+        testId="register"
         loading={props.isLoading}
         disabled={props.isLoading}
       />

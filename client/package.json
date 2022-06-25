@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "cypress": "cypress open",
     "test": "jest",
     "start": "NODE_ENV=development webpack serve",
     "build": "NODE_ENV=production webpack",
@@ -36,9 +37,9 @@
     "babel-loader": "^8.2.5",
     "cheerio": "^1.0.0-rc.3",
     "css-loader": "^6.7.1",
+    "cypress": "^10.2.0",
     "dotenv-webpack": "^7.1.0",
     "html-webpack-plugin": "^5.5.0",
-    "i": "^0.3.7",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^28.1.1",
     "jest-environment-jsdom": "^28.1.1",

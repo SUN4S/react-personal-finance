@@ -7,7 +7,7 @@ exports[`Form Textarea Matches Snapshot 1`] = `
 >
   Description:
   <textarea
-    data-testid="formTextarea"
+    data-testid="description"
     placeholder="Something to describe your expense"
   />
 </label>

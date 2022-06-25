@@ -281,7 +281,7 @@ export const ModalComponent = () => {
         </button>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormInput labelFor="date" label="Select time: ">
+          <FormInput labelFor="date" label="Select time: " inputTestId="date">
             <DatePicker
               selected={date}
               onChange={(date: Date) => setDate(date)}
@@ -294,6 +294,7 @@ export const ModalComponent = () => {
           <FormSelect
             labelFor="category"
             label="Expense Category"
+            inputTestId="category"
             name="category"
             options={["Essentials", "Wants", "Culture", "Unexpected"]}
             required
@@ -304,6 +305,7 @@ export const ModalComponent = () => {
             labelFor="number"
             label="Amount Spent:"
             name="amount"
+            inputTestId="amount"
             required
             type="number"
             placeholder="Amount"
@@ -315,12 +317,17 @@ export const ModalComponent = () => {
             labelFor="description"
             label="Description:"
             name="description"
+            inputTestId="description"
             required={false}
             placeholder="Something to describe your expense"
             register={register}
           />
 
-          <FormInput labelFor="tags" label="Select Tags to add: ">
+          <FormInput
+            labelFor="tags"
+            label="Select Tags to add: "
+            inputTestId="tags"
+          >
             <ReactTags
               tags={tags}
               delimiters={delimiters}
@@ -336,6 +343,7 @@ export const ModalComponent = () => {
           <FormInput
             labelFor="file"
             label={editable ? "Change receipt photo" : "Add receipt photo:"}
+            inputTestId="file"
           >
             <div className="receiptSelect">
               <input
@@ -351,6 +359,7 @@ export const ModalComponent = () => {
 
           <Button
             type="submit"
+            testId="submitForm"
             class={editable ? "modalBtn secondaryBtn" : "modalBtn primaryBtn"}
             text={editable ? "Edit Expense" : "Add Expense"}
             loading={isLoading}
@@ -362,6 +371,7 @@ export const ModalComponent = () => {
               type="button"
               class="modalBtn dangerBtn"
               text="Remove Expense"
+              testId="removeExpense"
               action={() => handleExpenseDelete()}
             />
           ) : (
@@ -369,6 +379,7 @@ export const ModalComponent = () => {
               type="button"
               class="modalBtn secondaryBtn"
               text="Clear Form"
+              testId="clearForm"
               action={() => resetForm()}
             />
           )}

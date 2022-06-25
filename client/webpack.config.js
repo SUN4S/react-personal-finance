@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const Dotenv = require("dotenv-webpack");
+const webpack = require("webpack");
 let mode = process.env.NODE_ENV ? "production" : "development";
 
 module.exports = {
@@ -19,6 +20,7 @@ module.exports = {
     publicPath: "/",
   },
   optimization: {
+    runtimeChunk: "single",
     splitChunks: {
       minSize: 10000,
       maxSize: 250000,

@@ -15,6 +15,7 @@ describe("Form Select", () => {
         labelFor="category"
         label="Expense Category"
         name="category"
+        inputTestId="category"
         options={["Essentials", "Wants", "Culture", "Unexpected"]}
         required
         register={mockRegister}
@@ -29,6 +30,7 @@ describe("Form Select", () => {
         labelFor="category"
         label="Expense Category"
         name="category"
+        inputTestId="category"
         options={["Essentials", "Wants", "Culture", "Unexpected"]}
         required
         register={mockRegister}
@@ -43,6 +45,7 @@ describe("Form Select", () => {
         labelFor="category"
         label="Expense Category"
         name="category"
+        inputTestId="category"
         options={["Essentials", "Wants", "Culture", "Unexpected"]}
         required
         register={mockRegister}
@@ -57,12 +60,13 @@ describe("Form Select", () => {
         labelFor="category"
         label="Expense Category"
         name="category"
+        inputTestId="category"
         options={["Essentials", "Wants", "Culture", "Unexpected"]}
         required
         register={mockRegister}
       />
     );
-    expect(getByTestId("formSelect")).toBeTruthy();
+    expect(getByTestId("category")).toBeTruthy();
   });
 
   it("Renders Options", () => {
@@ -71,12 +75,13 @@ describe("Form Select", () => {
         labelFor="category"
         label="Expense Category"
         name="category"
+        inputTestId="category"
         options={["Essentials", "Wants", "Culture", "Unexpected"]}
         required
         register={mockRegister}
       />
     );
-    const options = getByTestId("formSelect").querySelectorAll("option");
+    const options = getByTestId("category").querySelectorAll("option");
     expect(options[0]).toHaveTextContent("Essentials");
     expect(options[1]).toHaveTextContent("Wants");
     expect(options[2]).toHaveTextContent("Culture");
@@ -89,15 +94,16 @@ describe("Form Select", () => {
         labelFor="category"
         label="Expense Category"
         name="category"
+        inputTestId="category"
         options={["Essentials", "Wants", "Culture", "Unexpected"]}
         required
         register={mockRegister}
       />
     );
-    fireEvent.change(getByTestId("formSelect"), {
+    fireEvent.change(getByTestId("category"), {
       target: { value: "Culture", name: "Culture" },
     });
-    expect(getByTestId("formSelect")).toHaveValue("Culture");
+    expect(getByTestId("category")).toHaveValue("Culture");
   });
 
   it("Matches Snapshot", () => {
@@ -106,6 +112,7 @@ describe("Form Select", () => {
         labelFor="category"
         label="Expense Category"
         name="category"
+        inputTestId="category"
         options={["Essentials", "Wants", "Culture", "Unexpected"]}
         required
         register={mockRegister}

@@ -8,14 +8,24 @@ describe("Button", () => {
 
   it("Button", () => {
     const { getByTestId } = render(
-      <Button type="button" text="Press Me!" class="primaryBtn" />
+      <Button
+        type="button"
+        text="Press Me!"
+        class="primaryBtn"
+        testId="button"
+      />
     );
     expect(getByTestId("button")).toBeTruthy();
   });
 
   it("Renders Text", () => {
     const { getByTestId } = render(
-      <Button type="button" text="Press Me!" class="primaryBtn" />
+      <Button
+        type="button"
+        text="Press Me!"
+        class="primaryBtn"
+        testId="button"
+      />
     );
     const buttonText = screen.getByText("Press Me!");
     expect(buttonText).toBeTruthy();
@@ -27,6 +37,7 @@ describe("Button", () => {
       <Button
         type="button"
         text="Press Me!"
+        testId="button"
         class="primaryBtn"
         action={mockFunction}
       />
@@ -42,6 +53,7 @@ describe("Button", () => {
       <Button
         type="button"
         text="Press Me!"
+        testId="button"
         class="primaryBtn"
         action={mockFunction}
         disabled
@@ -53,21 +65,38 @@ describe("Button", () => {
 
   it("Loading", () => {
     const { getByTestId } = render(
-      <Button type="button" text="Press Me!" class="primaryBtn" loading />
+      <Button
+        type="button"
+        text="Press Me!"
+        class="primaryBtn"
+        testId="button"
+        loading
+      />
     );
     expect(getByTestId("buttonLoader")).toBeTruthy();
   });
 
   it("Matches Snapshot", () => {
     const tree = renderer.create(
-      <Button type="button" text="Press Me!" class="primaryBtn" />
+      <Button
+        type="button"
+        text="Press Me!"
+        class="primaryBtn"
+        testId="button"
+      />
     );
     expect(tree).toMatchSnapshot();
   });
 
   it("Matches Loading Snapshot", () => {
     const tree = renderer.create(
-      <Button type="button" text="Press Me!" class="primaryBtn" loading />
+      <Button
+        type="button"
+        text="Press Me!"
+        class="primaryBtn"
+        testId="button"
+        loading
+      />
     );
     expect(tree).toMatchSnapshot();
   });

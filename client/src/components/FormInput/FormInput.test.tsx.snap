@@ -18,7 +18,7 @@ exports[`Form Input Matches Snapshot 1`] = `
 >
   username
   <input
-    data-testid="formInput"
+    data-testid="username"
     placeholder="Enter Name"
     type="text"
   />

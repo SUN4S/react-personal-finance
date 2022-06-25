@@ -28,6 +28,7 @@ const Template: Story<TemplateProps> = (args) => {
           labelFor={args.labelFor}
           label={args.label}
           name={args.name}
+          inputTestId={args.inputTestId}
           required={args.required}
           type={args.type}
           placeholder={args.placeholder}
@@ -44,6 +45,7 @@ Default_Light.args = {
   labelFor: "name",
   label: "Enter your name: ",
   name: "name",
+  inputTestId: "input",
   required: true,
   type: "text",
   step: 0.1,
@@ -56,6 +58,7 @@ Default_Dark.args = {
   labelFor: "name",
   label: "Enter your name: ",
   name: "name",
+  inputTestId: "input",
   required: true,
   type: "text",
   step: 0.1,

@@ -11,8 +11,8 @@ const initialState = {
 };
 
 // Redux Toolkit create slice
-// reducers: notification is used to generate a new notification 
-// it can be called from anywhere, to display notification with provided prop data 
+// reducers: notification is used to generate a new notification
+// it can be called from anywhere, to display notification with provided prop data
 export const notificationSlice = createSlice({
   name: "notification",
   initialState,

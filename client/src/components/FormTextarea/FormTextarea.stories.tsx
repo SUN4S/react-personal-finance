@@ -27,6 +27,7 @@ const Template: Story<TemplateProps> = (args) => {
         <FormTextarea
           labelFor={args.labelFor}
           label={args.label}
+          inputTestId={args.inputTestId}
           name={args.name}
           required={args.required}
           placeholder={args.placeholder}
@@ -43,6 +44,7 @@ Default_Light.args = {
   labelFor: "name",
   label: "Enter Some text: ",
   name: "name",
+  inputTestId: "textarea",
   placeholder: "Text goes here",
   required: true,
 };
@@ -53,6 +55,7 @@ Default_Dark.args = {
   labelFor: "name",
   label: "Enter Some text: ",
   name: "name",
+  inputTestId: "textarea",
   placeholder: "Text goes here",
   required: true,
 };

@@ -2,6 +2,7 @@ export interface FormInputProps {
   labelFor: string;
   label?: string;
   name?: string;
+  inputTestId?: string;
   required?: boolean;
   type?: "text" | "password" | "email" | "number";
   step?: number;
@@ -14,6 +15,7 @@ export interface FormSelectProps {
   labelFor: string;
   label: string;
   name: string;
+  inputTestId: string;
   options: Array<string>;
   required: boolean;
   placeholder?: string;
@@ -24,6 +26,7 @@ export interface FormTextareaProps {
   labelFor: string;
   label: string;
   name: string;
+  inputTestId: string;
   required: boolean;
   placeholder?: string;
   register: any;

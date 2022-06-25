@@ -11,6 +11,7 @@ describe("Form Input", () => {
       <FormInput
         labelFor="username"
         label="username"
+        inputTestId="username"
         required
         type="text"
         name="username"
@@ -26,6 +27,7 @@ describe("Form Input", () => {
       <FormInput
         labelFor="username"
         label="username"
+        inputTestId="username"
         required
         type="text"
         name="username"
@@ -41,6 +43,7 @@ describe("Form Input", () => {
       <FormInput
         labelFor="username"
         label="username"
+        inputTestId="username"
         required
         type="text"
         name="username"
@@ -56,6 +59,7 @@ describe("Form Input", () => {
       <FormInput
         labelFor="username"
         label="username"
+        inputTestId="username"
         required
         type="text"
         name="username"
@@ -63,7 +67,7 @@ describe("Form Input", () => {
         register={mockRegister}
       />
     );
-    expect(getByTestId("formInput")).toBeTruthy();
+    expect(getByTestId("username")).toBeTruthy();
   });
 
   it("Renders Placeholder", () => {
@@ -71,6 +75,7 @@ describe("Form Input", () => {
       <FormInput
         labelFor="username"
         label="username"
+        inputTestId="username"
         required
         type="text"
         name="username"
@@ -78,7 +83,7 @@ describe("Form Input", () => {
         register={mockRegister}
       />
     );
-    expect(getByTestId("formInput")).toHaveAttribute(
+    expect(getByTestId("username")).toHaveAttribute(
       "placeholder",
       "Enter Name"
     );
@@ -89,6 +94,7 @@ describe("Form Input", () => {
       <FormInput
         labelFor="username"
         label="username"
+        inputTestId="username"
         required
         type="text"
         name="username"
@@ -96,7 +102,7 @@ describe("Form Input", () => {
         register={mockRegister}
       />
     );
-    expect(getByTestId("formInput")).toHaveAttribute("type", "text");
+    expect(getByTestId("username")).toHaveAttribute("type", "text");
   });
 
   it("Is Typeable", () => {
@@ -104,6 +110,7 @@ describe("Form Input", () => {
       <FormInput
         labelFor="username"
         label="username"
+        inputTestId="username"
         required
         type="text"
         name="username"
@@ -111,8 +118,8 @@ describe("Form Input", () => {
         register={mockRegister}
       />
     );
-    fireEvent.change(getByTestId("formInput"), { target: { value: "John" } });
-    expect(getByTestId("formInput")).toHaveValue("John");
+    fireEvent.change(getByTestId("username"), { target: { value: "John" } });
+    expect(getByTestId("username")).toHaveValue("John");
   });
 
   it("Renders Children", () => {
@@ -129,6 +136,7 @@ describe("Form Input", () => {
       <FormInput
         labelFor="username"
         label="username"
+        inputTestId="username"
         required
         type="text"
         name="username"

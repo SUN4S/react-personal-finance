@@ -6,6 +6,7 @@ interface TemplateProps {
   theme: String;
   type: "button" | "submit" | "reset" | undefined;
   text: string;
+  testId: string;
   class: string;
   action?: Function;
   disabled: boolean;
@@ -31,7 +32,14 @@ const Template: Story<TemplateProps> = (args) => {
   return (
     <html data-theme={args.theme}>
       <body>
-        <Button {...args} />
+        <Button
+          type={args.type}
+          text={args.text}
+          class={args.class}
+          testId={args.testId}
+          disabled={args.disabled}
+          loading={args.loading}
+        />
       </body>
     </html>
   );
@@ -43,6 +51,7 @@ Primary_Light.args = {
   type: "button",
   text: "Click Me!",
   class: "primaryBtn",
+  testId: "button",
   disabled: false,
   loading: false,
 };
@@ -53,6 +62,7 @@ Primary_Dark.args = {
   type: "button",
   text: "Click Me!",
   class: "primaryBtn",
+  testId: "button",
   disabled: false,
   loading: false,
 };
@@ -63,6 +73,7 @@ Secondary_Light.args = {
   type: "button",
   text: "Click Me!",
   class: "secondaryBtn",
+  testId: "button",
   disabled: false,
   loading: false,
 };
@@ -73,6 +84,7 @@ Secondary_Dark.args = {
   type: "button",
   text: "Click Me!",
   class: "secondaryBtn",
+  testId: "button",
   disabled: false,
   loading: false,
 };
@@ -83,6 +95,7 @@ Gray_Light.args = {
   type: "button",
   text: "Click Me!",
   class: "grayBtn",
+  testId: "button",
   disabled: false,
   loading: false,
 };
@@ -93,6 +106,7 @@ Gray_Dark.args = {
   type: "button",
   text: "Click Me!",
   class: "grayBtn",
+  testId: "button",
   disabled: false,
   loading: false,
 };
