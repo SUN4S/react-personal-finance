@@ -12,6 +12,7 @@ describe("Settings Page", () => {
 
     cy.get(`[data-testid="deleteUser"]`).should("be.visible");
     cy.get(`[data-testid="deleteUser"]`).click();
+    cy.on("window:confirm", () => true);
 
     cy.contains("Delete User").should("exist");
     cy.contains("User Successfully Deleted").should("exist");

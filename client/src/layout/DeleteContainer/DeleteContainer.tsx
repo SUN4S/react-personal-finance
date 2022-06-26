@@ -17,29 +17,31 @@ export const DeleteContainer = () => {
   const navigate = useNavigate();
 
   const handleClick = async () => {
-    // Calling Redux Toolkit api to delete user
-    const response: any = await deleteUser(null);
-    if (response.data) {
-      // If response goes throught
-      // Dispatch Redux Toolkit function to generate notification
-      dispatch(
-        notification({
-          title: "Delete User",
-          message: response.data.msg,
-          type: "success",
-        })
-      );
-      navigate("/login");
-    } else if (response.error) {
-      // If response fails
-      // Dispatch Redux Toolkit function to generate notification
-      dispatch(
-        notification({
-          title: "Delete User",
-          message: "Something Went Wrong",
-          type: "danger",
-        })
-      );
+    if (confirm("Are you sure you want to Delete your Account")) {
+      // Calling Redux Toolkit api to delete user
+      const response: any = await deleteUser(null);
+      if (response.data) {
+        // If response goes throught
+        // Dispatch Redux Toolkit function to generate notification
+        dispatch(
+          notification({
+            title: "Delete User",
+            message: response.data.msg,
+            type: "success",
+          })
+        );
+        navigate("/login");
+      } else if (response.error) {
+        // If response fails
+        // Dispatch Redux Toolkit function to generate notification
+        dispatch(
+          notification({
+            title: "Delete User",
+            message: "Something Went Wrong",
+            type: "danger",
+          })
+        );
+      }
     }
   };
 
