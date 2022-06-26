@@ -13,7 +13,7 @@ export const UserDropdown = (props: {
       className={`${!props.openStatus && "collapsedDropdown"}`}
     >
       <ul>
-        <li>
+        <li data-testid="settingsLink">
           <Link to="/settings">Settings</Link>
         </li>
         <li>

@@ -8,7 +8,7 @@ export const userApi = baseApi.injectEndpoints({
     // First mutation(query) takes user object and tries to authenticate user
     login: builder.mutation({
       query: (userData: LoginInputs) => ({
-        url: `/login`,
+        url: `/user/login`,
         method: "POST",
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
@@ -19,7 +19,7 @@ export const userApi = baseApi.injectEndpoints({
     // Second mutation(query) takes user object and tries to create a new user
     registerUser: builder.mutation({
       query: (userData: RegisterInputs) => ({
-        url: `/register`,
+        url: `/user/register`,
         method: "POST",
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
@@ -30,8 +30,16 @@ export const userApi = baseApi.injectEndpoints({
     // Third mutation(query) uses token to remove user from session
     logoutUser: builder.mutation({
       query: () => ({
-        url: `/logout`,
+        url: `/user/logout`,
         method: "POST",
+        withCredentials: true,
+      }),
+      invalidatesTags: ["User"],
+    }),
+    deleteUser: builder.mutation({
+      query: () => ({
+        url: `/user/delete`,
+        method: "DELETE",
         withCredentials: true,
       }),
       invalidatesTags: ["User"],
@@ -39,7 +47,7 @@ export const userApi = baseApi.injectEndpoints({
     // Fourth query send a request to see if user is logged to current session
     isLoggedIn: builder.query({
       query: () => ({
-        url: `/loggedIn`,
+        url: `/user/loggedIn`,
         method: "GET",
         withCredentials: true,
       }),
@@ -52,5 +60,6 @@ export const {
   useLoginMutation,
   useLogoutUserMutation,
   useRegisterUserMutation,
+  useDeleteUserMutation,
   useIsLoggedInQuery,
 } = userApi;

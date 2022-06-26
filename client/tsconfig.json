@@ -22,6 +22,6 @@
     "outDir": "./dist/",
     "noImplicitAny": true,
   },
-  "include": [ "src/**/*.tsx?", "types", "serviceWorker.js", "jest", "jest.config.js", "./setUpTests.js" ],
+  "include": [ "src/**/*.tsx?", "types", "serviceWorker.js", "jest", "jest.config.js", "./setUpTests.js", "src/index.d.ts" ],
   "exclude": [ "cypress" ]
 }

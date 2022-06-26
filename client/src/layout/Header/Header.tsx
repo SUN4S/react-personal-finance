@@ -55,6 +55,7 @@ export const Header = () => {
       setTheme("light");
     }
   };
+
   return (
     <header>
       <ThemeSwitch theme={currentTheme} clickFunction={handleThemeChange} />
@@ -65,6 +66,7 @@ export const Header = () => {
         />
         <h4>{user.username || "placeholder"}</h4>
         <div
+          data-testid="dropdownToggle"
           className={`dropdownArror ${open && "invertedArrow"}`}
           onClick={() => setOpen(!open)}
         >

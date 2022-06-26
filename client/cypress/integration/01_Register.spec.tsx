@@ -27,19 +27,19 @@ describe("Register Page", () => {
   it("Failed Register (Weak password)", () => {
     cy.get(`[data-testid="username"]`).type("thisuserdoesnotexis2");
     cy.get(`[data-testid="email"]`).type("dog@gmail.com");
-    cy.get(`[data-testid="password"]`).type("!@*#/!$-+Svnmac");
+    cy.get(`[data-testid="password"]`).type("dog");
     cy.get(`[data-testid="register"]`).click();
 
     cy.contains("Register User").should("exist");
     cy.contains(
       "Password must be strong. At least one upper case alphabet. At least one lower case alphabet. At least one digit. At least one special character. Minimum eight in length"
     ).should("exist");
-  }); //email@fmajcin.com
+  });
 
   it("Failed Register (Duplicate User)", () => {
     cy.get(`[data-testid="username"]`).clear().type("user123");
-    cy.get(`[data-testid="email"]`).clear().type("dog@gmail.com");
-    cy.get(`[data-testid="password"]`).clear().type("!@*#/!$-+Svnmac");
+    cy.get(`[data-testid="email"]`).clear().type("email@email123.com");
+    cy.get(`[data-testid="password"]`).clear().type("Password-123");
     cy.get(`[data-testid="register"]`).click();
 
     cy.contains("Register User").should("exist");

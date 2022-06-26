@@ -94,7 +94,7 @@ try {
   console.log(error);
 }
 
-app.use("/api", user);
+app.use("/api/user", user);
 app.use("/api/expenses", expenses);
 app.use("/api/budget", budget);
 

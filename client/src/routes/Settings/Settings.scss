@@ -1,0 +1,70 @@
+.settings {
+  width: 100%;
+  height: calc(100% - 72px);
+  overflow-y: auto;
+  padding: 16px 16px 16px 16px;
+
+  .settingsContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    padding: 8px;
+    border-radius: 3px;
+    background-color: var(--sidebar-bg);
+    box-shadow: 0 0 12px var(--primary-diffused);
+
+    .settingsHeader {
+      width: 100%;
+      height: 64px;
+      padding: 8px 16px;
+      text-align: center;
+      border-bottom: 1px solid var(--text-secondary);
+
+      h2 {
+        color: var(--text-primary);
+        font-weight: 400;
+      }
+    }
+
+    .settingsBody {
+      width: 100%;
+      height: calc(100% - 64px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 8px 0;
+
+      .leftSide {
+        width: 50%;
+        height: 100%;
+        padding: 8px;
+        border-right: 1px solid var(--text-secondary);
+      }
+
+      .rightSide {
+        width: 50%;
+        height: 100%;
+        padding: 8px;
+      }
+
+      @media (max-width: 576px) {
+        .leftSide {
+          width: 100%;
+          border-right: none;
+        }
+        .rightSide {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 576px) {
+    margin-bottom: 64px;
+  }
+}

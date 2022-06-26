@@ -12,6 +12,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ReactNotifications } from "react-notifications-component";
 import { Register } from "./routes/Register/Register";
+import { Settings } from "../src/routes/Settings/Settings";
 import { store } from "./app/store";
 
 // Creating root for React to inject code into
@@ -39,7 +40,7 @@ root.render(
             {/* App contains nav check(normal or mobile) and an Outlet */}
             <Route path="/" element={<App />}>
               <Route index element={<Dashboard />} />
-              <Route path="settings" element={<h1>settings</h1>} />
+              <Route path="settings" element={<Settings />} />
               <Route path="history" element={<h1>history</h1>} />
               <Route path="stocks" element={<h1>stocks</h1>} />
               <Route path="weekly" element={<h1>weekly</h1>} />

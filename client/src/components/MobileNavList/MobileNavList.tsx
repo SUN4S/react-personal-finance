@@ -30,7 +30,7 @@ export const MobileNavList = (props: { clickFunction: Function }) => {
             data-testid="mobileNavListButton"
             onClick={() => props.clickFunction()}
           >
-            +
+            <span>+</span>
           </button>
         </li>
         <li>

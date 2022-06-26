@@ -1,0 +1,29 @@
+.deleteContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  h3 {
+    width: 100%;
+    padding: 0 0 16px 0;
+    margin-bottom: 16px;
+    font-weight: 400;
+    color: var(--text-primary);
+    text-align: center;
+    border-bottom: 1px solid var(--text-secondary);
+  }
+
+  button {
+    width: 80%;
+  }
+
+  @media (max-width: 576px) {
+    .deleteContainer {
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

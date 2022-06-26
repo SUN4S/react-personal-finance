@@ -21,9 +21,13 @@ router.post("/login", passport.authenticate("local"), async (req: Request, res: 
 // Get request to check if user is logged in
 router.get("/loggedIn", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
-    res
-      .status(200)
-      .json({ msg: "User is logged in", username: req.user.username, image: req.user.image });
+    try {
+      return res
+        .status(200)
+        .json({ msg: "User is logged in", username: req.user.username, image: req.user.image });
+    } catch (error) {
+      logger.error(error);
+    }
   } else {
     res.status(401).json({ msg: "Unauthorizes access" });
   }
@@ -32,27 +36,31 @@ router.get("/loggedIn", async (req: Request, res: Response) => {
 // Set user avatar image
 router.post("/avatar", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
-    // Defining default values
-    let file = undefined;
-    let fileName = null;
-    // Checking if file was provided
-    if (req.files) {
-      const file = req.files.avatar;
-      const fileName = Date.now() + "-" + Math.round(Math.random() * 1e9) + file.name;
-      if (!global.whitelist.includes(file.mimetype)) {
-        return res.json({ msg: "Bad file format" });
-      } else {
-        file.mv(`${global.__basedir}/uploads/avatars/${fileName}`);
-      }
+    try {
+      // Defining default values
+      let file = undefined;
+      let fileName = null;
+      // Checking if file was provided
+      if (req.files) {
+        const file = req.files.avatar;
+        const fileName = Date.now() + "-" + Math.round(Math.random() * 1e9) + file.name;
+        if (!global.whitelist.includes(file.mimetype)) {
+          return res.json({ msg: "Bad file format" });
+        } else {
+          file.mv(`${global.__basedir}/uploads/avatars/${fileName}`);
+        }
 
-      // Saving file name in userModel which will be used later to find the img
-      const changeAvatar = await UserModel.findOneAndUpdate(
-        { _id: req.user.id },
-        { image: fileName }
-      );
-      return res.json({ msg: "Successfuly Added Avatar" });
-    } else {
-      res.json({ msg: "Avatar not provided" });
+        // Saving file name in userModel which will be used later to find the img
+        const changeAvatar = await UserModel.findOneAndUpdate(
+          { _id: req.user.id },
+          { image: fileName }
+        );
+        return res.json({ msg: "Successfuly Added Avatar" });
+      } else {
+        return res.json({ msg: "Avatar not provided" });
+      }
+    } catch (error) {
+      logger.error(error);
     }
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
@@ -61,12 +69,23 @@ router.post("/avatar", async (req: Request, res: Response) => {
 
 // Register a new user
 router.post("/register", async (req: Request, res: Response) => {
-  try {
-    const { username, email, password } = req.body;
+  const { username, email, password } = req.body;
 
+  const data = joiUserSchema.validate({
+    username: username,
+    email: email,
+    password: password,
+  });
+
+  if (data.error) {
+    return res.status(400).json({ msg: data.error.message });
+  }
+
+  try {
     const user = await UserModel.findOne({
       $or: [{ username: username }, { email: email }],
     });
+
     if (user != null) {
       if (user.username === username) {
         logger.warn(`Duplicate User Attempted Registration (Username: ${username})`);
@@ -76,16 +95,6 @@ router.post("/register", async (req: Request, res: Response) => {
       }
       return res.status(409).json({ msg: "Username or Email already in use" });
     } else {
-      const data = joiUserSchema.validate({
-        username: username,
-        email: email,
-        password: password,
-      });
-
-      if (data.error) {
-        return res.status(400).json({ msg: data.error.message });
-      }
-
       //Bcrypt works its magic
       bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(password, salt, function (err, hash) {
@@ -112,6 +121,30 @@ router.post("/register", async (req: Request, res: Response) => {
     }
   } catch (error) {
     logger.error(error);
+  }
+});
+
+router.delete("/delete", async (req: Request, res: Response) => {
+  if (req.isAuthenticated()) {
+    try {
+      await UserModel.findOneAndDelete({
+        _id: req.user.id,
+      });
+      await ExpensesModel.findOneAndDelete({
+        userid: req.user.id,
+      });
+      await BudgetModel.findOneAndDelete({
+        userid: req.user.id,
+      });
+      logger.info(`${req.user.username} has been deleted`);
+      req.logout();
+      return res.json({ msg: "User Successfully Deleted" });
+    } catch (error) {
+      console.log(error);
+      logger.error(error);
+    }
+  } else {
+    res.status(401).json({ msg: "Unauthorized access" });
   }
 });
 
