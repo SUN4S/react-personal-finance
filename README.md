@@ -22,7 +22,6 @@ DB_CLUSTER=<mongo db cluster>
 DB_DBNAME=<mongo db database name>
 SSL_CERT_FILE=<https cert file location>
 SSL_CERT_KEY=<https cer key file location>
-LOGTAIL_SOURCE_TOKEN=<Your Logtail token>
 ```
 and run ```npm start```
 

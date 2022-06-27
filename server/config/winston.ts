@@ -1,17 +1,21 @@
 import "winston-daily-rotate-file";
 
-import { Logtail } from "@logtail/node";
-import { LogtailTransport } from "@logtail/winston";
+import winston, { format } from "winston";
+
+import LogzioWinstonTransport from "winston-logzio";
 import path from "path";
-import winston from "winston";
 
 const dotenv = require("dotenv");
 dotenv.config();
 
 const { combine, timestamp, colorize, align, printf, json } = winston.format;
 
-// Connecting to logtail service
-const logtail = new Logtail(process.env.LOGTAIL_SOURCE_TOKEN);
+const logzioWinstonTransport = new LogzioWinstonTransport({
+  level: "info",
+  name: "winston_logzio",
+  token: process.env.LOGZIO_TOKEN,
+  host: process.env.LOGZIO_ADDRESS,
+});
 
 // functions to filter out rogue data
 const infoFilter = winston.format((info, opts) => {
@@ -126,7 +130,7 @@ const logger = winston.createLogger({
     fileRotateTransportWarn,
     fileRotateTransportError,
     fileRotateTransportHttp,
-    new LogtailTransport(logtail),
+    logzioWinstonTransport,
   ],
   exceptionHandlers: [
     new winston.transports.File({ filename: path.resolve(process.cwd() + "/logs/exception.log") }),

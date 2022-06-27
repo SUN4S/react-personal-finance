@@ -2,9 +2,12 @@ const budget = require("./routes/BudgetController");
 const expenses = require("./routes/ExpensesController");
 const user = require("./routes/UserController");
 
+import "./cron/cronjob";
+
 import express, { Express } from "express";
 import { morganRequestMiddleware, morganResponseMiddleware } from "./middleware/morgan";
 
+import { PassThrough } from "stream";
 import compression from "compression";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -92,6 +95,7 @@ try {
   );
 } catch (error) {
   console.log(error);
+  logger.error(error);
 }
 
 app.use("/api/user", user);
