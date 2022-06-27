@@ -95,7 +95,7 @@ try {
   );
 } catch (error) {
   console.log(error);
-  logger.error(error);
+  logger.error(error.message);
 }
 
 app.use("/api/user", user);

@@ -3,6 +3,7 @@ import express, { Request, Response } from "express";
 
 import { BudgetModel } from "../models/budgetSchema";
 import { ExpensesModel } from "../models/expensesSchema";
+import { ReportsModel } from "../models/reportsSchema";
 import bcrypt from "bcrypt";
 import logger from "../config/winston";
 import passport from "passport";
@@ -26,7 +27,7 @@ router.get("/loggedIn", async (req: Request, res: Response) => {
         .status(200)
         .json({ msg: "User is logged in", username: req.user.username, image: req.user.image });
     } catch (error) {
-      logger.error(error);
+      logger.error(error.message);
     }
   } else {
     res.status(401).json({ msg: "Unauthorizes access" });
@@ -60,7 +61,7 @@ router.post("/avatar", async (req: Request, res: Response) => {
         return res.json({ msg: "Avatar not provided" });
       }
     } catch (error) {
-      logger.error(error);
+      logger.error(error.message);
     }
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
@@ -113,6 +114,11 @@ router.post("/register", async (req: Request, res: Response) => {
               userid: response._id,
               budget: [],
             });
+            ReportsModel.create({
+              userid: response._id,
+              weeklyReports: [],
+              monthlyReports: [],
+            });
           });
         });
       });
@@ -120,7 +126,7 @@ router.post("/register", async (req: Request, res: Response) => {
       return res.status(201).json({ msg: "Account created succesfully" });
     }
   } catch (error) {
-    logger.error(error);
+    logger.error(error.message);
   }
 });
 
@@ -136,12 +142,15 @@ router.delete("/delete", async (req: Request, res: Response) => {
       await BudgetModel.findOneAndDelete({
         userid: req.user.id,
       });
+      await ReportsModel.findOneAndDelete({
+        userid: req.user.id,
+      });
+
       logger.info(`${req.user.username} has been deleted`);
       req.logout();
       return res.json({ msg: "User Successfully Deleted" });
     } catch (error) {
-      console.log(error);
-      logger.error(error);
+      logger.error(error.message);
     }
   } else {
     res.status(401).json({ msg: "Unauthorized access" });

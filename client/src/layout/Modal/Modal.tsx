@@ -116,15 +116,18 @@ export const ModalComponent = () => {
   const onSubmit: SubmitHandler<ModalInputs> = (data) => {
     // checks if modal is used to edit expense
     if (editable) {
+      console.log(modalData);
       // tags need to be parsed from object to array
       const tagData = tags.map((item) => {
         return item.text;
       });
       // Create new object that will be sent to the back-end
       const expenseObject = {
-        ...modalData!,
+        _id: modalData?._id,
+        date: date,
         category: data.category || modalData?.category!,
         amount: Number(data.amount),
+        description: data.description || undefined,
         tags: [...tagData].toString(),
         receipt: selectedFile || modalData?.receipt,
       };
@@ -147,10 +150,12 @@ export const ModalComponent = () => {
       // Create new object that will be sent to the back-end
 
       const expenseObject = {
-        ...data,
         date: date,
-        tags: tagData.toString(),
-        receipt: selectedFile,
+        category: data.category || modalData?.category!,
+        amount: Number(data.amount),
+        description: data.description || undefined,
+        tags: [...tagData].toString(),
+        receipt: selectedFile || modalData?.receipt,
       };
       // Use Redux toolkit api to send NEW expense data
       postExpense(expenseObject);

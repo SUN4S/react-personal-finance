@@ -10,15 +10,15 @@ const ExpensesSchema = new mongoose.Schema(
     tags: { type: [{ type: String }], default: [] },
     receipt: { type: String, Default: null },
   },
-  { collection: "expensesList" }
+  { collection: "expenseList" }
 );
 
 const UserExpenses = new mongoose.Schema(
   {
     userid: { type: String, required: true },
-    expensesList: { type: [ExpensesSchema], default: Array },
+    expenseList: { type: [ExpensesSchema], default: Array },
   },
-  { collection: "expensesList" }
+  { collection: "expenseList" }
 );
 
 export const joiExpenseSchema = Joi.object({

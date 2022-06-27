@@ -1,61 +1,72 @@
 import { ExpensesModel } from "../models/expensesSchema";
+import { ReportsModel } from "../models/reportsSchema";
 import cron from "cron";
 import logger from "../config/winston";
 
-// const job = new cron.CronJob(
-//   "* * * * * *",
-//   function () {
-//     console.log("You will see this message every second");
-//   },
-//   null,
-//   true,
-//   "Europe/London"
-// );
-
-const getList = async () => {
+const generateWeeklyReport = async () => {
   try {
-    // Gets expense object
+    // Gets all expenses
     const expenses = await ExpensesModel.find({});
     const data = await expenses;
-    data.map((object) => {
-      const totalAmount = object.expensesList
-        .map((item) => item.amount)
-        .reduce((prev, next) => prev + next);
+    data.map(async (object) => {
+      let totalAmount = 0;
+      let essentialsAmount = 0;
+      let wantsAmount = 0;
+      let cultureAmount = 0;
+      let unexpectedAmount = 0;
 
-      const essentialsAmount =
-        object.expensesList
-          .filter((item) => item.category === "Essentials")
-          .map((item) => item.amount)
-          .reduce((prev, next) => prev + next) || 0;
+      object.expenseList.length > 0 &&
+        object.expenseList
+          .filter(
+            (item) =>
+              item.date >
+                new Date(
+                  new Date().getFullYear(),
+                  new Date().getMonth(),
+                  new Date().getDate() - 7
+                ) && item.date < new Date()
+          )
+          .map((item) => {
+            totalAmount += item.amount;
+            switch (item.category) {
+              case "Essentials":
+                essentialsAmount += item.amount;
+                break;
+              case "Wants":
+                wantsAmount += item.amount;
+                break;
+              case "Culture":
+                cultureAmount += item.amount;
+                break;
+              case "Unexpected":
+                unexpectedAmount += item.amount;
+                break;
+            }
+          });
 
-      const WantsAmount =
-        object.expensesList
-          .filter((item) => item.category === "Wants")
-          .map((item) => item.amount)
-          .reduce((prev, next) => prev + next) || 0;
-
-      const cultureAmount =
-        object.expensesList
-          .filter((item) => item.category === "Culture")
-          .map((item) => item.amount)
-          .reduce((prev, next) => prev + next) || 0;
-
-      const unexpectedAmount =
-        object.expensesList
-          .filter((item) => item.category === "Unexpected")
-          .map((item) => item.amount)
-          .reduce((prev, next) => prev + next) || 0;
-
-      console.log(object);
-      console.log(totalAmount);
-      console.log(essentialsAmount);
-      console.log(WantsAmount);
-      console.log(cultureAmount);
-      console.log(unexpectedAmount);
+      try {
+        const response = await ReportsModel.findOneAndUpdate(
+          { userid: object.userid },
+          {
+            $push: {
+              weeklyReports: {
+                totalAmount: totalAmount,
+                essentialsAmount: essentialsAmount,
+                wantsAmount: wantsAmount,
+                cultureAmount: cultureAmount,
+                unexpectedAmount: unexpectedAmount,
+              },
+            },
+          }
+        );
+        logger.info(`Generated Weekly Report for ${object.userid}`);
+      } catch (error) {
+        logger.error(error.message);
+      }
     });
   } catch (error) {
     logger.error(error.message);
   }
 };
 
-getList();
+const weekly = new cron.CronJob("00 00 8 * * 0", generateWeeklyReport, null, true, "Europe/London");

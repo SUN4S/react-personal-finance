@@ -16,7 +16,7 @@ router.get("/", async (req: Request, res: Response) => {
       logger.info(`${req.user.username} Requested Budged Data`);
       return res.status(200).send(data.budgetList);
     } catch (error) {
-      logger.error(error);
+      logger.error(error.message);
     }
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
@@ -37,7 +37,7 @@ router.get("/currentBudget", async (req: Request, res: Response) => {
       logger.info(`${req.user.username} Requested Budged Data`);
       return res.status(200).send(currentBudget[0]);
     } catch (error) {
-      logger.error(error);
+      logger.error(error.message);
     }
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
@@ -82,7 +82,7 @@ router.post("/addBudget", async (req: Request, res: Response) => {
         return res.status(201).json({ msg: "Added new budget" });
       });
     } catch (error) {
-      logger.error(error);
+      logger.error(error.message);
     }
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
@@ -117,7 +117,7 @@ router.put("/editBudget", async (req: Request, res: Response) => {
       logger.info(`${req.user.username} Edited Budget`);
       return res.status(201).json({ msg: "Edited budget successfully" });
     } catch (error) {
-      logger.error(error);
+      logger.error(error.message);
     }
   } else {
     res.status(401).json({ msg: "Unauthorized access" });

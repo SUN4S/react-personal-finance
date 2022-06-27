@@ -14,9 +14,9 @@ router.get("/", async (req: Request, res: Response) => {
       const expenses = await ExpensesModel.findOne({ userid: req.user.id });
       const data = await expenses;
       logger.info(`${req.user.username} Requested Expense Data`);
-      return res.status(200).send(data.expensesList);
+      return res.status(200).send(data.expenseList);
     } catch (error) {
-      logger.error(error);
+      logger.error(error.message);
     }
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
@@ -33,7 +33,7 @@ router.get("/currentMonth", async (req: Request, res: Response) => {
       const currentMonth = new Date().getMonth() + 1;
       const currentYear = new Date().getFullYear();
       // Filters and sorts array here instead of in the client
-      const processedArray = expenses.expensesList
+      const processedArray = expenses.expenseList
         .sort((a, b) => {
           if (b.date > a.date) return 1;
           if (b.date < a.date) return -1;
@@ -47,7 +47,7 @@ router.get("/currentMonth", async (req: Request, res: Response) => {
       logger.info(`${req.user.username} Requested Expense Data`);
       return res.status(200).send(processedArray);
     } catch (error) {
-      logger.error(error);
+      logger.error(error.message);
     }
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
@@ -101,12 +101,12 @@ router.post("/addExpense", async (req: Request, res: Response) => {
         { userid: req.user.id },
         {
           $push: {
-            expensesList: data.value,
+            expenseList: data.value,
           },
         }
       );
     } catch (error) {
-      logger.error(error);
+      logger.error(error.message);
     }
 
     logger.info(`${req.user.username} Added New Expense`);
@@ -162,21 +162,21 @@ router.put("/editExpense", async (req: Request, res: Response) => {
       // Match object in array and update values
       const expenses = await ExpensesModel.findOneAndUpdate(
         {
-          expensesList: { $elemMatch: { _id: req.body._id } },
+          expenseList: { $elemMatch: { _id: req.body._id } },
         },
         {
           $set: {
-            "expensesList.$.category": req.body.category,
-            "expensesList.$.amount": req.body.amount,
-            "expensesList.$.date": req.body.date,
-            "expensesList.$.description": req.body.description,
-            "expensesList.$.tags": tags,
-            "expensesList.$.receipt": fileName,
+            "expenseList.$.category": req.body.category,
+            "expenseList.$.amount": req.body.amount,
+            "expenseList.$.date": req.body.date,
+            "expenseList.$.description": req.body.description,
+            "expenseList.$.tags": tags,
+            "expenseList.$.receipt": fileName,
           },
         }
       );
     } catch (error) {
-      logger.error(error);
+      logger.error(error.message);
     }
     logger.info(`${req.user.username} Edited Expense`);
     return res.status(201).json({ msg: "Edited expense successfully" });
@@ -193,7 +193,7 @@ router.delete("/deleteExpense", async (req: Request, res: Response) => {
       { userid: req.user.id },
       {
         $pull: {
-          expensesList: {
+          expenseList: {
             _id: req.body._id,
           },
         },
