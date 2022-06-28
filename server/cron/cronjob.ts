@@ -1,9 +1,9 @@
-import { ExpensesModel } from "../models/expensesSchema";
+import { ExpensesModel } from "../models/expenseSchema";
 import { ReportsModel } from "../models/reportsSchema";
 import cron from "cron";
 import logger from "../config/winston";
 
-const generateWeeklyReport = async () => {
+export const generateWeeklyReport = async () => {
   try {
     // Gets all expenses
     const expenses = await ExpensesModel.find({});

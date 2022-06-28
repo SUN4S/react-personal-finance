@@ -3,11 +3,7 @@ import express, { Request, Response } from "express";
 
 import logger from "../config/winston";
 
-const router = express.Router();
-
-// Return an array of all budgets
-// Budgets are categorized by month ex. 2022-06
-router.get("/", async (req: Request, res: Response) => {
+export const getAllBudgets = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     try {
       const currentDate = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
@@ -21,11 +17,9 @@ router.get("/", async (req: Request, res: Response) => {
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
   }
-});
+};
 
-// Return Current month budget
-// Budgets are categorized by month ex. 2022-06
-router.get("/currentBudget", async (req: Request, res: Response) => {
+export const getCurrentBudget = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     try {
       const currentDate = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
@@ -42,13 +36,11 @@ router.get("/currentBudget", async (req: Request, res: Response) => {
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
   }
-});
+};
 
-// Adding a monthly budget for the user
 // It's only possible to have one budget per month
 // TODO: Add an ability to select month interval
-
-router.post("/addBudget", async (req: Request, res: Response) => {
+export const addBudget = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     // Validate if Provided data is correct
     const data = joiBudgetSchema.validate(req.body);
@@ -87,11 +79,9 @@ router.post("/addBudget", async (req: Request, res: Response) => {
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
   }
-});
+};
 
-// Edit current month budget
-// no ability to change previous budgets
-router.put("/editBudget", async (req: Request, res: Response) => {
+export const editBudget = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     //Validate if provided data is correct
     const data = joiBudgetSchema.validate(req.body);
@@ -122,6 +112,4 @@ router.put("/editBudget", async (req: Request, res: Response) => {
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
   }
-});
-
-module.exports = router;
+};

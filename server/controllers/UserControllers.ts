@@ -1,26 +1,26 @@
-import { UserModel, joiUserSchema } from "../models/userSchema";
 import express, { Request, Response } from "express";
 
 import { BudgetModel } from "../models/budgetSchema";
-import { ExpensesModel } from "../models/expensesSchema";
+import { ExpensesModel } from "../models/expenseSchema";
 import { ReportsModel } from "../models/reportsSchema";
+import { UserModel } from "../models/userSchema";
 import bcrypt from "bcrypt";
+import { joiUserSchema } from "../models/userSchema";
 import logger from "../config/winston";
 import passport from "passport";
-
-const router = express.Router();
 
 // bcrypt variable
 const saltRounds = 10;
 
-// Login uses passport.js to authenticate user
-// "Local" strategy only uses Username and Passwowrd for authentication
-router.post("/login", passport.authenticate("local"), async (req: Request, res: Response) => {
-  res.json({ msg: "Logged in successfully", username: req.user.username, image: req.user.image });
-});
+export const login = (req: Request, res: Response) => {
+  return res.json({
+    msg: "Logged in successfully",
+    username: req.user.username,
+    image: req.user.image,
+  });
+};
 
-// Get request to check if user is logged in
-router.get("/loggedIn", async (req: Request, res: Response) => {
+export const loggedIn = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     try {
       return res
@@ -32,10 +32,9 @@ router.get("/loggedIn", async (req: Request, res: Response) => {
   } else {
     res.status(401).json({ msg: "Unauthorizes access" });
   }
-});
+};
 
-// Set user avatar image
-router.post("/avatar", async (req: Request, res: Response) => {
+export const addAvatar = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     try {
       // Defining default values
@@ -66,10 +65,9 @@ router.post("/avatar", async (req: Request, res: Response) => {
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
   }
-});
+};
 
-// Register a new user
-router.post("/register", async (req: Request, res: Response) => {
+export const register = async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
 
   const data = joiUserSchema.validate({
@@ -97,40 +95,54 @@ router.post("/register", async (req: Request, res: Response) => {
       return res.status(409).json({ msg: "Username or Email already in use" });
     } else {
       //Bcrypt works its magic
-      bcrypt.genSalt(saltRounds, function (err, salt) {
-        bcrypt.hash(password, salt, function (err, hash) {
+      bcrypt.genSalt(saltRounds, (err, salt) => {
+        bcrypt.hash(password, salt, async (err, hash) => {
           // Create a user, as well as extra collections linking them together
           // by user _id which is named userid in other collections
-          UserModel.create({
+          const response = await UserModel.create({
             username: username,
             email: email,
             hash: hash,
-          }).then((response) => {
-            ExpensesModel.create({
-              userid: response._id,
-              expenses: [],
-            });
-            BudgetModel.create({
-              userid: response._id,
-              budget: [],
-            });
-            ReportsModel.create({
-              userid: response._id,
-              weeklyReports: [],
-              monthlyReports: [],
-            });
           });
+          await ExpensesModel.create({
+            userid: response._id,
+            expenses: [],
+          });
+          await BudgetModel.create({
+            userid: response._id,
+            budget: [],
+          });
+          await ReportsModel.create({
+            userid: response._id,
+            weeklyReports: [],
+            monthlyReports: [],
+          });
+
+          logger.info(`Created new Account`);
+
+          // Function to login user immediately after registration
+          req.login(
+            { username: response.username, password: response.password, id: response._id },
+            { session: true },
+            (error) => {
+              console.log(error);
+              if (error) {
+                return logger.error(error.message);
+              } else {
+                return res.status(201).json({ msg: "Account created succesfully" });
+              }
+            }
+          );
+          //return res.status(201).json({ msg: "Account created succesfully" });
         });
       });
-      logger.info(`Created new Account`);
-      return res.status(201).json({ msg: "Account created succesfully" });
     }
   } catch (error) {
     logger.error(error.message);
   }
-});
+};
 
-router.delete("/delete", async (req: Request, res: Response) => {
+export const deleteUser = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     try {
       await UserModel.findOneAndDelete({
@@ -155,12 +167,10 @@ router.delete("/delete", async (req: Request, res: Response) => {
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
   }
-});
+};
 
-router.post("/logout", (req: Request, res: Response) => {
+export const logout = (req: Request, res: Response) => {
   logger.info(`${req.user.username} Logged Out`);
   req.logout();
   res.json({ msg: "Logged out successfully" });
-});
-
-module.exports = router;
+};

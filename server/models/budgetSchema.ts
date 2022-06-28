@@ -14,7 +14,7 @@ const UserBudget = new mongoose.Schema(
     userid: { type: String, required: true },
     budgetList: { type: [BudgetSchema], default: Array },
   },
-  { collection: "budgetsList" }
+  { collection: "budgetList" }
 );
 
 export const joiBudgetSchema = Joi.object({

@@ -1,7 +1,7 @@
 import Joi from "joi";
 import mongoose from "mongoose";
 
-const ExpensesSchema = new mongoose.Schema(
+const ExpenseSchema = new mongoose.Schema(
   {
     category: { type: String, required: true },
     amount: { type: Number, required: true },
@@ -16,7 +16,7 @@ const ExpensesSchema = new mongoose.Schema(
 const UserExpenses = new mongoose.Schema(
   {
     userid: { type: String, required: true },
-    expenseList: { type: [ExpensesSchema], default: Array },
+    expenseList: { type: [ExpenseSchema], default: Array },
   },
   { collection: "expenseList" }
 );

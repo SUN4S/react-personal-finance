@@ -1,13 +1,10 @@
-import { ExpensesModel, joiExpenseSchema } from "../models/expensesSchema";
+import { ExpensesModel, joiExpenseSchema } from "../models/expenseSchema";
 import express, { Request, Response } from "express";
 
 import fs from "fs";
 import logger from "../config/winston";
 
-const router = express.Router();
-
-// Return an array of ALL expenses
-router.get("/", async (req: Request, res: Response) => {
+export const getAllExpenses = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     try {
       // Gets expense object
@@ -21,10 +18,9 @@ router.get("/", async (req: Request, res: Response) => {
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
   }
-});
+};
 
-// Return array of expenses for current ongoing Month
-router.get("/currentMonth", async (req: Request, res: Response) => {
+export const getCurrentMonthExpenses = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     try {
       // Gets expense object
@@ -52,11 +48,11 @@ router.get("/currentMonth", async (req: Request, res: Response) => {
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
   }
-});
+};
 
-// Add a new expense object
-router.post("/addExpense", async (req: Request, res: Response) => {
+export const addExpense = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
+    console.log(req.body);
     // multipart/form-data cant send arrays, need to parse string
     const tags =
       req.body.tags.length > 0
@@ -82,6 +78,7 @@ router.post("/addExpense", async (req: Request, res: Response) => {
         file.mv(`./uploads/expenses/${fileName}`);
       }
     }
+
     // Validate data provided by the client
     const data = joiExpenseSchema.validate({
       category: req.body.category,
@@ -92,8 +89,10 @@ router.post("/addExpense", async (req: Request, res: Response) => {
       receipt: fileName ? fileName : null,
     });
     if (data.error) {
+      console.log(data.error);
       return res.status(400).json({ msg: data.error.message });
     }
+    console.log(req.data);
 
     try {
       // Add an expense by pushing new object into list
@@ -105,19 +104,17 @@ router.post("/addExpense", async (req: Request, res: Response) => {
           },
         }
       );
+      logger.info(`${req.user.username} Added New Expense`);
+      return res.status(201).json({ msg: "Added new Expense" });
     } catch (error) {
       logger.error(error.message);
     }
-
-    logger.info(`${req.user.username} Added New Expense`);
-    return res.status(201).json({ msg: "Added new Expense" });
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
   }
-});
+};
 
-// Exit a single expense in array
-router.put("/editExpense", async (req: Request, res: Response) => {
+export const editExpense = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     // multipart/form-data cant send arrays, need to parse string
     // multipart/form-data cant send arrays, need to parse string
@@ -183,10 +180,9 @@ router.put("/editExpense", async (req: Request, res: Response) => {
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
   }
-});
+};
 
-// Delete an expense by _id
-router.delete("/deleteExpense", async (req: Request, res: Response) => {
+export const deleteExpense = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     // Delete expense by pulling it from Array
     const expenses = await ExpensesModel.findOneAndUpdate(
@@ -215,6 +211,4 @@ router.delete("/deleteExpense", async (req: Request, res: Response) => {
     return res.status(200).json({ msg: "Deleted expense successfully" });
   }
   res.status(401).json({ msg: "Unauthorized access" });
-});
-
-module.exports = router;
+};

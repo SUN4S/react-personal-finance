@@ -1,9 +1,8 @@
 import "winston-daily-rotate-file";
 
-import winston, { format } from "winston";
-
 import LogzioWinstonTransport from "winston-logzio";
 import path from "path";
+import winston from "winston";
 
 const dotenv = require("dotenv");
 dotenv.config();

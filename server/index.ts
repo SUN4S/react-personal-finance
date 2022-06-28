@@ -1,13 +1,13 @@
-const budget = require("./routes/BudgetController");
-const expenses = require("./routes/ExpensesController");
-const user = require("./routes/UserController");
+const budget = require("./routes/Budgetroutes");
+const expenses = require("./routes/ExpenseRoutes");
+const user = require("./routes/UserRoutes");
+const reports = require("./routes/ReportsRoutes");
 
 import "./cron/cronjob";
 
 import express, { Express } from "express";
 import { morganRequestMiddleware, morganResponseMiddleware } from "./middleware/morgan";
 
-import { PassThrough } from "stream";
 import compression from "compression";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -101,6 +101,7 @@ try {
 app.use("/api/user", user);
 app.use("/api/expenses", expenses);
 app.use("/api/budget", budget);
+app.use("/api/reports", reports);
 
 app.get("/ServiceWorker.js", (req, res) => {
   res.header("Content-type: application/javascript");
