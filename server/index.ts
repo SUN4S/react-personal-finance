@@ -3,7 +3,8 @@ const expenses = require("./routes/ExpenseRoutes");
 const user = require("./routes/UserRoutes");
 const reports = require("./routes/ReportsRoutes");
 
-import "./cron/cronjob";
+import "./utils/cronjob";
+import "./utils/email";
 
 import express, { Express } from "express";
 import { morganRequestMiddleware, morganResponseMiddleware } from "./middleware/morgan";

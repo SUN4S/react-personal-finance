@@ -5,6 +5,7 @@ import { ExpensesModel } from "../models/expenseSchema";
 import { ReportsModel } from "../models/reportsSchema";
 import { UserModel } from "../models/userSchema";
 import bcrypt from "bcrypt";
+import { generateRegistrationEmail } from "../utils/emailTemplates/registrationTemplate";
 import { joiUserSchema } from "../models/userSchema";
 import logger from "../config/winston";
 import passport from "passport";
@@ -118,6 +119,7 @@ export const register = async (req: Request, res: Response) => {
             monthlyReports: [],
           });
 
+          generateRegistrationEmail(response.email, response.username);
           logger.info(`Created new Account`);
 
           // Function to login user immediately after registration

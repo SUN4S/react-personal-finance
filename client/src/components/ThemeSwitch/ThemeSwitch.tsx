@@ -2,7 +2,6 @@ import "./ThemeSwitch.scss";
 
 import { IconMoon } from "../../resources/icons/IconMoon/IconMoon";
 import { IconSun } from "../../resources/icons/IconSun/IconSun";
-import { useTheme } from "../../hooks/useTheme";
 
 export const ThemeSwitch = (props: {
   theme: string | null;

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand';
+    }
+    body {
+      width: 100%;
+      height: 100%;
+      background-color:rgb(30, 41, 59);
+    }
+    table {
+      height: 100%;
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      padding: 12px;
+      margin: 0 auto;
+      background-color: rgb(15, 23, 42);
+    }
+    thead{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 36px;
+    }
+    .bodyContainer {
+      border-top: 1px solid rgb(34, 110, 197);
+      text-align: start;
+      color: rgb(255,255,255);
+      font-size: 14px;
+      padding-top: 36px;
+      padding-bottom: 36px;
+    }
+    p {
+      margin: 6px 0;
+      line-height: 20px;
+    }
+    footer {
+      width: 100%;
+      height: 48px;
+      padding-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgb(34, 110, 197);
+    }
+    footer a {
+      font-size: 12px;
+      color: rgb(255,255,255);
+    }
+    .footerText {
+      list-style-type: none;
+      font-size: 12px;
+      color: rgb(255,255,255);
+    }
+  </style>
+</head>
+<body>
+  <table id="container">
+    <thead class="logoContainer">
+      <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 54.83 54.83"
+      id="logoIcon"
+      style="
+      width: 80px;
+      fill: transparent;
+      stroke: rgb(34, 110, 197);"
+      >
+        <g id="Layer_2" data-name="Layer 2">
+          <g id="Layer_1-2" data-name="Layer 1">
+            <path
+              style="stroke-width: 3px"
+              className="cls-1"
+              d="M37,1.5H17.8a2.75,2.75,0,0,0-1.91.79L2.29,15.89A2.75,2.75,0,0,0,1.5,17.8V37a2.71,2.71,0,0,0,.79,1.91l13.6,13.6a2.7,2.7,0,0,0,1.91.79H37a2.67,2.67,0,0,0,1.91-.79l13.6-13.6A2.67,2.67,0,0,0,53.33,37V17.8a2.7,2.7,0,0,0-.79-1.91L38.94,2.29A2.71,2.71,0,0,0,37,1.5Z"
+            />
+            <line className="cls-2" x1="16.69" y1="23.08" x2="16.69" y2="1.5" />
+            <line className="cls-2" x1="38.16" y1="53.33" x2="38.16" y2="31.74" />
+            <polyline
+              style="stroke-width: 2px"
+              className="cls-2"
+              points="53.34 16.47 38.16 31.74 16.69 53.33"
+            />
+            <polyline
+              style="stroke-width: 2px"
+              className="cls-2"
+              points="38.16 1.5 16.69 23.08 1.74 38.11"
+            />
+          </g>
+        </g>
+      </svg>
+    </thead>
+    <tbody class="bodyContainer">
+      <tr class="greeting"><b>Hello there {{username}},</b></div>
+      <tr>Your Account has been Successfully Created. To make sure that both parties are happy with this service, Please do not disclose any private information that you wouldn't want to lose.</>
+      <tr>Please take into account that this is a student project, and security <b>IS NOT</b> on par with any major company.</>
+      <tr>Thank you,</tr>
+      <tr>Marius G.</>
+    </tbody>
+    <tfoot>
+        <ul class="footerText">
+          <li>Vilnius, Lithuania</li>
+          <li><a href="marglipersonalfinance.me">marglipersonalfinance.me</a></li>
+        </ul>
+      <a href="https://tosdr.org/">Privacy Statement</a>
+    </tfoot>
+  </table>
+</body>
+</html>
