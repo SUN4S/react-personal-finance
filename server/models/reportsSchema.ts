@@ -1,10 +1,5 @@
+import { DateTime } from "luxon";
 import mongoose from "mongoose";
-
-// let totalAmount = 0;
-//       let essentialsAmount = 0;
-//       let wantsAmount = 0;
-//       let cultureAmount = 0;
-//       let unexpectedAmount = 0;
 
 const WeeklySchema = new mongoose.Schema(
   {
@@ -15,9 +10,9 @@ const WeeklySchema = new mongoose.Schema(
     unexpectedAmount: { type: Number },
     fromDate: {
       type: Date,
-      default: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 7),
+      default: DateTime.now().minus({ week: 1 }).setZone("Europe/London").toISO(),
     },
-    toDate: { type: Date, default: new Date() },
+    toDate: { type: Date, default: DateTime.now().setZone("Europe/London").toISO() },
   },
   { collection: "expenseReports" }
 );
@@ -31,7 +26,7 @@ const MonthlySchema = new mongoose.Schema(
     unexpectedAmount: { type: Number },
     monthDate: {
       type: String,
-      default: `${new Date().getUTCFullYear()}-${new Date().getUTCMonth() + 1}`,
+      default: `${DateTime.now().toFormat("yyyy-MM")}`,
     },
   },
   { collection: "expenseReports" }

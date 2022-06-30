@@ -1,5 +1,5 @@
 export interface ModalInputs {
-  date?: Date;
+  date?: string;
   category: string;
   amount: number;
   description?: string;

@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import Joi from "joi";
 import mongoose from "mongoose";
 
@@ -5,7 +6,7 @@ const BudgetSchema = new mongoose.Schema({
   budget: { type: Number, required: true },
   budgetDate: {
     type: String,
-    default: new Date().getFullYear() + "-" + (new Date().getMonth() + 1),
+    default: DateTime.now().toFormat("yyyy-MM"),
   },
 });
 

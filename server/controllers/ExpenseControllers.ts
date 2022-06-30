@@ -1,6 +1,7 @@
 import { ExpensesModel, joiExpenseSchema } from "../models/expenseSchema";
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 
+import { DateTime } from "luxon";
 import fs from "fs";
 import logger from "../config/winston";
 
@@ -26,8 +27,8 @@ export const getCurrentMonthExpenses = async (req: Request, res: Response) => {
       // Gets expense object
       const expenses = await ExpensesModel.findOne({ userid: req.user.id });
       // Gets current month and year
-      const currentMonth = new Date().getMonth() + 1;
-      const currentYear = new Date().getFullYear();
+      const currentMonth = DateTime.now().month;
+      const currentYear = DateTime.now().year;
       // Filters and sorts array here instead of in the client
       const processedArray = expenses.expenseList
         .sort((a, b) => {
@@ -36,8 +37,8 @@ export const getCurrentMonthExpenses = async (req: Request, res: Response) => {
           return 0;
         })
         .filter((item) => {
-          const year = new Date(item.date).getFullYear();
-          const month = new Date(item.date).getMonth() + 1;
+          const year = DateTime.fromISO(item.date).year;
+          const month = DateTime.fromISO(item.date).month;
           return currentMonth === month && currentYear === year;
         });
       logger.info(`${req.user.username} Requested Expense Data`);
@@ -52,7 +53,6 @@ export const getCurrentMonthExpenses = async (req: Request, res: Response) => {
 
 export const addExpense = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
-    console.log(req.body);
     // multipart/form-data cant send arrays, need to parse string
     const tags =
       req.body.tags.length > 0
@@ -78,7 +78,6 @@ export const addExpense = async (req: Request, res: Response) => {
         file.mv(`./uploads/expenses/${fileName}`);
       }
     }
-
     // Validate data provided by the client
     const data = joiExpenseSchema.validate({
       category: req.body.category,
@@ -88,26 +87,25 @@ export const addExpense = async (req: Request, res: Response) => {
       tags: tags || [],
       receipt: fileName ? fileName : null,
     });
+    const dateString = req.body.date.toString();
     if (data.error) {
-      console.log(data.error);
       return res.status(400).json({ msg: data.error.message });
-    }
-    console.log(req.data);
-
-    try {
-      // Add an expense by pushing new object into list
-      const expenses = await ExpensesModel.findOneAndUpdate(
-        { userid: req.user.id },
-        {
-          $push: {
-            expenseList: data.value,
-          },
-        }
-      );
-      logger.info(`${req.user.username} Added New Expense`);
-      return res.status(201).json({ msg: "Added new Expense" });
-    } catch (error) {
-      logger.error(error.message);
+    } else {
+      try {
+        // Add an expense by pushing new object into list
+        const expenses = await ExpensesModel.findOneAndUpdate(
+          { userid: req.user.id },
+          {
+            $push: {
+              expenseList: { ...data.value, date: dateString },
+            },
+          }
+        );
+        logger.info(`${req.user.username} Added New Expense`);
+        return res.status(201).json({ msg: "Added new Expense" });
+      } catch (error) {
+        logger.error(error.message);
+      }
     }
   } else {
     res.status(401).json({ msg: "Unauthorized access" });

@@ -1,8 +1,10 @@
+import { DateTime } from "luxon/src/datetime";
+
 export interface ExpenseState {
   _id?: string;
   category: string;
   amount: number;
-  date: Date;
+  date: string;
   tags?: Array<string>;
   description?: string;
   receipt?: string;
@@ -11,7 +13,7 @@ export interface ExpenseState {
 export interface ExpenseFormState {
   category: string;
   amount: number;
-  date: Date;
+  date: string;
   tags?: string;
   description?: string;
   receipt?: File | Blob | string;
@@ -24,7 +26,7 @@ export interface ExpenseModalState {
     _id?: string;
     category: string;
     amount: number;
-    date: Date;
+    date: string;
     tags?: Array<string>;
     description?: string;
     receipt?: string;

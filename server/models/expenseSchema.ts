@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import Joi from "joi";
 import mongoose from "mongoose";
 
@@ -5,7 +6,7 @@ const ExpenseSchema = new mongoose.Schema(
   {
     category: { type: String, required: true },
     amount: { type: Number, required: true },
-    date: { type: Date, default: new Date() },
+    date: { type: String, required: true },
     description: { type: String },
     tags: { type: [{ type: String }], default: [] },
     receipt: { type: String, Default: null },

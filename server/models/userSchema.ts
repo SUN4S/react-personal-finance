@@ -1,5 +1,5 @@
-import Joi, { string } from "joi";
-
+import { DateTime } from "luxon";
+import Joi from "joi";
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
@@ -18,7 +18,10 @@ const UserSchema = new mongoose.Schema(
       unique: true,
     },
     hash: { type: String, required: true },
-    date: { type: Date, default: new Date() },
+    date: {
+      type: Date,
+      default: DateTime.now().setZone("Europe/London").toISO(),
+    },
     image: { type: String, default: null },
   },
   { collection: "userData" }

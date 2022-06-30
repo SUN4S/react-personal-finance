@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 
 import { BudgetModel } from "../models/budgetSchema";
 import { ExpensesModel } from "../models/expenseSchema";
@@ -9,7 +9,6 @@ import { generateDeletionEmail } from "../utils/emailTemplates/deletionTemplate"
 import { generateRegistrationEmail } from "../utils/emailTemplates/registrationTemplate";
 import { joiUserSchema } from "../models/userSchema";
 import logger from "../config/winston";
-import passport from "passport";
 
 // bcrypt variable
 const saltRounds = 10;
@@ -128,7 +127,6 @@ export const register = async (req: Request, res: Response) => {
             { username: response.username, password: response.password, id: response._id },
             { session: true },
             (error) => {
-              console.log(error);
               if (error) {
                 return logger.error(error.message);
               } else {

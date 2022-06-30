@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import { ExpensesModel } from "../models/expenseSchema";
 import { ReportsModel } from "../models/reportsSchema";
 import { UserModel } from "../models/userSchema";
@@ -22,12 +23,9 @@ export const generateWeeklyReport = async () => {
         object.expenseList
           .filter(
             (item) =>
-              item.date >
-                new Date(
-                  new Date().getFullYear(),
-                  new Date().getMonth(),
-                  new Date().getDate() - 7
-                ) && item.date < new Date()
+              DateTime.fromISO(item.date).toISO() >
+                DateTime.now().minus({ week: 1 }).setZone("Europe/London").toISO() &&
+              DateTime.fromISO(item.date).toISO() < DateTime.now().toISO()
           )
           .map((item) => {
             totalAmount += item.amount;
@@ -90,8 +88,9 @@ export const generateMonthlyReport = async () => {
         object.expenseList
           .filter(
             (item) =>
-              item.date > new Date(new Date().getFullYear(), new Date().getMonth()) &&
-              item.date < new Date()
+              DateTime.fromISO(item.date).toISO() >
+                DateTime.now().minus({ month: 1 }).setZone("Europe/London").toISO() &&
+              DateTime.fromISO(item.date).toISO() < DateTime.now().toISO()
           )
           .map((item) => {
             totalAmount += item.amount;

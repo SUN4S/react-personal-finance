@@ -1,16 +1,10 @@
-import express, { Request, Response } from "express";
+import { monthlyReports, weeklyReports } from "../controllers/ReportsController";
 
-import { ReportsModel } from "../models/reportsSchema";
-import { generateWeeklyReport } from "../utils/cronjob";
-import logger from "../config/winston";
-import { weeklyReports } from "../controllers/ReportsController";
+import express from "express";
 
 const router = express.Router();
 
 router.get("/weeklyReports", weeklyReports);
-
-router.get("/forceReports", (req: Request, res: Response) => {
-  generateWeeklyReport();
-});
+router.get("/monthlyReports", monthlyReports);
 
 module.exports = router;

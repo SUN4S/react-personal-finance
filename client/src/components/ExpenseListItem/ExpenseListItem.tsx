@@ -1,5 +1,6 @@
 import "./ExpenseListItem.scss";
 
+import { DateTime } from "luxon";
 import { ExpenseState } from "../../models/expenses";
 import { IconEdit } from "../../resources/icons/IconEdit/IconEdit";
 
@@ -10,7 +11,7 @@ export const ExpenseListItem = (props: {
   return (
     <div className="expenseListElement" data-testid="expenseItem">
       <div className="expenseListElementDate">
-        {`${new Date(props.expenseData.date).toISOString().slice(0, 10)}`}
+        {`${DateTime.fromISO(props.expenseData.date).toFormat("yyyy-MM-dd")}`}
       </div>
       <div className="expenseListElementCategory">
         {props.expenseData.category}

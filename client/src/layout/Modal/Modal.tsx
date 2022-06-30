@@ -13,6 +13,7 @@ import {
 
 import { Button } from "../../components/Button/Button";
 import DatePicker from "react-datepicker";
+import { DateTime } from "luxon";
 import { FormInput } from "../../components/FormInput/FormInput";
 import { FormSelect } from "../../components/FormSelect/FormSelect";
 import { FormTextarea } from "../../components/FormTextarea/FormTextarea";
@@ -116,7 +117,6 @@ export const ModalComponent = () => {
   const onSubmit: SubmitHandler<ModalInputs> = (data) => {
     // checks if modal is used to edit expense
     if (editable) {
-      console.log(modalData);
       // tags need to be parsed from object to array
       const tagData = tags.map((item) => {
         return item.text;
@@ -124,7 +124,7 @@ export const ModalComponent = () => {
       // Create new object that will be sent to the back-end
       const expenseObject = {
         _id: modalData?._id,
-        date: date,
+        date: DateTime.fromJSDate(date).toISO(),
         category: data.category || modalData?.category!,
         amount: Number(data.amount),
         description: data.description || undefined,
@@ -148,9 +148,8 @@ export const ModalComponent = () => {
         return item.text;
       });
       // Create new object that will be sent to the back-end
-
       const expenseObject = {
-        date: date,
+        date: DateTime.fromJSDate(date).toISO(),
         category: data.category || modalData?.category!,
         amount: Number(data.amount),
         description: data.description || undefined,
@@ -293,6 +292,11 @@ export const ModalComponent = () => {
               showTimeSelect
               dateFormat="yyyy-MM-dd HH:mm"
               timeIntervals={5}
+              minDate={DateTime.now().startOf("month").toJSDate()}
+              maxDate={DateTime.now().toJSDate()}
+              onKeyDown={(e) => {
+                e.preventDefault();
+              }}
             />
           </FormInput>
 
