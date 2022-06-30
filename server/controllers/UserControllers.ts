@@ -5,6 +5,7 @@ import { ExpensesModel } from "../models/expenseSchema";
 import { ReportsModel } from "../models/reportsSchema";
 import { UserModel } from "../models/userSchema";
 import bcrypt from "bcrypt";
+import { generateDeletionEmail } from "../utils/emailTemplates/deletionTemplate";
 import { generateRegistrationEmail } from "../utils/emailTemplates/registrationTemplate";
 import { joiUserSchema } from "../models/userSchema";
 import logger from "../config/winston";
@@ -147,7 +148,7 @@ export const register = async (req: Request, res: Response) => {
 export const deleteUser = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     try {
-      await UserModel.findOneAndDelete({
+      const response = await UserModel.findOneAndDelete({
         _id: req.user.id,
       });
       await ExpensesModel.findOneAndDelete({
@@ -159,7 +160,7 @@ export const deleteUser = async (req: Request, res: Response) => {
       await ReportsModel.findOneAndDelete({
         userid: req.user.id,
       });
-
+      generateDeletionEmail(response.email, response.username);
       logger.info(`${req.user.username} has been deleted`);
       req.logout();
       return res.json({ msg: "User Successfully Deleted" });

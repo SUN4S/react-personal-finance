@@ -1,12 +1,12 @@
 import logger from "../../config/winston";
 import { transporter } from "../email";
 
-export const generateRegistrationEmail = async (recipientEmail: string, username: string) => {
+export const generateWeeklyExpenseEmail = async (recipientEmail: string, username: string) => {
   transporter
     .sendMail({
       from: `"Personal Finance" ${process.env.EMAIL_USERNAME}`, // sender address
       to: recipientEmail, // list of receivers
-      subject: "User Registration", // Subject line
+      subject: "Generated Weekly Report", // Subject line
       attachments: [
         {
           filename: "Logo.png",
@@ -139,7 +139,7 @@ export const generateRegistrationEmail = async (recipientEmail: string, username
                               <tbody>
                                 <tr>
                                   <td style="width:80px;">
-                                    <img alt="Logo" height="80" src="cid:Logo.png" style="border:0;display:block;outline:none;text-decoration:none;height:80px;width:100%;font-size:13px;" width="80" />
+                                    <img alt="Logo" height="80" src="https://drive.google.com/uc?id=17txKhgG6pwhWUhfzjZ_L0BL1uydMgGGn" style="border:0;display:block;outline:none;text-decoration:none;height:80px;width:100%;font-size:13px;" width="80" />
                                   </td>
                                 </tr>
                               </tbody>
@@ -172,12 +172,20 @@ export const generateRegistrationEmail = async (recipientEmail: string, username
                         </tr>
                         <tr>
                           <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                            <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:rgb(255,255,255);">Your Account has been Successfully Created. To make sure that both parties are happy with this service, Please do not disclose any private information or any other information that you wouldn't want to lose.</div>
+                            <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:rgb(255,255,255);">An expense report for the last week has been generated. Login to analyse your spending habits.</div>
                           </td>
                         </tr>
                         <tr>
-                          <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                            <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:rgb(255,255,255);">Please take into account that this is a student project, and security <b>IS NOT</b> on par with any major company.</div>
+                          <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+                              <tbody>
+                                <tr>
+                                  <td align="center" bgcolor="rgb(34, 110, 197)" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:rgb(34, 110, 197);" valign="middle">
+                                    <a href="https://marglipersonalfinance.me" style="display:inline-block;background:rgb(34, 110, 197);color:#ffffff;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;" target="_blank"> Go to website </a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
                           </td>
                         </tr>
                         <tr>

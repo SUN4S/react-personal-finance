@@ -1,6 +1,8 @@
 import { ExpensesModel } from "../models/expenseSchema";
 import { ReportsModel } from "../models/reportsSchema";
+import { UserModel } from "../models/userSchema";
 import cron from "cron";
+import { generateWeeklyExpenseEmail } from "./emailTemplates/weeklyReportTemplate";
 import logger from "../config/winston";
 
 export const generateWeeklyReport = async () => {
@@ -45,7 +47,7 @@ export const generateWeeklyReport = async () => {
           });
 
       try {
-        const response = await ReportsModel.findOneAndUpdate(
+        await ReportsModel.findOneAndUpdate(
           { userid: object.userid },
           {
             $push: {
@@ -59,6 +61,9 @@ export const generateWeeklyReport = async () => {
             },
           }
         );
+        const response = await UserModel.findById(object.userid);
+        generateWeeklyExpenseEmail(response.email, response.username);
+        console.log(response);
         logger.info(`Generated Weekly Report for ${object.userid}`);
       } catch (error) {
         logger.error(error.message);
