@@ -1,0 +1,29 @@
+<mjml>
+  <mj-body background-color="rgb(30, 41, 59)">
+    <mj-section background-color="rgb(15, 23, 42)">
+      <mj-column>
+        <mj-image src="https://drive.google.com/uc?id=17txKhgG6pwhWUhfzjZ_L0BL1uydMgGGn" alt="Logo" height="80px" width="80px"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="rgb(15, 23, 42)" border-top="1px solid rgb(34, 110, 197)" border-bottom="1px solid rgb(34, 110, 197)">
+      <mj-column>
+        <mj-text align="left" color="rgb(255,255,255)">Hello there ${username},</mj-text>
+        <mj-text align="left" color="rgb(255,255,255)">Your Account has been Successfully Created. To make sure that both parties are happy with this service, Please do not disclose any private information that you wouldn't want to lose.</mj-text>
+        <mj-text align="left" color="rgb(255,255,255)">Please take into account that this is a student project, and security <b>IS NOT</b> on par with any major company.</mj-text>
+        <mj-text align="left" color="rgb(255,255,255)">Thank you,</mj-text>
+        <mj-text align="left" color="rgb(255,255,255)">Marius G.</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="rgb(15, 23, 42)">
+      <mj-column>
+        <mj-text align="left" color="rgb(255,255,255)">Vilnius, Lithuania</mj-text>
+        <mj-text align="left"><a href="marglipersonalfinance.me" style="color: rgb(255,255,255)" >marglipersonalfinance.me</a></mj-text> 
+      </mj-column>
+       <mj-column>
+        <mj-text align="right" color="rgb(255,255,255)">
+          <a href="https://tosdr.org/" style="color: rgb(255,255,255)">Privacy Statement</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
