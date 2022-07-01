@@ -1,4 +1,4 @@
-import "./BudgetChart.scss";
+import "./BudgetChartContainer.scss";
 
 import { useEffect, useState } from "react";
 
@@ -8,7 +8,7 @@ import { BudgetDoughnutChart } from "../../components/BudgetDoughnutChart/Budget
 import { LoadingBox } from "../../components/LoadingBox/LoadingBox";
 
 // Component to render budgetChart
-export const BudgetChart = ({
+export const BudgetChartContainer = ({
   budgetData,
   expenseData,
   budgetIsFetching,

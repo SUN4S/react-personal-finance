@@ -314,6 +314,7 @@ export const ModalComponent = () => {
             labelFor="number"
             label="Amount Spent:"
             name="amount"
+            step={0.01}
             inputTestId="amount"
             required
             type="number"

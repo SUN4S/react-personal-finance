@@ -1,21 +1,23 @@
 import "./ChartContainer.scss";
 
-import { BudgetChart } from "../BudgetChart/BudgetChart";
-import { ExpenseChart } from "../ExpenseChart/ExpenseChart";
+import { BudgetChartContainer } from "../BudgetChartContainer/BudgetChartContainer";
+import { ExpenseChartContainer } from "../ExpenseChartContainer/ExpenseChartContainer";
 import { RootState } from "../../app/store";
+import { WeeklyChangeChartContainer } from "../WeeklyChangeChartContainer/WeeklyChangeChartContainer";
 import { useCurrentBudgetQuery } from "../../services/budget";
 import { useCurrentExpenseMonthQuery } from "../../services/expenses";
-import { useSelector } from "react-redux";
+import { useWeeklyReportsQuery } from "../../services/reports";
 
 // Chart container used to house data visualization charts
 export const ChartContainer = () => {
   // Redux Toolkit api Request to get expense array
   const currentExpensesQuery = useCurrentExpenseMonthQuery({});
   const budgetQuery = useCurrentBudgetQuery({});
+  const weeklyReportsQuery = useWeeklyReportsQuery({});
 
   return (
     <div className="chartContainer">
-      <BudgetChart
+      <BudgetChartContainer
         budgetData={budgetQuery.data}
         expenseData={currentExpensesQuery.data}
         budgetIsFetching={budgetQuery.isFetching}
@@ -23,12 +25,16 @@ export const ChartContainer = () => {
         expenseIsFetching={currentExpensesQuery.isFetching}
         expenseIsSuccess={currentExpensesQuery.isSuccess}
       />
-      <ExpenseChart
+      <ExpenseChartContainer
         expenseData={currentExpensesQuery.data}
         expenseIsFetching={currentExpensesQuery.isFetching}
         expenseIsSuccess={currentExpensesQuery.isSuccess}
       />
-      <div className="chart weeklyChangeChart">third</div>
+      <WeeklyChangeChartContainer
+        weeklyData={weeklyReportsQuery.data}
+        weeklyIsFetching={weeklyReportsQuery.isFetching}
+        weeklyIsSuccess={weeklyReportsQuery.isSuccess}
+      />
     </div>
   );
 };

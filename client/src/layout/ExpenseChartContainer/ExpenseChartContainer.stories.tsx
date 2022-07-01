@@ -1,6 +1,6 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 
-import { ExpenseChart } from "./ExpenseChart";
+import { ExpenseChartContainer } from "./ExpenseChartContainer";
 import { ExpenseState } from "../../models/expenses";
 import { mockExpense } from "../../resources/mockData";
 
@@ -13,14 +13,14 @@ interface TemplateProps {
 
 export default {
   title: "Layout/Expense Chart",
-  component: ExpenseChart,
+  component: ExpenseChartContainer,
 } as Meta;
 
 const Template: Story<TemplateProps> = (args) => {
   return (
     <html data-theme={args.theme}>
       <body className="chartContainer">
-        <ExpenseChart
+        <ExpenseChartContainer
           expenseData={args.expenseData}
           expenseIsFetching={args.expenseIsFetching}
           expenseIsSuccess={args.expenseIsSuccess}

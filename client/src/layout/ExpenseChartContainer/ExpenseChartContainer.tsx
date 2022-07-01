@@ -1,4 +1,4 @@
-import "./ExpenseChart.scss";
+import "./ExpenseChartContainer.scss";
 
 import { useEffect, useState } from "react";
 
@@ -13,7 +13,7 @@ interface DataObject {
 }
 
 // Component that houses subcomponents
-export const ExpenseChart = ({
+export const ExpenseChartContainer = ({
   expenseData,
   expenseIsFetching,
   expenseIsSuccess,

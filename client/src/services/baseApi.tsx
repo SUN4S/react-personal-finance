@@ -3,8 +3,6 @@
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
-import { useNavigate } from "react-router";
-
 // Define base Axios parameters
 const axiosBaseQuery =
   (
@@ -56,6 +54,6 @@ export const baseApi = createApi({
   baseQuery: axiosBaseQuery({
     baseUrl: `${process.env.SERVER_URL}/api`,
   }),
-  tagTypes: ["Expenses", "User", "Budget"],
+  tagTypes: ["Expenses", "User", "Budget", "Reports"],
   endpoints: () => ({}),
 });

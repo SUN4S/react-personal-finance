@@ -25,9 +25,16 @@ export const ExpenseBarChart = (props: { chartData: Array<DataObject> }) => {
 
   return (
     <div className="expenseChartContainer" data-testid="expenseChart">
-      <ResponsiveContainer width="100%" minWidth="225px" height="100%">
-        <BarChart data={props.chartData} layout="vertical">
-          <XAxis type="number" />
+      <ResponsiveContainer width="100%" minWidth="200px" height="100%">
+        <BarChart
+          data={props.chartData}
+          layout="vertical"
+          style={{ position: "relative", top: 7 }}
+        >
+          <XAxis
+            type="number"
+            tick={{ fontSize: 14, fill: "var(--text-secondary)" }}
+          />
           <YAxis
             type="category"
             dataKey="name"

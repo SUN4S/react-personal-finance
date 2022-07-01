@@ -1,12 +1,13 @@
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 import { baseApi } from "../services/baseApi";
+import budgetReducer from "../features/BudgetSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import expenseReducer from "../features/ExpenseSlice";
 import modalReducer from "../features/ModalSlice";
 import notificationReducer from "../features/NotificationSlice";
+import reportsReducer from "../features/ReportsSlice";
 import userReducer from "../features/UserSlice";
-import budgetReducer from "../features/BudgetSlice";
 
 // Redux store, that hold whole application state tree
 // middleware refers to api created with Redux Toolkit
@@ -19,6 +20,7 @@ export const store = configureStore({
     expenses: expenseReducer,
     notification: notificationReducer,
     modal: modalReducer,
+    reports: reportsReducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

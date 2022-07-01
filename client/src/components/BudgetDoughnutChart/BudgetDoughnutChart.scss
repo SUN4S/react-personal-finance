@@ -1,4 +1,17 @@
 .doughnutChartContainer {
   height: 100%;
   width: 100%;
+
+  .recharts-default-legend {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 auto !important;
+
+    .recharts-legend-item {
+      width: 80px;
+    }
+  }
 }

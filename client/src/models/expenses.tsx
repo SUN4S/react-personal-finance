@@ -1,5 +1,3 @@
-import { DateTime } from "luxon/src/datetime";
-
 export interface ExpenseState {
   _id?: string;
   category: string;
