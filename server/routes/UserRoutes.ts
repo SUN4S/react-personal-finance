@@ -1,5 +1,6 @@
 import {
   addAvatar,
+  changePassword,
   deleteUser,
   loggedIn,
   login,
@@ -24,6 +25,9 @@ router.post("/avatar", addAvatar);
 
 // Register a new user
 router.post("/register", register);
+
+// Change User Password
+router.put("/changePassword", changePassword);
 
 // Delete session user
 router.delete("/delete", deleteUser);

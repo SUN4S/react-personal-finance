@@ -71,21 +71,25 @@ export const addAvatar = async (req: Request, res: Response) => {
 export const register = async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
 
+  // use Joi to validate provided inputs
   const data = joiUserSchema.validate({
     username: username,
     email: email,
     password: password,
   });
 
+  // If joi validation didn't pass, return
   if (data.error) {
     return res.status(400).json({ msg: data.error.message });
   }
 
   try {
+    // Try to get user with provided email/username
     const user = await UserModel.findOne({
       $or: [{ username: username }, { email: email }],
     });
 
+    // If user already exists, return error
     if (user != null) {
       if (user.username === username) {
         logger.warn(`Duplicate User Attempted Registration (Username: ${username})`);
@@ -143,8 +147,51 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 
+// TODO: Generate email to notify of password change
+export const changePassword = async (req: Request, res: Response) => {
+  if (req.isAuthenticated()) {
+    // Get new and old passwords from body
+    const oldPassword = req.body.oldPassword;
+    const newPassword = req.body.newPassword;
+    // Extract schema and validate new password
+    const passwordSchema = joiUserSchema.extract("password").validate(newPassword);
+    // If new/old passwords match - return
+    if (oldPassword === newPassword) {
+      return res.json({ msg: "New Password same as Current Password" });
+    } else if (passwordSchema.error) {
+      return res.status(400).json({ msg: passwordSchema.error.message });
+    } else {
+      // Get current user data
+      const response = await UserModel.findById(req.user.id);
+      bcrypt.compare(oldPassword, response.hash, (err, success) => {
+        // Check if current password matches one on the DB
+        if (!success) {
+          return res.status(400).json({ msg: "Current Password did not match" });
+        } else {
+          // Generate new password and update user
+          bcrypt.genSalt(saltRounds, (err, salt) => {
+            bcrypt.hash(newPassword, salt, async (err, hash) => {
+              const user = await UserModel.findOneAndUpdate(
+                { _id: req.user.id },
+                { $set: { hash: hash } }
+              );
+            });
+          });
+          logger.info(`${response.username} updated password`);
+          return res.status(201).json({ msg: "Password Changed Successfully" });
+        }
+      });
+    }
+  } else {
+    res.status(401).json({ msg: "Unauthorized access" });
+  }
+};
+
+// Fcuntion used to delete current user
 export const deleteUser = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
+    // Remove current user from DB
+    // Along with all other collections connected to the user
     try {
       const response = await UserModel.findOneAndDelete({
         _id: req.user.id,
@@ -158,8 +205,10 @@ export const deleteUser = async (req: Request, res: Response) => {
       await ReportsModel.findOneAndDelete({
         userid: req.user.id,
       });
+      // Call function to generate and send email to user
       generateDeletionEmail(response.email, response.username);
       logger.info(`${req.user.username} has been deleted`);
+      // Passport function to remove user from session
       req.logout();
       return res.json({ msg: "User Successfully Deleted" });
     } catch (error) {
