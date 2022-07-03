@@ -1,23 +1,24 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 
-import { BudgetDoughnutChart } from "./BudgetDoughnutChart";
+import { WeeklyChangeChart } from "./WeeklyChangeChart";
+import { WeeklyChangeChartProps } from "../../models/reports";
+import { weeklyChangeChartData } from "../../resources/mockData";
 
 interface TemplateProps {
   theme: string;
-  expenseAmount: Number;
-  remainingBudget: Number;
+  chartData: Array<WeeklyChangeChartProps>;
 }
 
 export default {
-  title: "Components/Budget Doughnut Chart",
-  component: BudgetDoughnutChart,
+  title: "Components/Weekly Change Chart",
+  component: WeeklyChangeChart,
 } as Meta;
 
 const Template: Story<TemplateProps> = (args) => {
   return (
     <html data-theme={args.theme}>
       <div
-        className="barchartContainer"
+        className="lineChartContainer"
         style={{
           height: "160px",
           width: "465px",
@@ -25,10 +26,7 @@ const Template: Story<TemplateProps> = (args) => {
           backgroundColor: "var(--sidebar-bg)",
         }}
       >
-        <BudgetDoughnutChart
-          expenseAmount={args.expenseAmount}
-          remainingBudget={args.remainingBudget}
-        />
+        <WeeklyChangeChart chartData={args.chartData} />
       </div>
     </html>
   );
@@ -37,13 +35,11 @@ const Template: Story<TemplateProps> = (args) => {
 export const Default_Light = Template.bind({});
 Default_Light.args = {
   theme: "light",
-  expenseAmount: 600,
-  remainingBudget: 200,
+  chartData: weeklyChangeChartData,
 };
 
 export const Default_Dark = Template.bind({});
 Default_Dark.args = {
   theme: "dark",
-  expenseAmount: 600,
-  remainingBudget: 200,
+  chartData: weeklyChangeChartData,
 };

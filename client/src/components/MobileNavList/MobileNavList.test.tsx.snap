@@ -150,7 +150,9 @@ exports[`Mobile Navigation List Matches Snapshot 1`] = `
         data-testid="mobileNavListButton"
         onClick={[Function]}
       >
-        +
+        <span>
+          +
+        </span>
       </button>
     </li>
     <li>

@@ -11,7 +11,7 @@ describe("Expense List Item", () => {
     _id: "62b1a3df9525535b9a48136b",
     category: "Culture",
     amount: 100,
-    date: new Date("2022-06-21T10:56:14.942+00:00"),
+    date: "2022-06-21T10:56:14.942+00:00",
     tags: ["Cinema", "Dog"],
     description: "Random description",
     receipt: "",

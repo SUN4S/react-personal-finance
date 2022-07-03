@@ -52,12 +52,12 @@ describe("Budget Doughnut Chart", () => {
       container.querySelectorAll(
         ".recharts-default-legend .recharts-legend-item span"
       )[0]
-    ).toHaveTextContent("Spent");
+    ).toHaveTextContent("Remaining");
     expect(
       container.querySelectorAll(
         ".recharts-default-legend .recharts-legend-item span"
       )[1]
-    ).toHaveTextContent("Remaining");
+    ).toHaveTextContent("Spent");
   });
 
   it("Renders Legend", () => {

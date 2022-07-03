@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+import { beforeEach, cy, describe, it } from "local-cypress";
+
 describe("Register Page", () => {
   beforeEach(() => {
     cy.viewport(1280, 720);
@@ -38,7 +40,7 @@ describe("Register Page", () => {
 
   it("Failed Register (Duplicate User)", () => {
     cy.get(`[data-testid="username"]`).clear().type("user123");
-    cy.get(`[data-testid="email"]`).clear().type("email@email123.com");
+    cy.get(`[data-testid="email"]`).clear().type("email@email123-123.com");
     cy.get(`[data-testid="password"]`).clear().type("Password-123");
     cy.get(`[data-testid="register"]`).click();
 

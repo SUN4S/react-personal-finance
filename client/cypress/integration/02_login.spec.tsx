@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+import { afterEach, beforeEach, cy, describe, it } from "local-cypress";
+
 describe("Login Page", () => {
   beforeEach(() => {
     cy.viewport(1280, 720);

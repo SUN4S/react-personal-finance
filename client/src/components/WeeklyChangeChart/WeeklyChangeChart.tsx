@@ -16,6 +16,7 @@ import {
 
 import { WeeklyChangeChartProps } from "../../models/reports";
 
+//TODO: Add Story and test
 export const WeeklyChangeChart = (props: {
   chartData: Array<WeeklyChangeChartProps>;
 }) => {

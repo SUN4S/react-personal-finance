@@ -16,6 +16,8 @@
 // Import commands.js using ES2015 syntax:
 import "./commands";
 
+import { Cypress, afterEach, cy } from "local-cypress";
+
 afterEach(() => {
   //Code to Handle the Sesssions in cypress.
   //Keep the Session alive when you jump to another test
