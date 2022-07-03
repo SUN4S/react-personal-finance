@@ -1,6 +1,7 @@
 import { cleanup, render } from "@testing-library/react";
 
 import { BudgetDoughnutChart } from "./BudgetDoughnutChart";
+import userEvent from "@testing-library/user-event";
 
 describe("Budget Doughnut Chart", () => {
   beforeAll(() => {
@@ -25,7 +26,7 @@ describe("Budget Doughnut Chart", () => {
     const { container } = render(
       <BudgetDoughnutChart expenseAmount={600} remainingBudget={200} />
     );
-    expect(container.querySelector(".recharts-label")).toBeTruthy();
+    expect(container.querySelector(".recharts-label")).toBeInTheDocument();
   });
 
   it("Renders Label Correct Text", () => {
@@ -41,7 +42,7 @@ describe("Budget Doughnut Chart", () => {
     const { container } = render(
       <BudgetDoughnutChart expenseAmount={600} remainingBudget={200} />
     );
-    expect(container.querySelector(".recharts-default-legend")).toBeTruthy();
+    expect(container.querySelector(".recharts-default-legend")).toBeInTheDocument();
   });
 
   it("Renders Legend Correct Text", () => {
@@ -60,10 +61,12 @@ describe("Budget Doughnut Chart", () => {
     ).toHaveTextContent("Spent");
   });
 
-  it("Renders Legend", () => {
-    const { container } = render(
+  it("Renders Tooltip", () => {
+    const { getByTestId } = render(
       <BudgetDoughnutChart expenseAmount={600} remainingBudget={200} />
     );
-    expect(container.querySelector(".recharts-default-legend")).toBeTruthy();
+    expect(
+      getByTestId("doughnutChart").querySelector(".recharts-tooltip-wrapper")
+    ).toBeInTheDocument();
   });
 });

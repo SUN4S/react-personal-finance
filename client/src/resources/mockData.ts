@@ -9,7 +9,7 @@ export const mockExpense = [
   },
   {
     category: "Wants",
-    amount: 16,
+    amount: 16.5,
     date: "2022-06-18T03:00:00.000+00:00",
     description: "This is a random description",
     tags: ["Dog", "Cat", "Cake"],
@@ -25,7 +25,7 @@ export const mockExpense = [
   },
   {
     category: "Culture",
-    amount: 50,
+    amount: 50.99,
     date: "2022-06-17T03:00:00.000+00:00",
     description: "This is a random description",
     tags: ["Dog", "Cat", "Cake"],
@@ -48,16 +48,6 @@ export const barChartData = [
 
 export const weeklyReportsData = [
   {
-    totalAmount: 544,
-    essentialsAmount: 301,
-    wantsAmount: 40,
-    cultureAmount: 100,
-    unexpectedAmount: 103,
-    fromDate: "2022-06-19T03:00:00.000+00:00",
-    toDate: "2022-06-26T03:00:00.000+00:00",
-    _id: "62bdf0685ef4725a57d4d984",
-  },
-  {
     totalAmount: 489,
     essentialsAmount: 205,
     wantsAmount: 51,
@@ -66,6 +56,16 @@ export const weeklyReportsData = [
     fromDate: "2022-06-12T03:00:00.000+00:00",
     toDate: "2022-06-19T03:00:00.000+00:00",
     _id: "62bdf0685ef4725a57d4a6c4",
+  },
+  {
+    totalAmount: 544,
+    essentialsAmount: 301,
+    wantsAmount: 40,
+    cultureAmount: 100,
+    unexpectedAmount: 103,
+    fromDate: "2022-06-19T03:00:00.000+00:00",
+    toDate: "2022-06-26T03:00:00.000+00:00",
+    _id: "62bdf0685ef4725a57d4d984",
   },
 ];
 

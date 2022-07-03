@@ -20,7 +20,7 @@ const Template: Story<TemplateProps> = (args) => {
         style={{
           width: "400px",
           padding: "8px",
-          backgroundColor: "var(--page-bg)",
+          backgroundColor: "var(--login-form-bg)",
         }}
       >
         <LoginForm

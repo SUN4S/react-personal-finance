@@ -8,7 +8,6 @@ import { WeeklyChangeChart } from "../../components/WeeklyChangeChart/WeeklyChan
 import { WeeklyChangeChartProps } from "../../models/reports";
 import { WeeklyReportsProps } from "../../models/chart";
 
-// TODO: Add Story
 export const WeeklyChangeChartContainer = ({
   weeklyData,
   weeklyIsFetching,
@@ -20,7 +19,7 @@ export const WeeklyChangeChartContainer = ({
     let newArray: Array<WeeklyChangeChartProps> = [];
     weeklyData &&
       weeklyData.map((item) => {
-        newArray.unshift({
+        newArray.push({
           amount: item.totalAmount,
           date: item.toDate.slice(5, 10),
         });

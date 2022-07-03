@@ -1,5 +1,9 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
-import { mockBudget, mockExpense } from "../../resources/mockData";
+import {
+  mockBudget,
+  mockExpense,
+  weeklyReportsData,
+} from "../../resources/mockData";
 
 import { ChartContainer } from "./ChartContainer";
 import withMock from "storybook-addon-mock";
@@ -48,6 +52,12 @@ Default_Light.parameters = {
       status: 200,
       response: mockBudget,
     },
+    {
+      url: "http://localhost:3030/api/reports/weeklyReports",
+      method: "GET",
+      status: 200,
+      response: weeklyReportsData,
+    },
   ],
 };
 
@@ -69,6 +79,12 @@ Default_Dark.parameters = {
       method: "GET",
       status: 200,
       response: mockBudget,
+    },
+    {
+      url: "http://localhost:3030/api/reports/weeklyReports",
+      method: "GET",
+      status: 200,
+      response: weeklyReportsData,
     },
   ],
 };

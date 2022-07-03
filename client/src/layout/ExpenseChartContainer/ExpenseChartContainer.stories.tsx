@@ -12,7 +12,7 @@ interface TemplateProps {
 }
 
 export default {
-  title: "Layout/Expense Chart",
+  title: "Layout/Expense Chart Container",
   component: ExpenseChartContainer,
 } as Meta;
 

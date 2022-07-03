@@ -22,6 +22,8 @@ export const DeleteContainer = () => {
       const response: any = await deleteUser(null);
       if (response.data) {
         // If response goes throught
+        // Redirect user to login page
+        navigate("/login");
         // Dispatch Redux Toolkit function to generate notification
         dispatch(
           notification({
@@ -30,7 +32,6 @@ export const DeleteContainer = () => {
             type: "success",
           })
         );
-        navigate("/login");
       } else if (response.error) {
         // If response fails
         // Dispatch Redux Toolkit function to generate notification

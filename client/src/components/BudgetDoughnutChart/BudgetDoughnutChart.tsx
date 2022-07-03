@@ -19,7 +19,10 @@ export const BudgetDoughnutChart = (props: {
   const data = [
     {
       name: "Remaining",
-      value: props.remainingBudget < 0 ? 0 : props.remainingBudget,
+      value:
+        props.remainingBudget <= 0
+          ? 0
+          : props.remainingBudget
     },
     { name: "Spent", value: props.expenseAmount },
   ];

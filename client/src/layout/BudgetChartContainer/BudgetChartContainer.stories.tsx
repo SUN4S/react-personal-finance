@@ -16,7 +16,7 @@ interface TemplateProps {
 }
 
 export default {
-  title: "Layout/Budget Chart",
+  title: "Layout/Budget Chart Container",
   component: BudgetChartContainer,
 } as Meta;
 

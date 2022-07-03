@@ -32,9 +32,9 @@ export const BudgetChartContainer = ({
       newAmount += item.amount;
     });
     // Setting variable to expense state
-    setExpenseAmount(newAmount);
+    setExpenseAmount(Number(newAmount.toFixed(2)));
     // Setting budget difference so state
-    setRemainingBudget(budgetData?.budget - newAmount);
+    setRemainingBudget(Number((budgetData?.budget - newAmount).toFixed(2)));
   }, [budgetData, expenseData]);
 
   return (

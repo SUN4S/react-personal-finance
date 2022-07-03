@@ -1,16 +1,11 @@
-import { cleanup, render } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 
 import { ExpenseBarChart } from "./ExpenseBarChart";
+import { barChartData } from "../../resources/mockData";
+import userEvent from "@testing-library/user-event";
 
 describe("Expense Bar Chart", () => {
   afterEach(cleanup);
-
-  const mockData = [
-    { name: "Essentials", value: 0 },
-    { name: "Wants", value: 0 },
-    { name: "Culture", value: 0 },
-    { name: "Unexpected", value: 0 },
-  ];
 
   beforeAll(() => {
     jest
@@ -22,12 +17,16 @@ describe("Expense Bar Chart", () => {
   });
 
   it("Renders", () => {
-    const { getByTestId } = render(<ExpenseBarChart chartData={mockData} />);
+    const { getByTestId } = render(
+      <ExpenseBarChart chartData={barChartData} />
+    );
     expect(getByTestId("expenseChart")).toBeTruthy();
   });
 
   it("Renders yAxis", () => {
-    const { getByTestId } = render(<ExpenseBarChart chartData={mockData} />);
+    const { getByTestId } = render(
+      <ExpenseBarChart chartData={barChartData} />
+    );
     const axisText = getByTestId("expenseChart").querySelectorAll(
       `.recharts-yAxis .recharts-cartesian-axis-ticks text tspan`
     );
@@ -35,5 +34,24 @@ describe("Expense Bar Chart", () => {
     expect(axisText[1]).toHaveTextContent("Wants");
     expect(axisText[2]).toHaveTextContent("Culture");
     expect(axisText[3]).toHaveTextContent("Unexpected");
+  });
+
+  it("Renders xAxis", () => {
+    const { getByTestId } = render(
+      <ExpenseBarChart chartData={barChartData} />
+    );
+    const axisText = getByTestId("expenseChart").querySelectorAll(
+      `.recharts-xAxis .recharts-cartesian-axis-ticks .recharts-cartesian-axis-tick`
+    );
+    expect(axisText.length).toBe(5);
+  });
+
+  it("Renders Tooltip", () => {
+    const { getByTestId } = render(
+      <ExpenseBarChart chartData={barChartData} />
+    );
+    expect(
+      getByTestId("expenseChart").querySelector(".recharts-tooltip-wrapper")
+    ).toBeInTheDocument();
   });
 });

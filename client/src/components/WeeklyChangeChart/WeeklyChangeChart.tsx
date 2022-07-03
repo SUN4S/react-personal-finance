@@ -1,13 +1,8 @@
 import "./WeeklyChangeChart.scss";
 
 import {
-  Cell,
-  Label,
-  Legend,
   Line,
   LineChart,
-  Pie,
-  PieChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -16,11 +11,9 @@ import {
 
 import { WeeklyChangeChartProps } from "../../models/reports";
 
-//TODO: Add Story and test
 export const WeeklyChangeChart = (props: {
   chartData: Array<WeeklyChangeChartProps>;
 }) => {
-  console.log(props.chartData);
   return (
     <div className="lineChartContainer" data-testid="lineChart">
       <ResponsiveContainer width="100%" minWidth="200px" height="100%">
@@ -36,8 +29,10 @@ export const WeeklyChangeChart = (props: {
           <YAxis
             type="number"
             tick={{ fontSize: 14, fill: "var(--text-secondary)" }}
-            tickCount={9}
-            domain={["dataMin - 50", "dataMax + 50"]}
+            interval={0}
+            tickCount={5}
+            domain={["auto", "auto"]}
+            allowDecimals={false}
           />
           <Tooltip
             cursor={false}

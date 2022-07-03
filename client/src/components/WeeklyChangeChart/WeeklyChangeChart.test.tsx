@@ -21,4 +21,33 @@ describe("Weekly Change Chart", () => {
     );
     expect(getByTestId("lineChart")).toBeTruthy();
   });
+
+  it("Renders xAxis", () => {
+    const { getByTestId } = render(
+      <WeeklyChangeChart chartData={weeklyChangeChartData} />
+    );
+    const axisText = getByTestId("lineChart").querySelectorAll(
+      `.recharts-xAxis .recharts-cartesian-axis-ticks .recharts-cartesian-axis-tick`
+    );
+    expect(axisText.length).toBe(2);
+  });
+
+  it("Renders yAxis", () => {
+    const { getByTestId } = render(
+      <WeeklyChangeChart chartData={weeklyChangeChartData} />
+    );
+    const axisText = getByTestId("lineChart").querySelectorAll(
+      `.recharts-yAxis .recharts-cartesian-axis-ticks .recharts-cartesian-axis-tick`
+    );
+    expect(axisText.length).toBe(5);
+  });
+
+  it("Renders Tooltip", () => {
+    const { container } = render(
+      <WeeklyChangeChart chartData={weeklyChangeChartData} />
+    );
+    expect(
+      container.querySelector(".recharts-default-tooltip")
+    ).toBeInTheDocument();
+  });
 });
