@@ -4,8 +4,6 @@ import { RegisterForm } from "./RegisterForm";
 
 interface TemplateProps {
   theme: string;
-  submitFunction: Function;
-  isLoading: boolean;
 }
 
 export default {
@@ -23,25 +21,38 @@ const Template: Story<TemplateProps> = (args) => {
           backgroundColor: "var(--page-bg)",
         }}
       >
-        <RegisterForm
-          submitFunction={args.submitFunction}
-          isLoading={args.isLoading}
-        />
+        <RegisterForm />
       </body>
     </html>
   );
 };
 
 export const Default_Light = Template.bind({});
+Default_Light.parameters = {
+  mockData: [
+    {
+      url: "http://localhost:3030/api/register",
+      method: "POST",
+      status: 200,
+      response: { msg: "Successfully Registered" },
+    },
+  ],
+};
 Default_Light.args = {
   theme: "light",
-  submitFunction: () => alert("Submit"),
-  isLoading: false,
 };
 
 export const Default_Dark = Template.bind({});
+Default_Dark.parameters = {
+  mockData: [
+    {
+      url: "http://localhost:3030/api/register",
+      method: "POST",
+      status: 200,
+      response: { msg: "Successfully Registered" },
+    },
+  ],
+};
 Default_Dark.args = {
   theme: "dark",
-  submitFunction: () => alert("Submit"),
-  isLoading: false,
 };

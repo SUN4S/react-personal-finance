@@ -48,6 +48,7 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:3000",
+      "http://localhost:6006",
       "https://www.marglipersonalfinance.me",
       "https://marglipersonalfinance.me",
     ],

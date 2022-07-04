@@ -4,8 +4,6 @@ import { LoginForm } from "./LoginForm";
 
 interface TemplateProps {
   theme: string;
-  submitFunction: Function;
-  isLoading: boolean;
 }
 
 export default {
@@ -23,25 +21,42 @@ const Template: Story<TemplateProps> = (args) => {
           backgroundColor: "var(--login-form-bg)",
         }}
       >
-        <LoginForm
-          submitFunction={args.submitFunction}
-          isLoading={args.isLoading}
-        />
+        <LoginForm />
       </body>
     </html>
   );
 };
 
 export const Default_Light = Template.bind({});
+Default_Light.parameters = {
+  mockData: [
+    {
+      url: "http://localhost:3030/api/login",
+      method: "POST",
+      status: 200,
+      response: { msg: "Successfully Logged In" },
+    },
+  ],
+};
 Default_Light.args = {
   theme: "light",
-  submitFunction: () => alert("Submit"),
-  isLoading: false,
 };
 
 export const Default_Dark = Template.bind({});
+Default_Dark.parameters = {
+  mockData: [
+    {
+      url: "http://localhost:3030/api/login",
+      method: "POST",
+      status: 200,
+      response: {
+        msg: "Logged in successfully",
+        username: "User123",
+        image: "Image.jpg",
+      },
+    },
+  ],
+};
 Default_Dark.args = {
   theme: "dark",
-  submitFunction: () => alert("Submit"),
-  isLoading: false,
 };
