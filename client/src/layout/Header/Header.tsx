@@ -48,7 +48,6 @@ export const Header = () => {
   // Function that handles theme change
   // Inverts selected option,
   const handleThemeChange = () => {
-    console.log("Clicked");
     if (currentTheme === "light") {
       setTheme("dark");
     } else {

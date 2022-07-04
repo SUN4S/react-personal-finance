@@ -1,11 +1,15 @@
-import { LoginInputs, RegisterInputs } from "../models/user";
+import {
+  ChanggePasswordInput,
+  LoginInputs,
+  RegisterInputs,
+} from "../models/user";
 
 import { baseApi } from "./baseApi";
 
 // Inject a new userApi into the baseApi
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // First mutation(query) takes user object and tries to authenticate user
+    // takes user object and tries to authenticate user
     login: builder.mutation({
       query: (userData: LoginInputs) => ({
         url: `/user/login`,
@@ -16,7 +20,7 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
-    // Second mutation(query) takes user object and tries to create a new user
+    // takes user object and tries to create a new user
     registerUser: builder.mutation({
       query: (userData: RegisterInputs) => ({
         url: `/user/register`,
@@ -27,7 +31,7 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
-    // Third mutation(query) uses token to remove user from session
+    // uses token to remove user from session
     logoutUser: builder.mutation({
       query: () => ({
         url: `/user/logout`,
@@ -36,6 +40,18 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    // change current user password
+    changePassword: builder.mutation({
+      query: (userData: ChanggePasswordInput) => ({
+        url: `/user/changePassword`,
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+        data: userData,
+      }),
+      invalidatesTags: ["User"],
+    }),
+    // delete user from database
     deleteUser: builder.mutation({
       query: () => ({
         url: `/user/delete`,
@@ -44,7 +60,7 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
-    // Fourth query send a request to see if user is logged to current session
+    // send a request to see if user is logged to current session
     isLoggedIn: builder.query({
       query: () => ({
         url: `/user/loggedIn`,
@@ -60,6 +76,7 @@ export const {
   useLoginMutation,
   useLogoutUserMutation,
   useRegisterUserMutation,
+  useChangePasswordMutation,
   useDeleteUserMutation,
   useIsLoggedInQuery,
 } = userApi;

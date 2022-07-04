@@ -34,7 +34,9 @@ export const RegisterForm = (props: {
         register={register}
         name="username"
       />
-      {errors.username && <span data-testid="usernameMissing">This field is required</span>}
+      {errors.username && (
+        <span data-testid="usernameMissing">This field is required</span>
+      )}
 
       <FormInput
         labelFor="email"
@@ -46,7 +48,9 @@ export const RegisterForm = (props: {
         register={register}
         name="email"
       />
-      {errors.email && <span data-testid="emailMissing">This field is required</span>}
+      {errors.email && (
+        <span data-testid="emailMissing">This field is required</span>
+      )}
 
       <FormInput
         labelFor="password"
@@ -58,10 +62,13 @@ export const RegisterForm = (props: {
         register={register}
         name="password"
       />
-      {errors.password && <span data-testid="passwordMissing">This field is required</span>}
+      {errors.password && (
+        <span data-testid="passwordMissing">This field is required</span>
+      )}
 
       <div className="reqContainer">
         <ul>
+          <li>Length 8-64</li>
           <li>At least one Uppercase Letter</li>
           <li>At least one Number</li>
           <li>At least one Special Symbol</li>

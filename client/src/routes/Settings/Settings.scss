@@ -42,7 +42,12 @@
       .leftSide {
         width: 50%;
         height: 100%;
-        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        gap: 36px;
+        padding: 24px 8px;
         border-right: 1px solid var(--text-secondary);
       }
 
@@ -52,9 +57,10 @@
         padding: 8px;
       }
 
-      @media (max-width: 576px) {
+      @media (max-width: 768px) {
         .leftSide {
           width: 100%;
+          height: auto;
           border-right: none;
         }
         .rightSide {

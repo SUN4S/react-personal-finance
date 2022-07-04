@@ -2,6 +2,7 @@ import "./Settings.scss";
 
 import { Button } from "../../components/Button/Button";
 import { DeleteContainer } from "../../layout/DeleteContainer/DeleteContainer";
+import { PasswordChangeForm } from "../../layout/PasswordChangeForm/PasswordChangeForm";
 
 export const Settings = () => {
   return (
@@ -12,6 +13,7 @@ export const Settings = () => {
         </div>
         <div className="settingsBody">
           <div className="leftSide">
+            <PasswordChangeForm />
             <DeleteContainer />
           </div>
           <div className="rightSide">

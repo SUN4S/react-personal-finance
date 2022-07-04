@@ -47,7 +47,7 @@ export const DeleteContainer = () => {
   };
 
   return (
-    <div className="deleteContainer">
+    <div id="deleteContainer">
       <h3>Delete Account</h3>
       <Button
         type="button"

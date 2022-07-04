@@ -21,3 +21,14 @@ export interface UserState {
     image: string;
   };
 }
+
+export interface ChangePasswordFormInput {
+  oldPassword: string;
+  newPassword: string;
+  newPasswordRepeat: string;
+}
+
+export interface ChanggePasswordInput {
+  oldPassword: string;
+  newPassword: string;
+}
