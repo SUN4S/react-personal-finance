@@ -2,6 +2,7 @@ import "./Settings.scss";
 
 import { Button } from "../../components/Button/Button";
 import { DeleteContainer } from "../../layout/DeleteContainer/DeleteContainer";
+import { FileInputAvatarForm } from "../../layout/FileInputAvatar/FileInputAvatarForm";
 import { PasswordChangeForm } from "../../layout/PasswordChangeForm/PasswordChangeForm";
 
 export const Settings = () => {
@@ -17,7 +18,7 @@ export const Settings = () => {
             <DeleteContainer />
           </div>
           <div className="rightSide">
-            <h2>Right side</h2>
+            <FileInputAvatarForm />
           </div>
         </div>
       </div>

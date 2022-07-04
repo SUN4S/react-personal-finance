@@ -7,6 +7,7 @@ import { UserDropdown } from "../../components/UserDropdown/UserDropdown";
 import defaultAvatar from "../../resources/images/default-image.jpg";
 import { notification } from "../../features/NotificationSlice";
 import { useAppDispatch } from "../../app/hooks";
+import { useEffect } from "react";
 import { useLogoutUserMutation } from "../../services/user";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
@@ -21,6 +22,17 @@ export const Header = () => {
   const { currentTheme, setTheme } = useTheme();
 
   const [open, setOpen] = useState(false);
+  const [userImage, setUserImage] = useState<string | undefined>(
+    user.image === null || user.image === undefined
+      ? undefined
+      : `${process.env.SERVER_URL}/resources/avatar_image/${user.image}`
+  );
+
+  useEffect(() => {
+    setUserImage(
+      `${process.env.SERVER_URL}/resources/avatar_image/${user.image}`
+    );
+  }, [user]);
 
   // Redux toolkit api request to logout user
   const [logout] = useLogoutUserMutation();
@@ -59,10 +71,7 @@ export const Header = () => {
     <header>
       <ThemeSwitch theme={currentTheme} clickFunction={handleThemeChange} />
       <div className="userContainer">
-        <img
-          src={defaultAvatar || `/resources/avatar_image/${user.image}`}
-          alt="Avatar"
-        />
+        <img src={userImage || defaultAvatar} alt="Avatar" />
         <h4>{user.username || "placeholder"}</h4>
         <div
           data-testid="dropdownToggle"

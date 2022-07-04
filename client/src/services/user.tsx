@@ -1,4 +1,5 @@
 import {
+  AvatarChangeInput,
   ChanggePasswordInput,
   LoginInputs,
   RegisterInputs,
@@ -51,6 +52,19 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    // change current user password
+    addAvatar: builder.mutation({
+      query: (data: AvatarChangeInput) => ({
+        url: `/user/avatar`,
+        method: "POST",
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+        withCredentials: true,
+        data: data,
+      }),
+      invalidatesTags: ["User"],
+    }),
     // delete user from database
     deleteUser: builder.mutation({
       query: () => ({
@@ -77,6 +91,7 @@ export const {
   useLogoutUserMutation,
   useRegisterUserMutation,
   useChangePasswordMutation,
+  useAddAvatarMutation,
   useDeleteUserMutation,
   useIsLoggedInQuery,
 } = userApi;

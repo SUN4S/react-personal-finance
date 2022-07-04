@@ -45,10 +45,14 @@ export const addAvatar = async (req: Request, res: Response) => {
       if (req.files) {
         const file = req.files.avatar;
         const fileName = Date.now() + "-" + Math.round(Math.random() * 1e9) + file.name;
+        console.log(file);
+        console.log(fileName);
         if (!global.whitelist.includes(file.mimetype)) {
+          logger.warn(`${req.user.username} Provided Bad File Format`);
           return res.json({ msg: "Bad file format" });
         } else {
-          file.mv(`${global.__basedir}/uploads/avatars/${fileName}`);
+          logger.info("Saved New Image To Server");
+          file.mv(`./uploads/avatars/${fileName}`);
         }
 
         // Saving file name in userModel which will be used later to find the img
@@ -56,12 +60,13 @@ export const addAvatar = async (req: Request, res: Response) => {
           { _id: req.user.id },
           { image: fileName }
         );
-        return res.json({ msg: "Successfuly Added Avatar" });
+        return res.status(200).json({ msg: "Successfuly Added Avatar" });
       } else {
-        return res.json({ msg: "Avatar not provided" });
+        return res.status(400).json({ msg: "Avatar not provided" });
       }
     } catch (error) {
       logger.error(error.message);
+      return res.status(500).json({ msg: error.message });
     }
   } else {
     res.status(401).json({ msg: "Unauthorized access" });

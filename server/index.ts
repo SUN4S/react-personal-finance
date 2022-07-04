@@ -57,8 +57,10 @@ app.use(
 // Serving static images, which can be accessed through url
 app.use("/resources/expense_image", express.static(process.cwd() + "/uploads/expenses"));
 app.use("/resources/avatar_image", express.static(process.cwd() + "/uploads/avatars"));
+// Serving static website files
 app.use(require("serve-static")(__dirname + "/public"));
 app.use(express.static("/public"));
+
 app.use(require("body-parser").urlencoded({ extended: true }));
 app.use(
   require("express-session")({
@@ -75,8 +77,8 @@ if (!fs.existsSync(`./uploads/expenses`)) {
   fs.mkdirSync(`./uploads/expenses`, { recursive: true });
 }
 
-if (!fs.existsSync(`./uploads/avatar`)) {
-  fs.mkdirSync(`./uploads/avatar`, { recursive: true });
+if (!fs.existsSync(`./uploads/avatars`)) {
+  fs.mkdirSync(`./uploads/avatars`, { recursive: true });
 }
 
 // Using Passportjs for authentification

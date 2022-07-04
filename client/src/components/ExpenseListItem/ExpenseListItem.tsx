@@ -11,7 +11,7 @@ export const ExpenseListItem = (props: {
   return (
     <div className="expenseListElement" data-testid="expenseItem">
       <div className="expenseListElementDate">
-        {`${DateTime.fromISO(props.expenseData.date).toFormat("yyyy-MM-dd")}`}
+        {`${DateTime.fromISO(props.expenseData.date).toFormat("MM-dd")}`}
       </div>
       <div className="expenseListElementCategory">
         {props.expenseData.category}

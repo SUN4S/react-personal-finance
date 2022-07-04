@@ -84,6 +84,11 @@
     @media (max-width: 576px) {
       height: 100%;
     }
+    @media (max-width: 360px) {
+      .listHeader {
+        font-size: 12px;
+      }
+    }
   }
 
   @media (max-width: 576px) {

@@ -32,3 +32,7 @@ export interface ChanggePasswordInput {
   oldPassword: string;
   newPassword: string;
 }
+
+export interface AvatarChangeInput {
+  avatar: File;
+}

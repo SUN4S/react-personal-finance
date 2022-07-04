@@ -54,7 +54,12 @@
       .rightSide {
         width: 50%;
         height: 100%;
-        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        gap: 36px;
+        padding: 24px 8px;
       }
 
       @media (max-width: 768px) {
@@ -64,6 +69,7 @@
           border-right: none;
         }
         .rightSide {
+          height: auto;
           width: 100%;
         }
       }
