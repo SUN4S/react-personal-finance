@@ -85,7 +85,8 @@ export const LoginForm = () => {
       {errors.password && (
         <span data-testid="passwordMissing">This field is required</span>
       )}
-
+      <Link to="/recovery" className="recoverLink">Recover Password</Link>
+      
       <Button
         type="submit"
         class="primaryBtn"

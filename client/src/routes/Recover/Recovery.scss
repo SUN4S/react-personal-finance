@@ -1,4 +1,4 @@
-.login {
+.recovery {
   width: 100%;
   height: 100vh;
   display: flex;
@@ -8,7 +8,7 @@
   padding: 0 12px;
   background-color: var(--login-bg);
 
-  .loginContainer {
+  .recoveryContainer {
     width: 100%;
     max-width: 400px;
     display: flex;
@@ -20,8 +20,8 @@
     border-radius: 5px;
     box-shadow: 0 0 12px var(--primary-diffused);
 
-    .loginHeader,
-    .loginDesc {
+    .recoveryHeader,
+    .recoveryDesc {
       text-align: center;
       font-weight: 500;
       color: var(--text-primary);
@@ -29,7 +29,7 @@
       margin-bottom: 6px;
     }
 
-    .loginDesc {
+    .recoveryDesc {
       font-size: 14px;
     }
 

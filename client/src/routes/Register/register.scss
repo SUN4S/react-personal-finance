@@ -23,12 +23,13 @@
     .registerHeader,
     .registerDesc {
       text-align: center;
+      font-weight: 500;
       color: var(--text-primary);
       margin-top: 0;
       margin-bottom: 6px;
     }
 
-    .loginDesc {
+    .registerDesc {
       font-size: 14px;
     }
 

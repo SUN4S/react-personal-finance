@@ -1,7 +1,8 @@
 import {
   AvatarChangeInput,
-  ChanggePasswordInput,
+  ChangePasswordInput,
   LoginInputs,
+  RecoverPasswordInput,
   RegisterInputs,
 } from "../models/user";
 
@@ -43,9 +44,20 @@ export const userApi = baseApi.injectEndpoints({
     }),
     // change current user password
     changePassword: builder.mutation({
-      query: (userData: ChanggePasswordInput) => ({
+      query: (userData: ChangePasswordInput) => ({
         url: `/user/changePassword`,
         method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+        data: userData,
+      }),
+      invalidatesTags: ["User"],
+    }),
+    // change current user password
+    recoverPassword: builder.mutation({
+      query: (userData: RecoverPasswordInput) => ({
+        url: `/user/recoverPassword`,
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
         data: userData,
@@ -91,6 +103,7 @@ export const {
   useLogoutUserMutation,
   useRegisterUserMutation,
   useChangePasswordMutation,
+  useRecoverPasswordMutation,
   useAddAvatarMutation,
   useDeleteUserMutation,
   useIsLoggedInQuery,

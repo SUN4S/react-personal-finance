@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ReactNotifications } from "react-notifications-component";
+import { Recover } from "./routes/Recover/Recover";
 import { Register } from "./routes/Register/Register";
 import { Settings } from "../src/routes/Settings/Settings";
 import { store } from "./app/store";
@@ -34,6 +35,7 @@ root.render(
           <Route path="/" element={<PublicRoutes />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/recovery" element={<Recover />} />
           </Route>
           {/* Protected Routed are only used for users who are successfully authenticated */}
           <Route path="/" element={<ProtectedRoutes />}>

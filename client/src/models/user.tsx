@@ -28,11 +28,15 @@ export interface ChangePasswordFormInput {
   newPasswordRepeat: string;
 }
 
-export interface ChanggePasswordInput {
+export interface ChangePasswordInput {
   oldPassword: string;
   newPassword: string;
 }
 
 export interface AvatarChangeInput {
   avatar: File;
+}
+
+export interface RecoverPasswordInput {
+  email: string;
 }
