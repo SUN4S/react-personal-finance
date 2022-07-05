@@ -1,13 +1,11 @@
-import { BudgetModel, joiBudgetSchema } from "../models/budgetSchema";
 import {
   addBudget,
   editBudget,
   getAllBudgets,
   getCurrentBudget,
 } from "../controllers/BudgetController";
-import express, { Request, Response } from "express";
 
-import logger from "../config/winston";
+import express from "express";
 
 const router = express.Router();
 

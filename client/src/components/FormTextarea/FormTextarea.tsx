@@ -2,6 +2,7 @@ import "./FormTextarea.scss";
 
 import { FormTextareaProps } from "../../models/inputs";
 
+// creates a form textarea input inside a label
 export const FormTextarea: React.FC<FormTextareaProps> = ({
   labelFor,
   label,

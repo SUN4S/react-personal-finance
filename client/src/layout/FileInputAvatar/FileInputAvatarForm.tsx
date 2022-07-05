@@ -15,17 +15,23 @@ import { useSelector } from "react-redux";
 // Currently unused
 // TODO: Add user settings (where you will be able to change avatar)
 export const FileInputAvatarForm = () => {
+  // Get user information from redux store
   const user = useSelector((state: RootState) => state.user.userData);
-
+  // Redux toolkit mutation to handle adding new avatar image  
   const [addAvatar, { isLoading }] = useAddAvatarMutation();
+  // State to handle selected file
   const [selectedFile, setSelectedFile] = useState<File>();
+  // State to handle preview link
   const [preview, setPreview] = useState<string>(DefaultImage);
+  // Checking user data from store to see if custom avatar is set
+  // If not, set state to undefined
   const [userImage, setUserImage] = useState<string | undefined>(
     user.image === null || user.image === undefined
       ? undefined
       : `${process.env.SERVER_URL}/resources/avatar_image/${user.image}`
   );
 
+  // Redux funtion to dispatch event to reducer
   const dispatch = useAppDispatch();
 
   const {
@@ -66,9 +72,13 @@ export const FileInputAvatarForm = () => {
     if (!selectedFile) {
       return;
     }
-
+    // When selected file exists create an image url
     const objectUrl = URL.createObjectURL(selectedFile);
+    // remove user provided image link
+    // doing this allows to display new preview image that is not yet set
+    // if this is not done, user image will take priority to display
     setUserImage(undefined);
+    // setting new image link to preview state
     setPreview(objectUrl);
   }, [selectedFile]);
 

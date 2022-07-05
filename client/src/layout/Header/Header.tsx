@@ -21,7 +21,10 @@ export const Header = () => {
   // Custom Hook Call to handle Theme change
   const { currentTheme, setTheme } = useTheme();
 
+  // State to handle if Dropdown menu is open
   const [open, setOpen] = useState(false);
+  // Checking user data from store to see if custom avatar is set
+  // If not, set state to undefined
   const [userImage, setUserImage] = useState<string | undefined>(
     user.image === null || user.image === undefined
       ? undefined
@@ -29,6 +32,7 @@ export const Header = () => {
   );
 
   useEffect(() => {
+    // if User is updated, set user image to new/current image link
     setUserImage(
       `${process.env.SERVER_URL}/resources/avatar_image/${user.image}`
     );

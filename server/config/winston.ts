@@ -9,6 +9,7 @@ dotenv.config();
 
 const { combine, timestamp, colorize, align, printf, json } = winston.format;
 
+// connecting to logzio log interpreter
 const logzioWinstonTransport = new LogzioWinstonTransport({
   level: "info",
   name: "winston_logzio",

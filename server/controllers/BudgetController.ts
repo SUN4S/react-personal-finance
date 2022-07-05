@@ -4,12 +4,16 @@ import { Request, Response } from "express";
 import { DateTime } from "luxon";
 import logger from "../config/winston";
 
+// function to get all budgets in an array
+// uses PassportJS session to authenticate user
 export const getAllBudgets = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     try {
+      // call mongoose query to get Budget array by userid
       const budget = await BudgetModel.findOne({ userid: req.user.id });
       const data = await budget;
       logger.info(`${req.user.username} Requested Budged Data`);
+      // send only the budgetlist that we received
       return res.status(200).send(data.budgetList);
     } catch (error) {
       logger.error(error.message);
@@ -19,17 +23,20 @@ export const getAllBudgets = async (req: Request, res: Response) => {
   }
 };
 
+// function to get current monthly budget
+// uses PassportJS session to authenticate user
 export const getCurrentBudget = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     try {
+      // call mongoose query to get Budget array by userid
       const budget = await BudgetModel.findOne({ userid: req.user.id });
-
       const data = await budget;
       // Filter out unnecessary data
       const currentBudget = data.budgetList.filter(
         (item) => item.budgetDate == DateTime.now().toFormat("yyyy-MM")
       );
       logger.info(`${req.user.username} Requested Budged Data`);
+      // sned to client budget that matches current month
       return res.status(200).send(currentBudget[0]);
     } catch (error) {
       logger.error(error.message);
@@ -41,6 +48,11 @@ export const getCurrentBudget = async (req: Request, res: Response) => {
 
 // It's only possible to have one budget per month
 // TODO: Add an ability to select month interval
+/* 
+  body: {
+    budget: number;
+  }
+*/
 export const addBudget = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     // Validate if Provided data is correct
@@ -83,14 +95,23 @@ export const addBudget = async (req: Request, res: Response) => {
   }
 };
 
+// function to edit current month budget
+/* 
+  body: {
+    budget: number;
+  }
+*/
 export const editBudget = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     //Validate if provided data is correct
     const data = joiBudgetSchema.validate(req.body);
+    // check for joi error,
+    // if error exists, break function
     if (data.error) {
       return res.json({ msg: data.error.message });
     }
-
+    // find budget with the same date as at the time of query
+    // when found, update with new budget amount
     try {
       const budget = await BudgetModel.findOneAndUpdate(
         {

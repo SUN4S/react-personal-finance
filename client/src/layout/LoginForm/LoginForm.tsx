@@ -12,6 +12,7 @@ import { useAppDispatch } from "../../app/hooks";
 import { useLoginMutation } from "../../services/user";
 
 export const LoginForm = () => {
+  // Redux toolkit mutation to handle login query
   const [login, { isLoading }] = useLoginMutation();
 
   const dispatch = useAppDispatch();

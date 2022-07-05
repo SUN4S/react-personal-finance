@@ -1,5 +1,7 @@
 import { FormSelectProps } from "../../models/inputs";
 
+// Creates a dropdown select form input
+// options need to be privided as an Array
 export const FormSelect: React.FC<FormSelectProps> = ({
   labelFor,
   label,

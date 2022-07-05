@@ -11,6 +11,7 @@ export const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASSWORD,
   },
 });
+// check if transporter connected successfully
 transporter
   .verify()
   .then(console.log("Connected Email transporter"))

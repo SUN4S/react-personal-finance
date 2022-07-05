@@ -12,6 +12,7 @@ export const reportsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addMatcher(
+      // Function to add response data to store reports state
       reportsApi.endpoints.weeklyReports.matchFulfilled,
       (state, action?: PayloadAction<ReportsState[]>) => {
         if (action?.payload) {

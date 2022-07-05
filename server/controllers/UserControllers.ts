@@ -13,6 +13,13 @@ import logger from "../config/winston";
 // bcrypt variable
 const saltRounds = 10;
 
+// funtion to log in user
+/*
+  body: {
+    username: string,
+    password: string
+  }
+*/
 export const login = (req: Request, res: Response) => {
   return res.json({
     msg: "Logged in successfully",
@@ -21,8 +28,13 @@ export const login = (req: Request, res: Response) => {
   });
 };
 
+// function to check if user is logged in
+// this function does not take a body
+// uses PassportJS session to authenticate user
 export const loggedIn = async (req: Request, res: Response) => {
+  // passportJS function to check if user is authenticated
   if (req.isAuthenticated()) {
+    // try-catch just in case something goes horribly wrong
     try {
       return res
         .status(200)
@@ -35,6 +47,12 @@ export const loggedIn = async (req: Request, res: Response) => {
   }
 };
 
+// function to add new avatar image
+/*
+  body: {
+    avatar: File
+  }
+*/
 export const addAvatar = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     try {
@@ -43,15 +61,17 @@ export const addAvatar = async (req: Request, res: Response) => {
       let fileName = null;
       // Checking if file was provided
       if (req.files) {
+        // get file named avatar from fileList
         const file = req.files.avatar;
+        // generate a new filename that will be used to store on server
+        // generating new names prevents duplicate images being added
         const fileName = Date.now() + "-" + Math.round(Math.random() * 1e9) + file.name;
-        console.log(file);
-        console.log(fileName);
         if (!global.whitelist.includes(file.mimetype)) {
           logger.warn(`${req.user.username} Provided Bad File Format`);
           return res.json({ msg: "Bad file format" });
         } else {
           logger.info("Saved New Image To Server");
+          // express fileupload function to save file to folder
           file.mv(`./uploads/avatars/${fileName}`);
         }
 
@@ -73,6 +93,14 @@ export const addAvatar = async (req: Request, res: Response) => {
   }
 };
 
+// function to register a new user
+/*
+  body: {
+    username: string,
+    password: string,
+    email: string
+  }
+*/
 export const register = async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
 
@@ -153,6 +181,13 @@ export const register = async (req: Request, res: Response) => {
 };
 
 // TODO: Generate email to notify of password change
+// function to change current user password
+/*
+  body: {
+    oldPassword: string,
+    newPassword: string
+  }
+*/
 export const changePassword = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     // Get new and old passwords from body
@@ -193,6 +228,7 @@ export const changePassword = async (req: Request, res: Response) => {
 };
 
 // Fcuntion used to delete current user
+// uses PassportJS session to authenticate user that needs to be deleted
 export const deleteUser = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     // Remove current user from DB
@@ -224,6 +260,8 @@ export const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
+// function to log out user
+// uses PassportJS session to authenticate user that needs to be logged out
 export const logout = (req: Request, res: Response) => {
   logger.info(`${req.user.username} Logged Out`);
   req.logout();

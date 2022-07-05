@@ -7,6 +7,7 @@ import { IconStock } from "../../resources/icons/IconStock/IconStock";
 import { IconWeekly } from "../../resources/icons/IconWeekly/IconWeekly";
 import { NavLink } from "react-router-dom";
 
+// Generates tablet/pc navigation list
 export const SidebarList = () => {
   return (
     <ul className="preload-transitions" data-testid="sidebarList">

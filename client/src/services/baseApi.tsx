@@ -31,6 +31,9 @@ const axiosBaseQuery =
       });
       return { data: result.data };
     } catch (axiosError) {
+      // Go through this if statement on every error
+      // If received error is 401, redirect to login page
+      // exclude public router
       let err = axiosError as AxiosError;
       if (
         err.response?.status === 401 &&

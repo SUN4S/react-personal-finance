@@ -4,6 +4,8 @@ import { DateTime } from "luxon";
 import { ExpenseState } from "../../models/expenses";
 import { IconEdit } from "../../resources/icons/IconEdit/IconEdit";
 
+// Function that generates single expense list item
+// description/tags are hidden in mobile view
 export const ExpenseListItem = (props: {
   expenseData: ExpenseState;
   clickFunction: Function;

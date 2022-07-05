@@ -9,6 +9,7 @@ import { useChangePasswordMutation } from "../../services/user";
 import { useForm } from "react-hook-form";
 
 export const PasswordChangeForm = () => {
+  // Redux Toolkit mutation to handle password change query
   const [changePassword, { isLoading }] = useChangePasswordMutation();
 
   const dispatch = useAppDispatch();
@@ -21,7 +22,10 @@ export const PasswordChangeForm = () => {
 
   // On submit, sending request to authenticate user
   const onSubmit = async (data: ChangePasswordFormInput) => {
+    // Checking if new password and repeat are the same
+    // if they are, throw and error notification
     if (data.newPassword !== data.newPasswordRepeat) {
+      // Dispatch Redux Toolkit function to generate notification
       dispatch(
         notification({
           title: "Change Password",

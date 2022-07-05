@@ -1,7 +1,7 @@
+import { BudgetFetchState, BudgetState } from "../models/budget";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { budgetApi } from "../services/budget";
-import { BudgetFetchState, BudgetState } from "../models/budget";
 
 // Redux Toolkit created expense slice
 // extraReducers: request that was handled by the api sets the state here
@@ -12,6 +12,7 @@ export const budgetSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addMatcher(
+      // Function to add response data to store budget state
       budgetApi.endpoints.currentBudget.matchFulfilled,
       (state, action?: PayloadAction<BudgetState>) => {
         if (action?.payload) {

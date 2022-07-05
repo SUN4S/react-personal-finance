@@ -6,6 +6,8 @@ import { IconStock } from "../../resources/icons/IconStock/IconStock";
 import { IconWeekly } from "../../resources/icons/IconWeekly/IconWeekly";
 import { NavLink } from "react-router-dom";
 
+// Generates navigation for mobile screen
+// takes a function, in this case to open modal
 export const MobileNavList = (props: { clickFunction: Function }) => {
   return (
     <div className="mobileNav" data-testid="mobileNavList">

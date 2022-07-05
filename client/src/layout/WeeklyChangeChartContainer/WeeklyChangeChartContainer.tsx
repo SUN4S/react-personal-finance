@@ -13,17 +13,21 @@ export const WeeklyChangeChartContainer = ({
   weeklyIsFetching,
   weeklyIsSuccess,
 }: WeeklyReportsProps) => {
+  // State to store 'compiled' reports data
   const [dataArray, setDataArray] = useState<WeeklyChangeChartProps[]>([]);
 
   useEffect(() => {
+    // Creating a new array that will be stored to state
     let newArray: Array<WeeklyChangeChartProps> = [];
     weeklyData &&
       weeklyData.map((item) => {
+        // pushing a new object to array
         newArray.push({
           amount: item.totalAmount,
           date: item.toDate.slice(5, 10),
         });
       });
+    // setting newArray to state
     setDataArray(newArray);
   }, [weeklyData]);
 

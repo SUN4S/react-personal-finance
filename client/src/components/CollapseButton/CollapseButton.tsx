@@ -2,6 +2,7 @@ import "./CollapseButton.scss";
 
 import { IconArrow } from "../../resources/icons/IconArrow/IconArrow";
 
+// Arrow component that opens dropdown menu
 export const CollapseButton = (props: { clickFunction: Function }) => {
   return (
     <button

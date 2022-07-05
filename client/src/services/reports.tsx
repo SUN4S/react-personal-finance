@@ -3,7 +3,7 @@ import { baseApi } from "./baseApi";
 // Inject a new budgetApi into the baseApi
 export const reportsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // First query returns ALL expenses ever provided
+    // query to get all weekly reports
     weeklyReports: builder.query({
       query: () => ({
         url: `/reports/weeklyReports`,
@@ -12,6 +12,7 @@ export const reportsApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Reports"],
     }),
+    // query to get all monthly reports
     monthlyReports: builder.query({
       query: () => ({
         url: `/reports/monthlyReports`,

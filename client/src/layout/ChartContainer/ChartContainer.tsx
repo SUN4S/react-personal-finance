@@ -10,9 +10,11 @@ import { useWeeklyReportsQuery } from "../../services/reports";
 
 // Chart container used to house data visualization charts
 export const ChartContainer = () => {
-  // Redux Toolkit api Request to get expense array
+  // Redux Toolkit api Request to get Expense state
   const currentExpensesQuery = useCurrentExpenseMonthQuery({});
+  // Redux Toolkit api Request to get Bugdet state
   const budgetQuery = useCurrentBudgetQuery({});
+  // Redux Toolkit api Request to get Reports state
   const weeklyReportsQuery = useWeeklyReportsQuery({});
 
   return (

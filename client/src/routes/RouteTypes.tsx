@@ -4,6 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 
 // Public routes for non-authenticated users
 export const PublicRoutes = () => {
+  // using Custom Hook to get theme
   const { getStatus } = useAuth();
   const auth = getStatus();
 
@@ -12,6 +13,7 @@ export const PublicRoutes = () => {
 
 // Private routes for authenticated users
 export const ProtectedRoutes = () => {
+  // using Custom Hook to get theme
   const { getStatus } = useAuth();
   const auth = getStatus();
 

@@ -2,6 +2,7 @@ import "./FormInput.scss";
 
 import { FormInputProps } from "../../models/inputs";
 
+// form input element, since it has input INSIDe of label decided to have seperate component
 export const FormInput: React.FC<FormInputProps> = ({
   labelFor,
   label,

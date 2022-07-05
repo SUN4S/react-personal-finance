@@ -12,14 +12,21 @@ import { Sidebar } from "../Sidebar/Sidebar";
 
 Modal.setAppElement("#root");
 
+// Container to display header/navigation
+// App is used to display Non-changing layout
 export const App = () => {
+  // Get current witdh of display
+  // Used to change between tablet/pc and mobile navigation
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
+    // Add an event listener to window to check if it gets resized
     window.addEventListener("resize", () => {
+      // If window gets resized set state to new size
       setWindowWidth(window.innerWidth);
     });
   }, []);
+  
   return (
     <>
       <div className="App">

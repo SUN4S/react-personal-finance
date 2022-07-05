@@ -5,13 +5,16 @@ import { DateTime } from "luxon";
 import fs from "fs";
 import logger from "../config/winston";
 
+// function to get all expenses Array
+// uses PassportJS session to authenticate user
 export const getAllExpenses = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     try {
-      // Gets expense object
+      // Gets expense object by userid
       const expenses = await ExpensesModel.findOne({ userid: req.user.id });
       const data = await expenses;
       logger.info(`${req.user.username} Requested Expense Data`);
+      // send only the expenseList object array
       return res.status(200).send(data.expenseList);
     } catch (error) {
       logger.error(error.message);
@@ -21,12 +24,14 @@ export const getAllExpenses = async (req: Request, res: Response) => {
   }
 };
 
+// function to get current month expenses
+// uses PassportJS session to authenticate user
 export const getCurrentMonthExpenses = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     try {
       // Gets expense object
       const expenses = await ExpensesModel.findOne({ userid: req.user.id });
-      // Gets current month and year
+      // Gets current month and year using luxon
       const currentMonth = DateTime.now().month;
       const currentYear = DateTime.now().year;
       // Filters and sorts array here instead of in the client
@@ -42,6 +47,7 @@ export const getCurrentMonthExpenses = async (req: Request, res: Response) => {
           return currentMonth === month && currentYear === year;
         });
       logger.info(`${req.user.username} Requested Expense Data`);
+      // send only the processed array to the client
       return res.status(200).send(processedArray);
     } catch (error) {
       logger.error(error.message);
@@ -51,6 +57,17 @@ export const getCurrentMonthExpenses = async (req: Request, res: Response) => {
   }
 };
 
+// function to add new expense data
+/*
+  body: {
+    category: string,
+    amount: number,
+    date: string,
+    description: string,
+    tags: string,
+    receipt: File
+  }
+*/
 export const addExpense = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     // multipart/form-data cant send arrays, need to parse string
@@ -112,6 +129,18 @@ export const addExpense = async (req: Request, res: Response) => {
   }
 };
 
+// function to edit current expense data
+/*
+  body: {
+    _id: string, // of expense ebject that needs to be edited
+    category: string,
+    amount: number,
+    date: string,
+    description: string,
+    tags: string,
+    receipt: File
+  }
+*/
 export const editExpense = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     // multipart/form-data cant send arrays, need to parse string
@@ -180,6 +209,12 @@ export const editExpense = async (req: Request, res: Response) => {
   }
 };
 
+// function to delete current expense data
+/*
+  body: {
+    _id: string, // of expense ebject that needs to be deleted
+  }
+*/
 export const deleteExpense = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     // Delete expense by pulling it from Array

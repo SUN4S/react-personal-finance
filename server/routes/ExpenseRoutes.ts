@@ -1,4 +1,3 @@
-import { ExpensesModel, joiExpenseSchema } from "../models/expenseSchema";
 import {
   addExpense,
   deleteExpense,
@@ -6,7 +5,8 @@ import {
   getAllExpenses,
   getCurrentMonthExpenses,
 } from "../controllers/ExpenseControllers";
-import express, { Request, Response } from "express";
+
+import express from "express";
 
 const router = express.Router();
 

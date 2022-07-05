@@ -16,8 +16,12 @@ export const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
-    toggleModal: (state: ExpenseModalState, action: PayloadAction<ExpenseModalState>) => {
-      state.isOpen = action.payload.isOpen;
+    // Function to handle modal state
+    toggleModal: (
+      state: ExpenseModalState,
+      action: PayloadAction<ExpenseModalState>
+    ) => {
+      state.isOpen = state.isOpen === true ? false : action.payload.isOpen;
       state.editable = action.payload.editable;
       state.data = action.payload.data;
     },

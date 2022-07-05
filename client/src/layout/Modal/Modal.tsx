@@ -45,11 +45,14 @@ export const ModalComponent = () => {
   const editable = useSelector((state: RootState) => state.modal.editable);
   const modalData = useSelector((state: RootState) => state.modal.data);
 
-  // Variables
+  // State to handle set tags
   const [tags, setTags] = useState<Array<ModalTagInput>>([]);
+  // State to handle selected File, used to submit form
   const [selectedFile, setSelectedFile] = useState<File | Blob>();
+  // State to handle preview image link
   const [preview, setPreview] = useState<string>();
-  const [date, setDate] = useState(new Date());
+  // state to handle react datepicker date
+  const [date, setDate] = useState(DateTime.now().toJSDate());
 
   // Redux toolkit dispatch function
   const dispatch = useAppDispatch();
@@ -198,7 +201,7 @@ export const ModalComponent = () => {
     setTags([]);
     setSelectedFile(undefined);
     setPreview("");
-    setDate(new Date());
+    setDate(DateTime.now().toJSDate());
     reset();
   }, [reset]);
 
@@ -208,7 +211,7 @@ export const ModalComponent = () => {
     // depending if data is passed to modal, it autofills input fields
     if (modalData && modalStatus) {
       // Date is set by using a State
-      setDate(new Date(modalData.date));
+      setDate(DateTime.fromISO(modalData.date).toJSDate());
       // modal Tags and Receipt need extra check to check if render is needed
       // and call an appropriate function
       modalData.tags && renderTags(modalData.tags);

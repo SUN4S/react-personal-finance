@@ -17,6 +17,8 @@ export const notificationSlice = createSlice({
   name: "notification",
   initialState,
   reducers: {
+    // Function to generate a new notification
+    // takes title/message/type as arguments
     notification: (state: any, action: PayloadAction<Notification>) => {
       Store.addNotification({
         title: action.payload.title,

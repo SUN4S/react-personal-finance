@@ -4,7 +4,7 @@ import { baseApi } from "./baseApi";
 // Inject a new budgetApi into the baseApi
 export const budgetApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // First query returns ALL expenses ever provided
+    // query that returns ALL budgets ever provided
     budget: builder.query({
       query: () => ({
         url: `/budget`,
@@ -13,6 +13,7 @@ export const budgetApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Budget"],
     }),
+    // query that return current month budget
     currentBudget: builder.query({
       query: () => ({
         url: `/budget/currentBudget`,
@@ -21,6 +22,7 @@ export const budgetApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Budget"],
     }),
+    // mutation to post new budget
     postBudget: builder.mutation({
       query: (budgetData: BudgetFormState) => ({
         url: "/budget/addBudget",

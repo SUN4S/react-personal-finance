@@ -74,10 +74,15 @@ app.use(
 
 // Limit file upload to 4MB
 app.use(fileUpload({ limits: { fileSize: 4 * 1024 * 1024 } }));
+
+// check if folder for expense images exists, if it does not create one
+// express fileupload does not have functionality to create folders on it's own
 if (!fs.existsSync(`./uploads/expenses`)) {
   fs.mkdirSync(`./uploads/expenses`, { recursive: true });
 }
 
+// check if folder for avatar images exists, if it does not create one
+// express fileupload does not have functionality to create folders on it's own
 if (!fs.existsSync(`./uploads/avatars`)) {
   fs.mkdirSync(`./uploads/avatars`, { recursive: true });
 }
@@ -107,11 +112,13 @@ app.use("/api/expenses", expenses);
 app.use("/api/budget", budget);
 app.use("/api/reports", reports);
 
+// route to send serview worker to client, sometimes it is missing, don't know why
 app.get("/ServiceWorker.js", (req, res) => {
   res.header("Content-type: application/javascript");
   res.sendFile(path.join(process.cwd(), "/build/public/ServiceWorker.js"));
 });
 
+// send html to base path, reloading on certain pages would throw 404
 app.get("/*", (req, res) => {
   res.sendFile(path.join(process.cwd(), "/build/public/index.html"), function (err) {
     if (err) {
@@ -120,6 +127,7 @@ app.get("/*", (req, res) => {
   });
 });
 
+// route to throw error 404 if route is not defined
 app.all("*", (req, res) => res.status(404).json({ msg: "Page not Found" }));
 
 // const httpsPort = process.env.HTTPS_PORT || 5050;

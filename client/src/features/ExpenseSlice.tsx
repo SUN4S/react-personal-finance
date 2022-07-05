@@ -14,6 +14,7 @@ export const expenseSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addMatcher(
+      // Function to add response data to store expense state
       expensesApi.endpoints.currentExpenseMonth.matchFulfilled,
       (state, action?: PayloadAction<ExpenseState[]>) => {
         if (action?.payload) {

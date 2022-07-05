@@ -11,6 +11,7 @@ import {
 
 import { WeeklyChangeChartProps } from "../../models/reports";
 
+// Creates a line chart to document weekly change
 export const WeeklyChangeChart = (props: {
   chartData: Array<WeeklyChangeChartProps>;
 }) => {
