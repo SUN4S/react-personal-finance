@@ -38,6 +38,7 @@ const axiosBaseQuery =
       if (
         err.response?.status === 401 &&
         window.location.pathname !== "/login" &&
+        window.location.pathname !== "/recovery" &&
         window.location.pathname !== "/register"
       ) {
         window.location.href = "/login";

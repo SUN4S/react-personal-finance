@@ -1,6 +1,7 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 
 import { LoginForm } from "./LoginForm";
+import withMock from "storybook-addon-mock";
 
 interface TemplateProps {
   theme: string;
@@ -9,6 +10,7 @@ interface TemplateProps {
 export default {
   title: "Layout/Login Form",
   component: LoginForm,
+  decorators: [withMock],
 } as Meta;
 
 const Template: Story<TemplateProps> = (args) => {

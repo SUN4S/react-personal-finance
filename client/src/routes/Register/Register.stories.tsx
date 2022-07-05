@@ -26,7 +26,7 @@ export const Default_Light = Template.bind({});
 Default_Light.parameters = {
   mockData: [
     {
-      url: "http://localhost:3030/api/register",
+      url: "http://localhost:3030/api/user/register",
       method: "POST",
       status: 200,
       response: { msg: "Successfully Registered" },
@@ -41,7 +41,7 @@ export const Default_Dark = Template.bind({});
 Default_Dark.parameters = {
   mockData: [
     {
-      url: "http://localhost:3030/api/register",
+      url: "http://localhost:3030/api/user/register",
       method: "POST",
       status: 200,
       response: { msg: "Successfully Registered" },
