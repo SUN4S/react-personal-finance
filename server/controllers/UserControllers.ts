@@ -6,6 +6,9 @@ import { ReportsModel } from "../models/reportsSchema";
 import { UserModel } from "../models/userSchema";
 import bcrypt from "bcrypt";
 import { generateDeletionEmail } from "../utils/emailTemplates/deletionTemplate";
+import { generatePassword } from "../utils/passwordGenerator";
+import { generatePasswordChangeEmail } from "../utils/emailTemplates/changePasswordTemplate";
+import { generatePasswordRecoveryEmail } from "../utils/emailTemplates/recoverPasswordTemplate";
 import { generateRegistrationEmail } from "../utils/emailTemplates/registrationTemplate";
 import { joiUserSchema } from "../models/userSchema";
 import logger from "../config/winston";
@@ -218,12 +221,40 @@ export const changePassword = async (req: Request, res: Response) => {
             });
           });
           logger.info(`${response.username} updated password`);
+          generatePasswordChangeEmail(response.email, response.username);
           return res.status(201).json({ msg: "Password Changed Successfully" });
         }
       });
     }
   } else {
     res.status(401).json({ msg: "Unauthorized access" });
+  }
+};
+
+// function to recover passowrd
+/*
+  body: {
+    email: string,
+  }
+*/
+export const recoverPassword = async (req: Request, res: Response) => {
+  try {
+    // mongoose query try to find user with provided email
+    const response = await UserModel.findOne({ email: req.body.email });
+    // generate a temporary password
+    const tempPassword = generatePassword(16);
+    bcrypt.genSalt(saltRounds, (err, salt) => {
+      bcrypt.hash(tempPassword, salt, async (err, hash) => {
+        // push temporary password to database
+        await UserModel.findOneAndUpdate({ email: response.email }, { $set: { hash: hash } });
+      });
+    });
+    generatePasswordRecoveryEmail(response.email, response.username, tempPassword);
+    logger.info(`${response.username} requested recovery password`);
+    return res.status(201).json({ msg: "Recovery Email Sent" });
+  } catch (error) {
+    logger.error(error.message);
+    return res.status(201).json({ msg: "Recovery Email Sent" });
   }
 };
 

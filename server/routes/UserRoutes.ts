@@ -5,6 +5,7 @@ import {
   loggedIn,
   login,
   logout,
+  recoverPassword,
   register,
 } from "../controllers/UserControllers";
 
@@ -28,6 +29,9 @@ router.post("/register", register);
 
 // Change User Password
 router.put("/changePassword", changePassword);
+
+// Change User Password
+router.post("/recoverPassword", recoverPassword);
 
 // Delete session user
 router.delete("/delete", deleteUser);
