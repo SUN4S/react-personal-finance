@@ -1,5 +1,7 @@
 import "./Header.scss";
 
+import { useEffect, useRef } from "react";
+
 import { IconDropdown } from "../../resources/icons/IconDropdown/IconDropdown";
 import { RootState } from "../../app/store";
 import { ThemeSwitch } from "../../components/ThemeSwitch/ThemeSwitch";
@@ -7,7 +9,6 @@ import { UserDropdown } from "../../components/UserDropdown/UserDropdown";
 import defaultAvatar from "../../resources/images/default-image.jpg";
 import { notification } from "../../features/NotificationSlice";
 import { useAppDispatch } from "../../app/hooks";
-import { useEffect } from "react";
 import { useLogoutUserMutation } from "../../services/user";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
@@ -23,6 +24,8 @@ export const Header = () => {
 
   // State to handle if Dropdown menu is open
   const [open, setOpen] = useState(false);
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
   // Checking user data from store to see if custom avatar is set
   // If not, set state to undefined
   const [userImage, setUserImage] = useState<string | undefined>(
@@ -37,6 +40,18 @@ export const Header = () => {
       `${process.env.SERVER_URL}/resources/avatar_image/${user.image}`
     );
   }, [user]);
+
+  useEffect(() => {
+    if (open) {
+      window.addEventListener("mousedown", handleDropdownClick);
+    } else if (!open) {
+      window.removeEventListener("mousedown", handleDropdownClick);
+    }
+  }, [open]);
+
+  const handleDropdownClick = () => {
+    setOpen(false);
+  };
 
   // Redux toolkit api request to logout user
   const [logout] = useLogoutUserMutation();
@@ -80,7 +95,7 @@ export const Header = () => {
         <div
           data-testid="dropdownToggle"
           className={`dropdownArror ${open && "invertedArrow"}`}
-          onClick={() => setOpen(!open)}
+          onClick={() => !open && setOpen(true)}
         >
           <IconDropdown />
         </div>

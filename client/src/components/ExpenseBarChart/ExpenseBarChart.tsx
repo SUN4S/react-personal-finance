@@ -21,7 +21,7 @@ interface DataObject {
 
 export const ExpenseBarChart = (props: { chartData: Array<DataObject> }) => {
   // Colors for barchart bars
-  const COLORS = ["#1f77b4", "#ff7f0e", "#2ca02c", "#a2b321"];
+  const COLORS = ["#3b82f6", "#eab308", "#22c55e", "#ef4444"];
 
   return (
     <div className="expenseChartContainer" data-testid="expenseChart">

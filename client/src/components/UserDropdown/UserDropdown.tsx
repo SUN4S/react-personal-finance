@@ -2,12 +2,16 @@ import "./UserDropdown.scss";
 
 import { Link } from "react-router-dom";
 
-// Creates a dropdown list for user setting/logout
-// used in page header
-export const UserDropdown = (props: {
+interface DropdownProps {
   openStatus: boolean;
   logoutFunction: Function;
-}) => {
+}
+
+//  props: { openStatus: boolean, logoutFunction: Function },
+// ref: React.Ref<HTMLDivElement>
+// Creates a dropdown list for user setting/logout
+// used in page header
+export const UserDropdown = (props: DropdownProps) => {
   return (
     <div
       id="dropdown"

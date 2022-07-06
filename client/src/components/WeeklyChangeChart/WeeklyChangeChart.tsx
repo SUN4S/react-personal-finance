@@ -51,7 +51,7 @@ export const WeeklyChangeChart = (props: {
           <Line
             type="monotone"
             dataKey="amount"
-            stroke="rgb(34, 110, 197)"
+            stroke="#3b82f6"
             strokeWidth={2}
           />
         </LineChart>

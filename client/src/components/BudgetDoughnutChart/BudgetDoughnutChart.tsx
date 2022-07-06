@@ -17,17 +17,14 @@ export const BudgetDoughnutChart = (props: {
   // data that will be represented in the chart
   // If remaining value is less than 0, then set it to 0
   const data = [
+    { name: "Spent", value: props.expenseAmount },
     {
       name: "Remaining",
-      value:
-        props.remainingBudget <= 0
-          ? 0
-          : props.remainingBudget
+      value: props.remainingBudget <= 0 ? 0 : props.remainingBudget,
     },
-    { name: "Spent", value: props.expenseAmount },
   ];
   // Colors that doughtnut chart will have
-  const COLORS = ["#dc2626", "#22c55e"];
+  const COLORS = ["#ef4444", "#22c55e"];
 
   return (
     <div className="doughnutChartContainer" data-testid="doughnutChart">
