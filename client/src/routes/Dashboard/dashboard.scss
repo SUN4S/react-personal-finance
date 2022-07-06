@@ -25,14 +25,32 @@
       .expenseListHeaderDate {
         flex: 1;
         border-right: 1px solid var(--primary);
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+          cursor: pointer;
+          background-color: var(--primary-diffused);
+        }
       }
       .expenseListHeaderCategory {
         flex: 2;
         border-right: 1px solid var(--primary);
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+          cursor: pointer;
+          background-color: var(--primary-diffused);
+        }
       }
       .expenseListHeaderAmount {
         flex: 2;
         border-right: 1px solid var(--primary);
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+          cursor: pointer;
+          background-color: var(--primary-diffused);
+        }
       }
       .expenseListHeaderDescription {
         flex: 4;
