@@ -13,7 +13,7 @@ export const mockExpense = [
     date: "2022-06-18T03:00:00.000+00:00",
     description: "This is a random description",
     tags: ["Dog", "Cat", "Cake"],
-    receipt: "",
+    receipt: "fake-img.jpg",
   },
   {
     category: "Essentials",
@@ -29,7 +29,7 @@ export const mockExpense = [
     date: "2022-06-17T03:00:00.000+00:00",
     description: "This is a random description",
     tags: ["Dog", "Cat", "Cake"],
-    receipt: "",
+    receipt: "fake-img.jpg",
   },
 ];
 

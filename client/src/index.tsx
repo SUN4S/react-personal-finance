@@ -6,6 +6,7 @@ import { ProtectedRoutes, PublicRoutes } from "./routes/RouteTypes";
 
 import { App } from "./layout/App/App";
 import { Dashboard } from "./routes/Dashboard/Dashboard";
+import { History } from "./routes/History/History";
 import { Login } from "./routes/Login/Login";
 import { Provider } from "react-redux";
 import React from "react";
@@ -43,7 +44,7 @@ root.render(
             <Route path="/" element={<App />}>
               <Route index element={<Dashboard />} />
               <Route path="settings" element={<Settings />} />
-              <Route path="history" element={<h1>history</h1>} />
+              <Route path="history" element={<History />} />
               <Route path="stocks" element={<h1>stocks</h1>} />
               <Route path="weekly" element={<h1>weekly</h1>} />
               <Route path="monthly" element={<h1>monthly</h1>} />

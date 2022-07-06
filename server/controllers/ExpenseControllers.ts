@@ -13,9 +13,15 @@ export const getAllExpenses = async (req: Request, res: Response) => {
       // Gets expense object by userid
       const expenses = await ExpensesModel.findOne({ userid: req.user.id });
       const data = await expenses;
+      // sort data by date
+      const sortedArray = expenses.expenseList.sort((a, b) => {
+        if (b.date > a.date) return 1;
+        if (b.date < a.date) return -1;
+        return 0;
+      });
       logger.info(`${req.user.username} Requested Expense Data`);
-      // send only the expenseList object array
-      return res.status(200).send(data.expenseList);
+      // send sorted by date expense data
+      return res.status(200).send(sortedArray);
     } catch (error) {
       logger.error(error.message);
     }

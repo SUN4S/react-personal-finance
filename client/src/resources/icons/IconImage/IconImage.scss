@@ -1,0 +1,15 @@
+#imageIcon {
+  .cls-1 {
+    fill: transparent;
+  }
+  .cls-1,
+  .cls-2 {
+    stroke: var(--text-primary);
+    stroke-linecap: round;
+    stroke-miterlimit: 10;
+    stroke-width: 2px;
+  }
+  .cls-2 {
+    stroke: var(--text-primary);
+  }
+}

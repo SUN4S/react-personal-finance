@@ -1,4 +1,4 @@
-.expenseListElement {
+.historyListElement {
   width: 100%;
   min-height: 38px;
   max-height: 66px;
@@ -30,19 +30,19 @@
     border: none;
   }
 
-  .expenseListElementDate {
+  .historyListElementDate {
     flex: 1;
   }
-  .expenseListElementCategory {
+  .historyListElementCategory {
     flex: 2;
   }
-  .expenseListElementAmount {
+  .historyListElementAmount {
     flex: 2;
   }
-  .expenseListElementDescription {
+  .historyListElementDescription {
     flex: 4;
   }
-  .expenseListElementTags {
+  .historyListElementTags {
     flex: 2;
     max-height: 64px;
     display: flex;
@@ -60,7 +60,7 @@
       border: 2px solid var(--primary);
     }
   }
-  .expenseListElementControls {
+  .historyListElementControls {
     flex: 1;
 
     button {
@@ -78,6 +78,23 @@
         height: 18px;
         width: 18px;
       }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .historyListElementTags {
+      .tagElement {
+        font-size: 10px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .historyListElementDescription {
+      display: none;
+    }
+    .historyListElementTags {
+      display: none;
     }
   }
 

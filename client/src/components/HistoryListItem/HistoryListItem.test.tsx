@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render } from "@testing-library/react";
 
-import { ExpenseListItem } from "./ExpenseListItem";
+import { HistoryListItem } from "./HistoryListItem";
 import renderer from "react-test-renderer";
 
 describe("Expense List Item", () => {
@@ -14,72 +14,72 @@ describe("Expense List Item", () => {
     date: "2022-06-21T10:56:14.942+00:00",
     tags: ["Cinema", "Dog"],
     description: "Random description",
-    receipt: "",
+    receipt: "someImage.jpg",
   };
 
   it("Renders", () => {
     const { getByTestId } = render(
-      <ExpenseListItem expenseData={mockData} clickFunction={mockFunction} />
+      <HistoryListItem historyData={mockData} clickFunction={mockFunction} />
     );
-    expect(getByTestId("expenseItem")).toBeTruthy();
+    expect(getByTestId("historyItem")).toBeTruthy();
   });
 
   it("Clicked Edit", () => {
     const { getByTestId } = render(
-      <ExpenseListItem expenseData={mockData} clickFunction={mockFunction} />
+      <HistoryListItem historyData={mockData} clickFunction={mockFunction} />
     );
-    fireEvent.click(getByTestId("editExpenseButton"));
+    fireEvent.click(getByTestId("previewImageButton"));
     expect(mockFunction).toHaveBeenCalledTimes(1);
   });
 
   it("Renders Date", () => {
     const { getByTestId } = render(
-      <ExpenseListItem expenseData={mockData} clickFunction={mockFunction} />
+      <HistoryListItem historyData={mockData} clickFunction={mockFunction} />
     );
     expect(
-      getByTestId("expenseItem").querySelector(".expenseListElementDate")
-    ).toHaveTextContent("2022-06-21");
+      getByTestId("historyItem").querySelector(".historyListElementDate")
+    ).toHaveTextContent("06-21");
   });
 
   it("Renders Category", () => {
     const { getByTestId } = render(
-      <ExpenseListItem expenseData={mockData} clickFunction={mockFunction} />
+      <HistoryListItem historyData={mockData} clickFunction={mockFunction} />
     );
     expect(
-      getByTestId("expenseItem").querySelector(".expenseListElementCategory")
+      getByTestId("historyItem").querySelector(".historyListElementCategory")
     ).toHaveTextContent("Culture");
   });
 
   it("Renders Amount", () => {
     const { getByTestId } = render(
-      <ExpenseListItem expenseData={mockData} clickFunction={mockFunction} />
+      <HistoryListItem historyData={mockData} clickFunction={mockFunction} />
     );
     expect(
-      getByTestId("expenseItem").querySelector(".expenseListElementAmount")
+      getByTestId("historyItem").querySelector(".historyListElementAmount")
     ).toHaveTextContent("100");
   });
 
   it("Renders Description", () => {
     const { getByTestId } = render(
-      <ExpenseListItem expenseData={mockData} clickFunction={mockFunction} />
+      <HistoryListItem historyData={mockData} clickFunction={mockFunction} />
     );
     expect(
-      getByTestId("expenseItem").querySelector(".expenseListElementDescription")
+      getByTestId("historyItem").querySelector(".historyListElementDescription")
     ).toHaveTextContent("Random description");
   });
 
   it("Renders Tags", () => {
     const { getByTestId } = render(
-      <ExpenseListItem expenseData={mockData} clickFunction={mockFunction} />
+      <HistoryListItem historyData={mockData} clickFunction={mockFunction} />
     );
     expect(
-      getByTestId("expenseItem").querySelectorAll(".tagElement")[0]
+      getByTestId("historyItem").querySelectorAll(".tagElement")[0]
     ).toHaveTextContent("Cinema");
   });
 
   it("Matches Snapshot", () => {
     const tree = renderer.create(
-      <ExpenseListItem expenseData={mockData} clickFunction={mockFunction} />
+      <HistoryListItem historyData={mockData} clickFunction={mockFunction} />
     );
     expect(tree).toMatchSnapshot();
   });

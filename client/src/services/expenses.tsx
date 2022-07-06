@@ -8,7 +8,7 @@ import { baseApi } from "./baseApi";
 export const expensesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // First query returns ALL expenses ever provided
-    expenses: builder.query({
+    expenseHistory: builder.query({
       query: () => ({
         url: `/expenses`,
         method: "GET",
@@ -68,7 +68,7 @@ export const expensesApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useExpensesQuery,
+  useExpenseHistoryQuery,
   useCurrentExpenseMonthQuery,
   useEditExpenseMutation,
   usePostExpenseMutation,

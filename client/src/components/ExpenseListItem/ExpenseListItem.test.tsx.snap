@@ -8,7 +8,7 @@ exports[`Expense List Item Matches Snapshot 1`] = `
   <div
     className="expenseListElementDate"
   >
-    2022-06-21
+    06-21
   </div>
   <div
     className="expenseListElementCategory"
