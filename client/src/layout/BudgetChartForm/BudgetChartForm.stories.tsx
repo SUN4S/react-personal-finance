@@ -4,8 +4,8 @@ import { BudgetChartForm } from "./BudgetChartForm";
 
 interface TemplateProps {
   theme: string;
-  onSubmit: Function;
-  isLoading: boolean;
+  editable: boolean;
+  closeFunction: Function;
 }
 
 export default {
@@ -23,7 +23,10 @@ const Template: Story<TemplateProps> = (args) => {
           padding: "8px",
         }}
       >
-        <BudgetChartForm />
+        <BudgetChartForm
+          editable={args.editable}
+          closeFunction={args.closeFunction}
+        />
       </body>
     </html>
   );
@@ -32,9 +35,13 @@ const Template: Story<TemplateProps> = (args) => {
 export const Default_Light = Template.bind({});
 Default_Light.args = {
   theme: "light",
+  editable: false,
+  closeFunction: () => alert("Hello there"),
 };
 
 export const Default_Dark = Template.bind({});
 Default_Dark.args = {
   theme: "dark",
+  editable: false,
+  closeFunction: () => alert("Hello there"),
 };

@@ -1,4 +1,24 @@
 .chart {
+  .chartHeader {
+    width: 100%;
+    position: relative;
+
+    .editButton {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      right: 0;
+
+      svg {
+        height: 18px;
+        width: 18px;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
   .doughnutContainer {
     position: relative;
     height: 144px;

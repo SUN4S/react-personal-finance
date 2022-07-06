@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { BudgetChartForm } from "../BudgetChartForm/BudgetChartForm";
 import { BudgetChartProps } from "../../models/chart";
 import { BudgetDoughnutChart } from "../../components/BudgetDoughnutChart/BudgetDoughnutChart";
+import { IconEdit } from "../../resources/icons/IconEdit/IconEdit";
 import { LoadingBox } from "../../components/LoadingBox/LoadingBox";
 
 // Component to render budgetChart
@@ -22,6 +23,8 @@ export const BudgetChartContainer = ({
   // State to save change between budget and expenses
   const [remainingBudget, setRemainingBudget] =
     useState<number | undefined>(undefined);
+  // State to check if user wants to change current month budget
+  const [editable, setEditable] = useState<boolean>(false);
 
   // On load and prop change fire function
   useEffect(() => {
@@ -41,19 +44,28 @@ export const BudgetChartContainer = ({
     <div className="chart">
       <div className="chartHeader">
         <h3>Budget</h3>
+        <div className="editButton" onClick={() => setEditable(!editable)}>
+          <IconEdit />
+        </div>
       </div>
       <div className="chartBody">
         {expenseIsFetching || budgetIsFetching ? (
           <LoadingBox size="xl" />
         ) : (
           <div className="doughnutContainer">
-            {budgetIsSuccess && expenseIsSuccess && budgetData.budget ? (
+            {budgetIsSuccess &&
+            expenseIsSuccess &&
+            budgetData.budget &&
+            !editable ? (
               <BudgetDoughnutChart
                 expenseAmount={expenseAmount!}
                 remainingBudget={remainingBudget!}
               />
             ) : (
-              <BudgetChartForm />
+              <BudgetChartForm
+                editable={editable}
+                closeFunction={() => setEditable(false)}
+              />
             )}
           </div>
         )}

@@ -35,8 +35,25 @@ export const budgetApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Budget"],
     }),
+    // mutation to post new budget
+    editBudget: builder.mutation({
+      query: (budgetData: BudgetFormState) => ({
+        url: "/budget/editBudget",
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        withCredentials: true,
+        data: budgetData,
+      }),
+      invalidatesTags: ["Budget"],
+    }),
   }),
 });
 
-export const { useBudgetQuery, useCurrentBudgetQuery, usePostBudgetMutation } =
-  budgetApi;
+export const {
+  useBudgetQuery,
+  useCurrentBudgetQuery,
+  usePostBudgetMutation,
+  useEditBudgetMutation,
+} = budgetApi;
