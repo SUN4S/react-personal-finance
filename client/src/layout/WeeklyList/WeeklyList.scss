@@ -1,0 +1,60 @@
+.weeklylistBody {
+  height: 100%;
+  width: 100%;
+
+  .listItem {
+    width: 100%;
+    height: auto;
+    padding: 8px;
+    margin-bottom: 12px;
+    background-color: var(--sidebar-bg);
+    border-radius: 5px;
+    box-shadow: 0 0 12px var(--primary-diffused);
+
+    .listItemHeader {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      color: var(--text-primary);
+      font-size: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--primary);
+
+      div {
+        min-width: 130px;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+
+      @media (max-width: 360px) {
+        flex-direction: column;
+      }
+
+      @media (max-width: 360px) {
+        font-size: 14px;
+      }
+    }
+  }
+  .chartsContainer {
+    height: auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    padding-top: 8px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 150px);
+    }
+
+    @media (max-width: 384px) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(4, 150px);
+    }
+  }
+}

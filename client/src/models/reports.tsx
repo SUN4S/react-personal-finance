@@ -1,4 +1,4 @@
-export interface ReportsState {
+export interface WeeklyReportsState {
   totalAmount: number;
   essentialsAmount: number;
   wantsAmount: number;
@@ -9,8 +9,8 @@ export interface ReportsState {
   _id: string;
 }
 
-export interface ReportsFetchState {
-  data: ReportsState[];
+export interface WeeklyReportsFetchState {
+  data: WeeklyReportsState[];
 }
 
 export interface WeeklyChangeChartProps {

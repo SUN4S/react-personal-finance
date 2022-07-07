@@ -1,12 +1,12 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 
-import { ReportsState } from "../../models/reports";
 import { WeeklyChangeChartContainer } from "./WeeklyChangeChartContainer";
+import { WeeklyReportsState } from "../../models/reports";
 import { weeklyReportsData } from "../../resources/mockData";
 
 interface TemplateProps {
   theme: string;
-  reportsData: ReportsState[];
+  reportsData: WeeklyReportsState[];
   reportsIsFetching: boolean;
   reportsIsSuccess: boolean;
 }

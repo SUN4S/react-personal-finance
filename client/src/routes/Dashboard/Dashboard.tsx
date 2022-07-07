@@ -12,27 +12,35 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 export const Dashboard = () => {
+  // States to monitor what type of sorting was used
   const [sortedByDate, setSortedByDate] = useState<boolean>(false);
   const [sortedByCategory, setSortedByCategory] = useState<boolean>(false);
   const [sortedByAmount, setSortedByAmount] = useState<boolean>(false);
 
+  // Redux toolkit function to call reducer functions
   const dispatch = useDispatch();
 
-  const categorySort = () => {
-    dispatch(sortByCategory({ sorted: sortedByCategory }));
-    setSortedByCategory(!sortedByCategory);
-    setSortedByDate(false);
-    setSortedByAmount(false);
-  };
-
+  // Sorting Expense array list by Date
   const dateSort = () => {
+    // Dispatching reducer function
     dispatch(sortByDate({ sorted: sortedByDate }));
     setSortedByDate(!sortedByDate);
     setSortedByCategory(false);
     setSortedByAmount(false);
   };
 
+  // Sorting Expense array list by Category
+  const categorySort = () => {
+    // Dispatching reducer function
+    dispatch(sortByCategory({ sorted: sortedByCategory }));
+    setSortedByCategory(!sortedByCategory);
+    setSortedByDate(false);
+    setSortedByAmount(false);
+  };
+
+  // Sorting Expense array list by Amount
   const amountSort = () => {
+    // Dispatching reducer function
     dispatch(sortByAmount({ sorted: sortedByAmount }));
     setSortedByAmount(!sortedByAmount);
     setSortedByDate(false);

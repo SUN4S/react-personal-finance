@@ -8,8 +8,8 @@ import historyReducer from "../features/HistorySlice";
 import imageModalReducer from "../features/ImageModalSlice";
 import modalReducer from "../features/ModalSlice";
 import notificationReducer from "../features/NotificationSlice";
-import reportsReducer from "../features/ReportsSlice";
 import userReducer from "../features/UserSlice";
+import weeklyReducer from "../features/WeeklySlice";
 
 // Redux store, that hold whole application state tree
 // middleware refers to api created with Redux Toolkit
@@ -21,9 +21,9 @@ export const store = configureStore({
     budget: budgetReducer,
     expenses: expenseReducer,
     history: historyReducer,
+    weekly: weeklyReducer,
     notification: notificationReducer,
     modal: modalReducer,
-    reports: reportsReducer,
     imageModal: imageModalReducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },

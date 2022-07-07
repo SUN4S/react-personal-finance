@@ -179,17 +179,15 @@ const monthly = new cron.CronJob(
 );
 
 // function to check if it is currently the last day of the month
-function isLastDayOfMonth() {
-  const today = new Date();
-  const tomorrow = new Date();
-  // add 1 day to tomorrows date
-  tomorrow.setDate(tomorrow.getDate() + 1);
+const isLastDayOfMonth = () => {
+  const today = DateTime.now().setZone("Europe/London");
+  const tomorrow = DateTime.now().setZone("Europe/London").plus({ days: 1 });
 
   // if tomorrows date changes month,
   // it's the last day of the month
-  if (today.getMonth() !== tomorrow.getMonth()) {
+  if (today.month !== tomorrow.month) {
     return true;
   } else {
     return false;
   }
-}
+};

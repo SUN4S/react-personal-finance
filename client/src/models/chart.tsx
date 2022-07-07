@@ -1,6 +1,6 @@
 import { BudgetState } from "./budget";
 import { ExpenseState } from "./expenses";
-import { ReportsState } from "./reports";
+import { WeeklyReportsState } from "./reports";
 
 export interface BudgetChartProps {
   budgetData: BudgetState;
@@ -18,7 +18,7 @@ export interface ExpenseChartProps {
 }
 
 export interface WeeklyReportsProps {
-  weeklyData: Array<ReportsState>;
+  weeklyData: Array<WeeklyReportsState>;
   weeklyIsFetching: boolean;
   weeklyIsSuccess: boolean;
 }

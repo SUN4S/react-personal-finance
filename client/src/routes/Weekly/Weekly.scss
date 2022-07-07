@@ -1,0 +1,31 @@
+#weekly {
+  width: 100%;
+  height: calc(100% - 72px);
+  overflow-y: auto;
+  padding: 16px 16px 16px 16px;
+
+  .weeklyContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    padding: 8px;
+
+    .weeklyBody {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 8px 0;
+    }
+  }
+
+  @media (max-width: 576px) {
+    margin-bottom: 64px;
+  }
+}

@@ -18,7 +18,7 @@ export const BudgetChartForm = (props: {
   editable: boolean;
   closeFunction: Function;
 }) => {
-  // Using RTK mutation to handle server requests
+  // Using RTK mutation to handle server POST/PUT requests
   const [postBudget, postState] = usePostBudgetMutation();
   const [editBudget, editState] = useEditBudgetMutation();
   // RTK query to get data from server
@@ -34,10 +34,10 @@ export const BudgetChartForm = (props: {
     formState: { errors },
   } = useForm<BudgetFormState>();
 
-  // Function fired button click
+  // Function fired after button click
   const onSubmit: SubmitHandler<BudgetFormState> = async (data) => {
     if (props.editable) {
-      // Posting new budget
+      // editing Existing budget
       const response: any = await editBudget(data);
       if (response.data) {
         // If request goes through

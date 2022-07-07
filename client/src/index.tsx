@@ -15,6 +15,7 @@ import { ReactNotifications } from "react-notifications-component";
 import { Recover } from "./routes/Recover/Recover";
 import { Register } from "./routes/Register/Register";
 import { Settings } from "../src/routes/Settings/Settings";
+import { Weekly } from "./routes/Weekly/Weekly";
 import { store } from "./app/store";
 
 // Creating root for React to inject code into
@@ -46,7 +47,7 @@ root.render(
               <Route path="settings" element={<Settings />} />
               <Route path="history" element={<History />} />
               <Route path="stocks" element={<h1>stocks</h1>} />
-              <Route path="weekly" element={<h1>weekly</h1>} />
+              <Route path="weekly" element={<Weekly />} />
               <Route path="monthly" element={<h1>monthly</h1>} />
             </Route>
           </Route>
