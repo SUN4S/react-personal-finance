@@ -1,5 +1,5 @@
 # react-personal-finance
-A personal finance management program, that processes daily expenditures and ( at some point) generates weekly/monthly expense reports.
+A personal finance management project, that tracks daily expenses and generates weekly/monthly reports.
 
 ## Live version
 https://www.marglipersonalfinance.me/
@@ -22,13 +22,20 @@ DB_CLUSTER=<mongo db cluster>
 DB_DBNAME=<mongo db database name>
 SSL_CERT_FILE=<https cert file location>
 SSL_CERT_KEY=<https cer key file location>
+LOGZIO_TOKEN=<Logzio provided token>
+LOGZIO_ADDRESS=<Logzio connection param>
+EMAIL_USERNAME=<email transporter username>
+EMAIL_PASSWORD=<email transporter password>
 ```
 and run ```npm start```
 
 ## Usage production
 
 To run in production:
-In ```./client``` diractory:
+In ```./client/.env``` diractory:
+```
+SERVER_URL=<Keep empty> 
+```
 ```npm run build```
 
 In ```./server``` directory:
