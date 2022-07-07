@@ -42,7 +42,9 @@ describe("Budget Doughnut Chart", () => {
     const { container } = render(
       <BudgetDoughnutChart expenseAmount={600} remainingBudget={200} />
     );
-    expect(container.querySelector(".recharts-default-legend")).toBeInTheDocument();
+    expect(
+      container.querySelector(".recharts-default-legend")
+    ).toBeInTheDocument();
   });
 
   it("Renders Legend Correct Text", () => {
@@ -53,12 +55,12 @@ describe("Budget Doughnut Chart", () => {
       container.querySelectorAll(
         ".recharts-default-legend .recharts-legend-item span"
       )[0]
-    ).toHaveTextContent("Remaining");
+    ).toHaveTextContent("Spent");
     expect(
       container.querySelectorAll(
         ".recharts-default-legend .recharts-legend-item span"
       )[1]
-    ).toHaveTextContent("Spent");
+    ).toHaveTextContent("Remaining");
   });
 
   it("Renders Tooltip", () => {

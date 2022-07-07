@@ -2,8 +2,8 @@ import "./WeeklyList.scss";
 
 import { DateTime } from "luxon";
 import { ErrorText } from "../../components/ErrorText/ErrorText";
+import { ReportsChart } from "../../components/ReportsChart/ReportsChart";
 import { RootState } from "../../app/store";
-import { WeeklyReportsChart } from "../../components/WeeklyReportsChart/WeeklyReportsChart";
 import { WeeklyReportsState } from "../../models/reports";
 import { useSelector } from "react-redux";
 
@@ -30,28 +30,28 @@ export const WeeklyList = () => {
                 <div>Total Amount Spent: {item.totalAmount}</div>
               </div>
               <div className="chartsContainer">
-                <WeeklyReportsChart
+                <ReportsChart
                   totalAmount={item.totalAmount}
                   spentAmount={item.essentialsAmount}
                   color={"#3b82f6"}
                   name={"Essentials"}
                   shortText={false} // because some names are longer, this is to change allocated text width
                 />
-                <WeeklyReportsChart
+                <ReportsChart
                   totalAmount={item.totalAmount}
                   spentAmount={item.wantsAmount}
                   color={"#eab308"}
                   name={"Wants"}
                   shortText={true} // because some names are longer, this is to change allocated text width
                 />
-                <WeeklyReportsChart
+                <ReportsChart
                   totalAmount={item.totalAmount}
                   spentAmount={item.cultureAmount}
                   color={"#22c55e"}
                   name={"Culture"}
                   shortText={true} // because some names are longer, this is to change allocated text width
                 />
-                <WeeklyReportsChart
+                <ReportsChart
                   totalAmount={item.totalAmount}
                   spentAmount={item.unexpectedAmount}
                   color={"#ef4444"}

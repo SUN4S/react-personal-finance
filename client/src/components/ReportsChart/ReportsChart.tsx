@@ -1,4 +1,4 @@
-import "./WeeklyReportsChart.scss";
+import "./ReportsChart.scss";
 
 import {
   Cell,
@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from "recharts";
 
-export const WeeklyReportsChart = (props: {
+export const ReportsChart = (props: {
   totalAmount: number;
   spentAmount: number;
   color: string;
@@ -29,7 +29,7 @@ export const WeeklyReportsChart = (props: {
   const COLORS = [props.color, "var(--page-bg)"];
 
   return (
-    <div className="WeeklyChartContainer" data-testid="weeklyChart">
+    <div className="ReportsChartContainer" data-testid="reportsChart">
       <ResponsiveContainer width={"99%"} minWidth={140} height={142}>
         <PieChart>
           <Pie
