@@ -10,9 +10,10 @@ const WeeklySchema = new mongoose.Schema(
     unexpectedAmount: { type: Number },
     fromDate: {
       type: Date,
-      default: DateTime.now().minus({ week: 1 }).setZone("Europe/London").toISO(),
     },
-    toDate: { type: Date, default: DateTime.now().setZone("Europe/London").toISO() },
+    toDate: {
+      type: Date,
+    },
   },
   { collection: "expenseReports" }
 );
@@ -26,7 +27,6 @@ const MonthlySchema = new mongoose.Schema(
     unexpectedAmount: { type: Number },
     monthDate: {
       type: String,
-      default: `${DateTime.now().toFormat("yyyy-MM")}`,
     },
   },
   { collection: "expenseReports" }

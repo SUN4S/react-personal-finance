@@ -164,7 +164,7 @@ export const register = async (req: Request, res: Response) => {
 
           // Function to login user immediately after registration
           req.login(
-            { username: response.username, password: response.password, id: response._id },
+            { username: response.username, password: response.hash, id: response._id },
             { session: true },
             (error) => {
               if (error) {

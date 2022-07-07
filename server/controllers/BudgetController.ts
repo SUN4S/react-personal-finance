@@ -79,6 +79,7 @@ export const addBudget = async (req: Request, res: Response) => {
               $push: {
                 budgetList: {
                   budget: req.body.budget,
+                  budgetDate: DateTime.now().toFormat("yyyy-MM"),
                 },
               },
             }

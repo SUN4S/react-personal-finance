@@ -6,7 +6,6 @@ const BudgetSchema = new mongoose.Schema({
   budget: { type: Number, required: true },
   budgetDate: {
     type: String,
-    default: DateTime.now().toFormat("yyyy-MM"),
   },
 });
 

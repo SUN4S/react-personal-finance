@@ -224,16 +224,7 @@ export const editExpense = async (req: Request, res: Response) => {
 export const deleteExpense = async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     // Delete expense by pulling it from Array
-    const expenses = await ExpensesModel.findOneAndUpdate(
-      { userid: req.user.id },
-      {
-        $pull: {
-          expenseList: {
-            _id: req.body._id,
-          },
-        },
-      }
-    )
+    const expenses = await ExpensesModel.deleteOne({ _id: req.body._id })
       .then((response) => {
         // If expense Object contained file name, remove that file
         if (req.body.receipt) {

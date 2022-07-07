@@ -67,6 +67,8 @@ export const generateWeeklyReport = async () => {
                 wantsAmount: wantsAmount,
                 cultureAmount: cultureAmount,
                 unexpectedAmount: unexpectedAmount,
+                fromDate: DateTime.now().minus({ week: 1 }).setZone("Europe/London").toISO(),
+                toDate: DateTime.now().minus({ week: 1 }).setZone("Europe/London").toISO(),
               },
             },
           }
@@ -145,6 +147,7 @@ export const generateMonthlyReport = async () => {
                 wantsAmount: wantsAmount,
                 cultureAmount: cultureAmount,
                 unexpectedAmount: unexpectedAmount,
+                monthDate: `${DateTime.now().toFormat("yyyy-MM")}`,
               },
             },
           }

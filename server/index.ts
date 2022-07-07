@@ -1,4 +1,4 @@
-const budget = require("./routes/Budgetroutes");
+const budget = require("./routes/BudgetRoutes");
 const expenses = require("./routes/ExpenseRoutes");
 const user = require("./routes/UserRoutes");
 const reports = require("./routes/ReportsRoutes");
