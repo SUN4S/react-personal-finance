@@ -26,7 +26,7 @@ export const MonthlyList = () => {
                 <div className="dateContainer">
                   <div>
                     Date:{" "}
-                    {DateTime.fromISO(item.monthDate).toFormat("yyyy-MM-dd")}
+                    {DateTime.fromISO(item.monthDate).toFormat("yyyy-MM")}
                   </div>
                 </div>
                 <div>Total Amount Spent: {item.totalAmount}</div>
