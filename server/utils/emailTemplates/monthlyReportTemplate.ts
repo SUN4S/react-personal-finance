@@ -10,7 +10,7 @@ export const generateMonthlyExpenseEmail = async (recipientEmail: string, userna
       attachments: [
         {
           filename: "Logo.png",
-          path: __dirname + "/images/Logo.png",
+          path: process.cwd() + "/images/Logo.png",
           cid: "Logo.png",
         },
       ],
