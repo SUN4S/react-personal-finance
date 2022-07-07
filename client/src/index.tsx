@@ -8,6 +8,7 @@ import { App } from "./layout/App/App";
 import { Dashboard } from "./routes/Dashboard/Dashboard";
 import { History } from "./routes/History/History";
 import { Login } from "./routes/Login/Login";
+import { Monthly } from "./routes/Monthly/Monthly";
 import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -48,7 +49,7 @@ root.render(
               <Route path="history" element={<History />} />
               <Route path="stocks" element={<h1>stocks</h1>} />
               <Route path="weekly" element={<Weekly />} />
-              <Route path="monthly" element={<h1>monthly</h1>} />
+              <Route path="monthly" element={<Monthly />} />
             </Route>
           </Route>
           {/* Catch all for 404 pages */}

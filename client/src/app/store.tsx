@@ -7,6 +7,7 @@ import expenseReducer from "../features/ExpenseSlice";
 import historyReducer from "../features/HistorySlice";
 import imageModalReducer from "../features/ImageModalSlice";
 import modalReducer from "../features/ModalSlice";
+import monthlyReducer from "../features/MonthlySlice";
 import notificationReducer from "../features/NotificationSlice";
 import userReducer from "../features/UserSlice";
 import weeklyReducer from "../features/WeeklySlice";
@@ -22,6 +23,7 @@ export const store = configureStore({
     expenses: expenseReducer,
     history: historyReducer,
     weekly: weeklyReducer,
+    monthly: monthlyReducer,
     notification: notificationReducer,
     modal: modalReducer,
     imageModal: imageModalReducer,
