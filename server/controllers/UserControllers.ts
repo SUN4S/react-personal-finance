@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { BudgetModel } from "../models/budgetSchema";
 import { ExpensesModel } from "../models/expenseSchema";
 import { ReportsModel } from "../models/reportsSchema";
+import { StockModel } from "../models/stockSchema";
 import { UserModel } from "../models/userSchema";
 import bcrypt from "bcrypt";
 import { generateDeletionEmail } from "../utils/emailTemplates/deletionTemplate";
@@ -157,7 +158,10 @@ export const register = async (req: Request, res: Response) => {
             weeklyReports: [],
             monthlyReports: [],
           });
-
+          await StockModel.create({
+            userid: response._id,
+            heldStock: [],
+          });
           generateRegistrationEmail(response.email, response.username);
           logger.info(`Created new Account`);
 
@@ -275,6 +279,9 @@ export const deleteUser = async (req: Request, res: Response) => {
       userid: req.user.id,
     });
     await ReportsModel.findOneAndDelete({
+      userid: req.user.id,
+    });
+    await StockModel.findOneAndDelete({
       userid: req.user.id,
     });
     // Call function to generate and send email to user

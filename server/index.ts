@@ -2,6 +2,7 @@ const budget = require("./routes/BudgetRoutes");
 const expenses = require("./routes/ExpenseRoutes");
 const user = require("./routes/UserRoutes");
 const reports = require("./routes/ReportsRoutes");
+const stocks = require("./routes/StockRoutes");
 
 import "./utils/cronjob";
 import "./utils/email";
@@ -111,6 +112,7 @@ app.use("/api/user", user);
 app.use("/api/expenses", expenses);
 app.use("/api/budget", budget);
 app.use("/api/reports", reports);
+app.use("/api/stocks", stocks);
 
 // route to send serview worker to client, sometimes it is missing, don't know why
 app.get("/ServiceWorker.js", (req, res) => {

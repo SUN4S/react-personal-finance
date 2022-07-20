@@ -112,26 +112,29 @@ export const addExpense = async (req: Request, res: Response) => {
     tags: tags || [],
     receipt: fileName ? fileName : null,
   });
-  const dateString = req.body.date.toString();
+
   if (data.error) {
     return res.status(400).json({ msg: data.error.message });
-  } else {
-    try {
-      // Add an expense by pushing new object into list
-      const expenses = await ExpensesModel.findOneAndUpdate(
-        { userid: req.user.id },
-        {
-          $push: {
-            expenseList: { ...data.value, date: dateString },
-          },
-        }
-      );
-      logger.info(`${req.user.username} Added New Expense`);
-      return res.status(201).json({ msg: "Added new Expense" });
-    } catch (error) {
-      logger.error(error.message);
-      return res.status(500);
-    }
+  }
+
+  // convert date from Date format so String
+  const dateString = req.body.date.toString();
+
+  try {
+    // Add an expense by pushing new object into list
+    const expenses = await ExpensesModel.findOneAndUpdate(
+      { userid: req.user.id },
+      {
+        $push: {
+          expenseList: { ...data.value, date: dateString },
+        },
+      }
+    );
+    logger.info(`${req.user.username} Added New Expense`);
+    return res.status(201).json({ msg: "Added new Expense" });
+  } catch (error) {
+    logger.error(error.message);
+    return res.status(500);
   }
 };
 
