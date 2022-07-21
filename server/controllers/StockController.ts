@@ -187,9 +187,7 @@ export const addFavouriteStock = async (req: Request, res: Response) => {
 
 // Function to remove a favourite stock
 /*
-  body: {
-    id: string,
-  }
+  Params :id(string),
 */
 export const removeFavouriteStock = async (req: Request, res: Response) => {
   // passportJS function to check if user is authenticated
@@ -198,8 +196,12 @@ export const removeFavouriteStock = async (req: Request, res: Response) => {
   }
 
   try {
-    const stocks = await StockModel.findOne({ "heldStock._id": req.body.id });
-    console.log(stocks);
+    const stocks = await StockModel.updateOne(
+      { userid: req.user.id },
+      {
+        $pull: { heldStock: { _id: req.params.id } },
+      }
+    );
 
     logger.info(`${req.user.username} Removed Favourite Stock`);
     return res.status(200).json({ msg: "Successfully Removed Favourite" });

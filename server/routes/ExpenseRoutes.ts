@@ -23,6 +23,6 @@ router.post("/addExpense", addExpense);
 router.put("/editExpense", editExpense);
 
 // Delete an expense by _id
-router.delete("/deleteExpense", deleteExpense);
+router.delete("/deleteExpense/:id", deleteExpense);
 
 module.exports = router;

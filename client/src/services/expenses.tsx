@@ -56,11 +56,10 @@ export const expensesApi = baseApi.injectEndpoints({
     }),
     //Sixth mutation(query) takes an object with id of expense and/or filename
     deleteExpense: builder.mutation({
-      query: (deleteId: ExpenseDeleteId) => ({
-        url: "/expenses/deleteExpense",
+      query: (deleteId: string) => ({
+        url: `/expenses/deleteExpense/${deleteId}`,
         method: "DELETE",
         withCredentials: true,
-        data: deleteId,
       }),
       invalidatesTags: ["Expenses"],
     }),

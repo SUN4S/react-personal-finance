@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 const ExpenseSchema = new mongoose.Schema(
   {
+    _id: { type: mongoose.Types.ObjectId },
     category: { type: String, required: true },
     amount: { type: Number, required: true },
     date: { type: String, required: true },

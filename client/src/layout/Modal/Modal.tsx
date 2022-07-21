@@ -181,7 +181,7 @@ export const ModalComponent = () => {
     // TODO: Should add a pseudo modal to confirm selection instead of window.confirm
     if (window.confirm("Are you sure?") && modalData) {
       // Use React toolkit api to send a request to delete selected expense
-      deleteExpense({ _id: modalData._id!, receipt: modalData.receipt! });
+      deleteExpense(modalData._id!);
     }
     // Use React toolkit reducer to dispatch notification event
     dispatch(

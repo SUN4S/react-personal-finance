@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 const BoughtStockSchema = new mongoose.Schema(
   {
+    _id: { type: mongoose.Types.ObjectId },
     amount: {
       type: Number,
       required: [true, "can't be blank"],
@@ -22,6 +23,7 @@ const BoughtStockSchema = new mongoose.Schema(
 
 const HeldStockSchema = new mongoose.Schema(
   {
+    _id: { type: mongoose.Types.ObjectId },
     ticker: {
       type: String,
       required: [true, "can't be blank"],

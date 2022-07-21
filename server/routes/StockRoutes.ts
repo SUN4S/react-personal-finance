@@ -24,7 +24,7 @@ router.get("/findStock", findStockData);
 router.post("/addFavourite", addFavouriteStock);
 
 // Delete request to remove new favourite stock
-router.delete("/removeFavourite", removeFavouriteStock);
+router.delete("/removeFavourite/:id", removeFavouriteStock);
 
 // Post request to add new transaction data
 router.post("/addTransaction", addStockTransaction);

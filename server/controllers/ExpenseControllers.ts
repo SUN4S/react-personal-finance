@@ -220,28 +220,40 @@ export const editExpense = async (req: Request, res: Response) => {
 
 // function to delete current expense data
 /*
-  body: {
-    _id: string, // of expense ebject that needs to be deleted
-  }
+  Params :id(string),
 */
 export const deleteExpense = async (req: Request, res: Response) => {
   if (!req.isAuthenticated()) {
     return res.status(401).json({ msg: "Unauthorized access" });
   }
-  // Delete expense by pulling it from Array
-  const expenses = await ExpensesModel.deleteOne({ _id: req.body._id })
-    .then((response) => {
-      // If expense Object contained file name, remove that file
-      if (req.body.receipt) {
-        if (fs.existsSync(global.__basedir + "/uploads/expenses/" + req.body.receipt)) {
-          fs.unlinkSync(global.__basedir + "/uploads/expenses/" + req.body.receipt);
-        }
+  console.log(req.params.id);
+
+  try {
+    // Delete expense by pulling it from Array
+    const expenses = await ExpensesModel.findOneAndUpdate(
+      { userid: req.user.id },
+      {
+        $pull: { expenseList: { _id: req.params.id } },
       }
-      logger.info(`${req.user.username} Deleted Expense`);
-      return res.status(200).json({ msg: "Deleted expense successfully" });
-    })
-    .catch((error) => {
-      logger.error(error);
-      return res.status(500);
-    });
+    );
+
+    // Find which object was removed by _id
+    // used to check if it has a receipt image assigned to it
+    const deletedObject = expenses.expenseList.find(
+      (item) => item._id.toString() === req.params.id
+    );
+
+    // If expense Object contained file name, remove that file
+    if (deletedObject.receipt) {
+      if (fs.existsSync(global.__basedir + "/uploads/expenses/" + deletedObject.receipt)) {
+        fs.unlinkSync(global.__basedir + "/uploads/expenses/" + deletedObject.receipt);
+      }
+    }
+
+    logger.info(`${req.user.username} Deleted Expense`);
+    return res.status(200).json({ msg: "Deleted expense successfully" });
+  } catch (error) {
+    logger.error(error);
+    return res.status(500);
+  }
 };
