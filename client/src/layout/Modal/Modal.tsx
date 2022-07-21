@@ -117,7 +117,7 @@ export const ModalComponent = () => {
   // Form has 2 states,
   // 'editable' for when modal is being used to edit expense
   // regular, for when modal is being used to add new expense
-  const onSubmit: SubmitHandler<ModalInputs> = (data) => {
+  const onSubmit: SubmitHandler<ModalInputs> = async (data) => {
     // checks if modal is used to edit expense
     if (editable) {
       // tags need to be parsed from object to array
@@ -134,16 +134,33 @@ export const ModalComponent = () => {
         tags: [...tagData].toString(),
         receipt: selectedFile || modalData?.receipt,
       };
+
       // Use Redux toolkit api to send expense data to be edited
-      editExpense(expenseObject);
-      // Use React toolkit reducer to dispatch notification event
-      dispatch(
-        notification({
-          title: "Edit Expense",
-          type: "success",
-          message: "Successfully Edited Expense",
-        })
-      );
+      const response: any = await editExpense(expenseObject);
+
+      // Check if Put response passed
+      if (response.data) {
+        // Use React toolkit reducer to dispatch notification event
+        dispatch(
+          notification({
+            title: "Edit Expense",
+            type: "success",
+            message: response.data.msg,
+          })
+        );
+        // Use Redux toolkit to dispatch event to handle modal close
+        dispatch(toggleModal({ isOpen: false }));
+        resetForm();
+      } else if (response.error) {
+        // Use React toolkit reducer to dispatch notification event
+        dispatch(
+          notification({
+            title: "Edit Expense",
+            type: "danger",
+            message: response.error.data.msg,
+          })
+        );
+      }
     } else {
       // This statement gets handled if modal is NOT editable
       // tags need to be parsed from object to array
@@ -159,20 +176,34 @@ export const ModalComponent = () => {
         tags: [...tagData].toString(),
         receipt: selectedFile || modalData?.receipt,
       };
+
       // Use Redux toolkit api to send NEW expense data
-      postExpense(expenseObject);
-      // Use React toolkit reducer to dispatch notification event
-      dispatch(
-        notification({
-          title: "Add Expense",
-          type: "success",
-          message: "Successfully Added Expense",
-        })
-      );
+      const response: any = await postExpense(expenseObject);
+
+      // Check if Post reponse passed
+      if (response.data) {
+        // Use React toolkit reducer to dispatch notification event
+        dispatch(
+          notification({
+            title: "Add Expense",
+            type: "success",
+            message: response.data.msg,
+          })
+        );
+        // Use Redux toolkit to dispatch event to handle modal close
+        dispatch(toggleModal({ isOpen: false }));
+        resetForm();
+      } else if (response.error) {
+        // Use React toolkit reducer to dispatch notification event
+        dispatch(
+          notification({
+            title: "Add Expense",
+            type: "danger",
+            message: response.error.data.msg,
+          })
+        );
+      }
     }
-    // Use Redux toolkit to dispatch event to handle modal close
-    dispatch(toggleModal({ isOpen: false }));
-    resetForm();
   };
 
   // Handle the deletion of single expense

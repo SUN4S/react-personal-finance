@@ -96,7 +96,7 @@ export const addExpense = async (req: Request, res: Response) => {
     // Check item mimetype to filter out non-image files
     if (!global.whitelist.includes(file.mimetype)) {
       logger.warn(`${req.user.username} Provided Bad File Format`);
-      return res.json({ msg: "Bad file format" });
+      return res.status(400).json({ msg: "Bad file format" });
     } else {
       // use 'express-fileupload' to save file
       logger.info("Saved New Image To Server");
@@ -171,10 +171,12 @@ export const editExpense = async (req: Request, res: Response) => {
     fileName = Date.now() + "-" + Math.round(Math.random() * 1e9) + file.name;
     if (!global.whitelist.includes(file.mimetype)) {
       logger.warn(`${req.user.username} Provided Bad File Format`);
-      return res.set({ "Content-Type": file.mimetype }).json({ msg: "Bad file format" });
+      return res
+        .set({ "Content-Type": file.mimetype })
+        .status(400)
+        .json({ msg: "Bad file format" });
     } else {
       // Add new file
-      // TODO: should also delete old file
       file.mv(`${global.__basedir}/uploads/expenses/${fileName}`);
     }
   }
