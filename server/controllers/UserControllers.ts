@@ -6,6 +6,7 @@ import { ReportsModel } from "../models/reportsSchema";
 import { StockModel } from "../models/stockSchema";
 import { UserModel } from "../models/userSchema";
 import bcrypt from "bcrypt";
+import fs from "fs";
 import { generateDeletionEmail } from "../utils/emailTemplates/deletionTemplate";
 import { generatePassword } from "../utils/passwordGenerator";
 import { generatePasswordChangeEmail } from "../utils/emailTemplates/changePasswordTemplate";
@@ -62,9 +63,6 @@ export const addAvatar = async (req: Request, res: Response) => {
     return res.status(401).json({ msg: "Unauthorized access" });
   }
   try {
-    // Defining default values
-    let file = undefined;
-    let fileName = null;
     // Checking if file was provided
     if (req.files) {
       // get file named avatar from fileList
@@ -86,6 +84,16 @@ export const addAvatar = async (req: Request, res: Response) => {
         { _id: req.user.id },
         { image: fileName }
       );
+
+      // If editing uses a new image, delete old one
+      if (changeAvatar.image !== fileName) {
+        if (fs.existsSync(global.__basedir + "/uploads/avatars/" + changeAvatar.image)) {
+          fs.unlinkSync(global.__basedir + "/uploads/avatars/" + changeAvatar.image);
+        }
+      }
+
+      console.log(changeAvatar);
+      console.log(fileName);
       return res.status(200).json({ msg: "Successfuly Added Avatar" });
     } else {
       return res.status(400).json({ msg: "Avatar not provided" });
@@ -269,10 +277,10 @@ export const deleteUser = async (req: Request, res: Response) => {
   // Remove current user from DB
   // Along with all other collections connected to the user
   try {
-    const response = await UserModel.findOneAndDelete({
+    const user = await UserModel.findOneAndDelete({
       _id: req.user.id,
     });
-    await ExpensesModel.findOneAndDelete({
+    const expenses = await ExpensesModel.findOneAndDelete({
       userid: req.user.id,
     });
     await BudgetModel.findOneAndDelete({
@@ -284,8 +292,27 @@ export const deleteUser = async (req: Request, res: Response) => {
     await StockModel.findOneAndDelete({
       userid: req.user.id,
     });
+
+    // Remove any avatar images that user posted
+    if (user.image !== null) {
+      if (fs.existsSync(global.__basedir + "/uploads/avatars/" + user.image)) {
+        fs.unlinkSync(global.__basedir + "/uploads/avatars/" + user.image);
+      }
+    }
+
+    // remove any expense receipt images the user posted
+    await Promise.allSettled(
+      expenses.expenseList.map((item) => {
+        if (item.receipt !== null) {
+          if (fs.existsSync(global.__basedir + "/uploads/expenses/" + item.receipt)) {
+            fs.unlinkSync(global.__basedir + "/uploads/expenses/" + item.receipt);
+          }
+        }
+      })
+    );
+
     // Call function to generate and send email to user
-    generateDeletionEmail(response.email, response.username);
+    generateDeletionEmail(user.email, user.username);
     logger.info(`${req.user.username} has been deleted`);
     // Passport function to remove user from session
     req.logout();

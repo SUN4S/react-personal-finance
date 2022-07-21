@@ -210,6 +210,18 @@ export const editExpense = async (req: Request, res: Response) => {
         },
       }
     );
+
+    // Find which object was edited by _id
+    // used to check if it has a receipt image assigned to it
+    const editedObject = expenses.expenseList.find((item) => item._id.toString() === req.body._id);
+
+    // If editing uses a new image, delete old one
+    if (editedObject.receipt !== fileName) {
+      if (fs.existsSync(global.__basedir + "/uploads/expenses/" + editedObject.receipt)) {
+        fs.unlinkSync(global.__basedir + "/uploads/expenses/" + editedObject.receipt);
+      }
+    }
+
     logger.info(`${req.user.username} Edited Expense`);
     return res.status(201).json({ msg: "Edited expense successfully" });
   } catch (error) {
