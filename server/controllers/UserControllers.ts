@@ -26,11 +26,25 @@ const saltRounds = 10;
   }
 */
 export const login = (req: Request, res: Response) => {
-  return res.json({
+  console.log(req.user.username);
+  logger.info(`${req.user.username} Logged In`);
+
+  return res.status(200).json({
     msg: "Logged in successfully",
     username: req.user.username,
     image: req.user.image,
   });
+};
+
+// function to log out user
+// uses PassportJS session to authenticate user that needs to be logged out
+export const logout = (req: Request, res: Response) => {
+  logger.info(`${req.user.username} Logged Out`);
+  console.log(req.user.username);
+  req.session.destroy(() => {
+    res.clearCookie("connect.sid");
+  });
+  return res.json({ msg: "Logged out successfully" });
 };
 
 // function to check if user is logged in
@@ -41,15 +55,10 @@ export const loggedIn = async (req: Request, res: Response) => {
   if (!req.isAuthenticated()) {
     return res.status(401).json({ msg: "Unauthorizes access" });
   }
-  // try-catch just in case something goes horribly wrong
-  try {
-    return res
-      .status(200)
-      .json({ msg: "User is logged in", username: req.user.username, image: req.user.image });
-  } catch (error) {
-    logger.error(error.message);
-    return res.status(500);
-  }
+
+  return res
+    .status(200)
+    .json({ msg: "User is logged in", username: req.user.username, image: req.user.image });
 };
 
 // function to add new avatar image
@@ -64,43 +73,41 @@ export const addAvatar = async (req: Request, res: Response) => {
   }
   try {
     // Checking if file was provided
-    if (req.files) {
-      // get file named avatar from fileList
-      const file = req.files.avatar;
-      // generate a new filename that will be used to store on server
-      // generating new names prevents duplicate images being added
-      const fileName = Date.now() + "-" + Math.round(Math.random() * 1e9) + file.name;
-      if (!global.whitelist.includes(file.mimetype)) {
-        logger.warn(`${req.user.username} Provided Bad File Format`);
-        return res.json({ msg: "Bad file format" });
-      } else {
-        logger.info("Saved New Image To Server");
-        // express fileupload function to save file to folder
-        file.mv(`./uploads/avatars/${fileName}`);
-      }
-
-      // Saving file name in userModel which will be used later to find the img
-      const changeAvatar = await UserModel.findOneAndUpdate(
-        { _id: req.user.id },
-        { image: fileName }
-      );
-
-      // If editing uses a new image, delete old one
-      if (changeAvatar.image !== fileName) {
-        if (fs.existsSync(global.__basedir + "/uploads/avatars/" + changeAvatar.image)) {
-          fs.unlinkSync(global.__basedir + "/uploads/avatars/" + changeAvatar.image);
-        }
-      }
-
-      console.log(changeAvatar);
-      console.log(fileName);
-      return res.status(200).json({ msg: "Successfuly Added Avatar" });
-    } else {
+    if (!req.files) {
       return res.status(400).json({ msg: "Avatar not provided" });
     }
+    // get file named avatar from fileList
+    const file = req.files.avatar;
+    // generate a new filename that will be used to store on server
+    // generating new names prevents duplicate images being added
+    const fileName = Date.now() + "-" + Math.round(Math.random() * 1e9) + file.name;
+    if (!global.whitelist.includes(file.mimetype)) {
+      logger.warn(`${req.user.username} Provided Bad File Format`);
+      return res.json({ msg: "Bad file format" });
+    } else {
+      logger.info("Saved New Image To Server");
+      // express fileupload function to save file to folder
+      file.mv(`./uploads/avatars/${fileName}`);
+    }
+
+    // Saving file name in userModel which will be used later to find the img
+    const changeAvatar = await UserModel.findOneAndUpdate(
+      { _id: req.user.id },
+      { image: fileName }
+    );
+
+    // If editing uses a new image, delete old one
+    if (changeAvatar.image !== fileName) {
+      if (fs.existsSync(global.__basedir + "/uploads/avatars/" + changeAvatar.image)) {
+        fs.unlinkSync(global.__basedir + "/uploads/avatars/" + changeAvatar.image);
+      }
+    }
+
+    logger.info(`${req.user.username} Added new Avatar`);
+    return res.status(200).json({ msg: "Successfuly Added Avatar" });
   } catch (error) {
     logger.error(error.message);
-    return res.status(500).json({ msg: error.message });
+    return res.status(500);
   }
 };
 
@@ -126,7 +133,7 @@ export const register = async (req: Request, res: Response) => {
   if (data.error) {
     return res.status(400).json({ msg: data.error.message });
   }
-
+  
   try {
     // Try to get user with provided email/username
     const user = await UserModel.findOne({
@@ -142,59 +149,57 @@ export const register = async (req: Request, res: Response) => {
         logger.warn(`Duplicate User Attempted Registration (Email: ${email})`);
       }
       return res.status(409).json({ msg: "Username or Email already in use" });
-    } else {
-      //Bcrypt works its magic
-      bcrypt.genSalt(saltRounds, (err, salt) => {
-        bcrypt.hash(password, salt, async (err, hash) => {
-          // Create a user, as well as extra collections linking them together
-          // by user _id which is named userid in other collections
-          const response = await UserModel.create({
-            username: username,
-            email: email,
-            hash: hash,
-          });
-          await ExpensesModel.create({
-            userid: response._id,
-            expenses: [],
-          });
-          await BudgetModel.create({
-            userid: response._id,
-            budget: [],
-          });
-          await ReportsModel.create({
-            userid: response._id,
-            weeklyReports: [],
-            monthlyReports: [],
-          });
-          await StockModel.create({
-            userid: response._id,
-            heldStock: [],
-          });
-          generateRegistrationEmail(response.email, response.username);
-          logger.info(`Created new Account`);
-
-          // Function to login user immediately after registration
-          req.login(
-            { username: response.username, password: response.hash, id: response._id },
-            { session: true },
-            (error) => {
-              if (error) {
-                return logger.error(error.message);
-              } else {
-                return res.status(201).json({ msg: "Account created succesfully" });
-              }
-            }
-          );
-          //return res.status(201).json({ msg: "Account created succesfully" });
-        });
-      });
     }
+    
+    //Bcrypt works its magic
+    const salt = await bcrypt.genSalt(saltRounds);
+    const hash = await bcrypt.hash(password, salt);
+    // Create a user, as well as extra collections linking them together
+    // by user _id which is named userid in other collections
+    const response = await UserModel.create({
+      username: username,
+      email: email,
+      hash: hash,
+    });
+    await ExpensesModel.create({
+      userid: response._id,
+      expenses: [],
+    });
+    await BudgetModel.create({
+      userid: response._id,
+      budget: [],
+    });
+    await ReportsModel.create({
+      userid: response._id,
+      weeklyReports: [],
+      monthlyReports: [],
+    });
+    await StockModel.create({
+      userid: response._id,
+      heldStock: [],
+    });
+    generateRegistrationEmail(response.email, response.username);
+    logger.info(`Created new Account`);
+
+    // Function to login user immediately after registration
+    req.login(
+      { username: response.username, password: response.hash, id: response._id },
+      { session: true },
+      (error) => {
+        if (error) {
+          return logger.error(error.message);
+        } else {
+          return res.status(201).json({ msg: "Account created succesfully" });
+        }
+      }
+    );
+    //return res.status(201).json({ msg: "Account created succesfully" });
   } catch (error) {
     logger.error(error.message);
+    res.status(500);
   }
 };
 
-// TODO: Generate email to notify of password change
 // function to change current user password
 /*
   body: {
@@ -209,36 +214,41 @@ export const changePassword = async (req: Request, res: Response) => {
   // Get new and old passwords from body
   const oldPassword = req.body.oldPassword;
   const newPassword = req.body.newPassword;
+
   // Extract schema and validate new password
   const passwordSchema = joiUserSchema.extract("password").validate(newPassword);
+
   // If new/old passwords match - return
   if (oldPassword === newPassword) {
-    return res.json({ msg: "New Password same as Current Password" });
-  } else if (passwordSchema.error) {
-    return res.status(400).json({ msg: passwordSchema.error.message });
-  } else {
-    // Get current user data
-    const response = await UserModel.findById(req.user.id);
-    bcrypt.compare(oldPassword, response.hash, (err, success) => {
-      // Check if current password matches one on the DB
-      if (!success) {
-        return res.status(400).json({ msg: "Current Password did not match" });
-      } else {
-        // Generate new password and update user
-        bcrypt.genSalt(saltRounds, (err, salt) => {
-          bcrypt.hash(newPassword, salt, async (err, hash) => {
-            const user = await UserModel.findOneAndUpdate(
-              { _id: req.user.id },
-              { $set: { hash: hash } }
-            );
-          });
-        });
-        logger.info(`${response.username} updated password`);
-        generatePasswordChangeEmail(response.email, response.username);
-        return res.status(201).json({ msg: "Password Changed Successfully" });
-      }
-    });
+    return res.status(400).json({ msg: "New Password same as Current Password" });
   }
+
+  // Check if password passses joi authentication
+  if (passwordSchema.error) {
+    return res.status(400).json({ msg: passwordSchema.error.message });
+  }
+
+  // Get current user data
+  const response = await UserModel.findById(req.user.id);
+  bcrypt.compare(oldPassword, response.hash, (err, success) => {
+    // Check if current password matches one on the DB
+    if (!success) {
+      return res.status(400).json({ msg: "Current Password did not match" });
+    } else {
+      // Generate new password and update user
+      bcrypt.genSalt(saltRounds, (err, salt) => {
+        bcrypt.hash(newPassword, salt, async (err, hash) => {
+          const user = await UserModel.findOneAndUpdate(
+            { _id: req.user.id },
+            { $set: { hash: hash } }
+          );
+        });
+      });
+      logger.info(`${response.username} updated password`);
+      generatePasswordChangeEmail(response.email, response.username);
+      return res.status(201).json({ msg: "Password Changed Successfully" });
+    }
+  });
 };
 
 // function to recover passowrd
@@ -320,12 +330,4 @@ export const deleteUser = async (req: Request, res: Response) => {
   } catch (error) {
     logger.error(error.message);
   }
-};
-
-// function to log out user
-// uses PassportJS session to authenticate user that needs to be logged out
-export const logout = (req: Request, res: Response) => {
-  logger.info(`${req.user.username} Logged Out`);
-  req.logout();
-  res.json({ msg: "Logged out successfully" });
 };
