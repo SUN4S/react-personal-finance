@@ -1,10 +1,12 @@
 import {
   addFavouriteStock,
   addStockTransaction,
+  editStockTransaction,
   findStockData,
   getStockData,
   getStockDataWithInterval,
   removeFavouriteStock,
+  removeStockTransaction,
 } from "../controllers/StockController";
 
 import express from "express";
@@ -28,5 +30,11 @@ router.delete("/removeFavourite/:id", removeFavouriteStock);
 
 // Post request to add new transaction data
 router.post("/addTransaction", addStockTransaction);
+
+// Put request to edit transaction data
+router.put("/editTransaction", editStockTransaction);
+
+// Delete request to remove transaction data
+router.delete("/removeTransaction/:id", removeStockTransaction);
 
 module.exports = router;

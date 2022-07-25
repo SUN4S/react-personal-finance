@@ -85,6 +85,10 @@ export const addExpense = async (req: Request, res: Response) => {
           return item;
         })
       : [];
+  const category = req.body.category;
+  const amount = req.body.amount;
+  const date = req.body.date;
+  const description = req.body.description;
   // define initial values for if file does not exist
   let file = undefined;
   let fileName = null;
@@ -105,10 +109,10 @@ export const addExpense = async (req: Request, res: Response) => {
   }
   // Validate data provided by the client
   const data = joiExpenseSchema.validate({
-    category: req.body.category,
-    amount: req.body.amount,
-    date: req.body.date,
-    description: req.body.description,
+    category: category,
+    amount: amount,
+    date: date,
+    description: description,
     tags: tags || [],
     receipt: fileName ? fileName : null,
   });
@@ -118,7 +122,7 @@ export const addExpense = async (req: Request, res: Response) => {
   }
 
   // convert date from Date format so String
-  const dateString = req.body.date.toString();
+  const dateString = date.toString();
 
   try {
     // Add an expense by pushing new object into list
@@ -126,7 +130,14 @@ export const addExpense = async (req: Request, res: Response) => {
       { userid: req.user.id },
       {
         $push: {
-          expenseList: { ...data.value, date: dateString },
+          expenseList: {
+            category: category,
+            amount: amount,
+            date: dateString,
+            description: description,
+            tags: tags,
+            receipt: fileName,
+          },
         },
       }
     );
@@ -162,6 +173,15 @@ export const editExpense = async (req: Request, res: Response) => {
           return item;
         })
       : [];
+  const expenseid = req.body._id;
+  const category = req.body.category;
+  const amount = req.body.amount;
+  const date = req.body.date;
+  const description = req.body.description;
+
+  // convert date from Date format so String
+  const dateString = date.toString();
+
   // Defining default values for variables
   let file = undefined;
   // Sets default value to already existing one as to not overwrite
@@ -183,10 +203,10 @@ export const editExpense = async (req: Request, res: Response) => {
 
   // Validate data provided by the client
   const data = joiExpenseSchema.validate({
-    category: req.body.category,
-    amount: req.body.amount,
-    date: req.body.date,
-    description: req.body.description,
+    category: category,
+    amount: amount,
+    date: date,
+    description: description,
     tags: tags || [],
     receipt: file ? fileName : null,
   });
@@ -199,20 +219,21 @@ export const editExpense = async (req: Request, res: Response) => {
     // Match object in array and update values
     const expenses = await ExpensesModel.findOneAndUpdate(
       {
-        expenseList: { $elemMatch: { _id: req.body._id } },
+        expenseList: { $elemMatch: { _id: expenseid } },
       },
       {
         $set: {
-          "expenseList.$.category": req.body.category,
-          "expenseList.$.amount": req.body.amount,
-          "expenseList.$.date": req.body.date,
-          "expenseList.$.description": req.body.description,
+          "expenseList.$.category": category,
+          "expenseList.$.amount": amount,
+          "expenseList.$.date": dateString,
+          "expenseList.$.description": description,
           "expenseList.$.tags": tags,
           "expenseList.$.receipt": fileName,
         },
       }
     );
 
+    console.log(expenses);
     // Find which object was edited by _id
     // used to check if it has a receipt image assigned to it
     const editedObject = expenses.expenseList.find((item) => item._id.toString() === req.body._id);
@@ -240,14 +261,15 @@ export const deleteExpense = async (req: Request, res: Response) => {
   if (!req.isAuthenticated()) {
     return res.status(401).json({ msg: "Unauthorized access" });
   }
-  console.log(req.params.id);
+
+  const expenseid = req.params.id;
 
   try {
     // Delete expense by pulling it from Array
     const expenses = await ExpensesModel.findOneAndUpdate(
       { userid: req.user.id },
       {
-        $pull: { expenseList: { _id: req.params.id } },
+        $pull: { expenseList: { _id: expenseid } },
       }
     );
 

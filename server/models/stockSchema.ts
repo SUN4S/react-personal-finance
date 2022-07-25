@@ -4,7 +4,11 @@ import mongoose from "mongoose";
 
 const BoughtStockSchema = new mongoose.Schema(
   {
-    _id: { type: mongoose.Types.ObjectId },
+    _id: { type: mongoose.Types.ObjectId, default: mongoose.Types.ObjectId },
+    ticker: {
+      type: String,
+      required: [true, "can't be blank"],
+    },
     amount: {
       type: Number,
       required: [true, "can't be blank"],
@@ -23,7 +27,7 @@ const BoughtStockSchema = new mongoose.Schema(
 
 const HeldStockSchema = new mongoose.Schema(
   {
-    _id: { type: mongoose.Types.ObjectId },
+    _id: { type: mongoose.Types.ObjectId, default: mongoose.Types.ObjectId },
     ticker: {
       type: String,
       required: [true, "can't be blank"],
@@ -33,7 +37,6 @@ const HeldStockSchema = new mongoose.Schema(
     type: { type: String, Default: "" },
     locale: { type: String, required: true },
     currency: { type: String, required: true },
-    boughtStock: { type: [BoughtStockSchema], default: Array },
   },
   { collection: "stockData" }
 );
@@ -41,24 +44,26 @@ const HeldStockSchema = new mongoose.Schema(
 const StockSchema = new mongoose.Schema(
   {
     userid: { type: String, required: true },
-    heldStock: { type: [HeldStockSchema], default: Array },
+    favouriteStocks: { type: [HeldStockSchema], default: Array },
+    stockTransactions: { type: [BoughtStockSchema], default: Array },
   },
   { collection: "stockData" }
 );
 
 export const joiAddStockFavouriteSchema = Joi.object({
-  ticker: Joi.string().required().min(1).max(6),
+  ticker: Joi.string().required().min(1),
   name: Joi.string().required(),
-  exchange: Joi.string().required().min(1).max(6),
+  exchange: Joi.string().required().min(1),
   type: Joi.string(),
   locale: Joi.string().required(),
   currency: Joi.string().required(),
 });
 
 export const joiAddStockTransactionSchema = Joi.object({
+  ticker: Joi.string().required().min(1),
   amount: Joi.number().min(1).max(1000000).required(),
-  date: Joi.date(),
-  stockValue: Joi.number(),
+  date: Joi.date().required(),
+  stockValue: Joi.number().required(),
 });
 
 export const joiStockIntervalSchema = Joi.object({
