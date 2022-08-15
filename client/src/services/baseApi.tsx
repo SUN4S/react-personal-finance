@@ -58,6 +58,6 @@ export const baseApi = createApi({
   baseQuery: axiosBaseQuery({
     baseUrl: `${process.env.SERVER_URL}/api`,
   }),
-  tagTypes: ["Expenses", "User", "Budget", "Reports"],
+  tagTypes: ["Expenses", "User", "Budget", "Reports", "Stocks"],
   endpoints: () => ({}),
 });

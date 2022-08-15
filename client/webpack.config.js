@@ -2,18 +2,18 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
-const Dotenv = require("dotenv-webpack");
 const webpack = require("webpack");
-let mode = process.env.NODE_ENV ? "production" : "development";
+const mode =
+  process.env.NODE_ENV === "production" ? "production" : "development";
 
 module.exports = {
-  mode: mode,
+  mode,
   entry: {
     bundle: path.resolve(__dirname, "src/index.tsx"),
     ServiceWorker: path.resolve(__dirname, "serviceWorker.js"),
   },
   output: {
-    path: path.resolve(__dirname, "../server/build/public"),
+    path: path.resolve(__dirname, "./public"),
     filename: "./[name].js",
     clean: true,
     assetModuleFilename: "images/[name][ext][query]",
@@ -77,9 +77,6 @@ module.exports = {
       title: "Personal Finance",
       favicon: "./src/resources/icons/Logo.svg",
     }),
-    new Dotenv({
-      path: "./.env",
-    }),
     new WebpackPwaManifest({
       filename: "manifest.json",
       name: "Personal Finance",
@@ -101,6 +98,12 @@ module.exports = {
           purpose: "any maskable",
         },
       ],
+    }),
+    new webpack.DefinePlugin({
+      "process.env.SERVER_URL":
+        mode === "development"
+          ? JSON.stringify("http://localhost:3030")
+          : JSON.stringify(""),
     }),
   ],
   resolve: {

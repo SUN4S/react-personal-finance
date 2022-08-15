@@ -393,7 +393,7 @@ export const ModalComponent = () => {
               <input
                 type="file"
                 className="customFileInput"
-                accept=".jpg,.png.,jpeg"
+                accept=".jpg,.png,jpeg"
                 {...register("receipt")}
                 onChange={onSelectFile}
               />

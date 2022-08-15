@@ -104,7 +104,7 @@ export const FileInputAvatarForm = () => {
             required: true,
             onChange: (e) => onSelectFile(e),
           })}
-          accept=".jpg,.png.,jpeg"
+          accept=".jpg,.png,jpeg"
         />
         {errors.avatar && (
           <span data-testid="avatarMissing">This field is required</span>
