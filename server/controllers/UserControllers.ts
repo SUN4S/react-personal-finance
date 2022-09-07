@@ -26,7 +26,6 @@ const saltRounds = 10;
   }
 */
 export const login = (req: Request, res: Response) => {
-  console.log(req.user.username);
   logger.info(`${req.user.username} Logged In`);
 
   return res.status(200).json({
@@ -133,7 +132,7 @@ export const register = async (req: Request, res: Response) => {
   if (data.error) {
     return res.status(400).json({ msg: data.error.message });
   }
-  
+
   try {
     // Try to get user with provided email/username
     const user = await UserModel.findOne({
@@ -150,7 +149,7 @@ export const register = async (req: Request, res: Response) => {
       }
       return res.status(409).json({ msg: "Username or Email already in use" });
     }
-    
+
     //Bcrypt works its magic
     const salt = await bcrypt.genSalt(saltRounds);
     const hash = await bcrypt.hash(password, salt);

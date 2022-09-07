@@ -1,6 +1,5 @@
 import "winston-daily-rotate-file";
 
-import LogzioWinstonTransport from "winston-logzio";
 import path from "path";
 import winston from "winston";
 
@@ -8,14 +7,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const { combine, timestamp, colorize, align, printf, json } = winston.format;
-
-// connecting to logzio log interpreter
-const logzioWinstonTransport = new LogzioWinstonTransport({
-  level: "info",
-  name: "winston_logzio",
-  token: process.env.LOGZIO_TOKEN,
-  host: process.env.LOGZIO_ADDRESS,
-});
 
 // functions to filter out rogue data
 const infoFilter = winston.format((info, opts) => {
@@ -130,7 +121,6 @@ const logger = winston.createLogger({
     fileRotateTransportWarn,
     fileRotateTransportError,
     fileRotateTransportHttp,
-    logzioWinstonTransport,
   ],
   exceptionHandlers: [
     new winston.transports.File({ filename: path.resolve(process.cwd() + "/logs/exception.log") }),

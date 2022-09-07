@@ -99,14 +99,15 @@ app.use(function (req, res, next) {
 app.use(cookieParser());
 
 // Using cloud mongoDB
-try {
-  mongoose.connect(
+mongoose
+  .connect(
     `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.rgrkl.mongodb.net/${process.env.DB_DBNAME}?retryWrites=true&w=majority`
-  );
-} catch (error) {
-  console.log(error);
-  logger.error(error.message);
-}
+  )
+  .then(console.log("Connected to Database"))
+  .catch((error) => {
+    console.log(error.message);
+    logger.error(error.message);
+  });
 
 app.use("/api/user", user);
 app.use("/api/expenses", expenses);
